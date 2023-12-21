@@ -77,9 +77,17 @@
 		9B4C4F612B34DE21005C48D5 /* MorseCodeTests */ = {
 			isa = PBXGroup;
 			children = (
-				9BB5FFDE2B34E382000B7C30 /* MorseCodeConvertorTests.swift */,
+				9BB5FFE02B34E3AA000B7C30 /* Engine */,
 			);
 			path = MorseCodeTests;
+			sourceTree = "<group>";
+		};
+		9BB5FFE02B34E3AA000B7C30 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				9BB5FFDE2B34E382000B7C30 /* MorseCodeConvertorTests.swift */,
+			);
+			path = Engine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
