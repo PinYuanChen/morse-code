@@ -10,25 +10,22 @@ import MorseCode
 
 class MorseCodeConvertor {
     
-    enum FlashType: Equatable {
-        case longLight
-        case shortLight
-        case pause
+    enum FlashType: String {
+        case dah = "-"
+        case di = "."
+        case pause = " "
         
         var duration: Double {
             switch self {
-            case .longLight:
+            case .dah:
                 return 3.0
-            case .shortLight, .pause:
+            case .di, .pause:
                 return 1.0
             }
         }
     }
     
     func convertToMorseCode(input: String) -> String {
-        guard !input.isEmpty else {
-            return ""
-        }
         
         var output = ""
         for char in input.lowercased() {
@@ -46,8 +43,16 @@ class MorseCodeConvertor {
         return output
     }
     
-    func convertToMorseFlashArray(input: String) -> [FlashType] {
-        return []
+    func convertToMorseFlashSignals(input: String) -> [FlashType] {
+        
+        var signals = [FlashType]()
+        for char in input {
+            guard let type = FlashType(rawValue: "\(char)") else { continue }
+            
+            signals.append(type)
+        }
+        
+        return signals
     }
 }
 
@@ -67,9 +72,9 @@ final class MorseCodeConvertorTests: XCTestCase {
                        sut.convertToMorseCode(input: "Hello world!"))
     }
     
-    func test_deliveryEmptyFlashArray_whenInputEmptyString() {
+    func test_deliverEmptyFlashSignals_whenInputEmptyString() {
         let sut = makeSUT()
-        XCTAssertEqual([], sut.convertToMorseFlashArray(input: ""))
+        XCTAssertEqual([], sut.convertToMorseFlashSignals(input: ""))
     }
     
     // MARK: - Helpers
