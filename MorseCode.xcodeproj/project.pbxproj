@@ -109,10 +109,18 @@
 		9BB5FFE52B34EA3C000B7C30 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */,
 				CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */,
+				CDD04BE92B355B06006D29B7 /* Resources */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		CDD04BE92B355B06006D29B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
