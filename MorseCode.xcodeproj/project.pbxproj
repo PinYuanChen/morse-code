@@ -13,6 +13,9 @@
 		9BB5FFE42B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */; };
 		9BB5FFE92B34EB15000B7C30 /* MorseCodeDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */; };
 		CDD04BE82B355A8A006D29B7 /* MorseCodeConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */; };
+		CDD04BF72B356B6F006D29B7 /* MorseCodeiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD04BEF2B356B6E006D29B7 /* MorseCodeiOS.framework */; };
+		CDD04BFC2B356B6F006D29B7 /* MorseCodeiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */; };
+		CDD04BFD2B356B6F006D29B7 /* MorseCodeiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD04BF12B356B6E006D29B7 /* MorseCodeiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,6 +25,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 9B4C4F542B34DE21005C48D5;
 			remoteInfo = MorseCode;
+		};
+		CDD04BF82B356B6F006D29B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B4C4F4C2B34DE21005C48D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDD04BEE2B356B6E006D29B7;
+			remoteInfo = MorseCodeiOS;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -33,6 +43,10 @@
 		9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeDict.swift; sourceTree = "<group>"; };
 		CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertor.swift; sourceTree = "<group>"; };
+		CDD04BEF2B356B6E006D29B7 /* MorseCodeiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MorseCodeiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDD04BF12B356B6E006D29B7 /* MorseCodeiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MorseCodeiOS.h; sourceTree = "<group>"; };
+		CDD04BF62B356B6F006D29B7 /* MorseCodeiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeiOSTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +65,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDD04BEC2B356B6E006D29B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDD04BF32B356B6F006D29B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDD04BF72B356B6F006D29B7 /* MorseCodeiOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -59,6 +88,8 @@
 			children = (
 				9B4C4F572B34DE21005C48D5 /* MorseCode */,
 				9B4C4F612B34DE21005C48D5 /* MorseCodeTests */,
+				CDD04BF02B356B6E006D29B7 /* MorseCodeiOS */,
+				CDD04BFA2B356B6F006D29B7 /* MorseCodeiOSTests */,
 				9B4C4F562B34DE21005C48D5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +99,8 @@
 			children = (
 				9B4C4F552B34DE21005C48D5 /* MorseCode.framework */,
 				9B4C4F5D2B34DE21005C48D5 /* MorseCodeTests.xctest */,
+				CDD04BEF2B356B6E006D29B7 /* MorseCodeiOS.framework */,
+				CDD04BF62B356B6F006D29B7 /* MorseCodeiOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +156,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		CDD04BF02B356B6E006D29B7 /* MorseCodeiOS */ = {
+			isa = PBXGroup;
+			children = (
+				CDD04BF12B356B6E006D29B7 /* MorseCodeiOS.h */,
+			);
+			path = MorseCodeiOS;
+			sourceTree = "<group>";
+		};
+		CDD04BFA2B356B6F006D29B7 /* MorseCodeiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */,
+			);
+			path = MorseCodeiOSTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -131,6 +180,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B4C4F642B34DE21005C48D5 /* MorseCode.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDD04BEA2B356B6E006D29B7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDD04BFD2B356B6F006D29B7 /* MorseCodeiOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +230,42 @@
 			productReference = 9B4C4F5D2B34DE21005C48D5 /* MorseCodeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CDD04BEE2B356B6E006D29B7 /* MorseCodeiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDD04C022B356B6F006D29B7 /* Build configuration list for PBXNativeTarget "MorseCodeiOS" */;
+			buildPhases = (
+				CDD04BEA2B356B6E006D29B7 /* Headers */,
+				CDD04BEB2B356B6E006D29B7 /* Sources */,
+				CDD04BEC2B356B6E006D29B7 /* Frameworks */,
+				CDD04BED2B356B6E006D29B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MorseCodeiOS;
+			productName = MorseCodeiOS;
+			productReference = CDD04BEF2B356B6E006D29B7 /* MorseCodeiOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CDD04BF52B356B6F006D29B7 /* MorseCodeiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDD04C032B356B6F006D29B7 /* Build configuration list for PBXNativeTarget "MorseCodeiOSTests" */;
+			buildPhases = (
+				CDD04BF22B356B6F006D29B7 /* Sources */,
+				CDD04BF32B356B6F006D29B7 /* Frameworks */,
+				CDD04BF42B356B6F006D29B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDD04BF92B356B6F006D29B7 /* PBXTargetDependency */,
+			);
+			name = MorseCodeiOSTests;
+			productName = MorseCodeiOSTests;
+			productReference = CDD04BF62B356B6F006D29B7 /* MorseCodeiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -191,6 +284,12 @@
 						CreatedOnToolsVersion = 15.0.1;
 						LastSwiftMigration = 1500;
 					};
+					CDD04BEE2B356B6E006D29B7 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					CDD04BF52B356B6F006D29B7 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
 				};
 			};
 			buildConfigurationList = 9B4C4F4F2B34DE21005C48D5 /* Build configuration list for PBXProject "MorseCode" */;
@@ -208,6 +307,8 @@
 			targets = (
 				9B4C4F542B34DE21005C48D5 /* MorseCode */,
 				9B4C4F5C2B34DE21005C48D5 /* MorseCodeTests */,
+				CDD04BEE2B356B6E006D29B7 /* MorseCodeiOS */,
+				CDD04BF52B356B6F006D29B7 /* MorseCodeiOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -221,6 +322,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9B4C4F5B2B34DE21005C48D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDD04BED2B356B6E006D29B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDD04BF42B356B6F006D29B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,6 +363,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDD04BEB2B356B6E006D29B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDD04BF22B356B6F006D29B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDD04BFC2B356B6F006D29B7 /* MorseCodeiOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -255,6 +385,11 @@
 			isa = PBXTargetDependency;
 			target = 9B4C4F542B34DE21005C48D5 /* MorseCode */;
 			targetProxy = 9B4C4F5F2B34DE21005C48D5 /* PBXContainerItemProxy */;
+		};
+		CDD04BF92B356B6F006D29B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDD04BEE2B356B6E006D29B7 /* MorseCodeiOS */;
+			targetProxy = CDD04BF82B356B6F006D29B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -487,6 +622,110 @@
 			};
 			name = Release;
 		};
+		CDD04BFE2B356B6F006D29B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7588T3DZY6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pin.MorseCodeiOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CDD04BFF2B356B6F006D29B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7588T3DZY6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.pin.MorseCodeiOS;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CDD04C002B356B6F006D29B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7588T3DZY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pin.MorseCodeiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CDD04C012B356B6F006D29B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7588T3DZY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pin.MorseCodeiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -513,6 +752,24 @@
 			buildConfigurations = (
 				9B4C4F6B2B34DE21005C48D5 /* Debug */,
 				9B4C4F6C2B34DE21005C48D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDD04C022B356B6F006D29B7 /* Build configuration list for PBXNativeTarget "MorseCodeiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDD04BFE2B356B6F006D29B7 /* Debug */,
+				CDD04BFF2B356B6F006D29B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDD04C032B356B6F006D29B7 /* Build configuration list for PBXNativeTarget "MorseCodeiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDD04C002B356B6F006D29B7 /* Debug */,
+				CDD04C012B356B6F006D29B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
