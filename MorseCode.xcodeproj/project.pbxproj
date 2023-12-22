@@ -12,6 +12,7 @@
 		9BB5FFDF2B34E382000B7C30 /* MorseCodeConvertorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFDE2B34E382000B7C30 /* MorseCodeConvertorTests.swift */; };
 		9BB5FFE42B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */; };
 		9BB5FFE92B34EB15000B7C30 /* MorseCodeDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */; };
+		CDD04BE82B355A8A006D29B7 /* MorseCodeConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +32,7 @@
 		9BB5FFDE2B34E382000B7C30 /* MorseCodeConvertorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertorTests.swift; sourceTree = "<group>"; };
 		9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeDict.swift; sourceTree = "<group>"; };
+		CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */,
+				CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD04BE82B355A8A006D29B7 /* MorseCodeConvertor.swift in Sources */,
 				9BB5FFE92B34EB15000B7C30 /* MorseCodeDict.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
