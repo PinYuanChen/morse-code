@@ -49,7 +49,13 @@ class MorseCodeConvertor {
         for char in input {
             guard let type = FlashType(rawValue: "\(char)") else { continue }
             
-            signals.append(type)
+            if type == .pause {
+                let longPause = [FlashType](repeating: .pause, count: 2)
+                signals.append(contentsOf: longPause)
+            } else {
+                signals.append(type)
+                signals.append(.pause) // pause between characters
+            }
         }
         
         return signals
@@ -75,6 +81,18 @@ final class MorseCodeConvertorTests: XCTestCase {
     func test_deliverEmptyFlashSignals_whenInputEmptyString() {
         let sut = makeSUT()
         XCTAssertEqual([], sut.convertToMorseFlashSignals(input: ""))
+    }
+    
+    func test_deliverFlashSignals_whenInputMorseCodeString() {
+        let sut = makeSUT()
+        let sosSignals: [MorseCodeConvertor.FlashType] = [.di, .pause, .di, .pause, .di, .pause, // S
+                                                          .pause, .pause,
+                                                          .dah, .pause, .dah, .pause, .dah, .pause, // O
+                                                          .pause, .pause,
+                                                          .di, .pause, .di, .pause, .di, .pause, // S
+                                                          .pause, .pause]
+        let sosMorseCode = sut.convertToMorseCode(input: "SOS")
+        XCTAssertEqual(sosSignals, sut.convertToMorseFlashSignals(input: sosMorseCode))
     }
     
     // MARK: - Helpers
