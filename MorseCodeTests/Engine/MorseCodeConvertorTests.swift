@@ -9,6 +9,11 @@ import XCTest
 import MorseCode
 
 class MorseCodeConvertor {
+    
+    enum FlashType: Equatable {
+        
+    }
+    
     func convertToMorseCode(input: String) -> String {
         guard !input.isEmpty else {
             return ""
@@ -29,6 +34,10 @@ class MorseCodeConvertor {
         
         return output
     }
+    
+    func convertToMorseFlashArray(input: String) -> [FlashType] {
+        return []
+    }
 }
 
 final class MorseCodeConvertorTests: XCTestCase {
@@ -45,6 +54,11 @@ final class MorseCodeConvertorTests: XCTestCase {
         XCTAssertEqual(".- .---- ..--- ...-- ", sut.convertToMorseCode(input: "a123"))
         XCTAssertEqual(".... . .-.. .-.. ---    .-- --- .-. .-.. -.. -.-.-- ",
                        sut.convertToMorseCode(input: "Hello world!"))
+    }
+    
+    func test_deliveryEmptyFlashArray_whenInputEmptyString() {
+        let sut = makeSUT()
+        XCTAssertEqual([], sut.convertToMorseFlashArray(input: ""))
     }
     
     // MARK: - Helpers
