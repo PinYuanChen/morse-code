@@ -7,7 +7,7 @@
 
 import Foundation
 
-let morseCodeDict = [
+public let morseCodeDict = [
     "0": "-----",
     "1": ".----",
     "2": "..---",
@@ -52,5 +52,6 @@ let morseCodeDict = [
     "/": "-..-.",
     "@": ".--.-.",
     "(": "-.--.",
-    ")": "-.--.-"
+    ")": "-.--.-",
+    " ": " "
 ]
