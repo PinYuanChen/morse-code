@@ -11,7 +11,18 @@ import MorseCode
 class MorseCodeConvertor {
     
     enum FlashType: Equatable {
+        case longLight
+        case shortLight
+        case pause
         
+        var duration: Double {
+            switch self {
+            case .longLight:
+                return 3.0
+            case .shortLight, .pause:
+                return 1.0
+            }
+        }
     }
     
     func convertToMorseCode(input: String) -> String {
