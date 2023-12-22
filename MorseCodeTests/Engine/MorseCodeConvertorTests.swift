@@ -18,9 +18,9 @@ final class MorseCodeConvertorTests: XCTestCase {
     func test_deliverCorrectMorseCode() {
         let sut = makeSUT()
         
-        XCTAssertEqual("... --- ... ", sut.convertToMorseCode(input: "SOS"))
-        XCTAssertEqual(".- .---- ..--- ...-- ", sut.convertToMorseCode(input: "a123"))
-        XCTAssertEqual(".... . .-.. .-.. ---    .-- --- .-. .-.. -.. -.-.-- ",
+        XCTAssertEqual(sosMorseCodeString, sut.convertToMorseCode(input: "SOS"))
+        XCTAssertEqual(a123MorseCodeString, sut.convertToMorseCode(input: "a123"))
+        XCTAssertEqual(helloWorldMorseCodeString,
                        sut.convertToMorseCode(input: "Hello world!"))
     }
     
@@ -37,8 +37,7 @@ final class MorseCodeConvertorTests: XCTestCase {
                                                           .pause, .pause,
                                                           .di, .pause, .di, .pause, .di, .pause, // S
                                                           .pause, .pause]
-        let sosMorseCode = sut.convertToMorseCode(input: "SOS")
-        XCTAssertEqual(sosSignals, sut.convertToMorseFlashSignals(input: sosMorseCode))
+        XCTAssertEqual(sosSignals, sut.convertToMorseFlashSignals(input: sosMorseCodeString))
     }
     
     // MARK: - Helpers
@@ -47,4 +46,8 @@ final class MorseCodeConvertorTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
+    
+    private let sosMorseCodeString = "... --- ... "
+    private let a123MorseCodeString = ".- .---- ..--- ...-- "
+    private let helloWorldMorseCodeString = ".... . .-.. .-.. ---    .-- --- .-. .-.. -.. -.-.-- "
 }
