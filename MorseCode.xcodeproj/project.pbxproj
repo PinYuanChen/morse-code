@@ -16,6 +16,8 @@
 		CDD04BF72B356B6F006D29B7 /* MorseCodeiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD04BEF2B356B6E006D29B7 /* MorseCodeiOS.framework */; };
 		CDD04BFC2B356B6F006D29B7 /* MorseCodeiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */; };
 		CDD04BFD2B356B6F006D29B7 /* MorseCodeiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD04BF12B356B6E006D29B7 /* MorseCodeiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDD04C062B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */; };
+		CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C072B357F85006D29B7 /* FlashType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		CDD04BF12B356B6E006D29B7 /* MorseCodeiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MorseCodeiOS.h; sourceTree = "<group>"; };
 		CDD04BF62B356B6F006D29B7 /* MorseCodeiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeiOSTests.swift; sourceTree = "<group>"; };
+		CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertorPrototype.swift; sourceTree = "<group>"; };
+		CDD04C072B357F85006D29B7 /* FlashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				9B4C4F582B34DE21005C48D5 /* MorseCode.h */,
+				CDD04C042B357E09006D29B7 /* MorseFeature */,
 				9BB5FFE52B34EA3C000B7C30 /* Engine */,
 			);
 			path = MorseCode;
@@ -170,6 +175,15 @@
 				CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */,
 			);
 			path = MorseCodeiOSTests;
+			sourceTree = "<group>";
+		};
+		CDD04C042B357E09006D29B7 /* MorseFeature */ = {
+			isa = PBXGroup;
+			children = (
+				CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */,
+				CDD04C072B357F85006D29B7 /* FlashType.swift */,
+			);
+			path = MorseFeature;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -351,6 +365,8 @@
 			files = (
 				CDD04BE82B355A8A006D29B7 /* MorseCodeConvertor.swift in Sources */,
 				9BB5FFE92B34EB15000B7C30 /* MorseCodeDict.swift in Sources */,
+				CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */,
+				CDD04C062B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,7 +31,7 @@ final class MorseCodeConvertorTests: XCTestCase {
     
     func test_deliverFlashSignals_whenInputMorseCodeString() {
         let sut = makeSUT()
-        let sosSignals: [MorseCodeConvertor.FlashType] = [.di, .pause, .di, .pause, .di, .pause, // S
+        let sosSignals: [FlashType] = [.di, .pause, .di, .pause, .di, .pause, // S
                                                           .pause, .pause,
                                                           .dah, .pause, .dah, .pause, .dah, .pause, // O
                                                           .pause, .pause,

@@ -8,21 +8,6 @@ public class MorseCodeConvertor {
     
     public init() { }
     
-    public enum FlashType: String {
-        case dah = "-"
-        case di = "."
-        case pause = " "
-        
-        var duration: Double {
-            switch self {
-            case .dah:
-                return 3.0
-            case .di, .pause:
-                return 1.0
-            }
-        }
-    }
-    
     public func convertToMorseCode(input: String) -> String {
         
         var output = ""
