@@ -8,6 +8,7 @@ import MorseCode
 public final class MorseCodeViewController: UIViewController {
     
     public let convertButton = UIButton()
+    public let flashButton = UIButton()
     public var currentInputText = ""
     
     public required init(convertor: MorseCodeConvertorPrototype) {
@@ -23,6 +24,7 @@ public final class MorseCodeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
+        flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
     }
     
     private let convertor: MorseCodeConvertorPrototype
@@ -34,5 +36,9 @@ private extension MorseCodeViewController {
     @objc func didTappedConvertButton(_ sender: UIButton) {
         let result = convertor.convertToMorseCode(input: currentInputText)
         currentMorseText = result
+    }
+    
+    @objc func didTappedFlashButton(_ sender: UIButton) {
+        let _ = convertor.convertToMorseFlashSignals(input: currentMorseText)
     }
 }
