@@ -33,8 +33,9 @@ final class MorseCodeViewControllerTests: XCTestCase {
         
         sut.loadViewIfNeeded()
         sut.convertButton.simulateTap()
-        
         XCTAssertEqual(convertor.convertCallCount, 1)
+        sut.convertButton.simulateTap()
+        XCTAssertEqual(convertor.convertCallCount, 2)
     }
     
     // MARK: - Helpers
