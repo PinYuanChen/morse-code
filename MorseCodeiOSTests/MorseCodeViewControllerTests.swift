@@ -9,10 +9,12 @@ import MorseCodeiOS
 final class ConvertorSpy: MorseCodeConvertorPrototype {
     
     var convertCallCount = 0
+    var morseCodeString = ""
     
     func convertToMorseCode(input: String) -> String {
         convertCallCount += 1
-        return ""
+        morseCodeString = input
+        return input
     }
     
     func convertToMorseFlashSignals(input: String) -> [MorseCode.FlashType] {
@@ -36,6 +38,21 @@ final class MorseCodeViewControllerTests: XCTestCase {
         XCTAssertEqual(convertor.convertCallCount, 1)
         sut.convertButton.simulateTap()
         XCTAssertEqual(convertor.convertCallCount, 2)
+    }
+    
+    func test_userInitiatedConvertFunction_overrideFormerInput() {
+        let (sut, convertor) = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        let firstInput = "First input"
+        sut.currentInputText = firstInput
+        sut.convertButton.simulateTap()
+        XCTAssertEqual(convertor.morseCodeString, firstInput)
+        
+        let secondInput = "Second input"
+        sut.currentInputText = secondInput
+        sut.convertButton.simulateTap()
+        XCTAssertEqual(convertor.morseCodeString, secondInput)
     }
     
     // MARK: - Helpers
