@@ -7,6 +7,8 @@ import MorseCode
 
 public final class MorseCodeViewController: UIViewController {
     
+    public let convertButton = UIButton()
+    
     public required init(convertor: MorseCodeConvertorPrototype) {
         self.convertor = convertor
         super.init(nibName: nil, bundle: nil)
@@ -17,5 +19,17 @@ public final class MorseCodeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
+    }
+    
     private let convertor: MorseCodeConvertorPrototype
+}
+
+// MARK: - Private functions
+private extension MorseCodeViewController {
+    @objc func didTappedConvertButton(_ sender: UIButton) {
+        let _ = convertor.convertToMorseCode(input: "")
+    }
 }

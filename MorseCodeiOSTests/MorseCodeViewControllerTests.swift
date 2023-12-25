@@ -11,6 +11,7 @@ final class ConvertorSpy: MorseCodeConvertorPrototype {
     var convertCallCount = 0
     
     func convertToMorseCode(input: String) -> String {
+        convertCallCount += 1
         return ""
     }
     
@@ -25,6 +26,15 @@ final class MorseCodeViewControllerTests: XCTestCase {
         let (_, convertor) = makeSUT()
         
         XCTAssertEqual(convertor.convertCallCount, 0)
+    }
+    
+    func test_userInitiatedConvertFunction_convertInput() {
+        let (sut, convertor) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        sut.convertButton.simulateTap()
+        
+        XCTAssertEqual(convertor.convertCallCount, 1)
     }
     
     // MARK: - Helpers
