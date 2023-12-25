@@ -22,6 +22,8 @@
 		CDD10AA52B3922A9008ED95F /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */; };
 		CDD10AA72B394C33008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4C4F552B34DE21005C48D5 /* MorseCode.framework */; platformFilter = ios; };
 		CDD10AA82B394C33008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4C4F552B34DE21005C48D5 /* MorseCode.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CDD10AAE2B3953D4008ED95F /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10AAD2B3953D4008ED95F /* UIControl+TestHelpers.swift */; };
+		CDD10AB02B39550F008ED95F /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10AAF2B39550F008ED95F /* UIButton+TestHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		CDD04C072B357F85006D29B7 /* FlashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashType.swift; sourceTree = "<group>"; };
 		CDD10AA12B39211A008ED95F /* MorseCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeViewControllerTests.swift; sourceTree = "<group>"; };
 		CDD10AA32B392201008ED95F /* MorseCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
+		CDD10AAD2B3953D4008ED95F /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
+		CDD10AAF2B39550F008ED95F /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,7 @@
 		CDD04BFA2B356B6F006D29B7 /* MorseCodeiOSTests */ = {
 			isa = PBXGroup;
 			children = (
+				CDD10AAC2B3953C2008ED95F /* Helpers */,
 				CDD10AA12B39211A008ED95F /* MorseCodeViewControllerTests.swift */,
 			);
 			path = MorseCodeiOSTests;
@@ -220,6 +225,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDD10AAC2B3953C2008ED95F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CDD10AAD2B3953D4008ED95F /* UIControl+TestHelpers.swift */,
+				CDD10AAF2B39550F008ED95F /* UIButton+TestHelpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,7 +446,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD10AA22B39211A008ED95F /* MorseCodeViewControllerTests.swift in Sources */,
+				CDD10AB02B39550F008ED95F /* UIButton+TestHelpers.swift in Sources */,
 				CDD10AA52B3922A9008ED95F /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				CDD10AAE2B3953D4008ED95F /* UIControl+TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
