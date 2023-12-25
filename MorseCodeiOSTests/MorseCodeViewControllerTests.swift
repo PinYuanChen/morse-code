@@ -6,7 +6,10 @@ import XCTest
 import MorseCode
 import MorseCodeiOS
 
-class ConvertorSpy: MorseCodeConvertorPrototype {
+final class ConvertorSpy: MorseCodeConvertorPrototype {
+    
+    var convertCallCount = 0
+    
     func convertToMorseCode(input: String) -> String {
         return ""
     }
@@ -17,13 +20,19 @@ class ConvertorSpy: MorseCodeConvertorPrototype {
 }
 
 final class MorseCodeViewControllerTests: XCTestCase {
-
+    
+    func test_init_doesNotConvert() {
+        let (_, convertor) = makeSUT()
+        
+        XCTAssertEqual(convertor.convertCallCount, 0)
+    }
     
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> MorseCodeViewController {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodeViewController, convertor: ConvertorSpy) {
         let convertor = ConvertorSpy()
         let sut = MorseCodeViewController(convertor: convertor)
+        trackForMemoryLeaks(convertor, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
-        return sut
+        return (sut, convertor)
     }
 }

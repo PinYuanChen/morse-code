@@ -5,11 +5,11 @@
 import UIKit
 import MorseCode
 
-public class MorseCodeViewController: UIViewController {
+public final class MorseCodeViewController: UIViewController {
     
     public required init(convertor: MorseCodeConvertorPrototype) {
         self.convertor = convertor
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
     
     @available(*, unavailable)
