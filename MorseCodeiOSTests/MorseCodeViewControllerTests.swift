@@ -99,7 +99,6 @@ final class MorseCodeViewControllerTests: XCTestCase {
 
 extension MorseCodeViewController {
     func simulateConvertInputToMorseCode(_ input: String) {
-        guard !input.isEmpty else { return }
         currentInputText = input
         convertButton.simulateTap()
     }

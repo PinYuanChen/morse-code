@@ -34,6 +34,7 @@ public final class MorseCodeViewController: UIViewController {
 // MARK: - Private functions
 private extension MorseCodeViewController {
     @objc func didTappedConvertButton(_ sender: UIButton) {
+        guard !currentInputText.isEmpty else { return }
         let result = convertor.convertToMorseCode(input: currentInputText)
         currentMorseText = result
     }
