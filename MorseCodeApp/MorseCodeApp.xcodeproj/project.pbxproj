@@ -13,7 +13,26 @@
 		CDD10AC52B397F3C008ED95F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC32B397F3C008ED95F /* Main.storyboard */; };
 		CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC62B397F3D008ED95F /* Assets.xcassets */; };
 		CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */; };
+		CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; };
+		CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CDD10AD62B3980A0008ED95F /* MorseCodeiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */; };
+		CDD10AD72B3980A0008ED95F /* MorseCodeiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CDD10AD82B3980A0008ED95F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CDD10AD72B3980A0008ED95F /* MorseCodeiOS.framework in Embed Frameworks */,
+				CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CDD10ABA2B397F3C008ED95F /* MorseCodeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorseCodeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -24,6 +43,8 @@
 		CDD10AC62B397F3D008ED95F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD10AC92B397F3D008ED95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD10ACB2B397F3D008ED95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDD10AD22B3980A0008ED95F /* MorseCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCodeiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD10AD62B3980A0008ED95F /* MorseCodeiOS.framework in Frameworks */,
+				CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +65,7 @@
 			children = (
 				CDD10ABC2B397F3C008ED95F /* MorseCodeApp */,
 				CDD10ABB2B397F3C008ED95F /* Products */,
+				CDD10AD12B3980A0008ED95F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +91,15 @@
 			path = MorseCodeApp;
 			sourceTree = "<group>";
 		};
+		CDD10AD12B3980A0008ED95F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDD10AD22B3980A0008ED95F /* MorseCode.framework */,
+				CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,6 +110,7 @@
 				CDD10AB62B397F3C008ED95F /* Sources */,
 				CDD10AB72B397F3C008ED95F /* Frameworks */,
 				CDD10AB82B397F3C008ED95F /* Resources */,
+				CDD10AD82B3980A0008ED95F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -298,8 +332,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,8 +360,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
