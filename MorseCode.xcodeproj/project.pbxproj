@@ -14,10 +14,10 @@
 		9BB5FFE92B34EB15000B7C30 /* MorseCodeDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */; };
 		CDD04BE82B355A8A006D29B7 /* MorseCodeConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */; };
 		CDD04BF72B356B6F006D29B7 /* MorseCodeiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD04BEF2B356B6E006D29B7 /* MorseCodeiOS.framework */; };
-		CDD04BFC2B356B6F006D29B7 /* MorseCodeiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */; };
 		CDD04BFD2B356B6F006D29B7 /* MorseCodeiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = CDD04BF12B356B6E006D29B7 /* MorseCodeiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CDD04C062B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */; };
 		CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C072B357F85006D29B7 /* FlashType.swift */; };
+		CDD10AA22B39211A008ED95F /* MorseCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10AA12B39211A008ED95F /* MorseCodeViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +48,9 @@
 		CDD04BEF2B356B6E006D29B7 /* MorseCodeiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MorseCodeiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD04BF12B356B6E006D29B7 /* MorseCodeiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MorseCodeiOS.h; sourceTree = "<group>"; };
 		CDD04BF62B356B6F006D29B7 /* MorseCodeiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeiOSTests.swift; sourceTree = "<group>"; };
 		CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertorPrototype.swift; sourceTree = "<group>"; };
 		CDD04C072B357F85006D29B7 /* FlashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashType.swift; sourceTree = "<group>"; };
+		CDD10AA12B39211A008ED95F /* MorseCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,7 +172,7 @@
 		CDD04BFA2B356B6F006D29B7 /* MorseCodeiOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				CDD04BFB2B356B6F006D29B7 /* MorseCodeiOSTests.swift */,
+				CDD10AA12B39211A008ED95F /* MorseCodeViewControllerTests.swift */,
 			);
 			path = MorseCodeiOSTests;
 			sourceTree = "<group>";
@@ -303,6 +303,7 @@
 					};
 					CDD04BF52B356B6F006D29B7 = {
 						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
@@ -390,7 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD04BFC2B356B6F006D29B7 /* MorseCodeiOSTests.swift in Sources */,
+				CDD10AA22B39211A008ED95F /* MorseCodeViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,6 +709,7 @@
 		CDD04C002B356B6F006D29B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7588T3DZY6;
@@ -718,6 +720,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -726,6 +729,7 @@
 		CDD04C012B356B6F006D29B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7588T3DZY6;
