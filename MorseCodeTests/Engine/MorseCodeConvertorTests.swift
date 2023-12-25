@@ -41,7 +41,7 @@ final class MorseCodeConvertorTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    func makeSUT(file: StaticString = #file, line: UInt = #line) -> MorseCodeConvertor {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> MorseCodeConvertor {
         let sut = MorseCodeConvertor()
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut

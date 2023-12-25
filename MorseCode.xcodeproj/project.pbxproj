@@ -18,6 +18,8 @@
 		CDD04C062B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */; };
 		CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C072B357F85006D29B7 /* FlashType.swift */; };
 		CDD10AA22B39211A008ED95F /* MorseCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10AA12B39211A008ED95F /* MorseCodeViewControllerTests.swift */; };
+		CDD10AA42B392201008ED95F /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10AA32B392201008ED95F /* MorseCodeViewController.swift */; };
+		CDD10AA52B3922A9008ED95F /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,7 @@
 		CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertorPrototype.swift; sourceTree = "<group>"; };
 		CDD04C072B357F85006D29B7 /* FlashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashType.swift; sourceTree = "<group>"; };
 		CDD10AA12B39211A008ED95F /* MorseCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeViewControllerTests.swift; sourceTree = "<group>"; };
+		CDD10AA32B392201008ED95F /* MorseCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD04BF12B356B6E006D29B7 /* MorseCodeiOS.h */,
+				CDD10AA32B392201008ED95F /* MorseCodeViewController.swift */,
 			);
 			path = MorseCodeiOS;
 			sourceTree = "<group>";
@@ -300,6 +304,7 @@
 					};
 					CDD04BEE2B356B6E006D29B7 = {
 						CreatedOnToolsVersion = 15.0.1;
+						LastSwiftMigration = 1500;
 					};
 					CDD04BF52B356B6F006D29B7 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -384,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD10AA42B392201008ED95F /* MorseCodeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD10AA22B39211A008ED95F /* MorseCodeViewControllerTests.swift in Sources */,
+				CDD10AA52B3922A9008ED95F /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +649,7 @@
 		CDD04BFE2B356B6F006D29B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -667,6 +675,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -675,6 +684,7 @@
 		CDD04BFF2B356B6F006D29B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -709,6 +719,7 @@
 		CDD04C002B356B6F006D29B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -729,6 +740,7 @@
 		CDD04C012B356B6F006D29B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
