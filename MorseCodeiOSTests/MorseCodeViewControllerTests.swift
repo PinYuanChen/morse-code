@@ -30,13 +30,22 @@ final class MorseCodeViewControllerTests: XCTestCase {
         XCTAssertEqual(convertor.convertCallCount, 0)
     }
     
+    func test_userInitiatedConvertWithEmptyInput_noConvert() {
+        let (sut, convertor) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        sut.simulateConvertInputToMorseCode("")
+        
+        XCTAssertEqual(convertor.convertCallCount, 0)
+    }
+    
     func test_userInitiatedConvertFunction_convertInput() {
         let (sut, convertor) = makeSUT()
         
         sut.loadViewIfNeeded()
-        sut.convertButton.simulateTap()
+        sut.simulateConvertInputToMorseCode("test")
         XCTAssertEqual(convertor.convertCallCount, 1)
-        sut.convertButton.simulateTap()
+        sut.simulateConvertInputToMorseCode("test2")
         XCTAssertEqual(convertor.convertCallCount, 2)
     }
     
@@ -45,13 +54,11 @@ final class MorseCodeViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         let firstInput = "First input"
-        sut.currentInputText = firstInput
-        sut.convertButton.simulateTap()
+        sut.simulateConvertInputToMorseCode(firstInput)
         XCTAssertEqual(convertor.morseCodeString, firstInput)
         
         let secondInput = "Second input"
-        sut.currentInputText = secondInput
-        sut.convertButton.simulateTap()
+        sut.simulateConvertInputToMorseCode(secondInput)
         XCTAssertEqual(convertor.morseCodeString, secondInput)
     }
     
@@ -62,5 +69,13 @@ final class MorseCodeViewControllerTests: XCTestCase {
         trackForMemoryLeaks(convertor, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, convertor)
+    }
+}
+
+extension MorseCodeViewController {
+    func simulateConvertInputToMorseCode(_ input: String) {
+        guard !input.isEmpty else { return }
+        currentInputText = input
+        convertButton.simulateTap()
     }
 }
