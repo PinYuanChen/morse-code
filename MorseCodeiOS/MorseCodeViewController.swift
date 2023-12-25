@@ -24,6 +24,7 @@ public final class MorseCodeViewController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
         flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
         resetButton.addTarget(self, action: #selector(didTappedResetButton), for: .touchUpInside)
@@ -31,6 +32,57 @@ public final class MorseCodeViewController: UIViewController {
     
     private let convertor: MorseCodeConvertorPrototype
     private(set) var currentMorseText = ""
+}
+
+// MARK: - Setup UI
+private extension MorseCodeViewController {
+    func setupUI() {
+        setupTitleLabel()
+        setupBaseView()
+        setupInputBaseView()
+        setupInputTextField()
+        setupResetButton()
+        setupMorseBaseView()
+        setupMorseTextField()
+        setupFlashButton()
+        setupConvertButton()
+    }
+    
+    func setupTitleLabel() {
+        
+    }
+    
+    func setupBaseView() {
+        
+    }
+    
+    func setupInputBaseView() {
+        
+    }
+    
+    func setupInputTextField() {
+        
+    }
+    
+    func setupResetButton() {
+        
+    }
+    
+    func setupMorseBaseView() {
+        
+    }
+    
+    func setupMorseTextField() {
+        
+    }
+    
+    func setupFlashButton() {
+        
+    }
+    
+    func setupConvertButton() {
+        
+    }
 }
 
 // MARK: - Private functions
