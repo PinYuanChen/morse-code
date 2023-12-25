@@ -4,7 +4,7 @@
 
 import Foundation
 
-public class MorseCodeConvertor: MorseCodeConvertorPrototype {
+public final class MorseCodeConvertor: MorseCodeConvertorPrototype {
     
     public init() { }
     
