@@ -105,7 +105,6 @@ extension MorseCodeViewController {
     }
     
     func simulateInvokeFlash() {
-        guard !currentInputText.isEmpty else { return }
         flashButton.simulateTap()
     }
 }

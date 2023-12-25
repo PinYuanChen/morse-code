@@ -39,6 +39,7 @@ private extension MorseCodeViewController {
     }
     
     @objc func didTappedFlashButton(_ sender: UIButton) {
+        guard !currentInputText.isEmpty else { return }
         let _ = convertor.convertToMorseFlashSignals(input: currentMorseText)
     }
 }
