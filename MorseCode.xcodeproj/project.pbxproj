@@ -20,6 +20,8 @@
 		CDD10AA22B39211A008ED95F /* MorseCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10AA12B39211A008ED95F /* MorseCodeViewControllerTests.swift */; };
 		CDD10AA42B392201008ED95F /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10AA32B392201008ED95F /* MorseCodeViewController.swift */; };
 		CDD10AA52B3922A9008ED95F /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */; };
+		CDD10AA72B394C33008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4C4F552B34DE21005C48D5 /* MorseCode.framework */; platformFilter = ios; };
+		CDD10AA82B394C33008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4C4F552B34DE21005C48D5 /* MorseCode.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,28 @@
 			remoteGlobalIDString = CDD04BEE2B356B6E006D29B7;
 			remoteInfo = MorseCodeiOS;
 		};
+		CDD10AA92B394C33008ED95F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B4C4F4C2B34DE21005C48D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B4C4F542B34DE21005C48D5;
+			remoteInfo = MorseCode;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CDD10AAB2B394C33008ED95F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CDD10AA82B394C33008ED95F /* MorseCode.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9B4C4F552B34DE21005C48D5 /* MorseCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MorseCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD10AA72B394C33008ED95F /* MorseCode.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +122,7 @@
 				CDD04BF02B356B6E006D29B7 /* MorseCodeiOS */,
 				CDD04BFA2B356B6F006D29B7 /* MorseCodeiOSTests */,
 				9B4C4F562B34DE21005C48D5 /* Products */,
+				CDD10AA62B394C33008ED95F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,6 +215,13 @@
 			path = MorseFeature;
 			sourceTree = "<group>";
 		};
+		CDD10AA62B394C33008ED95F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -256,10 +288,12 @@
 				CDD04BEB2B356B6E006D29B7 /* Sources */,
 				CDD04BEC2B356B6E006D29B7 /* Frameworks */,
 				CDD04BED2B356B6E006D29B7 /* Resources */,
+				CDD10AAB2B394C33008ED95F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CDD10AAA2B394C33008ED95F /* PBXTargetDependency */,
 			);
 			name = MorseCodeiOS;
 			productName = MorseCodeiOS;
@@ -414,6 +448,12 @@
 			isa = PBXTargetDependency;
 			target = CDD04BEE2B356B6E006D29B7 /* MorseCodeiOS */;
 			targetProxy = CDD04BF82B356B6F006D29B7 /* PBXContainerItemProxy */;
+		};
+		CDD10AAA2B394C33008ED95F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 9B4C4F542B34DE21005C48D5 /* MorseCode */;
+			targetProxy = CDD10AA92B394C33008ED95F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
