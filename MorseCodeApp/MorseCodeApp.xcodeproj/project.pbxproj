@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */; };
 		CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */; };
-		CDD10AC22B397F3C008ED95F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10AC12B397F3C008ED95F /* ViewController.swift */; };
-		CDD10AC52B397F3C008ED95F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC32B397F3C008ED95F /* Main.storyboard */; };
 		CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC62B397F3D008ED95F /* Assets.xcassets */; };
 		CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */; };
 		CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; };
@@ -38,8 +36,6 @@
 		CDD10ABA2B397F3C008ED95F /* MorseCodeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorseCodeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CDD10AC12B397F3C008ED95F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CDD10AC42B397F3C008ED95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CDD10AC62B397F3D008ED95F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDD10AC92B397F3D008ED95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD10ACB2B397F3D008ED95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -82,8 +78,6 @@
 			children = (
 				CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */,
 				CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */,
-				CDD10AC12B397F3C008ED95F /* ViewController.swift */,
-				CDD10AC32B397F3C008ED95F /* Main.storyboard */,
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
 				CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */,
 				CDD10ACB2B397F3D008ED95F /* Info.plist */,
@@ -161,7 +155,6 @@
 			files = (
 				CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */,
 				CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */,
-				CDD10AC52B397F3C008ED95F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +165,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD10AC22B397F3C008ED95F /* ViewController.swift in Sources */,
 				CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */,
 				CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */,
 			);
@@ -181,14 +173,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CDD10AC32B397F3C008ED95F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDD10AC42B397F3C008ED95F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -331,7 +315,6 @@
 				INFOPLIST_FILE = MorseCodeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -359,7 +342,6 @@
 				INFOPLIST_FILE = MorseCodeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
