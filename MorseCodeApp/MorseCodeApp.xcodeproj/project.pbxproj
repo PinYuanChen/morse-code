@@ -134,8 +134,8 @@
 		CDD10AED2B3A716E008ED95F /* MorseCodeAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift */,
 				CD00A9892B3A74D40042E9F6 /* Helpers */,
+				CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift */,
 			);
 			path = MorseCodeAppTests;
 			sourceTree = "<group>";
