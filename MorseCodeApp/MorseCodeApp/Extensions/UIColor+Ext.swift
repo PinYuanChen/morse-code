@@ -24,9 +24,6 @@ extension UIColor {
     /// input bg color
     static let bg1B262F: UIColor = #colorLiteral(red: 0.1058823529, green: 0.1490196078, blue: 0.1843137255, alpha: 1)
     
-    /// clear button
-    static let bg25313A: UIColor = #colorLiteral(red: 0.1450980392, green: 0.1921568627, blue: 0.2274509804, alpha: 1)
-    
     /// input view line
     static let line3A4955: UIColor = #colorLiteral(red: 0.2274509804, green: 0.2862745098, blue: 0.3333333333, alpha: 1)
     
