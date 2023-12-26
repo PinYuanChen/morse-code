@@ -60,11 +60,30 @@ private extension MorseCodeViewController {
     }
     
     func setupTitleLabel() {
+        titleLabel.text = "Morse Code Flashlight"
+        titleLabel.textColor = .txt5BC5A5
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textAlignment = .center
         
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(60)
+            $0.centerX.equalToSuperview()
+        }
     }
     
     func setupBaseView() {
+        baseView.backgroundColor = .bg25333F
+        baseView.layer.cornerRadius = 10
+        baseView.layer.masksToBounds = true
         
+        view.addSubview(baseView)
+        baseView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(44)
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview().offset(-20)
+            $0.height.equalTo(baseView.snp.width)
+        }
     }
     
     func setupInputBaseView() {
