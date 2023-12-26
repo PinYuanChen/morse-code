@@ -13,8 +13,6 @@
 		CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */; };
 		CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; };
 		CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CDD10AD62B3980A0008ED95F /* MorseCodeiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */; };
-		CDD10AD72B3980A0008ED95F /* MorseCodeiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +32,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CDD10AD72B3980A0008ED95F /* MorseCodeiOS.framework in Embed Frameworks */,
 				CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -59,7 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD10AD62B3980A0008ED95F /* MorseCodeiOS.framework in Frameworks */,
 				CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

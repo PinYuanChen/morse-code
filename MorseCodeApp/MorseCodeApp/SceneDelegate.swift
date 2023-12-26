@@ -4,7 +4,6 @@
 
 import UIKit
 import MorseCode
-import MorseCodeiOS
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -15,9 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = (scene as? UIWindowScene) else { return }
         
         let convertor = MorseCodeConvertor()
-        let morseCodeViewController = MorseCodeViewController(convertor: convertor)
-        
-        window?.rootViewController = morseCodeViewController
+//        let morseCodeViewController = MorseCodeViewController(convertor: convertor)
+//        
+//        window?.rootViewController = morseCodeViewController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -6,8 +6,23 @@
 	<dict>
 		<key>MorseCodeApp.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>CDD10AB92B397F3C008ED95F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CDD10AEB2B3A716E008ED95F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
