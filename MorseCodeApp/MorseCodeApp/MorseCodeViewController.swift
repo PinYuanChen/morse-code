@@ -8,11 +8,13 @@ import MorseCode
 
 public final class MorseCodeViewController: UIViewController {
     
+    // MARK: Public properties
     public let convertButton = UIButton()
     public let flashButton = UIButton()
     public let resetButton = UIButton()
     public var currentInputText = ""
     
+    // MARK: Life cycle
     public required init(convertor: MorseCodeConvertorPrototype) {
         self.convertor = convertor
         super.init(nibName: nil, bundle: nil)
@@ -31,13 +33,21 @@ public final class MorseCodeViewController: UIViewController {
         resetButton.addTarget(self, action: #selector(didTappedResetButton), for: .touchUpInside)
     }
     
+    // MARK: Private properties
     private let convertor: MorseCodeConvertorPrototype
     private(set) var currentMorseText = ""
+    private let titleLabel = UILabel()
+    private let baseView = UIView()
+    private let inputBaseView = UIView()
+    private let inputTextField = UITextField()
+    private let morseBaseView = UIView()
+    private let morseTextField = UITextField()
 }
 
 // MARK: - Setup UI
 private extension MorseCodeViewController {
     func setupUI() {
+        view.backgroundColor = .bg04121F
         setupTitleLabel()
         setupBaseView()
         setupInputBaseView()
