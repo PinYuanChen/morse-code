@@ -17,6 +17,16 @@
 		CDD10AD72B3980A0008ED95F /* MorseCodeiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CDD10AF02B3A716E008ED95F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDD10AB22B397F3C008ED95F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDD10AB92B397F3C008ED95F;
+			remoteInfo = MorseCodeApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		CDD10AD82B3980A0008ED95F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -41,6 +51,7 @@
 		CDD10ACB2B397F3D008ED95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD10AD22B3980A0008ED95F /* MorseCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCodeiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +64,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDD10AE92B3A716E008ED95F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -60,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD10ABC2B397F3C008ED95F /* MorseCodeApp */,
+				CDD10AED2B3A716E008ED95F /* MorseCodeAppTests */,
 				CDD10ABB2B397F3C008ED95F /* Products */,
 				CDD10AD12B3980A0008ED95F /* Frameworks */,
 			);
@@ -69,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD10ABA2B397F3C008ED95F /* MorseCodeApp.app */,
+				CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,6 +114,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CDD10AED2B3A716E008ED95F /* MorseCodeAppTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MorseCodeAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,6 +142,24 @@
 			productReference = CDD10ABA2B397F3C008ED95F /* MorseCodeApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CDD10AEB2B3A716E008ED95F /* MorseCodeAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDD10AF42B3A716E008ED95F /* Build configuration list for PBXNativeTarget "MorseCodeAppTests" */;
+			buildPhases = (
+				CDD10AE82B3A716E008ED95F /* Sources */,
+				CDD10AE92B3A716E008ED95F /* Frameworks */,
+				CDD10AEA2B3A716E008ED95F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDD10AF12B3A716E008ED95F /* PBXTargetDependency */,
+			);
+			name = MorseCodeAppTests;
+			productName = MorseCodeAppTests;
+			productReference = CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -127,6 +172,10 @@
 				TargetAttributes = {
 					CDD10AB92B397F3C008ED95F = {
 						CreatedOnToolsVersion = 15.0.1;
+					};
+					CDD10AEB2B3A716E008ED95F = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = CDD10AB92B397F3C008ED95F;
 					};
 				};
 			};
@@ -144,6 +193,7 @@
 			projectRoot = "";
 			targets = (
 				CDD10AB92B397F3C008ED95F /* MorseCodeApp */,
+				CDD10AEB2B3A716E008ED95F /* MorseCodeAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -155,6 +205,13 @@
 			files = (
 				CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */,
 				CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDD10AEA2B3A716E008ED95F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,7 +227,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CDD10AE82B3A716E008ED95F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CDD10AF12B3A716E008ED95F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDD10AB92B397F3C008ED95F /* MorseCodeApp */;
+			targetProxy = CDD10AF02B3A716E008ED95F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */ = {
@@ -357,6 +429,42 @@
 			};
 			name = Release;
 		};
+		CDD10AF22B3A716E008ED95F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7588T3DZY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pin.MorseCodeAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MorseCodeApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MorseCodeApp";
+			};
+			name = Debug;
+		};
+		CDD10AF32B3A716E008ED95F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7588T3DZY6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pin.MorseCodeAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MorseCodeApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MorseCodeApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -374,6 +482,15 @@
 			buildConfigurations = (
 				CDD10ACF2B397F3D008ED95F /* Debug */,
 				CDD10AD02B397F3D008ED95F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDD10AF42B3A716E008ED95F /* Build configuration list for PBXNativeTarget "MorseCodeAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDD10AF22B3A716E008ED95F /* Debug */,
+				CDD10AF32B3A716E008ED95F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
