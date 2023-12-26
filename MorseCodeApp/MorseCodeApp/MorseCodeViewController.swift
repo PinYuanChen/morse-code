@@ -79,7 +79,7 @@ private extension MorseCodeViewController {
             $0.top.equalTo(titleLabel.snp.bottom).offset(44)
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().offset(-20)
-            $0.height.equalTo(200)
+            $0.height.equalTo(240)
         }
     }
     
@@ -116,11 +116,34 @@ private extension MorseCodeViewController {
     }
     
     func setupMorseBaseView() {
+        morseBaseView.backgroundColor = .bg1B262F
+        morseBaseView.layer.cornerRadius = 10
+        morseBaseView.layer.masksToBounds = true
         
+        baseView.addSubview(morseBaseView)
+        morseBaseView.snp.makeConstraints {
+            $0.top.equalTo(inputBaseView.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(inputBaseView)
+        }
     }
     
     func setupMorseTextField() {
+        morseTextField.textColor = .txt5BC5A5
+        morseTextField.backgroundColor = .clear
+        morseTextField.attributedPlaceholder = NSAttributedString(
+            string: "Morse code output",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.txt5BC5A5]
+        )
+        morseTextField.isUserInteractionEnabled = false
+        morseBaseView.addSubview(morseTextField)
         
+        morseTextField.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(5)
+            $0.height.equalTo(40)
+            $0.width.equalToSuperview().offset(-10)
+            $0.centerY.equalToSuperview()
+        }
     }
     
     func setupFlashButton() {
