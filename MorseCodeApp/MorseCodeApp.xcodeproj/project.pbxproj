@@ -13,6 +13,7 @@
 		CD00A98F2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift */; };
 		CD00A9912B3A75600042E9F6 /* XCTestCase+LeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9902B3A75600042E9F6 /* XCTestCase+LeakTracking.swift */; };
 		CD00A9972B3A79080042E9F6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD00A9962B3A79080042E9F6 /* SnapKit */; };
+		CD00A99A2B3A7BC30042E9F6 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9992B3A7BC30042E9F6 /* UIColor+Ext.swift */; };
 		CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */; };
 		CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */; };
 		CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC62B397F3D008ED95F /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
 		CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewControllerTests.swift; sourceTree = "<group>"; };
 		CD00A9902B3A75600042E9F6 /* XCTestCase+LeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+LeakTracking.swift"; sourceTree = "<group>"; };
+		CD00A9992B3A7BC30042E9F6 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		CDD10ABA2B397F3C008ED95F /* MorseCodeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorseCodeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +93,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		CD00A9982B3A7B950042E9F6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CD00A9992B3A7BC30042E9F6 /* UIColor+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CDD10AB12B397F3C008ED95F = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 				CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */,
 				CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */,
 				CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */,
+				CD00A9982B3A7B950042E9F6 /* Extensions */,
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
 				CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */,
 				CDD10ACB2B397F3D008ED95F /* Info.plist */,
@@ -251,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */,
+				CD00A99A2B3A7BC30042E9F6 /* UIColor+Ext.swift in Sources */,
 				CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */,
 				CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */,
 			);
