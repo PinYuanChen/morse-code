@@ -87,15 +87,6 @@ final class MorseCodeViewControllerTests: XCTestCase {
         XCTAssertEqual(convertor.flashCallCount, 1)
     }
     
-    func test_resetInputText() {
-        let (sut, _) = makeSUT()
-        sut.loadViewIfNeeded()
-        
-        sut.simulateConvertInputToMorseCode("input")
-        sut.simulateResetInput()
-        XCTAssertEqual(sut.getCurrentInput(), "")
-    }
-    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodeViewController, convertor: ConvertorSpy) {
         let convertor = ConvertorSpy()
@@ -114,13 +105,5 @@ extension MorseCodeViewController {
     
     func simulateInvokeFlash() {
         flashButton.simulateTap()
-    }
-    
-    func simulateResetInput() {
-        resetButton.simulateTap()
-    }
-    
-    func getCurrentInput() -> String {
-        currentInputText
     }
 }

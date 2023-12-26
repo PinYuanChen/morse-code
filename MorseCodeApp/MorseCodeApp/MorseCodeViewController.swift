@@ -8,11 +8,12 @@ import MorseCode
 
 public final class MorseCodeViewController: UIViewController {
     
+    // MARK: Public properties
     public let convertButton = UIButton()
     public let flashButton = UIButton()
-    public let resetButton = UIButton()
     public var currentInputText = ""
     
+    // MARK: Life cycle
     public required init(convertor: MorseCodeConvertorPrototype) {
         self.convertor = convertor
         super.init(nibName: nil, bundle: nil)
@@ -28,21 +29,27 @@ public final class MorseCodeViewController: UIViewController {
         setupUI()
         convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
         flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
-        resetButton.addTarget(self, action: #selector(didTappedResetButton), for: .touchUpInside)
     }
     
+    // MARK: Private properties
     private let convertor: MorseCodeConvertorPrototype
     private(set) var currentMorseText = ""
+    private let titleLabel = UILabel()
+    private let baseView = UIView()
+    private let inputBaseView = UIView()
+    private let inputTextField = CustomTextField()
+    private let morseBaseView = UIView()
+    private let morseTextField = UITextField()
 }
 
 // MARK: - Setup UI
 private extension MorseCodeViewController {
     func setupUI() {
+        view.backgroundColor = .bg04121F
         setupTitleLabel()
         setupBaseView()
         setupInputBaseView()
         setupInputTextField()
-        setupResetButton()
         setupMorseBaseView()
         setupMorseTextField()
         setupFlashButton()
@@ -50,31 +57,93 @@ private extension MorseCodeViewController {
     }
     
     func setupTitleLabel() {
+        titleLabel.text = "Morse Code Flashlight"
+        titleLabel.textColor = .txt5BC5A5
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textAlignment = .center
         
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(60)
+            $0.centerX.equalToSuperview()
+        }
     }
     
     func setupBaseView() {
+        baseView.backgroundColor = .bg25333F
+        baseView.layer.cornerRadius = 10
+        baseView.layer.masksToBounds = true
         
+        view.addSubview(baseView)
+        baseView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(44)
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview().offset(-20)
+            $0.height.equalTo(240)
+        }
     }
     
     func setupInputBaseView() {
+        inputBaseView.backgroundColor = .bg1B262F
+        inputBaseView.layer.cornerRadius = 10
+        inputBaseView.layer.masksToBounds = true
         
+        baseView.addSubview(inputBaseView)
+        inputBaseView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview().offset(-20)
+            $0.height.equalTo(60)
+        }
     }
     
     func setupInputTextField() {
+        inputTextField.textColor = .white
+        inputTextField.attributedPlaceholder = NSAttributedString(
+            string: "Input your message here.",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
+        inputTextField.backgroundColor = .clear
+        inputTextField.clearButtonMode = .whileEditing
+        inputBaseView.addSubview(inputTextField)
         
-    }
-    
-    func setupResetButton() {
-        
+        inputTextField.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(5)
+            $0.height.equalTo(40)
+            $0.width.equalToSuperview().offset(-10)
+            $0.centerY.equalToSuperview()
+        }
     }
     
     func setupMorseBaseView() {
+        morseBaseView.backgroundColor = .bg1B262F
+        morseBaseView.layer.cornerRadius = 10
+        morseBaseView.layer.masksToBounds = true
         
+        baseView.addSubview(morseBaseView)
+        morseBaseView.snp.makeConstraints {
+            $0.top.equalTo(inputBaseView.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(inputBaseView)
+        }
     }
     
     func setupMorseTextField() {
+        morseTextField.textColor = .txt5BC5A5
+        morseTextField.backgroundColor = .clear
+        morseTextField.attributedPlaceholder = NSAttributedString(
+            string: "Morse code output",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.txt5BC5A5]
+        )
+        morseTextField.isUserInteractionEnabled = false
+        morseBaseView.addSubview(morseTextField)
         
+        morseTextField.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(5)
+            $0.height.equalTo(40)
+            $0.width.equalToSuperview().offset(-10)
+            $0.centerY.equalToSuperview()
+        }
     }
     
     func setupFlashButton() {
@@ -98,8 +167,18 @@ private extension MorseCodeViewController {
         guard !currentInputText.isEmpty else { return }
         let _ = convertor.convertToMorseFlashSignals(input: currentMorseText)
     }
-    
-    @objc func didTappedResetButton(_ sender: UIButton) {
-        currentInputText = ""
+}
+
+class CustomTextField: UITextField {
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        for view in subviews {
+            if let button = view as? UIButton {
+                button.setImage(button.image(for: .normal)?.withRenderingMode(.alwaysTemplate), for: .normal)
+                button.tintColor = .bg275452
+            }
+        }
     }
 }
