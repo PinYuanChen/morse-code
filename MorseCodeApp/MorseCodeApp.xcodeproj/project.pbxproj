@@ -12,6 +12,7 @@
 		CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */; };
 		CD00A98F2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift */; };
 		CD00A9912B3A75600042E9F6 /* XCTestCase+LeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9902B3A75600042E9F6 /* XCTestCase+LeakTracking.swift */; };
+		CD00A9972B3A79080042E9F6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD00A9962B3A79080042E9F6 /* SnapKit */; };
 		CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */; };
 		CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */; };
 		CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC62B397F3D008ED95F /* Assets.xcassets */; };
@@ -57,7 +58,6 @@
 		CDD10AC92B397F3D008ED95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD10ACB2B397F3D008ED95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD10AD22B3980A0008ED95F /* MorseCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCodeiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -67,6 +67,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */,
+				CD00A9972B3A79080042E9F6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				CDD10AD22B3980A0008ED95F /* MorseCode.framework */,
-				CDD10AD32B3980A0008ED95F /* MorseCodeiOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,6 +157,9 @@
 			dependencies = (
 			);
 			name = MorseCodeApp;
+			packageProductDependencies = (
+				CD00A9962B3A79080042E9F6 /* SnapKit */,
+			);
 			productName = MorseCodeApp;
 			productReference = CDD10ABA2B397F3C008ED95F /* MorseCodeApp.app */;
 			productType = "com.apple.product-type.application";
@@ -175,6 +178,8 @@
 				CDD10AF12B3A716E008ED95F /* PBXTargetDependency */,
 			);
 			name = MorseCodeAppTests;
+			packageProductDependencies = (
+			);
 			productName = MorseCodeAppTests;
 			productReference = CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -208,6 +213,9 @@
 				Base,
 			);
 			mainGroup = CDD10AB12B397F3C008ED95F;
+			packageReferences = (
+				CD00A9922B3A76960042E9F6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = CDD10ABB2B397F3C008ED95F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -524,6 +532,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD00A9922B3A76960042E9F6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD00A9962B3A79080042E9F6 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD00A9922B3A76960042E9F6 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CDD10AB22B397F3C008ED95F /* Project object */;
 }
