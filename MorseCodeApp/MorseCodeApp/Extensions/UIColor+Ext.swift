@@ -30,9 +30,9 @@ extension UIColor {
     /// green border line
     static let line69E2C1: UIColor = #colorLiteral(red: 0.4117647059, green: 0.8862745098, blue: 0.7568627451, alpha: 1)
     
-    /// convert button gradient background
+    /// clear button
     static let bg275452: UIColor = #colorLiteral(red: 0.1529411765, green: 0.3294117647, blue: 0.3215686275, alpha: 1)
     
-    /// convert button gradient background
-    static let bg1F4343: UIColor = #colorLiteral(red: 0.1215686275, green: 0.262745098, blue: 0.262745098, alpha: 1)
+    /// convert button
+    static let bg5BC5A5: UIColor = #colorLiteral(red: 0.3568627451, green: 0.7725490196, blue: 0.6470588235, alpha: 1)
 }
