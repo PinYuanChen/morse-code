@@ -105,6 +105,7 @@ private extension MorseCodeViewController {
         )
         inputTextField.backgroundColor = .clear
         inputTextField.clearButtonMode = .whileEditing
+        inputTextField.delegate = self
         inputBaseView.addSubview(inputTextField)
         
         inputTextField.snp.makeConstraints {
@@ -185,5 +186,15 @@ private extension MorseCodeViewController {
     @objc func didTappedFlashButton(_ sender: UIButton) {
         guard !currentInputText.isEmpty else { return }
         let _ = convertor.convertToMorseFlashSignals(input: currentMorseText)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+extension MorseCodeViewController: UITextFieldDelegate {
+    public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let regex = "[A-Za-z0-9 .,?!-/@()]*"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
+        return predicate.evaluate(with: string)
     }
 }
