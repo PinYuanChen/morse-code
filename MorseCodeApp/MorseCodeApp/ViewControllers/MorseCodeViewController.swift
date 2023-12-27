@@ -33,7 +33,6 @@ public final class MorseCodeViewController: UIViewController {
     
     // MARK: Private properties
     private let convertor: MorseCodeConvertorPrototype
-    private(set) var currentMorseText = ""
     private let titleLabel = UILabel()
     private let baseView = UIView()
     private let inputBaseView = UIView()
@@ -198,13 +197,16 @@ private extension MorseCodeViewController {
     @objc func didTappedConvertButton(_ sender: UIButton) {
         guard !currentInputText.isEmpty else { return }
         let result = convertor.convertToMorseCode(input: currentInputText)
-        currentMorseText = result
-        morseTextField.text = currentMorseText
+        morseTextField.text = result
     }
     
     @objc func didTappedFlashButton(_ sender: UIButton) {
-        guard !currentInputText.isEmpty else { return }
-        let _ = convertor.convertToMorseFlashSignals(input: currentMorseText)
+        guard let morseText = morseTextField.text,
+              !morseText.isEmpty else {
+            return
+        }
+        
+        let _ = convertor.convertToMorseFlashSignals(input: morseText)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
