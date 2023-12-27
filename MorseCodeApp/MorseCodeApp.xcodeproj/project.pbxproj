@@ -16,6 +16,7 @@
 		CD00A99A2B3A7BC30042E9F6 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9992B3A7BC30042E9F6 /* UIColor+Ext.swift */; };
 		CD4ED4ED2B3C00E600197428 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED4EC2B3C00E600197428 /* CustomTextField.swift */; };
 		CD4ED4EF2B3C014900197428 /* ConvertorSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED4EE2B3C014900197428 /* ConvertorSpy.swift */; };
+		CD4ED4F12B3C04E800197428 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED4F02B3C04E800197428 /* CustomButton.swift */; };
 		CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */; };
 		CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */; };
 		CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC62B397F3D008ED95F /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 		CD00A9992B3A7BC30042E9F6 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		CD4ED4EC2B3C00E600197428 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		CD4ED4EE2B3C014900197428 /* ConvertorSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertorSpy.swift; sourceTree = "<group>"; };
+		CD4ED4F02B3C04E800197428 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CDD10ABA2B397F3C008ED95F /* MorseCodeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorseCodeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				CD4ED4EC2B3C00E600197428 /* CustomTextField.swift */,
+				CD4ED4F02B3C04E800197428 /* CustomButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 			files = (
 				CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */,
 				CD00A99A2B3A7BC30042E9F6 /* UIColor+Ext.swift in Sources */,
+				CD4ED4F12B3C04E800197428 /* CustomButton.swift in Sources */,
 				CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */,
 				CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */,
 				CD4ED4ED2B3C00E600197428 /* CustomTextField.swift in Sources */,

@@ -9,8 +9,8 @@ import MorseCode
 public final class MorseCodeViewController: UIViewController {
     
     // MARK: Public properties
-    public let convertButton = UIButton()
-    public let flashButton = UIButton()
+    public let convertButton = CustomButton()
+    public let flashButton = CustomButton()
     public var currentInputText = ""
     
     // MARK: Life cycle
@@ -166,6 +166,7 @@ private extension MorseCodeViewController {
         convertButton.backgroundColor = .bg5BC5A5
         convertButton.layer.cornerRadius = 10
         convertButton.layer.masksToBounds = true
+        convertButton.isEnabled = false
         
         baseView.addSubview(convertButton)
         convertButton.snp.makeConstraints {
@@ -181,6 +182,7 @@ private extension MorseCodeViewController {
         guard !currentInputText.isEmpty else { return }
         let result = convertor.convertToMorseCode(input: currentInputText)
         currentMorseText = result
+        morseTextField.text = currentMorseText
     }
     
     @objc func didTappedFlashButton(_ sender: UIButton) {
