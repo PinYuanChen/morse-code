@@ -4,6 +4,7 @@
 
 import UIKit
 import SnapKit
+import Combine
 import MorseCode
 
 public final class MorseCodeViewController: UIViewController {
@@ -27,8 +28,7 @@ public final class MorseCodeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
-        flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
+        bind()
     }
     
     // MARK: Private properties
@@ -40,6 +40,8 @@ public final class MorseCodeViewController: UIViewController {
     private let inputTextField = CustomTextField()
     private let morseBaseView = UIView()
     private let morseTextField = UITextField()
+    @Published private var isValidInput = false
+    private var anyCancellables = [AnyCancellable]()
 }
 
 // MARK: - Setup UI
@@ -176,6 +178,21 @@ private extension MorseCodeViewController {
     }
 }
 
+// MARK: - Bind
+private extension MorseCodeViewController {
+    func bind() {
+        inputTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        $isValidInput
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.isEnabled, on: convertButton)
+            .store(in: &anyCancellables)
+        
+        convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
+        flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
+    }
+}
+
 // MARK: - Private functions
 private extension MorseCodeViewController {
     @objc func didTappedConvertButton(_ sender: UIButton) {
@@ -188,6 +205,10 @@ private extension MorseCodeViewController {
     @objc func didTappedFlashButton(_ sender: UIButton) {
         guard !currentInputText.isEmpty else { return }
         let _ = convertor.convertToMorseFlashSignals(input: currentMorseText)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        isValidInput = textField.hasText
     }
 }
 
