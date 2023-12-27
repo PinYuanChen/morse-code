@@ -141,17 +141,36 @@ private extension MorseCodeViewController {
         morseTextField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(5)
             $0.height.equalTo(40)
-            $0.width.equalToSuperview().offset(-10)
+            $0.width.equalToSuperview().offset(-50)
             $0.centerY.equalToSuperview()
         }
     }
     
     func setupFlashButton() {
+        flashButton.backgroundColor = .bg275452
+        flashButton.layer.cornerRadius = 15
+        flashButton.layer.masksToBounds = true
         
+        morseBaseView.addSubview(flashButton)
+        flashButton.snp.makeConstraints {
+            $0.leading.equalTo(morseTextField.snp.trailing).offset(5)
+            $0.size.equalTo(30)
+            $0.centerY.equalToSuperview()
+        }
     }
     
     func setupConvertButton() {
+        convertButton.setTitle("Convert", for: .normal)
+        convertButton.titleLabel?.textColor = .white
+        convertButton.backgroundColor = .bg5BC5A5
+        convertButton.layer.cornerRadius = 10
+        convertButton.layer.masksToBounds = true
         
+        baseView.addSubview(convertButton)
+        convertButton.snp.makeConstraints {
+            $0.leading.size.equalTo(morseBaseView)
+            $0.bottom.equalToSuperview().offset(-17)
+        }
     }
 }
 
