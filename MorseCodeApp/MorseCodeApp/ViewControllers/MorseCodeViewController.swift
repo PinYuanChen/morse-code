@@ -152,6 +152,7 @@ private extension MorseCodeViewController {
         flashButton.backgroundColor = .bg275452
         flashButton.layer.cornerRadius = 15
         flashButton.layer.masksToBounds = true
+        flashButton.isEnabled = false
         
         morseBaseView.addSubview(flashButton)
         flashButton.snp.makeConstraints {
