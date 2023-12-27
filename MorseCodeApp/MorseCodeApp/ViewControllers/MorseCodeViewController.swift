@@ -209,6 +209,7 @@ private extension MorseCodeViewController {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         isValidInput = textField.hasText
+        currentInputText = textField.text ?? ""
     }
 }
 
