@@ -18,6 +18,11 @@ class FlashManager {
     
     func startPlaySignals() {
         currentStatus = .playing
+        scheduleTimer()
+    }
+    
+    private func scheduleTimer() {
+        
     }
     
     private func swtichTorch(on: Bool) {
@@ -40,6 +45,8 @@ class FlashManager {
         }
     }
 
+    private(set) var index = 0
+    private var signals = [FlashType]()
 }
 
 final class FlashManagerTests: XCTestCase {
