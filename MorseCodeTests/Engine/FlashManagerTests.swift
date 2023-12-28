@@ -59,7 +59,12 @@ final class FlashManagerTests: XCTestCase {
     
     func test_initDoesNotPlay() {
         let sut = makeSUT()
-        
+        XCTAssertEqual(sut.currentStatus, FlashManager.StatusType.stop)
+    }
+    
+    func test_startPlayingEmptySignals_didNotPlay() {
+        let sut = makeSUT()
+        sut.startPlaySignals(signals: [])
         XCTAssertEqual(sut.currentStatus, FlashManager.StatusType.stop)
     }
     
