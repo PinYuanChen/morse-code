@@ -16,7 +16,10 @@ class FlashManager {
         case stop
     }
     
-    func startPlaySignals() {
+    func startPlaySignals(signals: [FlashType]) {
+        guard !signals.isEmpty else { return }
+        
+        self.signals = signals
         currentStatus = .playing
         scheduleTimer()
     }
