@@ -25,10 +25,13 @@ class FlashManager {
     }
     
     private func scheduleTimer() {
-        
+        // bottom case: turn off timer
+        // fetch info by index
+        // trigger switch function
+        // set timer and call next
     }
     
-    private func swtichTorch(on: Bool) {
+    private func toggleTorch(on: Bool) {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video),
               device.hasTorch else {
             print("Torch isn't available")
