@@ -9,7 +9,11 @@ public enum FlashType: String {
     case di = "."
     case pause = " "
     
-    var duration: Double {
+    public var turnOn: Bool {
+        return self != .pause
+    }
+    
+    public var duration: Double {
         switch self {
         case .dah:
             return 3.0

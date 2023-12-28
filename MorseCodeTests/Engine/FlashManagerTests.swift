@@ -26,13 +26,26 @@ class FlashManager {
     
     func stopPlayingSignals() {
         currentStatus = .stop
+        toggleTorch(on: false)
+        flashTimer?.invalidate()
+        flashTimer = nil
     }
     
     private func scheduleTimer() {
-        // bottom case: turn off timer
-        // fetch info by index
-        // trigger switch function
-        // set timer and call next
+        guard index < signals.count else {
+            stopPlayingSignals()
+            return
+        }
+        
+        let flashType = signals[index]
+        toggleTorch(on: flashType.turnOn)
+        
+        flashTimer = Timer.scheduledTimer(withTimeInterval: flashType.duration, repeats: false) { [weak self] timer in
+            guard let self = self else { return }
+            
+            self.index += 1
+            self.scheduleTimer()
+        }
     }
     
     private func toggleTorch(on: Bool) {
@@ -55,6 +68,7 @@ class FlashManager {
         }
     }
 
+    private(set) var flashTimer: Timer?
     private(set) var index = 0
     private var signals = [FlashType]()
 }
@@ -82,7 +96,10 @@ final class FlashManagerTests: XCTestCase {
         let sut = makeSUT()
         sut.startPlaySignals(signals: [.di])
         sut.stopPlayingSignals()
+        
         XCTAssertEqual(sut.currentStatus, FlashManager.StatusType.stop)
+        XCTAssertEqual(sut.index, 0)
+        XCTAssertNil(sut.flashTimer)
     }
     
     // MARK: - Helpers
