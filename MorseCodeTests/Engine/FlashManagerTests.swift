@@ -4,6 +4,7 @@
 
 import XCTest
 import MorseCode
+import AVFoundation
 
 class FlashManager {
     
@@ -18,6 +19,27 @@ class FlashManager {
     func startPlaySignals() {
         currentStatus = .playing
     }
+    
+    private func swtichTorch(on: Bool) {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video),
+              device.hasTorch else {
+            print("Torch isn't available")
+            return
+        }
+        
+        do {
+            try device.lockForConfiguration()
+            device.torchMode = on ? .on : .off
+            
+            if on {
+                try device.setTorchModeOn(level: AVCaptureDevice.maxAvailableTorchLevel.significand)
+            }
+            device.unlockForConfiguration()
+        } catch {
+            print("Torch can't be used")
+        }
+    }
+
 }
 
 final class FlashManagerTests: XCTestCase {
