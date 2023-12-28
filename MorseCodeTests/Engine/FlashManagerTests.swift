@@ -111,8 +111,8 @@ final class FlashManagerTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> FlashManager {
-        let sut = FlashManager(timerScheduler: RunLoop.current)
+    private func makeSUT(timerScheduler: TimerSchedulerPrototype = RunLoop.current ,file: StaticString = #file, line: UInt = #line) -> FlashManager {
+        let sut = FlashManager(timerScheduler: timerScheduler)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
