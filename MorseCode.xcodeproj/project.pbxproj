@@ -17,6 +17,7 @@
 		CDD04C062B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */; };
 		CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C072B357F85006D29B7 /* FlashType.swift */; };
 		CDD90F7C2B3D46CE00A89614 /* TimerSchedulerPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD90F7B2B3D46CE00A89614 /* TimerSchedulerPrototype.swift */; };
+		CDD90F7E2B3D487D00A89614 /* MockTimerScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD90F7D2B3D487D00A89614 /* MockTimerScheduler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertorPrototype.swift; sourceTree = "<group>"; };
 		CDD04C072B357F85006D29B7 /* FlashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashType.swift; sourceTree = "<group>"; };
 		CDD90F7B2B3D46CE00A89614 /* TimerSchedulerPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSchedulerPrototype.swift; sourceTree = "<group>"; };
+		CDD90F7D2B3D487D00A89614 /* MockTimerScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerScheduler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */,
+				CDD90F7D2B3D487D00A89614 /* MockTimerScheduler.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD24FC432B3C1A34005F6959 /* FlashManagerTests.swift in Sources */,
+				CDD90F7E2B3D487D00A89614 /* MockTimerScheduler.swift in Sources */,
 				9BB5FFDF2B34E382000B7C30 /* MorseCodeConvertorTests.swift in Sources */,
 				9BB5FFE42B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
