@@ -34,10 +34,30 @@ final class FlashManagerTests: XCTestCase {
         XCTAssertNil(sut.flashTimer)
     }
     
+    func test_signalDurations() {
+        checkDuration(type: .di, duration: 1)
+        checkDuration(type: .dah, duration: 3)
+        checkDuration(type: .pause, duration: 1)
+    }
+    
     // MARK: - Helpers
-    private func makeSUT(timerScheduler: TimerSchedulerPrototype = RunLoop.current ,file: StaticString = #file, line: UInt = #line) -> FlashManager {
+    private func makeSUT(timerScheduler: TimerSchedulerPrototype = RunLoop.current, file: StaticString = #file, line: UInt = #line) -> FlashManager {
         let sut = FlashManager(timerScheduler: timerScheduler)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+    
+    private func checkDuration(type: FlashType, duration: Double) {
+        var timerScheduler = MockTimerScheduler()
+        var timerDelay = TimeInterval(0)
+        
+        timerScheduler.handleAddTimer = { timer in
+            timerDelay = timer.fireDate.timeIntervalSinceNow
+            timer.fire()
+        }
+        
+        let sut = makeSUT(timerScheduler: timerScheduler)
+        sut.startPlaySignals(signals: [type])
+        XCTAssertEqual(timerDelay, duration, accuracy: 1)
     }
 }
