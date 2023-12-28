@@ -9,6 +9,11 @@ import AVFoundation
 class FlashManager {
     
     var currentStatus: StatusType = .stop
+    let timerScheduler: TimerSchedulerPrototype
+    
+    init(timerScheduler: TimerSchedulerPrototype) {
+        self.timerScheduler = timerScheduler
+    }
     
     enum StatusType {
         case playing
@@ -46,6 +51,9 @@ class FlashManager {
             self.index += 1
             self.scheduleTimer()
         }
+        
+        guard let timer = flashTimer else { return }
+        timerScheduler.add(timer, forMode: .default)
     }
     
     private func toggleTorch(on: Bool) {
@@ -104,7 +112,7 @@ final class FlashManagerTests: XCTestCase {
     
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> FlashManager {
-        let sut = FlashManager()
+        let sut = FlashManager(timerScheduler: RunLoop.current)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
