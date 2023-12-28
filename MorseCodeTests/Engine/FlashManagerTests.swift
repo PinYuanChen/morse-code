@@ -4,7 +4,6 @@
 
 import XCTest
 import MorseCode
-import AVFoundation
 
 final class FlashManagerTests: XCTestCase {
     

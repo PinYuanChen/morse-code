@@ -53,8 +53,8 @@ private extension FlashManager {
         flashTimer = Timer.scheduledTimer(withTimeInterval: flashType.duration, repeats: false) { [weak self] timer in
             guard let self = self else { return }
             
-            self.index += 1
-            self.scheduleTimer()
+            index += 1
+            scheduleTimer()
         }
         
         guard let timer = flashTimer else { return }
