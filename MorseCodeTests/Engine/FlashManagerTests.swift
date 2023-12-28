@@ -68,6 +68,12 @@ final class FlashManagerTests: XCTestCase {
         XCTAssertEqual(sut.currentStatus, FlashManager.StatusType.stop)
     }
     
+    func test_startPlayingNonEmptySignals_didPlay() {
+        let sut = makeSUT()
+        sut.startPlaySignals(signals: [.di])
+        XCTAssertEqual(sut.currentStatus, FlashManager.StatusType.playing)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> FlashManager {
         let sut = FlashManager()
