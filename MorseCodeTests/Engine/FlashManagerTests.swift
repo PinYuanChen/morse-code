@@ -24,6 +24,10 @@ class FlashManager {
         scheduleTimer()
     }
     
+    func stopPlayingSignals() {
+        currentStatus = .stop
+    }
+    
     private func scheduleTimer() {
         // bottom case: turn off timer
         // fetch info by index
@@ -72,6 +76,13 @@ final class FlashManagerTests: XCTestCase {
         let sut = makeSUT()
         sut.startPlaySignals(signals: [.di])
         XCTAssertEqual(sut.currentStatus, FlashManager.StatusType.playing)
+    }
+    
+    func test_stopPlayingSignals_didStop() {
+        let sut = makeSUT()
+        sut.startPlaySignals(signals: [.di])
+        sut.stopPlayingSignals()
+        XCTAssertEqual(sut.currentStatus, FlashManager.StatusType.stop)
     }
     
     // MARK: - Helpers
