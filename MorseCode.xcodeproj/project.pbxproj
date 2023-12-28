@@ -18,6 +18,7 @@
 		CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C072B357F85006D29B7 /* FlashType.swift */; };
 		CDD90F7C2B3D46CE00A89614 /* TimerSchedulerPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD90F7B2B3D46CE00A89614 /* TimerSchedulerPrototype.swift */; };
 		CDD90F7E2B3D487D00A89614 /* MockTimerScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD90F7D2B3D487D00A89614 /* MockTimerScheduler.swift */; };
+		CDD90F802B3D4A9000A89614 /* FlashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD90F7F2B3D4A9000A89614 /* FlashManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		CDD04C072B357F85006D29B7 /* FlashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashType.swift; sourceTree = "<group>"; };
 		CDD90F7B2B3D46CE00A89614 /* TimerSchedulerPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSchedulerPrototype.swift; sourceTree = "<group>"; };
 		CDD90F7D2B3D487D00A89614 /* MockTimerScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerScheduler.swift; sourceTree = "<group>"; };
+		CDD90F7F2B3D4A9000A89614 /* FlashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */,
+				CDD90F7F2B3D4A9000A89614 /* FlashManager.swift */,
 				CDD90F7A2B3D46AC00A89614 /* Helpers */,
 				CDD04BE92B355B06006D29B7 /* Resources */,
 			);
@@ -277,6 +280,7 @@
 				9BB5FFE92B34EB15000B7C30 /* MorseCodeDict.swift in Sources */,
 				CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */,
 				CDD04C062B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift in Sources */,
+				CDD90F802B3D4A9000A89614 /* FlashManager.swift in Sources */,
 				CDD90F7C2B3D46CE00A89614 /* TimerSchedulerPrototype.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
