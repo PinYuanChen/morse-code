@@ -168,10 +168,10 @@ private extension MorseCodeViewController {
     
     func setupFlashButton() {
         flashButton.setTitle("Play", for: .normal)
-        flashButton.backgroundColor = .bg275452
+        flashButton.backgroundColor = .bg5BC5A5
         flashButton.layer.cornerRadius = 15
         flashButton.layer.masksToBounds = true
-        flashButton.isEnabled = true
+        flashButton.isEnabled = false
         
         baseView.addSubview(flashButton)
         flashButton.snp.makeConstraints {
@@ -202,6 +202,7 @@ private extension MorseCodeViewController {
         guard !currentInputText.isEmpty else { return }
         let result = convertor.convertToMorseCode(input: currentInputText)
         morseTextField.text = result
+        flashButton.isEnabled = true
     }
     
     @objc func didTappedFlashButton(_ sender: UIButton) {
@@ -209,9 +210,15 @@ private extension MorseCodeViewController {
               !morseText.isEmpty else {
             return
         }
-        
-        let signals = convertor.convertToMorseFlashSignals(input: morseText)
-        flashManager.startPlaySignals(signals: signals)
+    
+        if flashManager.getCurrentStatus() == .stop {
+            let signals = convertor.convertToMorseFlashSignals(input: morseText)
+            flashManager.startPlaySignals(signals: signals)
+            flashButton.setTitle("Stop", for: .normal)
+        } else {
+            flashManager.stopPlayingSignals()
+            flashButton.setTitle("Play", for: .normal)
+        }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
