@@ -63,6 +63,8 @@ final class MorseCodeViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         sut.simulateConvertInputToMorseCode("input")
+        XCTAssertTrue(sut.flashButton.isEnabled)
+        
         sut.simulateInvokeFlash()
         XCTAssertEqual(convertor.convertFlashCount, 1)
     }
