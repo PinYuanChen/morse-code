@@ -70,7 +70,7 @@ final class MorseCodeViewControllerTests: XCTestCase {
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodeViewController, convertor: ConvertorSpy) {
         let convertor = ConvertorSpy()
-        let sut = MorseCodeViewController(convertor: convertor)
+        let sut = MorseCodeViewController(convertor: convertor, flashManager: FlashManager())
         trackForMemoryLeaks(convertor, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, convertor)

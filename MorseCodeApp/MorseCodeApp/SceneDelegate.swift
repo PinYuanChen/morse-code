@@ -15,7 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         let convertor = MorseCodeConvertor()
-        let morseCodeViewController = MorseCodeViewController(convertor: convertor)
+        let flashManager = FlashManager()
+        let morseCodeViewController = MorseCodeViewController(convertor: convertor, flashManager: flashManager)
         window.rootViewController = morseCodeViewController
         
         self.window = window
