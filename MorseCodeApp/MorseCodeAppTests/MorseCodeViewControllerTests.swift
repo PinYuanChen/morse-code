@@ -79,7 +79,7 @@ final class MorseCodeViewControllerTests: XCTestCase {
     }
 }
 
-extension MorseCodeViewController {
+private extension MorseCodeViewController {
     func simulateConvertInputToMorseCode(_ input: String) {
         currentInputText = input
         convertButton.simulateTap()
