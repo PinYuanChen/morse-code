@@ -55,8 +55,8 @@ private extension MorseCodeViewController {
         setupInputTextField()
         setupMorseBaseView()
         setupMorseTextField()
-        setupFlashButton()
         setupConvertButton()
+        setupFlashButton()
     }
     
     func setupTitleLabel() {
@@ -150,30 +150,31 @@ private extension MorseCodeViewController {
         }
     }
     
-    func setupFlashButton() {
-        flashButton.backgroundColor = .bg275452
-        flashButton.layer.cornerRadius = 15
-        flashButton.layer.masksToBounds = true
-        flashButton.isEnabled = false
-        
-        morseBaseView.addSubview(flashButton)
-        flashButton.snp.makeConstraints {
-            $0.leading.equalTo(morseTextField.snp.trailing).offset(5)
-            $0.size.equalTo(30)
-            $0.centerY.equalToSuperview()
-        }
-    }
-    
     func setupConvertButton() {
-        convertButton.setTitle("Convert", for: .normal)
-        convertButton.titleLabel?.textColor = .white
+        convertButton.setImage(.init(systemName: "chevron.down"), for: .normal)
+        convertButton.imageView?.tintColor = .white
         convertButton.backgroundColor = .bg5BC5A5
-        convertButton.layer.cornerRadius = 10
+        convertButton.layer.cornerRadius = 20
         convertButton.layer.masksToBounds = true
         convertButton.isEnabled = false
         
         baseView.addSubview(convertButton)
         convertButton.snp.makeConstraints {
+            $0.size.equalTo(40)
+            $0.top.equalTo(inputBaseView.snp.bottom).offset(-5)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    func setupFlashButton() {
+        flashButton.setTitle("Play", for: .normal)
+        flashButton.backgroundColor = .bg275452
+        flashButton.layer.cornerRadius = 15
+        flashButton.layer.masksToBounds = true
+        flashButton.isEnabled = true
+        
+        baseView.addSubview(flashButton)
+        flashButton.snp.makeConstraints {
             $0.leading.size.equalTo(morseBaseView)
             $0.bottom.equalToSuperview().offset(-17)
         }
@@ -210,6 +211,7 @@ private extension MorseCodeViewController {
         }
         
         let signals = convertor.convertToMorseFlashSignals(input: morseText)
+        flashManager.startPlaySignals(signals: signals)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
