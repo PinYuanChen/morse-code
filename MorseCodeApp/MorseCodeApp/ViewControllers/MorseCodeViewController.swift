@@ -42,6 +42,7 @@ public final class MorseCodeViewController: UIViewController {
     private let morseBaseView = UIView()
     private let morseTextField = UITextField()
     @Published private var isValidInput = false
+    private let generator = UIImpactFeedbackGenerator(style: .heavy)
     private var anyCancellables = [AnyCancellable]()
 }
 
@@ -200,6 +201,8 @@ private extension MorseCodeViewController {
 private extension MorseCodeViewController {
     @objc func didTappedConvertButton(_ sender: UIButton) {
         guard !currentInputText.isEmpty else { return }
+        
+        generator.impactOccurred()
         let result = convertor.convertToMorseCode(input: currentInputText)
         morseTextField.text = result
         flashButton.isEnabled = true
@@ -211,6 +214,7 @@ private extension MorseCodeViewController {
             return
         }
     
+        generator.impactOccurred()
         if flashManager.getCurrentStatus() == .stop {
             let signals = convertor.convertToMorseFlashSignals(input: morseText)
             flashManager.startPlaySignals(signals: signals)
@@ -224,6 +228,7 @@ private extension MorseCodeViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
         isValidInput = textField.hasText
         currentInputText = textField.text ?? ""
+        generator.impactOccurred()
     }
 }
 
