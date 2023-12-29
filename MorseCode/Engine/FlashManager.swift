@@ -63,7 +63,7 @@ private extension FlashManager {
     }
     
     func toggleTorch(on: Bool) {
-        guard let device = AVCaptureDevice.default(for: AVMediaType.video),
+        guard let device = AVCaptureDevice.default(for: .video),
               device.hasTorch else {
             print("Torch isn't available")
             return
@@ -72,7 +72,6 @@ private extension FlashManager {
         do {
             try device.lockForConfiguration()
             device.torchMode = on ? .on : .off
-            
             device.unlockForConfiguration()
         } catch {
             print("Torch can't be used")

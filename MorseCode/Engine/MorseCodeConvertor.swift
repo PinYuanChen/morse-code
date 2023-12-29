@@ -15,11 +15,13 @@ public final class MorseCodeConvertor: MorseCodeConvertorPrototype {
             guard let mCode = morseCodeDict["\(char)"] else {
                 continue
             }
+            
+            // Replace space between words
             if mCode == " " {
-                output.append("   ")
+                output.append(longPauseSpace)
             } else {
                 output.append(mCode)
-                output.append(" ")
+                output.append(shortPauseSpace)
             }
         }
         
@@ -43,4 +45,7 @@ public final class MorseCodeConvertor: MorseCodeConvertorPrototype {
         
         return signals
     }
+    
+    private let shortPauseSpace = " "
+    private let longPauseSpace = "   "
 }
