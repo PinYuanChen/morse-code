@@ -9,7 +9,7 @@ public class FlashManager: FlashManagerPrototype {
     public var currentStatus: FlashStatusType = .stop
     public let timerScheduler: TimerSchedulerPrototype
     
-    public init(timerScheduler: TimerSchedulerPrototype) {
+    public init(timerScheduler: TimerSchedulerPrototype = RunLoop.current) {
         self.timerScheduler = timerScheduler
     }
     
