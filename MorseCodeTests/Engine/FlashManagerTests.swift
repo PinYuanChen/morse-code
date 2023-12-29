@@ -36,9 +36,11 @@ final class FlashManagerTests: XCTestCase {
     }
     
     func test_signalDurations() {
-        checkDuration(type: .di, duration: 1)
-        checkDuration(type: .dah, duration: 3)
-        checkDuration(type: .pause, duration: 1)
+        let signals: [FlashType] = [.di, .pause, .pause, .dah, .pause, .dah, .pause]
+        
+        signals.forEach {
+            checkDuration(type: $0, duration: $0.duration)
+        }
     }
     
     func test_finishPlaySignals_didResetIndex() {
