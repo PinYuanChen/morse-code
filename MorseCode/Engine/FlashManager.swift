@@ -70,9 +70,6 @@ private extension FlashManager {
             try device.lockForConfiguration()
             device.torchMode = on ? .on : .off
             
-            if on {
-                try device.setTorchModeOn(level: AVCaptureDevice.maxAvailableTorchLevel.significand)
-            }
             device.unlockForConfiguration()
         } catch {
             print("Torch can't be used")
