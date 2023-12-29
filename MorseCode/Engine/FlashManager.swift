@@ -6,19 +6,11 @@ import AVFoundation
 
 public class FlashManager {
     
-    public var currentStatus: StatusType = .stop
+    public var currentStatus: FlashStatusType = .stop
     public let timerScheduler: TimerSchedulerPrototype
-    public private(set) var flashTimer: Timer?
-    public private(set) var index = 0
     
     public init(timerScheduler: TimerSchedulerPrototype) {
         self.timerScheduler = timerScheduler
-    }
-    
-    public enum StatusType {
-        case playing
-        case pause
-        case stop
     }
     
     public func startPlaySignals(signals: [FlashType]) {
@@ -36,6 +28,8 @@ public class FlashManager {
         flashTimer = nil
     }
 
+    private var index = 0
+    private var flashTimer: Timer?
     private var signals = [FlashType]()
 }
 
