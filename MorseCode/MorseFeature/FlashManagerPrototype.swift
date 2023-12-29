@@ -8,6 +8,7 @@ public protocol FlashManagerPrototype {
     func getCurrentStatus() -> FlashStatusType
     func startPlaySignals(signals: [FlashType])
     func stopPlayingSignals()
+    var didFinishPlaying: (() -> Void)? { get set }
 }
 
 public enum FlashStatusType {

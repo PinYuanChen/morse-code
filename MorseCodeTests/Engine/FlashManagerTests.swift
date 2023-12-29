@@ -26,10 +26,13 @@ final class FlashManagerTests: XCTestCase {
     
     func test_stopPlayingSignals_didStop() {
         let sut = makeSUT()
+        sut.didFinishPlaying = { [weak sut] in
+            guard let sut = sut else { return }
+            XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
+        }
+        
         sut.startPlaySignals(signals: [.di])
         sut.stopPlayingSignals()
-        
-        XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
     }
     
     func test_signalDurations() {

@@ -8,6 +8,7 @@ public class FlashManager: FlashManagerPrototype {
     
     public var currentStatus: FlashStatusType = .stop
     public let timerScheduler: TimerSchedulerPrototype
+    public var didFinishPlaying: (() -> Void)?
     
     public init(timerScheduler: TimerSchedulerPrototype = RunLoop.current) {
         self.timerScheduler = timerScheduler
@@ -30,6 +31,7 @@ public class FlashManager: FlashManagerPrototype {
         toggleTorch(on: false)
         flashTimer?.invalidate()
         flashTimer = nil
+        didFinishPlaying?()
     }
 
     private var index = 0
