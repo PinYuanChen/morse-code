@@ -51,20 +51,20 @@ final class MorseCodeViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         sut.simulateInvokeFlash()
-        XCTAssertEqual(convertor.flashCallCount, 0)
+        XCTAssertEqual(convertor.convertFlashCount, 0)
         
         sut.simulateConvertInputToMorseCode("")
         sut.simulateInvokeFlash()
-        XCTAssertEqual(convertor.flashCallCount, 0)
+        XCTAssertEqual(convertor.convertFlashCount, 0)
     }
     
-    func test_userInitiatedFlashWithValidInput_showsFlash() {
+    func test_userInitiatedFlashWithValidInput_convertSignals() {
         let (sut, convertor) = makeSUT()
         sut.loadViewIfNeeded()
         
         sut.simulateConvertInputToMorseCode("input")
         sut.simulateInvokeFlash()
-        XCTAssertEqual(convertor.flashCallCount, 1)
+        XCTAssertEqual(convertor.convertFlashCount, 1)
     }
     
     // MARK: - Helpers

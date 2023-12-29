@@ -7,7 +7,7 @@ import MorseCode
 final class ConvertorSpy: MorseCodeConvertorPrototype {
     
     var convertCallCount = 0
-    var flashCallCount = 0
+    var convertFlashCount = 0
     var morseCodeString = ""
     
     func convertToMorseCode(input: String) -> String {
@@ -17,7 +17,7 @@ final class ConvertorSpy: MorseCodeConvertorPrototype {
     }
     
     func convertToMorseFlashSignals(input: String) -> [MorseCode.FlashType] {
-        flashCallCount += 1
+        convertFlashCount += 1
         return fakeSignals
     }
     
