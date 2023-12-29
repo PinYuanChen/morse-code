@@ -16,7 +16,6 @@
 		CD74A6DD2B3E704400BB8E6C /* FlashManagerPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD74A6DC2B3E704400BB8E6C /* FlashManagerPrototype.swift */; };
 		CDD04BE82B355A8A006D29B7 /* MorseCodeConvertor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */; };
 		CDD04C062B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */; };
-		CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD04C072B357F85006D29B7 /* FlashType.swift */; };
 		CDD90F7C2B3D46CE00A89614 /* TimerSchedulerPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD90F7B2B3D46CE00A89614 /* TimerSchedulerPrototype.swift */; };
 		CDD90F7E2B3D487D00A89614 /* MockTimerScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD90F7D2B3D487D00A89614 /* MockTimerScheduler.swift */; };
 		CDD90F802B3D4A9000A89614 /* FlashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD90F7F2B3D4A9000A89614 /* FlashManager.swift */; };
@@ -43,7 +42,6 @@
 		CD74A6DC2B3E704400BB8E6C /* FlashManagerPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashManagerPrototype.swift; sourceTree = "<group>"; };
 		CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertor.swift; sourceTree = "<group>"; };
 		CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertorPrototype.swift; sourceTree = "<group>"; };
-		CDD04C072B357F85006D29B7 /* FlashType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashType.swift; sourceTree = "<group>"; };
 		CDD90F7B2B3D46CE00A89614 /* TimerSchedulerPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerSchedulerPrototype.swift; sourceTree = "<group>"; };
 		CDD90F7D2B3D487D00A89614 /* MockTimerScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerScheduler.swift; sourceTree = "<group>"; };
 		CDD90F7F2B3D4A9000A89614 /* FlashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashManager.swift; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */,
-				CDD04C072B357F85006D29B7 /* FlashType.swift */,
 				CD74A6DC2B3E704400BB8E6C /* FlashManagerPrototype.swift */,
 			);
 			path = MorseFeature;
@@ -281,7 +278,6 @@
 			files = (
 				CDD04BE82B355A8A006D29B7 /* MorseCodeConvertor.swift in Sources */,
 				9BB5FFE92B34EB15000B7C30 /* MorseCodeDict.swift in Sources */,
-				CDD04C082B357F85006D29B7 /* FlashType.swift in Sources */,
 				CDD04C062B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift in Sources */,
 				CD74A6DD2B3E704400BB8E6C /* FlashManagerPrototype.swift in Sources */,
 				CDD90F802B3D4A9000A89614 /* FlashManager.swift in Sources */,
