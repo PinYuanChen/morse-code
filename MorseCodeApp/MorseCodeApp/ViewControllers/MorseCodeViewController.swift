@@ -207,7 +207,7 @@ private extension MorseCodeViewController {
             return
         }
         
-        let _ = convertor.convertToMorseFlashSignals(input: morseText)
+        let signals = convertor.convertToMorseFlashSignals(input: morseText)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

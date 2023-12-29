@@ -4,8 +4,10 @@
 
 import Foundation
 
-protocol FlashManagerPrototype {
+public protocol FlashManagerPrototype {
     func getCurrentStatus() -> FlashStatusType
+    func startPlaySignals(signals: [FlashType])
+    func stopPlayingSignals()
 }
 
 public enum FlashStatusType {

@@ -4,13 +4,17 @@
 
 import AVFoundation
 
-public class FlashManager {
+public class FlashManager: FlashManagerPrototype {
     
     public var currentStatus: FlashStatusType = .stop
     public let timerScheduler: TimerSchedulerPrototype
     
     public init(timerScheduler: TimerSchedulerPrototype) {
         self.timerScheduler = timerScheduler
+    }
+    
+    public func getCurrentStatus() -> FlashStatusType {
+        currentStatus
     }
     
     public func startPlaySignals(signals: [FlashType]) {
