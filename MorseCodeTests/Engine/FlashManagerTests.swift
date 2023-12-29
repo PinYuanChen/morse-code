@@ -41,6 +41,25 @@ final class FlashManagerTests: XCTestCase {
         checkDuration(type: .pause, duration: 1)
     }
     
+    func test_finishPlaySignals_didResetIndex() {
+        var timerScheduler = MockTimerScheduler()
+        timerScheduler.handleAddTimer = { timer in
+            timer.fire()
+        }
+        
+        let sut = makeSUT(timerScheduler: timerScheduler)
+        
+        let exp = expectation(description: "Wait for stop")
+        sut.didFinishPlaying = { [weak sut] in
+            guard let sut = sut else { return }
+            XCTAssertEqual(sut.index, 0)
+            exp.fulfill()
+        }
+        
+        sut.startPlaySignals(signals: [.di])
+        wait(for: [exp], timeout: 1)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(timerScheduler: TimerSchedulerPrototype = RunLoop.current, file: StaticString = #file, line: UInt = #line) -> FlashManager {
         let sut = FlashManager(timerScheduler: timerScheduler)
