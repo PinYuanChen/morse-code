@@ -34,7 +34,7 @@ public final class MorseCodeViewController: UIViewController {
     
     // MARK: Private properties
     private let convertor: MorseCodeConvertorPrototype
-    private let flashManager: FlashManagerPrototype
+    private var flashManager: FlashManagerPrototype
     private let titleLabel = UILabel()
     private let baseView = UIView()
     private let inputBaseView = UIView()
@@ -191,6 +191,10 @@ private extension MorseCodeViewController {
             .receive(on: DispatchQueue.main)
             .assign(to: \.isEnabled, on: convertButton)
             .store(in: &anyCancellables)
+        
+        flashManager.didFinishPlaying = {
+            self.flashButton.setTitle("Play", for: .normal)
+        }
         
         convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
         flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
