@@ -185,6 +185,8 @@ private extension MorseCodeViewController {
 // MARK: - Bind
 private extension MorseCodeViewController {
     func bind() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        
         inputTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         $isValidInput
@@ -203,6 +205,10 @@ private extension MorseCodeViewController {
 
 // MARK: - Private functions
 private extension MorseCodeViewController {
+    @objc func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
     @objc func didTappedConvertButton(_ sender: UIButton) {
         guard !currentInputText.isEmpty else { return }
         
