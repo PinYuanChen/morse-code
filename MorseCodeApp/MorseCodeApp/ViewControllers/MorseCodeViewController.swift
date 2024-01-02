@@ -61,7 +61,7 @@ private extension MorseCodeViewController {
     }
     
     func setupTitleLabel() {
-        titleLabel.text = "Morse Code Flashlight"
+        titleLabel.text = "Morse Flash Signal"
         titleLabel.textColor = .txt5BC5A5
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         titleLabel.textAlignment = .center
