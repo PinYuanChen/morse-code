@@ -23,6 +23,7 @@
 		CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */; };
 		CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; };
 		CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CDEB81C62B4FDDCF0058190A /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEB81C52B4FDDCF0058190A /* TabBarItemType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		CDD10ACB2B397F3D008ED95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD10AD22B3980A0008ED95F /* MorseCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDEB81C52B4FDDCF0058190A /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			children = (
 				CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */,
 				CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */,
+				CDEB81C32B4FDDA20058190A /* About */,
 				CDEB81C22B4FDD630058190A /* Flash */,
 				CD00A9982B3A7B950042E9F6 /* Extensions */,
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
@@ -182,6 +185,22 @@
 				CD4ED4EB2B3C00D600197428 /* Views */,
 			);
 			path = Flash;
+			sourceTree = "<group>";
+		};
+		CDEB81C32B4FDDA20058190A /* About */ = {
+			isa = PBXGroup;
+			children = (
+				CDEB81C42B4FDDB00058190A /* Model */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
+		CDEB81C42B4FDDB00058190A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CDEB81C52B4FDDCF0058190A /* TabBarItemType.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +318,7 @@
 				CD4ED4F12B3C04E800197428 /* CustomButton.swift in Sources */,
 				CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */,
 				CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */,
+				CDEB81C62B4FDDCF0058190A /* TabBarItemType.swift in Sources */,
 				CD4ED4ED2B3C00E600197428 /* CustomTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
