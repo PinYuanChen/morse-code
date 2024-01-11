@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  MorseCodeApp
+
+  Created by patrick on 2024/1/11.
+  
+*/
+
+"CFBundleDisplayName" = "Morse Flash Signal";

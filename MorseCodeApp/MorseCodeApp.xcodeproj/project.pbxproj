@@ -24,6 +24,7 @@
 		CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; };
 		CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CDEB81CD2B4FE3010058190A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDEB81CF2B4FE3010058190A /* Localizable.strings */; };
+		CDEB81D92B4FE55D0058190A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDEB81DB2B4FE55D0058190A /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,9 @@
 		CDEB81CE2B4FE3010058190A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CDEB81D02B4FE3450058190A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CDEB81D12B4FE3530058190A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CDEB81DA2B4FE55D0058190A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CDEB81DC2B4FE55F0058190A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CDEB81DD2B4FE5600058190A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,7 @@
 				CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */,
 				CDD10ACB2B397F3D008ED95F /* Info.plist */,
 				CDEB81CF2B4FE3010058190A /* Localizable.strings */,
+				CDEB81DB2B4FE55D0058190A /* InfoPlist.strings */,
 			);
 			path = MorseCodeApp;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */,
+				CDEB81D92B4FE55D0058190A /* InfoPlist.strings in Resources */,
 				CDEB81CD2B4FE3010058190A /* Localizable.strings in Resources */,
 				CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */,
 			);
@@ -342,6 +348,16 @@
 				CDEB81D12B4FE3530058190A /* zh-Hant */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		CDEB81DB2B4FE55D0058190A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDEB81DA2B4FE55D0058190A /* en */,
+				CDEB81DC2B4FE55F0058190A /* zh-Hans */,
+				CDEB81DD2B4FE5600058190A /* zh-Hant */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
