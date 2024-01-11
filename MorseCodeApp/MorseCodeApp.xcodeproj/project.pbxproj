@@ -149,8 +149,7 @@
 			children = (
 				CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */,
 				CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */,
-				CD4ED4EB2B3C00D600197428 /* Views */,
-				CD4ED4EA2B3C00C500197428 /* ViewControllers */,
+				CDEB81C22B4FDD630058190A /* Flash */,
 				CD00A9982B3A7B950042E9F6 /* Extensions */,
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
 				CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */,
@@ -174,6 +173,15 @@
 				CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift */,
 			);
 			path = MorseCodeAppTests;
+			sourceTree = "<group>";
+		};
+		CDEB81C22B4FDD630058190A /* Flash */ = {
+			isa = PBXGroup;
+			children = (
+				CD4ED4EA2B3C00C500197428 /* ViewControllers */,
+				CD4ED4EB2B3C00D600197428 /* Views */,
+			);
+			path = Flash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
