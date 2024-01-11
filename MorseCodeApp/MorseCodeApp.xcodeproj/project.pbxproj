@@ -23,6 +23,7 @@
 		CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */; };
 		CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; };
 		CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CDEB81CD2B4FE3010058190A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDEB81CF2B4FE3010058190A /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,9 @@
 		CDD10ACB2B397F3D008ED95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD10AD22B3980A0008ED95F /* MorseCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDEB81CE2B4FE3010058190A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CDEB81D02B4FE3450058190A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CDEB81D12B4FE3530058190A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
 				CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */,
 				CDD10ACB2B397F3D008ED95F /* Info.plist */,
+				CDEB81CF2B4FE3010058190A /* Localizable.strings */,
 			);
 			path = MorseCodeApp;
 			sourceTree = "<group>";
@@ -247,6 +252,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = CDD10AB12B397F3C008ED95F;
 			packageReferences = (
@@ -268,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */,
+				CDEB81CD2B4FE3010058190A /* Localizable.strings in Resources */,
 				CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +334,16 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		CDEB81CF2B4FE3010058190A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDEB81CE2B4FE3010058190A /* en */,
+				CDEB81D02B4FE3450058190A /* zh-Hans */,
+				CDEB81D12B4FE3530058190A /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -334,6 +352,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -397,6 +416,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

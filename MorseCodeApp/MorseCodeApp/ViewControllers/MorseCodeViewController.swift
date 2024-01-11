@@ -61,7 +61,7 @@ private extension MorseCodeViewController {
     }
     
     func setupTitleLabel() {
-        titleLabel.text = "Morse Flash Signal"
+        titleLabel.text = NSLocalizedString("MORSE_FLASH_TITLE", comment: "")
         titleLabel.textColor = .txt5BC5A5
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         titleLabel.textAlignment = .center
@@ -104,7 +104,7 @@ private extension MorseCodeViewController {
     func setupInputTextField() {
         inputTextField.textColor = .white
         inputTextField.attributedPlaceholder = NSAttributedString(
-            string: "Input your message here.",
+            string: NSLocalizedString("INPUT_PLACEHOLDER", comment: ""),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         )
         inputTextField.backgroundColor = .clear
@@ -137,7 +137,7 @@ private extension MorseCodeViewController {
         morseTextField.textColor = .txt5BC5A5
         morseTextField.backgroundColor = .clear
         morseTextField.attributedPlaceholder = NSAttributedString(
-            string: "Morse code output",
+            string: NSLocalizedString("MORSE_CODE_OUTPUT", comment: ""),
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.txt5BC5A5]
         )
         morseTextField.isUserInteractionEnabled = false
@@ -168,7 +168,7 @@ private extension MorseCodeViewController {
     }
     
     func setupFlashButton() {
-        flashButton.setTitle("Play", for: .normal)
+        flashButton.setTitle(NSLocalizedString("PLAY", comment: ""), for: .normal)
         flashButton.backgroundColor = .bg5BC5A5
         flashButton.layer.cornerRadius = 15
         flashButton.layer.masksToBounds = true
@@ -195,7 +195,7 @@ private extension MorseCodeViewController {
             .store(in: &anyCancellables)
         
         flashManager.didFinishPlaying = {
-            self.flashButton.setTitle("Play", for: .normal)
+            self.flashButton.setTitle(NSLocalizedString("PLAY", comment: ""), for: .normal)
         }
         
         convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
@@ -228,10 +228,10 @@ private extension MorseCodeViewController {
         if flashManager.getCurrentStatus() == .stop {
             let signals = convertor.convertToMorseFlashSignals(input: morseText)
             flashManager.startPlaySignals(signals: signals)
-            flashButton.setTitle("Stop", for: .normal)
+            flashButton.setTitle(NSLocalizedString("STOP", comment: ""), for: .normal)
         } else {
             flashManager.stopPlayingSignals()
-            flashButton.setTitle("Play", for: .normal)
+            flashButton.setTitle(NSLocalizedString("PLAY", comment: ""), for: .normal)
         }
     }
     

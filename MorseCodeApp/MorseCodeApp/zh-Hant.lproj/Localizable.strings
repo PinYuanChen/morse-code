@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  MorseCodeApp
+
+  Created by patrick on 2024/1/11.
+  
+*/
+
+"MORSE_FLASH_TITLE" = "摩斯手電筒";
+"PLAY" = "播放";
+"STOP" = "停止";
+"INPUT_PLACEHOLDER" = "輸入訊息";
+"MORSE_CODE_OUTPUT" = "摩斯密碼";

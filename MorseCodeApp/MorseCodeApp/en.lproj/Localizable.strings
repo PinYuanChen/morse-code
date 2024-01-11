@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  MorseCodeApp
+
+  Created by patrick on 2024/1/11.
+  
+*/
+
+"MORSE_FLASH_TITLE" = "Morse Flash Signal";
+"PLAY" = "Play";
+"STOP" = "Stop";
+"INPUT_PLACEHOLDER" = "Input your message here.";
+"MORSE_CODE_OUTPUT" = "Morse code output";
