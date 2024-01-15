@@ -6,8 +6,8 @@
   
 */
 
-"MORSE_FLASH_TITLE" = "摩斯手电筒";
+"MORSE_FLASH_TITLE" = "摩尔斯手电筒";
 "PLAY" = "播放";
 "STOP" = "停止";
-"INPUT_PLACEHOLDER" = "输入讯息";
-"MORSE_CODE_OUTPUT" = "摩斯密码";
+"INPUT_PLACEHOLDER" = "输入信息";
+"MORSE_CODE_OUTPUT" = "摩尔斯电码";
