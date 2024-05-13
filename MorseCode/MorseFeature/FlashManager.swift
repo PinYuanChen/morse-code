@@ -35,6 +35,12 @@ public class FlashManager: FlashManagerPrototype {
         index = 0
         didFinishPlaying?()
     }
+    
+    deinit {
+        toggleTorch(on: false)
+        flashTimer?.invalidate()
+        flashTimer = nil
+    }
 
     private var flashTimer: Timer?
     private var signals = [FlashType]()
@@ -51,11 +57,9 @@ private extension FlashManager {
         let flashType = signals[index]
         toggleTorch(on: flashType.turnOn)
         
-        flashTimer = Timer.scheduledTimer(withTimeInterval: flashType.duration, repeats: false) { [weak self] timer in
-            guard let self = self else { return }
-            
-            index += 1
-            scheduleTimer()
+        flashTimer = Timer.scheduledTimer(withTimeInterval: flashType.duration, repeats: false) { [unowned self] timer in
+            self.index += 1
+            self.scheduleTimer()
         }
         
         guard let timer = flashTimer else { return }
