@@ -90,7 +90,6 @@
 			children = (
 				9B4C4F582B34DE21005C48D5 /* MorseCode.h */,
 				CDD04C042B357E09006D29B7 /* MorseFeature */,
-				9BB5FFE52B34EA3C000B7C30 /* Engine */,
 			);
 			path = MorseCode;
 			sourceTree = "<group>";
@@ -99,18 +98,18 @@
 			isa = PBXGroup;
 			children = (
 				9BB5FFE22B34E419000B7C30 /* Helpers */,
-				9BB5FFE02B34E3AA000B7C30 /* Engine */,
+				9BB5FFE02B34E3AA000B7C30 /* MorseFeature */,
 			);
 			path = MorseCodeTests;
 			sourceTree = "<group>";
 		};
-		9BB5FFE02B34E3AA000B7C30 /* Engine */ = {
+		9BB5FFE02B34E3AA000B7C30 /* MorseFeature */ = {
 			isa = PBXGroup;
 			children = (
 				9BB5FFDE2B34E382000B7C30 /* MorseCodeConvertorTests.swift */,
 				CD24FC422B3C1A34005F6959 /* FlashManagerTests.swift */,
 			);
-			path = Engine;
+			path = MorseFeature;
 			sourceTree = "<group>";
 		};
 		9BB5FFE22B34E419000B7C30 /* Helpers */ = {
@@ -120,17 +119,6 @@
 				CDD90F7D2B3D487D00A89614 /* MockTimerScheduler.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		9BB5FFE52B34EA3C000B7C30 /* Engine */ = {
-			isa = PBXGroup;
-			children = (
-				CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */,
-				CDD90F7F2B3D4A9000A89614 /* FlashManager.swift */,
-				CDD90F7A2B3D46AC00A89614 /* Helpers */,
-				CDD04BE92B355B06006D29B7 /* Resources */,
-			);
-			path = Engine;
 			sourceTree = "<group>";
 		};
 		CDD04BE92B355B06006D29B7 /* Resources */ = {
@@ -146,6 +134,10 @@
 			children = (
 				CDD04C052B357EAC006D29B7 /* MorseCodeConvertorPrototype.swift */,
 				CD74A6DC2B3E704400BB8E6C /* FlashManagerPrototype.swift */,
+				CDD04BE72B355A8A006D29B7 /* MorseCodeConvertor.swift */,
+				CDD90F7F2B3D4A9000A89614 /* FlashManager.swift */,
+				CDD04BE92B355B06006D29B7 /* Resources */,
+				CDD90F7A2B3D46AC00A89614 /* Helpers */,
 			);
 			path = MorseFeature;
 			sourceTree = "<group>";
