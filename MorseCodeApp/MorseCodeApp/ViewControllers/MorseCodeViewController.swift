@@ -11,17 +11,7 @@ public final class MorseCodeViewController: UIViewController {
     
     // MARK: Public properties
     public let convertButton = CustomButton()
-    public let flashButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.image = .init(systemName: "flashlight.on.circle.fill")
-        configuration.image?.withTintColor(.white)
-        configuration.image?.withTintColor(.white.withAlphaComponent(0.5))
-        configuration.contentInsets = .zero
-        
-        let button = UIButton(configuration: configuration)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    public let flashButton = CustomButton()
     public var currentInputText = ""
     
     // MARK: Life cycle
@@ -160,6 +150,8 @@ private extension MorseCodeViewController {
     }
     
     func setupFlashButton() {
+        flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
+        flashButton.tintColor = .white
         flashButton.layer.cornerRadius = 20
         flashButton.layer.masksToBounds = true
         flashButton.isEnabled = false
@@ -185,7 +177,7 @@ private extension MorseCodeViewController {
             .store(in: &anyCancellables)
         
         flashManager.didFinishPlaying = {
-            self.flashButton.setImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
+            self.flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
         }
         
         convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
@@ -218,10 +210,10 @@ private extension MorseCodeViewController {
         if flashManager.getCurrentStatus() == .stop {
             let signals = convertor.convertToMorseFlashSignals(input: morseText)
             flashManager.startPlaySignals(signals: signals)
-            flashButton.setImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
+            flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
         } else {
             flashManager.stopPlayingSignals()
-            flashButton.setImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
+            flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
         }
     }
     
