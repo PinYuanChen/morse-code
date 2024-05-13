@@ -66,6 +66,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B10B18A2BF1FED900DD0233 /* MorseCache */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MorseCache;
+			sourceTree = "<group>";
+		};
 		9B4C4F4B2B34DE21005C48D5 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				9B4C4F582B34DE21005C48D5 /* MorseCode.h */,
+				9B10B18A2BF1FED900DD0233 /* MorseCache */,
 				CDD04C042B357E09006D29B7 /* MorseFeature */,
 			);
 			path = MorseCode;
