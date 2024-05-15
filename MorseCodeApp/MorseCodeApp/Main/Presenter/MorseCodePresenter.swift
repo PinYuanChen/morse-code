@@ -20,6 +20,10 @@ public class MorseCodePresenter {
     public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype) {
         self.convertor = convertor
         self.flashManager = flashManager
+        
+        self.flashManager.didFinishPlaying = { [unowned self] in
+            self.delegate?.updateFlashButton(status: .stop)
+        }
     }
     
     public func validateInput(string: String) -> Bool {
