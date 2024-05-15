@@ -11,7 +11,6 @@ public final class MorseCodeViewController: UIViewController {
     // MARK: Public properties
     public let convertButton = CustomButton()
     public let flashButton = CustomButton()
-    public var currentInputText = ""
     
     // MARK: Life cycle
     public required init(presenter: MorseCodePresenter) {
@@ -29,7 +28,6 @@ public final class MorseCodeViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        bind()
     }
     
     // MARK: Private properties
@@ -53,6 +51,8 @@ extension MorseCodeViewController: MorseCodePresenterDelegate {
 private extension MorseCodeViewController {
     func setupUI() {
         view.backgroundColor = .bg04121F
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        
         setupTitleLabel()
         setupInputBaseView()
         setupInputTextField()
@@ -98,6 +98,7 @@ private extension MorseCodeViewController {
         inputTextField.backgroundColor = .clear
         inputTextField.clearButtonMode = .whileEditing
         inputTextField.delegate = self
+        inputTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         inputBaseView.addSubview(inputTextField)
         
@@ -115,6 +116,8 @@ private extension MorseCodeViewController {
         convertButton.layer.cornerRadius = 15
         convertButton.layer.masksToBounds = true
         convertButton.isEnabled = false
+        
+        convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
         
         inputBaseView.addSubview(convertButton)
         convertButton.snp.makeConstraints {
@@ -160,29 +163,13 @@ private extension MorseCodeViewController {
         flashButton.layer.masksToBounds = true
         flashButton.isEnabled = false
         
+        flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
+        
         morseBaseView.addSubview(flashButton)
         flashButton.snp.makeConstraints {
             $0.size.equalTo(40)
             $0.trailing.bottom.equalToSuperview().offset(-10)
         }
-    }
-}
-
-// MARK: - Bind
-private extension MorseCodeViewController {
-    func bind() {
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-        
-        inputTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        
-        /*
-        flashManager.didFinishPlaying = {
-            self.flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
-        }
-        */
-        
-        convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
-        flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
     }
 }
 
@@ -193,8 +180,6 @@ private extension MorseCodeViewController {
     }
     
     @objc func didTappedConvertButton(_ sender: UIButton) {
-        guard !currentInputText.isEmpty else { return }
-        
         generator.impactOccurred()
         /*
         let result = convertor.convertToMorseCode(input: currentInputText)
