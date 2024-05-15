@@ -21,10 +21,22 @@ public final class MorseCodePresenterTests: XCTestCase {
     func test_convertInputTextToMorseCode() {
         let (sut, convertor) = makeSUT()
         
-        let _ = sut.convertToMorseCode(text: "test1")
+        sut.convertToMorseCode(text: "test1")
         XCTAssertEqual(convertor.convertCallCount, 1)
-        let _ = sut.convertToMorseCode(text: "test2")
+        sut.convertToMorseCode(text: "test2")
         XCTAssertEqual(convertor.convertCallCount, 2)
+    }
+    
+    func test_convertFunction_OverrideFormerInput() {
+        let (sut, convertor) = makeSUT()
+        
+        let firstInput = "First input"
+        sut.convertToMorseCode(text: firstInput)
+        XCTAssertEqual(convertor.morseCodeString, firstInput)
+        
+        let secondInput = "Second input"
+        sut.convertToMorseCode(text: secondInput)
+        XCTAssertEqual(convertor.morseCodeString, secondInput)
     }
 
     // MARK: - Helpers

@@ -45,6 +45,13 @@ public final class MorseCodeViewController: UIViewController {
     private var anyCancellables = [AnyCancellable]()
 }
 
+// MARK: - Presenter Delegate
+extension MorseCodeViewController: MorseCodePresenterDelegate {
+    public func displayMorseCode(code: String) {
+        morseTextField.text = code
+    }
+}
+
 // MARK: - Setup UI
 private extension MorseCodeViewController {
     func setupUI() {
