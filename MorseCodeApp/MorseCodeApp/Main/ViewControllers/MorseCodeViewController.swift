@@ -15,10 +15,8 @@ public final class MorseCodeViewController: UIViewController {
     public var currentInputText = ""
     
     // MARK: Life cycle
-    public required init(presenter: MorseCodePresenter, convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype) {
+    public required init(presenter: MorseCodePresenter) {
         self.presenter = presenter
-        self.convertor = convertor
-        self.flashManager = flashManager
         super.init(nibName: nil, bundle: nil)
         
         presenter.delegate = self
@@ -37,8 +35,6 @@ public final class MorseCodeViewController: UIViewController {
     
     // MARK: Private properties
     private let presenter: MorseCodePresenter
-    private let convertor: MorseCodeConvertorPrototype
-    private var flashManager: FlashManagerPrototype
     private let titleLabel = UILabel()
     private let inputBaseView = UIView()
     private let inputTextField = CustomTextField()
@@ -187,9 +183,11 @@ private extension MorseCodeViewController {
             .assign(to: \.isEnabled, on: convertButton)
             .store(in: &anyCancellables)
         
+        /*
         flashManager.didFinishPlaying = {
             self.flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
         }
+        */
         
         convertButton.addTarget(self, action: #selector(didTappedConvertButton), for: .touchUpInside)
         flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
@@ -206,9 +204,11 @@ private extension MorseCodeViewController {
         guard !currentInputText.isEmpty else { return }
         
         generator.impactOccurred()
+        /*
         let result = convertor.convertToMorseCode(input: currentInputText)
         morseTextField.text = result
         flashButton.isEnabled = true
+        */
     }
     
     @objc func didTappedFlashButton(_ sender: UIButton) {
@@ -218,6 +218,7 @@ private extension MorseCodeViewController {
         }
     
         generator.impactOccurred()
+        /*
         if flashManager.getCurrentStatus() == .stop {
             let signals = convertor.convertToMorseFlashSignals(input: morseText)
             flashManager.startPlaySignals(signals: signals)
@@ -226,6 +227,7 @@ private extension MorseCodeViewController {
             flashManager.stopPlayingSignals()
             flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
         }
+         */
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
