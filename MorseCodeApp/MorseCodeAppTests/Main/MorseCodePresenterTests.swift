@@ -61,6 +61,13 @@ public final class MorseCodePresenterTests: XCTestCase {
         sut.playOrPauseFlashSignals(text: "hello")
         XCTAssertEqual(convertor.convertFlashCount, 1)
     }
+    
+    func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
+        let table = "Localizable"
+        let bundle = Bundle(for: MorseCodePresenter.self)
+        
+        assertLocalizedKeyAndValuesExist(in: bundle, table)
+    }
 
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenter, convertor: ConvertorSpy) {

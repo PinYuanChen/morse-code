@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9B10B1902BF48E9600DD0233 /* MorseCodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B18F2BF48E9600DD0233 /* MorseCodePresenter.swift */; };
 		9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */; };
+		9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */; };
+		9B10B1992BF4B59300DD0233 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
 		CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */; };
@@ -22,7 +24,6 @@
 		CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */; };
 		CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */; };
 		CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC62B397F3D008ED95F /* Assets.xcassets */; };
-		CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */; };
 		CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; };
 		CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CDEB81CD2B4FE3010058190A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDEB81CF2B4FE3010058190A /* Localizable.strings */; };
@@ -56,6 +57,8 @@
 /* Begin PBXFileReference section */
 		9B10B18F2BF48E9600DD0233 /* MorseCodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenter.swift; sourceTree = "<group>"; };
 		9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterTests.swift; sourceTree = "<group>"; };
+		9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationHelper.swift; sourceTree = "<group>"; };
+		9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -69,7 +72,6 @@
 		CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CDD10AC62B397F3D008ED95F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CDD10AC92B397F3D008ED95F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDD10ACB2B397F3D008ED95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD10AD22B3980A0008ED95F /* MorseCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +137,7 @@
 				CD00A9902B3A75600042E9F6 /* XCTestCase+LeakTracking.swift */,
 				CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */,
 				CD4ED4EE2B3C014900197428 /* ConvertorSpy.swift */,
+				9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -191,7 +194,7 @@
 				9B10B18C2BF48E2900DD0233 /* Main */,
 				CD00A9982B3A7B950042E9F6 /* Extensions */,
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
-				CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */,
+				9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */,
 				CDD10ACB2B397F3D008ED95F /* Info.plist */,
 				CDEB81CF2B4FE3010058190A /* Localizable.strings */,
 				CDEB81DB2B4FE55D0058190A /* InfoPlist.strings */,
@@ -309,7 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD10ACA2B397F3D008ED95F /* LaunchScreen.storyboard in Resources */,
+				9B10B1992BF4B59300DD0233 /* LaunchScreen.storyboard in Resources */,
 				CDEB81D92B4FE55D0058190A /* InfoPlist.strings in Resources */,
 				CDEB81CD2B4FE3010058190A /* Localizable.strings in Resources */,
 				CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */,
@@ -346,6 +349,7 @@
 			files = (
 				9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */,
 				CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */,
+				9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */,
 				CD4ED4EF2B3C014900197428 /* ConvertorSpy.swift in Sources */,
 				CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */,
 				CD00A9912B3A75600042E9F6 /* XCTestCase+LeakTracking.swift in Sources */,
@@ -364,14 +368,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CDD10AC82B397F3D008ED95F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDD10AC92B397F3D008ED95F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		CDEB81CF2B4FE3010058190A /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
