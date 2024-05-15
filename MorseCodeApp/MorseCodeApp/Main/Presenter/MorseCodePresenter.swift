@@ -15,6 +15,10 @@ public class MorseCodePresenter {
         self.flashManager = flashManager
     }
     
+    public func convertToMorseCode(text: String) -> String {
+        return convertor.convertToMorseCode(input: text)
+    }
+    
     // MARK: Private properties
     private let convertor: MorseCodeConvertorPrototype
     private var flashManager: FlashManagerPrototype

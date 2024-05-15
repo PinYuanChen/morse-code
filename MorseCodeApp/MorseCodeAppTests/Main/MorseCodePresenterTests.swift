@@ -17,6 +17,15 @@ public final class MorseCodePresenterTests: XCTestCase {
         
         XCTAssertEqual(convertor.convertCallCount, 0)
     }
+    
+    func test_convertInputTextToMorseCode() {
+        let (sut, convertor) = makeSUT()
+        
+        let _ = sut.convertToMorseCode(text: "test1")
+        XCTAssertEqual(convertor.convertCallCount, 1)
+        let _ = sut.convertToMorseCode(text: "test2")
+        XCTAssertEqual(convertor.convertCallCount, 2)
+    }
 
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenter, convertor: ConvertorSpy) {
