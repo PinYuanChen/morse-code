@@ -15,6 +15,14 @@ public protocol MorseCodePresenterDelegate: AnyObject {
 
 public class MorseCodePresenter {
     
+    static let title = NSLocalizedString("MORSE_FLASH_TITLE", comment: "Main page title")
+    
+    static let convertButtonTitle = NSLocalizedString("CONVERT", comment: "convert button")
+    
+    static let inputTextPlaceholder = NSLocalizedString("INPUT_PLACEHOLDER", comment: "user input textfield")
+    
+    static let morseCodePlaceholder = NSLocalizedString("MORSE_CODE_OUTPUT", comment: "morse code textfield")
+    
     public weak var delegate: MorseCodePresenterDelegate?
     
     public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype) {
