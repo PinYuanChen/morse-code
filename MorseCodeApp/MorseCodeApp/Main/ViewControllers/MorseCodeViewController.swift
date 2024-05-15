@@ -44,6 +44,15 @@ public final class MorseCodeViewController: UIViewController {
 extension MorseCodeViewController: MorseCodePresenterDelegate {
     public func displayMorseCode(code: String) {
         morseTextField.text = code
+        flashButton.isEnabled = true
+    }
+    
+    public func updateFlashButton(status: FlashStatusType) {
+        if status == .playing {
+            flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
+        } else {
+            flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
+        }
     }
 }
 
@@ -181,11 +190,7 @@ private extension MorseCodeViewController {
     
     @objc func didTappedConvertButton(_ sender: UIButton) {
         generator.impactOccurred()
-        /*
-        let result = convertor.convertToMorseCode(input: currentInputText)
-        morseTextField.text = result
-        flashButton.isEnabled = true
-        */
+        presenter.convertToMorseCode(text: inputTextField.text ?? "")
     }
     
     @objc func didTappedFlashButton(_ sender: UIButton) {
@@ -195,16 +200,7 @@ private extension MorseCodeViewController {
         }
     
         generator.impactOccurred()
-        /*
-        if flashManager.getCurrentStatus() == .stop {
-            let signals = convertor.convertToMorseFlashSignals(input: morseText)
-            flashManager.startPlaySignals(signals: signals)
-            flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
-        } else {
-            flashManager.stopPlayingSignals()
-            flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
-        }
-         */
+        presenter.playOrPauseFlashSignals(text: morseText)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

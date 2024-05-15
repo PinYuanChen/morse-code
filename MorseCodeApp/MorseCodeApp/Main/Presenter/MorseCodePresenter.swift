@@ -10,6 +10,7 @@ import MorseCode
 
 public protocol MorseCodePresenterDelegate: AnyObject {
     func displayMorseCode(code: String)
+    func updateFlashButton(status: FlashStatusType)
 }
 
 public class MorseCodePresenter {
@@ -32,6 +33,17 @@ public class MorseCodePresenter {
     public func convertToMorseCode(text: String) {
         let result =  convertor.convertToMorseCode(input: text)
         delegate?.displayMorseCode(code: result)
+    }
+    
+    public func playOrPauseFlashSignals(text: String) {
+        if flashManager.getCurrentStatus() == .stop {
+            let signals = convertor.convertToMorseFlashSignals(input: text)
+            flashManager.startPlaySignals(signals: signals)
+        } else {
+            flashManager.stopPlayingSignals()
+        }
+
+        delegate?.updateFlashButton(status: flashManager.getCurrentStatus())
     }
     
     // MARK: Private properties
