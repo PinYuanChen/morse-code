@@ -5,7 +5,7 @@
 import Foundation
 
 public protocol FlashManagerPrototype {
-    func getCurrentStatus() -> FlashStatusType
+    var currentStatus: FlashStatusType { get }
     func startPlaySignals(signals: [FlashType])
     func stopPlayingSignals()
     var didFinishPlaying: (() -> Void)? { get set }
