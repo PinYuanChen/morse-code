@@ -18,6 +18,22 @@ public final class MorseCodePresenterTests: XCTestCase {
         XCTAssertEqual(convertor.convertCallCount, 0)
     }
     
+    func test_ValidateInput() {
+        let (sut, _) = makeSUT()
+        
+        let validCharacter = "z"
+        XCTAssertTrue(sut.validateInput(string: validCharacter))
+        
+        let validNumber = "0"
+        XCTAssertTrue(sut.validateInput(string: validNumber))
+        
+        let validSign = "@"
+        XCTAssertTrue(sut.validateInput(string: validSign))
+        
+        let invalidEmoji = "😎"
+        XCTAssertFalse(sut.validateInput(string: invalidEmoji))
+    }
+    
     func test_convertInputTextToMorseCode() {
         let (sut, convertor) = makeSUT()
         

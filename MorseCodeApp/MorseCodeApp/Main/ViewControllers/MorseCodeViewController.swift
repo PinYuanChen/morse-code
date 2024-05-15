@@ -240,9 +240,6 @@ private extension MorseCodeViewController {
 // MARK: - UITextFieldDelegate
 extension MorseCodeViewController: UITextFieldDelegate {
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let regex = "[A-Za-z0-9 .,?!-/@()]*"
-        
-        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
-        return predicate.evaluate(with: string)
+        return presenter.validateInput(string: string)
     }
 }

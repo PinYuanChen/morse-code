@@ -21,6 +21,14 @@ public class MorseCodePresenter {
         self.flashManager = flashManager
     }
     
+    public func validateInput(string: String) -> Bool {
+        let regex = "[A-Za-z0-9 .,?!-/@()]*"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
+        
+        return predicate.evaluate(with: string)
+    }
+    
     public func convertToMorseCode(text: String) {
         let result =  convertor.convertToMorseCode(input: text)
         delegate?.displayMorseCode(code: result)
