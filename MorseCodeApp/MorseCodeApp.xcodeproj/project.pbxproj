@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9B10B1902BF48E9600DD0233 /* MorseCodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B18F2BF48E9600DD0233 /* MorseCodePresenter.swift */; };
+		9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
 		CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		9B10B18F2BF48E9600DD0233 /* MorseCodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenter.swift; sourceTree = "<group>"; };
+		9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterTests.swift; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift */,
+				9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */,
 				CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */,
 				CD4ED4EF2B3C014900197428 /* ConvertorSpy.swift in Sources */,
 				CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */,
