@@ -4,7 +4,6 @@
 
 import UIKit
 import SnapKit
-import Combine
 import MorseCode
 
 public final class MorseCodeViewController: UIViewController {
@@ -40,9 +39,7 @@ public final class MorseCodeViewController: UIViewController {
     private let inputTextField = CustomTextField()
     private let morseBaseView = UIView()
     private let morseTextField = UITextField()
-    @Published private var isValidInput = false
     private let generator = UIImpactFeedbackGenerator(style: .heavy)
-    private var anyCancellables = [AnyCancellable]()
 }
 
 // MARK: - Presenter Delegate
@@ -178,11 +175,6 @@ private extension MorseCodeViewController {
         
         inputTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        $isValidInput
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.isEnabled, on: convertButton)
-            .store(in: &anyCancellables)
-        
         /*
         flashManager.didFinishPlaying = {
             self.flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
@@ -231,8 +223,7 @@ private extension MorseCodeViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        isValidInput = textField.hasText
-        currentInputText = textField.text ?? ""
+        convertButton.isEnabled = textField.hasText
         generator.impactOccurred()
     }
 }
