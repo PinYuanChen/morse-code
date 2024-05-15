@@ -54,6 +54,13 @@ public final class MorseCodePresenterTests: XCTestCase {
         sut.convertToMorseCode(text: secondInput)
         XCTAssertEqual(convertor.morseCodeString, secondInput)
     }
+    
+    func test_convertMorseCodeToFlashSignals() {
+        let (sut, convertor) = makeSUT()
+        
+        sut.playOrPauseFlashSignals(text: "hello")
+        XCTAssertEqual(convertor.convertFlashCount, 1)
+    }
 
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenter, convertor: ConvertorSpy) {
