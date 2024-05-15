@@ -15,10 +15,13 @@ public final class MorseCodeViewController: UIViewController {
     public var currentInputText = ""
     
     // MARK: Life cycle
-    public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype) {
+    public required init(presenter: MorseCodePresenter, convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype) {
+        self.presenter = presenter
         self.convertor = convertor
         self.flashManager = flashManager
         super.init(nibName: nil, bundle: nil)
+        
+        presenter.delegate = self
     }
     
     @available(*, unavailable)
@@ -33,6 +36,7 @@ public final class MorseCodeViewController: UIViewController {
     }
     
     // MARK: Private properties
+    private let presenter: MorseCodePresenter
     private let convertor: MorseCodeConvertorPrototype
     private var flashManager: FlashManagerPrototype
     private let titleLabel = UILabel()
