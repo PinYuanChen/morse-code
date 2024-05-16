@@ -47,12 +47,8 @@ extension MorseCodeViewController: MorseCodePresenterDelegate {
         flashButton.isEnabled = true
     }
     
-    public func updateFlashButton(status: FlashStatusType) {
-        if status == .playing {
-            flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
-        } else {
-            flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
-        }
+    public func updateFlashButton(imageName: String) {
+        flashButton.setBackgroundImage(.init(systemName: imageName), for: .normal)
     }
 }
 
@@ -117,7 +113,6 @@ private extension MorseCodeViewController {
             $0.centerX.equalToSuperview()
         }
     }
-    
     
     func setupConvertButton() {
         convertButton.setTitle(MorseCodePresenter.convertButtonTitle, for: .normal)
