@@ -8,10 +8,6 @@ import MorseCode
 
 public final class MorseCodeViewController: UIViewController {
     
-    // MARK: Public properties
-    public let convertButton = CustomButton()
-    public let flashButton = CustomButton()
-    
     // MARK: Life cycle
     public required init(presenter: MorseCodePresenter) {
         self.presenter = presenter
@@ -32,6 +28,8 @@ public final class MorseCodeViewController: UIViewController {
     
     // MARK: Private properties
     private let presenter: MorseCodePresenter
+    private let convertButton = CustomButton()
+    private let flashButton = CustomButton()
     private let titleLabel = UILabel()
     private let inputBaseView = UIView()
     private let inputTextField = CustomTextField()
@@ -47,12 +45,8 @@ extension MorseCodeViewController: MorseCodePresenterDelegate {
         flashButton.isEnabled = true
     }
     
-    public func updateFlashButton(status: FlashStatusType) {
-        if status == .playing {
-            flashButton.setBackgroundImage(.init(systemName: "flashlight.slash.circle.fill"), for: .normal)
-        } else {
-            flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
-        }
+    public func updateFlashButton(imageName: String) {
+        flashButton.setBackgroundImage(.init(systemName: imageName), for: .normal)
     }
 }
 
@@ -117,7 +111,6 @@ private extension MorseCodeViewController {
             $0.centerX.equalToSuperview()
         }
     }
-    
     
     func setupConvertButton() {
         convertButton.setTitle(MorseCodePresenter.convertButtonTitle, for: .normal)

@@ -15,6 +15,15 @@ public enum FlashStatusType {
     case playing
     case pause
     case stop
+    
+    public var imageName: String {
+        switch self {
+        case .playing:
+            return "flashlight.slash.circle.fill"
+        default:
+            return "flashlight.on.circle.fill"
+        }
+    }
 }
 
 public enum FlashType: String {

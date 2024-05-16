@@ -11,6 +11,11 @@
 		9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */; };
 		9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */; };
 		9B10B1992BF4B59300DD0233 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */; };
+		9B32A5422BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */; };
+		9B32A5442BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B32A5432BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift */; };
+		9B32A54F2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */; };
+		9B32A5502BF5A64300E8CCD4 /* MorseCodeViewController_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54D2BF5A64300E8CCD4 /* MorseCodeViewController_light.png */; };
+		9B32A5512BF5A64300E8CCD4 /* MorseCodeViewController_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54E2BF5A64300E8CCD4 /* MorseCodeViewController_dark.png */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
 		CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */; };
@@ -59,6 +64,11 @@
 		9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterTests.swift; sourceTree = "<group>"; };
 		9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationHelper.swift; sourceTree = "<group>"; };
 		9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Snapshot.swift"; sourceTree = "<group>"; };
+		9B32A5432BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Snapshot.swift"; sourceTree = "<group>"; };
+		9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_extraExtraExtraLarge.png; sourceTree = "<group>"; };
+		9B32A54D2BF5A64300E8CCD4 /* MorseCodeViewController_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_light.png; sourceTree = "<group>"; };
+		9B32A54E2BF5A64300E8CCD4 /* MorseCodeViewController_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_dark.png; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -116,6 +126,7 @@
 		9B10B18D2BF48E5200DD0233 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				9B32A54B2BF5A62200E8CCD4 /* snapshots */,
 				CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift */,
 				9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */,
 			);
@@ -130,6 +141,16 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		9B32A54B2BF5A62200E8CCD4 /* snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				9B32A54E2BF5A64300E8CCD4 /* MorseCodeViewController_dark.png */,
+				9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */,
+				9B32A54D2BF5A64300E8CCD4 /* MorseCodeViewController_light.png */,
+			);
+			path = snapshots;
+			sourceTree = "<group>";
+		};
 		CD00A9892B3A74D40042E9F6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +159,8 @@
 				CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */,
 				CD4ED4EE2B3C014900197428 /* ConvertorSpy.swift */,
 				9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */,
+				9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */,
+				9B32A5432BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -323,6 +346,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B32A5512BF5A64300E8CCD4 /* MorseCodeViewController_dark.png in Resources */,
+				9B32A54F2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png in Resources */,
+				9B32A5502BF5A64300E8CCD4 /* MorseCodeViewController_light.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,8 +377,10 @@
 				CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */,
 				9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */,
 				CD4ED4EF2B3C014900197428 /* ConvertorSpy.swift in Sources */,
+				9B32A5442BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift in Sources */,
 				CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */,
 				CD00A9912B3A75600042E9F6 /* XCTestCase+LeakTracking.swift in Sources */,
+				9B32A5422BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift in Sources */,
 				CD00A98F2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
