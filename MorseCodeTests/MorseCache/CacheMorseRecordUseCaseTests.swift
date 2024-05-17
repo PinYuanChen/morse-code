@@ -11,14 +11,17 @@ import MorseCode
 class MorseRecordStore {
     typealias DeletionCompletion = (Error?) -> Void
     
-    var deleteCachedRecordsCallCount = 0
-    var insertions = [[MorseRecord]]()
+    enum ReceivedMessage: Equatable {
+        case deleteCachedRecords
+        case insert([MorseRecord])
+    }
     
+    private(set) var receivedMessages = [ReceivedMessage]()
     private var deletionCompletions = [DeletionCompletion]()
     
     func deleteCachedRecords(completion: @escaping DeletionCompletion) {
-        deleteCachedRecordsCallCount += 1
         deletionCompletions.append(completion)
+        receivedMessages.append(.deleteCachedRecords)
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
@@ -30,7 +33,7 @@ class MorseRecordStore {
     }
     
     func insert(_ records: [MorseRecord]) {
-        insertions.append(records)
+        receivedMessages.append(.insert(records))
     }
 }
 
@@ -56,7 +59,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
     func test_init_doesNotDeleteCacheUponCreation() {
         let (_, store) = makeSUT()
 
-        XCTAssertEqual(store.deleteCachedRecordsCallCount, 0)
+        XCTAssertEqual(store.receivedMessages, [])
     }
     
     func test_save_requestsCacheDeletion() {
@@ -65,7 +68,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         
         sut.save(records)
         
-        XCTAssertEqual(store.deleteCachedRecordsCallCount, 1)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
@@ -76,7 +79,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         sut.save(records)
         store.completeDeletion(with: deletionError)
         
-        XCTAssertEqual(store.insertions.count, 0)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
     
     func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
@@ -86,8 +89,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         sut.save(records)
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.insertions.count, 1)
-        XCTAssertEqual(store.insertions.first, records)
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(records)])
     }
     
     // MARK: - Helpers
