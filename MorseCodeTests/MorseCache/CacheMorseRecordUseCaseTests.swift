@@ -12,7 +12,7 @@ class MorseRecordStore {
     typealias DeletionCompletion = (Error?) -> Void
     
     var deleteCachedRecordsCallCount = 0
-    var insertCallCount = 0
+    var insertions = [[MorseRecord]]()
     
     private var deletionCompletions = [DeletionCompletion]()
     
@@ -30,7 +30,7 @@ class MorseRecordStore {
     }
     
     func insert(_ records: [MorseRecord]) {
-        insertCallCount += 1
+        insertions.append(records)
     }
 }
 
@@ -76,7 +76,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         sut.save(records)
         store.completeDeletion(with: deletionError)
         
-        XCTAssertEqual(store.insertCallCount, 0)
+        XCTAssertEqual(store.insertions.count, 0)
     }
     
     func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
@@ -86,7 +86,8 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         sut.save(records)
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.insertCallCount, 1)
+        XCTAssertEqual(store.insertions.count, 1)
+        XCTAssertEqual(store.insertions.first, records)
     }
     
     // MARK: - Helpers

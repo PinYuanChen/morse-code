@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MorseRecord {
+public struct MorseRecord: Equatable {
     public let id: UUID
     public let text: String
     public let morseCode: String
