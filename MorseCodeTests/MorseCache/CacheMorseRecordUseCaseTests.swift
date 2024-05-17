@@ -8,44 +8,12 @@
 import XCTest
 import MorseCode
 
-class MorseRecordStore {
+protocol MorseRecordStore {
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
     
-    enum ReceivedMessage: Equatable {
-        case deleteCachedRecords
-        case insert([MorseRecord])
-    }
-    
-    private(set) var receivedMessages = [ReceivedMessage]()
-    private var deletionCompletions = [DeletionCompletion]()
-    private var insertionCompletions = [InsertionCompletion]()
-    
-    func deleteCachedRecords(completion: @escaping DeletionCompletion) {
-        deletionCompletions.append(completion)
-        receivedMessages.append(.deleteCachedRecords)
-    }
-    
-    func completeDeletion(with error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
-    }
-    
-    func completeDeletionSuccessfully(at index: Int = 0) {
-        deletionCompletions[index](nil)
-    }
-    
-    func insert(_ records: [MorseRecord], completion: @escaping InsertionCompletion) {
-        insertionCompletions.append(completion)
-        receivedMessages.append(.insert(records))
-    }
-    
-    func completeInsertion(with error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
-    }
-    
-    func completeInsertionSuccessfully(at index: Int = 0) {
-        insertionCompletions[index](nil)
-    }
+    func deleteCachedRecords(completion: @escaping DeletionCompletion)
+    func insert(_ records: [MorseRecord], completion: @escaping InsertionCompletion)
 }
 
 class LocalMorseRecordLoader {
@@ -134,12 +102,52 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: LocalMorseRecordLoader, store: MorseRecordStore) {
-        let store = MorseRecordStore()
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: LocalMorseRecordLoader, store: MorseRecordStoreSpy) {
+        let store = MorseRecordStoreSpy()
         let sut = LocalMorseRecordLoader(store: store)
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, store)
+    }
+    
+    private class MorseRecordStoreSpy: MorseRecordStore {
+        typealias DeletionCompletion = (Error?) -> Void
+        typealias InsertionCompletion = (Error?) -> Void
+        
+        enum ReceivedMessage: Equatable {
+            case deleteCachedRecords
+            case insert([MorseRecord])
+        }
+        
+        private(set) var receivedMessages = [ReceivedMessage]()
+        private var deletionCompletions = [DeletionCompletion]()
+        private var insertionCompletions = [InsertionCompletion]()
+        
+        func deleteCachedRecords(completion: @escaping DeletionCompletion) {
+            deletionCompletions.append(completion)
+            receivedMessages.append(.deleteCachedRecords)
+        }
+        
+        func completeDeletion(with error: Error, at index: Int = 0) {
+            deletionCompletions[index](error)
+        }
+        
+        func completeDeletionSuccessfully(at index: Int = 0) {
+            deletionCompletions[index](nil)
+        }
+        
+        func insert(_ records: [MorseRecord], completion: @escaping InsertionCompletion) {
+            insertionCompletions.append(completion)
+            receivedMessages.append(.insert(records))
+        }
+        
+        func completeInsertion(with error: Error, at index: Int = 0) {
+            insertionCompletions[index](error)
+        }
+        
+        func completeInsertionSuccessfully(at index: Int = 0) {
+            insertionCompletions[index](nil)
+        }
     }
     
     private func expect(_ sut: LocalMorseRecordLoader, toCompleteWithError expectedError: NSError?, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
