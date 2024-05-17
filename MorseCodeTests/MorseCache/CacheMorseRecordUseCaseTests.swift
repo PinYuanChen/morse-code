@@ -43,8 +43,9 @@ class LocalMorseRecordLoader {
         self.store = store
     }
     
-    func save(_ records: [MorseRecord]) {
+    func save(_ records: [MorseRecord], completion: @escaping (Error?) -> Void) {
         store.deleteCachedRecords { [unowned self] error in
+            completion(error)
             if error == nil {
                 self.store.insert(records)
             }
@@ -66,7 +67,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let records = [uniqueRecord(), uniqueRecord()]
         
-        sut.save(records)
+        sut.save(records) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
@@ -76,7 +77,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        sut.save(records)
+        sut.save(records) { _ in }
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
@@ -86,10 +87,28 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         let records = [uniqueRecord(), uniqueRecord()]
         let (sut, store) = makeSUT()
         
-        sut.save(records)
+        sut.save(records) { _ in }
         store.completeDeletionSuccessfully()
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(records)])
+    }
+    
+    func test_save_failsOnDeletionError() {
+        let records = [uniqueRecord(), uniqueRecord()]
+        let (sut, store) = makeSUT()
+        let deletionError = anyNSError()
+        let exp = expectation(description: "Wait for save completion")
+        
+        var receivedError: Error?
+        sut.save(records) { error in
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        store.completeDeletion(with: deletionError)
+        wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertEqual(receivedError as NSError?, deletionError)
     }
     
     // MARK: - Helpers
