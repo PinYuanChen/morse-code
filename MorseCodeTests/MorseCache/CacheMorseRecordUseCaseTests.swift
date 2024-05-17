@@ -29,11 +29,15 @@ class LocalMorseRecordLoader {
             if let cacheDeletionError = error {
                 completion(cacheDeletionError)
             } else {
-                self.store.insert(records) { [weak self] error in
-                    guard self != nil else { return }
-                    completion(error)
-                }
+                self.cache(records, with: completion)
             }
+        }
+    }
+    
+    private func cache(_ records: [MorseRecord], with completion: @escaping (Error?) -> Void) {
+        store.insert(records) { [weak self] error in
+            guard self != nil else { return }
+            completion(error)
         }
     }
     
