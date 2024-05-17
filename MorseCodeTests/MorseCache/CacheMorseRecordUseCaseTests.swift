@@ -27,7 +27,10 @@ class LocalMorseRecordLoader {
             guard let self = self else { return }
             
             if error == nil {
-                self.store.insert(records, completion: completion)
+                self.store.insert(records) { [weak self] error in
+                    guard self != nil else { return }
+                    completion(error)
+                }
             } else {
                 completion(error)
             }
@@ -112,6 +115,20 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         
         sut = nil
         store.completeDeletion(with: anyNSError())
+        
+        XCTAssertTrue(receivedResults.isEmpty)
+    }
+    
+    func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
+        let store = MorseRecordStoreSpy()
+        var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
+        
+        var receivedResults = [Error?]()
+        sut?.save([uniqueRecord()]) { receivedResults.append($0) }
+        
+        store.completeDeletionSuccessfully()
+        sut = nil
+        store.completeInsertion(with: anyNSError())
         
         XCTAssertTrue(receivedResults.isEmpty)
     }
