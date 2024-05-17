@@ -9,11 +9,13 @@ import Foundation
 
 public final class LocalMorseRecordLoader {
     
+    public typealias SaveResult = Error?
+    
     public init(store: MorseRecordStore) {
         self.store = store
     }
     
-    public func save(_ records: [MorseRecord], completion: @escaping (Error?) -> Void) {
+    public func save(_ records: [MorseRecord], completion: @escaping (SaveResult) -> Void) {
         store.deleteCachedRecords { [weak self] error in
             guard let self = self else { return }
             

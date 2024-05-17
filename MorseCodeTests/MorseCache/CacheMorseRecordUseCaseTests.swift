@@ -78,7 +78,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         let store = MorseRecordStoreSpy()
         var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
         
-        var receivedResults = [Error?]()
+        var receivedResults = [LocalMorseRecordLoader.SaveResult]()
         sut?.save([uniqueRecord()]) { receivedResults.append($0) }
         
         sut = nil
@@ -91,7 +91,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         let store = MorseRecordStoreSpy()
         var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
         
-        var receivedResults = [Error?]()
+        var receivedResults = [LocalMorseRecordLoader.SaveResult]()
         sut?.save([uniqueRecord()]) { receivedResults.append($0) }
         
         store.completeDeletionSuccessfully()
