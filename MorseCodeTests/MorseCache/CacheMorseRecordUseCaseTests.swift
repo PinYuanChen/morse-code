@@ -23,7 +23,9 @@ class LocalMorseRecordLoader {
     }
     
     func save(_ records: [MorseRecord], completion: @escaping (Error?) -> Void) {
-        store.deleteCachedRecords { [unowned self] error in
+        store.deleteCachedRecords { [weak self] error in
+            guard let self = self else { return }
+            
             if error == nil {
                 self.store.insert(records, completion: completion)
             } else {
@@ -99,6 +101,19 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
             store.completeDeletionSuccessfully()
             store.completeInsertionSuccessfully()
         })
+    }
+    
+    func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
+        let store = MorseRecordStoreSpy()
+        var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
+        
+        var receivedResults = [Error?]()
+        sut?.save([uniqueRecord()]) { receivedResults.append($0) }
+        
+        sut = nil
+        store.completeDeletion(with: anyNSError())
+        
+        XCTAssertTrue(receivedResults.isEmpty)
     }
     
     // MARK: - Helpers
