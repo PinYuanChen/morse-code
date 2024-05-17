@@ -8,42 +8,6 @@
 import XCTest
 import MorseCode
 
-protocol MorseRecordStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    
-    func deleteCachedRecords(completion: @escaping DeletionCompletion)
-    func insert(_ records: [MorseRecord], completion: @escaping InsertionCompletion)
-}
-
-class LocalMorseRecordLoader {
-    
-    init(store: MorseRecordStore) {
-        self.store = store
-    }
-    
-    func save(_ records: [MorseRecord], completion: @escaping (Error?) -> Void) {
-        store.deleteCachedRecords { [weak self] error in
-            guard let self = self else { return }
-            
-            if let cacheDeletionError = error {
-                completion(cacheDeletionError)
-            } else {
-                self.cache(records, with: completion)
-            }
-        }
-    }
-    
-    private func cache(_ records: [MorseRecord], with completion: @escaping (Error?) -> Void) {
-        store.insert(records) { [weak self] error in
-            guard self != nil else { return }
-            completion(error)
-        }
-    }
-    
-    private let store: MorseRecordStore
-}
-
 final class CacheMorseRecordUseCaseTests: XCTestCase {
     
     func test_init_doesNotDeleteCacheUponCreation() {
