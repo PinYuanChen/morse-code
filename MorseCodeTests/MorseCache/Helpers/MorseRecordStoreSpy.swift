@@ -59,4 +59,8 @@ class MorseRecordStoreSpy: MorseRecordStore {
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
         retrievalCompletions[index](.success(.none))
     }
+    
+    func completeRetrieval(with records: [LocalMorseRecord], at index: Int = 0) {
+        retrievalCompletions[index](.success(records))
+    }
 }
