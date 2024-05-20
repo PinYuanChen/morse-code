@@ -113,9 +113,14 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         let exp = expectation(description: "Wait for load completion")
         
         var receivedError: Error?
-        sut.load { error in
-            receivedError = error
-            exp.fulfill()
+        sut.load { result in
+            switch result {
+            case .failure(let error):
+                receivedError = error
+                exp.fulfill()
+            default:
+                XCTFail("Expect to fail on the same error")
+            }
         }
         
         store.completeRetrieval(with: retrievalError)
@@ -137,8 +142,13 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         let exp = expectation(description: "Wait for save completion")
         
         var receivedError: Error?
-        sut.save([uniqueRecord()]) { error in
-            receivedError = error
+        sut.save([uniqueRecord()]) { result in
+            switch result {
+            case .failure(let error):
+                receivedError = error
+            default:
+                break
+            }
             exp.fulfill()
         }
         
