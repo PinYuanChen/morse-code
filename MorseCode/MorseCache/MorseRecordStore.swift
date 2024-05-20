@@ -13,4 +13,5 @@ public protocol MorseRecordStore {
     
     func deleteCachedRecords(completion: @escaping DeletionCompletion)
     func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion)
+    func retrieve()
 }

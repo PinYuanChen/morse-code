@@ -27,6 +27,10 @@ public final class LocalMorseRecordLoader {
         }
     }
     
+    public func load() {
+        store.retrieve()
+    }
+    
     private func cache(_ records: [MorseRecord], with completion: @escaping (Error?) -> Void) {
         store.insert(records.toLocal()) { [weak self] error in
             guard self != nil else { return }

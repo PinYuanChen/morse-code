@@ -99,6 +99,14 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         XCTAssertTrue(receivedResults.isEmpty)
     }
     
+    func test_load_requestsCacheRetrieval() {
+            let (sut, store) = makeSUT()
+            
+            sut.load()
+            
+            XCTAssertEqual(store.receivedMessages, [.retrieve])
+        }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: LocalMorseRecordLoader, store: MorseRecordStoreSpy) {
         let store = MorseRecordStoreSpy()
