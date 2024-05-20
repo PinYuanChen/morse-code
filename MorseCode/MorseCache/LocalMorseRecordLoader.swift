@@ -10,7 +10,7 @@ import Foundation
 public final class LocalMorseRecordLoader {
     
     public typealias SaveResult = Result<Void, Error>
-    public typealias LoadResult = Result<Void, Error>
+    public typealias LoadResult = Result<[LocalMorseRecord]?, Error>
     
     public init(store: MorseRecordStore) {
         self.store = store

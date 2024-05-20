@@ -14,7 +14,7 @@ public protocol MorseRecordStore {
     typealias InsertionResult = Result<Void, Error>
     typealias InsertionCompletion = (InsertionResult) -> Void
     
-    typealias RetrievalResult = Result<Void, Error>
+    typealias RetrievalResult = Result<[LocalMorseRecord]?, Error>
     typealias RetrievalCompletion = (RetrievalResult) -> Void
     
     func deleteCachedRecords(completion: @escaping DeletionCompletion)

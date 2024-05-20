@@ -129,6 +129,26 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         XCTAssertEqual(receivedError as NSError?, retrievalError)
     }
     
+    func test_load_deliversNoRecordOnEmptyCache() {
+        let (sut, store) = makeSUT()
+        let exp = expectation(description: "Wait for load completion")
+        
+        var receivedResult: [LocalMorseRecord]?
+        sut.load { result in
+            switch result {
+            case .success(let result):
+                receivedResult = result
+                exp.fulfill()
+            default:
+                XCTFail("Expect to retrieve empty result")
+            }
+        }
+        
+        store.completeRetrievalWithEmptyCache()
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertNil(receivedResult)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: LocalMorseRecordLoader, store: MorseRecordStoreSpy) {
         let store = MorseRecordStoreSpy()
