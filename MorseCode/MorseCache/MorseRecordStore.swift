@@ -8,9 +8,14 @@
 import Foundation
 
 public protocol MorseRecordStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    typealias RetrievalCompletion = (Error?) -> Void
+    typealias DeletionResult = Result<Void, Error>
+    typealias DeletionCompletion = (DeletionResult) -> Void
+    
+    typealias InsertionResult = Result<Void, Error>
+    typealias InsertionCompletion = (InsertionResult) -> Void
+    
+    typealias RetrievalResult = Result<[LocalMorseRecord]?, Error>
+    typealias RetrievalCompletion = (RetrievalResult) -> Void
     
     func deleteCachedRecords(completion: @escaping DeletionCompletion)
     func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion)

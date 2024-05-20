@@ -9,8 +9,6 @@ import Foundation
 import MorseCode
 
 class MorseRecordStoreSpy: MorseRecordStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
     
     enum ReceivedMessage: Equatable {
         case deleteCachedRecords
@@ -29,11 +27,11 @@ class MorseRecordStoreSpy: MorseRecordStore {
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
+        deletionCompletions[index](.failure(error))
     }
     
     func completeDeletionSuccessfully(at index: Int = 0) {
-        deletionCompletions[index](nil)
+        deletionCompletions[index](.success(()))
     }
     
     func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion) {
@@ -42,11 +40,11 @@ class MorseRecordStoreSpy: MorseRecordStore {
     }
     
     func completeInsertion(with error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
+        insertionCompletions[index](.failure(error))
     }
     
     func completeInsertionSuccessfully(at index: Int = 0) {
-        insertionCompletions[index](nil)
+        insertionCompletions[index](.success(()))
     }
     
     func retrieve(completion: @escaping RetrievalCompletion) {
@@ -55,6 +53,10 @@ class MorseRecordStoreSpy: MorseRecordStore {
     }
     
     func completeRetrieval(with error: Error, at index: Int = 0) {
-        retrievalCompletions[index](error)
+        retrievalCompletions[index](.failure(error))
+    }
+    
+    func completeRetrievalWithEmptyCache(at index: Int = 0) {
+        retrievalCompletions[index](.success(.none))
     }
 }
