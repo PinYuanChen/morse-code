@@ -27,8 +27,8 @@ public final class LocalMorseRecordLoader {
         }
     }
     
-    public func load() {
-        store.retrieve()
+    public func load(completion: @escaping (Error?) -> Void) {
+        store.retrieve(completion: completion)
     }
     
     private func cache(_ records: [MorseRecord], with completion: @escaping (Error?) -> Void) {
