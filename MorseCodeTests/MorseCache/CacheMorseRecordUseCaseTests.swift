@@ -38,12 +38,15 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
     
     func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
         let records = [uniqueRecord(), uniqueRecord()]
+        let localRecords = records.map {
+            LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals)
+        }
         let (sut, store) = makeSUT()
         
         sut.save(records) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(records)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(localRecords)])
     }
     
     func test_save_failsOnDeletionError() {
@@ -116,7 +119,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         
         enum ReceivedMessage: Equatable {
             case deleteCachedRecords
-            case insert([MorseRecord])
+            case insert([LocalMorseRecord])
         }
         
         private(set) var receivedMessages = [ReceivedMessage]()
@@ -136,7 +139,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
             deletionCompletions[index](nil)
         }
         
-        func insert(_ records: [MorseRecord], completion: @escaping InsertionCompletion) {
+        func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion) {
             insertionCompletions.append(completion)
             receivedMessages.append(.insert(records))
         }

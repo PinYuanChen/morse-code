@@ -28,11 +28,17 @@ public final class LocalMorseRecordLoader {
     }
     
     private func cache(_ records: [MorseRecord], with completion: @escaping (Error?) -> Void) {
-        store.insert(records) { [weak self] error in
+        store.insert(records.toLocal()) { [weak self] error in
             guard self != nil else { return }
             completion(error)
         }
     }
     
     private let store: MorseRecordStore
+}
+
+private extension Array where Element == MorseRecord {
+    func toLocal() -> [LocalMorseRecord] {
+        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+    }
 }
