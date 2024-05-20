@@ -8,7 +8,7 @@
 import XCTest
 import MorseCode
 
-final class CacheMorseRecordUseCaseTests: XCTestCase {
+final class LocalMorseRecordLoaderTests: XCTestCase {
     
     func test_init_doesNotDeleteCacheUponCreation() {
         let (_, store) = makeSUT()
