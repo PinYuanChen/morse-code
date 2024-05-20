@@ -8,7 +8,7 @@
 import XCTest
 import MorseCode
 
-final class CacheMorseRecordUseCaseTests: XCTestCase {
+final class LocalMorseRecordLoaderTests: XCTestCase {
     
     func test_init_doesNotDeleteCacheUponCreation() {
         let (_, store) = makeSUT()
@@ -18,32 +18,30 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
     
     func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
-        let records = [uniqueRecord(), uniqueRecord()]
         
-        sut.save(records) { _ in }
+        sut.save(uniqueRecords().records) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
-        let records = [uniqueRecord(), uniqueRecord()]
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        sut.save(records) { _ in }
+        sut.save(uniqueRecords().records) { _ in }
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
     
     func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
-        let records = [uniqueRecord(), uniqueRecord()]
+        let (records, localRecords) = uniqueRecords()
         let (sut, store) = makeSUT()
         
         sut.save(records) { _ in }
         store.completeDeletionSuccessfully()
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(records)])
+        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(localRecords)])
     }
     
     func test_save_failsOnDeletionError() {
@@ -78,8 +76,8 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         let store = MorseRecordStoreSpy()
         var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
         
-        var receivedResults = [Error?]()
-        sut?.save([uniqueRecord()]) { receivedResults.append($0) }
+        var receivedResults = [LocalMorseRecordLoader.SaveResult]()
+        sut?.save(uniqueRecords().records) { receivedResults.append($0) }
         
         sut = nil
         store.completeDeletion(with: anyNSError())
@@ -91,14 +89,39 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         let store = MorseRecordStoreSpy()
         var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
         
-        var receivedResults = [Error?]()
-        sut?.save([uniqueRecord()]) { receivedResults.append($0) }
+        var receivedResults = [LocalMorseRecordLoader.SaveResult]()
+        sut?.save(uniqueRecords().records) { receivedResults.append($0) }
         
         store.completeDeletionSuccessfully()
         sut = nil
         store.completeInsertion(with: anyNSError())
         
         XCTAssertTrue(receivedResults.isEmpty)
+    }
+    
+    func test_load_requestsCacheRetrieval() {
+        let (sut, store) = makeSUT()
+        
+        sut.load() { _ in }
+        
+        XCTAssertEqual(store.receivedMessages, [.retrieve])
+    }
+    
+    func test_load_failsOnRetrievalError() {
+        let (sut, store) = makeSUT()
+        let retrievalError = anyNSError()
+        let exp = expectation(description: "Wait for load completion")
+        
+        var receivedError: Error?
+        sut.load { error in
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        store.completeRetrieval(with: retrievalError)
+        wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertEqual(receivedError as NSError?, retrievalError)
     }
     
     // MARK: - Helpers
@@ -108,46 +131,6 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         trackForMemoryLeaks(store, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, store)
-    }
-    
-    private class MorseRecordStoreSpy: MorseRecordStore {
-        typealias DeletionCompletion = (Error?) -> Void
-        typealias InsertionCompletion = (Error?) -> Void
-        
-        enum ReceivedMessage: Equatable {
-            case deleteCachedRecords
-            case insert([MorseRecord])
-        }
-        
-        private(set) var receivedMessages = [ReceivedMessage]()
-        private var deletionCompletions = [DeletionCompletion]()
-        private var insertionCompletions = [InsertionCompletion]()
-        
-        func deleteCachedRecords(completion: @escaping DeletionCompletion) {
-            deletionCompletions.append(completion)
-            receivedMessages.append(.deleteCachedRecords)
-        }
-        
-        func completeDeletion(with error: Error, at index: Int = 0) {
-            deletionCompletions[index](error)
-        }
-        
-        func completeDeletionSuccessfully(at index: Int = 0) {
-            deletionCompletions[index](nil)
-        }
-        
-        func insert(_ records: [MorseRecord], completion: @escaping InsertionCompletion) {
-            insertionCompletions.append(completion)
-            receivedMessages.append(.insert(records))
-        }
-        
-        func completeInsertion(with error: Error, at index: Int = 0) {
-            insertionCompletions[index](error)
-        }
-        
-        func completeInsertionSuccessfully(at index: Int = 0) {
-            insertionCompletions[index](nil)
-        }
     }
     
     private func expect(_ sut: LocalMorseRecordLoader, toCompleteWithError expectedError: NSError?, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
@@ -163,6 +146,15 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
         
         XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
+    }
+    
+    private func uniqueRecords() -> (records: [MorseRecord], localRecords: [LocalMorseRecord]) {
+        let records = [uniqueRecord(), uniqueRecord()]
+        let localRecords = records.map {
+            LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals)
+        }
+        
+        return (records, localRecords)
     }
     
     private func uniqueRecord() -> MorseRecord {

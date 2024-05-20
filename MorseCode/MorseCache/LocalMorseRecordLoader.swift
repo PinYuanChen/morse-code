@@ -9,11 +9,13 @@ import Foundation
 
 public final class LocalMorseRecordLoader {
     
+    public typealias SaveResult = Error?
+    
     public init(store: MorseRecordStore) {
         self.store = store
     }
     
-    public func save(_ records: [MorseRecord], completion: @escaping (Error?) -> Void) {
+    public func save(_ records: [MorseRecord], completion: @escaping (SaveResult) -> Void) {
         store.deleteCachedRecords { [weak self] error in
             guard let self = self else { return }
             
@@ -25,12 +27,22 @@ public final class LocalMorseRecordLoader {
         }
     }
     
+    public func load(completion: @escaping (Error?) -> Void) {
+        store.retrieve(completion: completion)
+    }
+    
     private func cache(_ records: [MorseRecord], with completion: @escaping (Error?) -> Void) {
-        store.insert(records) { [weak self] error in
+        store.insert(records.toLocal()) { [weak self] error in
             guard self != nil else { return }
             completion(error)
         }
     }
     
     private let store: MorseRecordStore
+}
+
+private extension Array where Element == MorseRecord {
+    func toLocal() -> [LocalMorseRecord] {
+        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+    }
 }
