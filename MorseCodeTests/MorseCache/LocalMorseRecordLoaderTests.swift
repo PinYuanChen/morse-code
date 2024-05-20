@@ -127,9 +127,9 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
     func test_load_deliversRecordsOnNonEmptyCache() {
         let (sut, store) = makeSUT()
         
-        let records = uniqueRecords().localRecords
+        let (records, localRecords) = uniqueRecords()
         expect(sut, toCompleteLoadingWith: .success(records), when: {
-            store.completeRetrieval(with: records)
+            store.completeRetrieval(with: localRecords)
         })
     }
     
