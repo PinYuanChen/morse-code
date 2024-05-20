@@ -18,29 +18,24 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
     
     func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
-        let records = [uniqueRecord(), uniqueRecord()]
         
-        sut.save(records) { _ in }
+        sut.save(uniqueRecords().records) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
-        let records = [uniqueRecord(), uniqueRecord()]
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        sut.save(records) { _ in }
+        sut.save(uniqueRecords().records) { _ in }
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
     
     func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
-        let records = [uniqueRecord(), uniqueRecord()]
-        let localRecords = records.map {
-            LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals)
-        }
+        let (records, localRecords) = uniqueRecords()
         let (sut, store) = makeSUT()
         
         sut.save(records) { _ in }
@@ -82,7 +77,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
         
         var receivedResults = [LocalMorseRecordLoader.SaveResult]()
-        sut?.save([uniqueRecord()]) { receivedResults.append($0) }
+        sut?.save(uniqueRecords().records) { receivedResults.append($0) }
         
         sut = nil
         store.completeDeletion(with: anyNSError())
@@ -95,7 +90,7 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
         
         var receivedResults = [LocalMorseRecordLoader.SaveResult]()
-        sut?.save([uniqueRecord()]) { receivedResults.append($0) }
+        sut?.save(uniqueRecords().records) { receivedResults.append($0) }
         
         store.completeDeletionSuccessfully()
         sut = nil
@@ -166,6 +161,15 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
         
         XCTAssertEqual(receivedError as NSError?, expectedError, file: file, line: line)
+    }
+    
+    private func uniqueRecords() -> (records: [MorseRecord], localRecords: [LocalMorseRecord]) {
+        let records = [uniqueRecord(), uniqueRecord()]
+        let localRecords = records.map {
+            LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals)
+        }
+        
+        return (records, localRecords)
     }
     
     private func uniqueRecord() -> MorseRecord {
