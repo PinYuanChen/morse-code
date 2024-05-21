@@ -68,15 +68,8 @@ class CodableMorseRecordStoreTests: XCTestCase {
     func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
         let sut = makeSUT()
         let (_, localRecords) = uniqueRecords()
-        let exp = expectation(description: "Wait for cache retrieval")
         
-        sut.insert(localRecords) { insertionResult in
-            if case let .failure(error) = insertionResult {
-                XCTFail("Unexpected failure with insertion error \(error)")
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
+        insert(localRecords, to: sut)
         expect(sut, toRetrieve: .success(localRecords))
     }
     
@@ -84,15 +77,7 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let sut = makeSUT()
         let (_, localRecords) = uniqueRecords()
         
-        let exp = expectation(description: "Wait for cache insertion")
-        sut.insert(localRecords) { insertionResult in
-            if case let .failure(error) = insertionResult {
-                XCTFail("Unexpected failure with insertion error \(error)")
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        
+        insert(localRecords, to: sut)
         expect(sut, toRetrieveTwice: .success(localRecords))
     }
     
@@ -101,6 +86,17 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let sut = CodableMorseRecordStore(storeURL: testSpecificStoreURL())
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+    
+    private func insert(_ records: [LocalMorseRecord], to sut: CodableMorseRecordStore) {
+        let exp = expectation(description: "Wait for cache insertion")
+        sut.insert(records) { insertionResult in
+            if case let .failure(error) = insertionResult {
+                XCTFail("Unexpected failure with insertion error \(error)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
     }
     
     private func expect(_ sut: CodableMorseRecordStore, toRetrieveTwice expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
