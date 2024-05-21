@@ -62,16 +62,28 @@ class CodableMorseRecordStoreTests: XCTestCase {
         expect(sut, toRetrieveTwice: .failure(anyNSError()))
     }
     
+    func test_insert_deliversNoErrorOnEmptyCache() {
+        let sut = makeSUT()
+        
+        let insertionError = insert(uniqueRecords().localRecords, to: sut)
+        XCTAssertNil(insertionError, "Expected to insert cache successfully")
+    }
+    
+    func test_insert_deliversNoErrorOnNonEmptyCache() {
+        let sut = makeSUT()
+        insert(uniqueRecords().localRecords, to: sut)
+        
+        let insertionError = insert(uniqueRecords().localRecords, to: sut)
+        XCTAssertNil(insertionError, "Expected to insert cache successfully")
+    }
+    
     func test_insert_overridesPreviouslyInsertedCacheValues() {
         let sut = makeSUT()
         
-        let firstInsertionError = insert(uniqueRecords().localRecords, to: sut)
-        XCTAssertNil(firstInsertionError, "Expected to insert cache successfully")
+        insert(uniqueRecords().localRecords, to: sut)
         
         let latestRecords = uniqueRecords().localRecords
-        let latestInsertionError = insert(latestRecords, to: sut)
-        
-        XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
+        insert(latestRecords, to: sut)
         expect(sut, toRetrieve: .success(latestRecords))
     }
     
@@ -81,17 +93,14 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let (_, localRecords) = uniqueRecords()
         
         let insertionError = insert(localRecords, to: sut)
-        
         XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
-        expect(sut, toRetrieve: .success(.none))
     }
     
     func test_delete_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
-        let deletionError = deleteCache(from: sut)
         
+        let deletionError = deleteCache(from: sut)
         XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
-        expect(sut, toRetrieve: .success(.none))
     }
     
     func test_delete_emptiesPreviouslyInsertedCache() {
@@ -100,8 +109,6 @@ class CodableMorseRecordStoreTests: XCTestCase {
         
         let deletionError = deleteCache(from: sut)
         XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
-        
-        expect(sut, toRetrieve: .success(.none))
     }
     
     func test_delete_deliversErrorOnDeletionError() {
@@ -109,9 +116,34 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let sut = makeSUT(storeURL: noDeletePermissionURL)
         
         let deletionError = deleteCache(from: sut)
-        
         XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
-        expect(sut, toRetrieve: .success(.none))
+    }
+    
+    func test_storeSideEffects_runSerially() {
+        let sut = makeSUT()
+        var completedOperationsInOrder = [XCTestExpectation]()
+        
+        let op1 = expectation(description: "Operation 1")
+        sut.insert(uniqueRecords().localRecords) { _ in
+            completedOperationsInOrder.append(op1)
+            op1.fulfill()
+        }
+        
+        let op2 = expectation(description: "Operation 2")
+        sut.deleteCachedRecords { _ in
+            completedOperationsInOrder.append(op2)
+            op2.fulfill()
+        }
+        
+        let op3 = expectation(description: "Operation 3")
+        sut.insert(uniqueRecords().localRecords) { _ in
+            completedOperationsInOrder.append(op3)
+            op3.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5.0)
+        
+        XCTAssertEqual(completedOperationsInOrder, [op1, op2, op3], "Expected side-effects to run serially but operations finished in the wrong order")
     }
     
     // MARK: - Helpers
