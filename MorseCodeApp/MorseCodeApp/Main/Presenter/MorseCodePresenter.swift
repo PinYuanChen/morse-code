@@ -19,6 +19,22 @@ public protocol MorseCodePresenterPrototype {
     func playOrPauseFlashSignals(text: String)
 }
 
+extension MorseCodePresenterPrototype {
+    public func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool {
+        let regex = "[A-Za-z0-9 .,?!-/@()]*"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
+        
+        guard predicate.evaluate(with: string) else {
+            return false
+        }
+        
+        let newString = currentText?.replacingCharacters(in: range, with: string)
+        let length = newString?.count ?? 0
+        return length <= MorseCodePresenter.maxInputLength
+    }
+}
+
 public class MorseCodePresenter: MorseCodePresenterPrototype {
     
     static let title = NSLocalizedString("MORSE_FLASH_TITLE", comment: "Main page title")
@@ -40,20 +56,6 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         self.flashManager.didFinishPlaying = { [unowned self] in
             self.delegate?.updateFlashButton(imageName: FlashStatusType.stop.imageName)
         }
-    }
-    
-    public func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool {
-        let regex = "[A-Za-z0-9 .,?!-/@()]*"
-        
-        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
-        
-        guard predicate.evaluate(with: string) else {
-            return false
-        }
-        
-        let newString = currentText?.replacingCharacters(in: range, with: string)
-        let length = newString?.count ?? 0
-        return length <= MorseCodePresenter.maxInputLength
     }
     
     public func convertToMorseCode(text: String) {
