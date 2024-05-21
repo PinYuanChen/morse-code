@@ -51,12 +51,12 @@ public final class LocalMorseRecordLoader: MorseRecordLoaderPrototype {
 
 private extension Array where Element == MorseRecord {
     func toLocal() -> [LocalMorseRecord] {
-        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode) }
     }
 }
 
 private extension Array where Element == LocalMorseRecord {
     func toModels() -> [MorseRecord] {
-        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode) }
     }
 }

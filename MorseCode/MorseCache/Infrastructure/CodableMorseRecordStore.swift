@@ -13,10 +13,9 @@ public class CodableMorseRecordStore: MorseRecordStore {
         let id: UUID
         let text: String
         let morseCode: String
-        let flashSignals: [FlashType]
         
         var local: LocalMorseRecord {
-            .init(id: id, text: text, morseCode: morseCode, flashSignals: flashSignals)
+            .init(id: id, text: text, morseCode: morseCode)
         }
     }
     
@@ -37,7 +36,7 @@ public class CodableMorseRecordStore: MorseRecordStore {
             do {
                 let decoder = JSONDecoder()
                 let records = try decoder.decode([CodableMorseRecord].self, from: data)
-                completion(.success(records.map { LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }))
+                completion(.success(records.map { LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode) }))
             } catch {
                 completion(.failure(error))
             }
@@ -49,7 +48,7 @@ public class CodableMorseRecordStore: MorseRecordStore {
         queue.async(flags: .barrier) {
             do {
                 let encoder = JSONEncoder()
-                let codableRecords = records.map { CodableMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+                let codableRecords = records.map { CodableMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode) }
                 
                 let encoded = try encoder.encode(codableRecords)
                 try encoded.write(to: storeURL)
