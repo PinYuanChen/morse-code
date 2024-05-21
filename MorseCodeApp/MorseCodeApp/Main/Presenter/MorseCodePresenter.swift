@@ -13,7 +13,13 @@ public protocol MorseCodePresenterDelegate: AnyObject {
     func updateFlashButton(imageName: String)
 }
 
-public class MorseCodePresenter {
+public protocol MorseCodePresenterPrototype {
+    func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool
+    func convertToMorseCode(text: String)
+    func playOrPauseFlashSignals(text: String)
+}
+
+public class MorseCodePresenter: MorseCodePresenterPrototype {
     
     static let title = NSLocalizedString("MORSE_FLASH_TITLE", comment: "Main page title")
     
