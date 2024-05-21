@@ -9,12 +9,39 @@ import XCTest
 import MorseCode
 
 class CodableMorseRecordStore {
+    
+    private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("morseRecords.store")
+    
     func retrieve(completion: @escaping MorseRecordStore.RetrievalCompletion) {
-        completion(.success(.none))
+        guard let data = try? Data(contentsOf: storeURL) else {
+            return completion(.success(.none))
+        }
+        
+        let decoder = JSONDecoder()
+        let records = try! decoder.decode([LocalMorseRecord].self, from: data)
+        completion(.success(records))
+    }
+    
+    func insert(_ records: [LocalMorseRecord], completion: @escaping MorseRecordStore.InsertionCompletion) {
+        let encoder = JSONEncoder()
+        let encoded = try! encoder.encode(records)
+        try! encoded.write(to: storeURL)
+        completion(.success(()))
     }
 }
 
 class CodableMorseRecordStoreTests: XCTestCase {
+    
+    override func setUpWithError() throws {
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("morseRecords.store")
+        try? FileManager.default.removeItem(at: storeURL)
+    }
+    
+    override func tearDownWithError() throws {
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("morseRecords.store")
+        try? FileManager.default.removeItem(at: storeURL)
+    }
+    
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = CodableMorseRecordStore()
         let exp = expectation(description: "Wait for cache retrieval")
@@ -45,6 +72,32 @@ class CodableMorseRecordStoreTests: XCTestCase {
                     
                 default:
                     XCTFail("Expected retrieving twice from empty cache to deliver same empty result, got \(firstResult) and \(secondResult) instead")
+                }
+                
+                exp.fulfill()
+            }
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
+    func test_retrieveAfterInsertingToEmptyCache_deliversInsertedValues() {
+        let sut = CodableMorseRecordStore()
+        let (_, localRecords) = uniqueRecords()
+        let exp = expectation(description: "Wait for cache retrieval")
+        
+        sut.insert(localRecords) { insertionResult in
+            sut.retrieve { retrieveResult in
+                if case let .failure(error) = insertionResult {
+                    XCTFail("Unexpected failure with insertion error \(error)")
+                }
+                
+                switch retrieveResult {
+                case let .success(retrievedRecords):
+                    XCTAssertEqual(retrievedRecords, localRecords)
+                    
+                default:
+                    XCTFail("Expected found result with records\(localRecords), got \(retrieveResult) instead")
                 }
                 
                 exp.fulfill()
