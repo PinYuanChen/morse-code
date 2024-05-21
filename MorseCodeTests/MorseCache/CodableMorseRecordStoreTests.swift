@@ -53,6 +53,10 @@ class CodableMorseRecordStore {
             completion(.failure(error))
         }
     }
+    
+    func deleteCachedRecords(completion: @escaping MorseRecordStore.DeletionCompletion) {
+        completion(.success(()))
+    }
 }
 
 class CodableMorseRecordStoreTests: XCTestCase {
@@ -130,6 +134,21 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let insertionError = insert(localRecords, to: sut)
         
         XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
+        expect(sut, toRetrieve: .success(.none))
+    }
+    
+    func test_delete_hasNoSideEffectsOnEmptyCache() {
+        let sut = makeSUT()
+        let exp = expectation(description: "Wait for cache deletion")
+        
+        sut.deleteCachedRecords { deletionResult in
+            if case let Result.failure(error) = deletionResult {
+                XCTFail("Unexpected failure with deletion error \(error)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+        
         expect(sut, toRetrieve: .success(.none))
     }
     
