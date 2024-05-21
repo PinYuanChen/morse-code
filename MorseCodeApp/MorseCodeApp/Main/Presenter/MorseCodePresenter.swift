@@ -23,6 +23,8 @@ public class MorseCodePresenter {
     
     static let morseCodePlaceholder = NSLocalizedString("MORSE_CODE_OUTPUT", comment: "morse code textfield")
     
+    public static let maxInputLength = 30
+    
     public weak var delegate: MorseCodePresenterDelegate?
     
     public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype) {
@@ -34,12 +36,18 @@ public class MorseCodePresenter {
         }
     }
     
-    public func validateInput(string: String) -> Bool {
+    public func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool {
         let regex = "[A-Za-z0-9 .,?!-/@()]*"
         
         let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
         
-        return predicate.evaluate(with: string)
+        guard predicate.evaluate(with: string) else {
+            return false
+        }
+        
+        let newString = currentText?.replacingCharacters(in: range, with: string)
+        let length = newString?.count ?? 0
+        return length <= MorseCodePresenter.maxInputLength
     }
     
     public func convertToMorseCode(text: String) {

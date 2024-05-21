@@ -205,6 +205,6 @@ private extension MorseCodeViewController {
 // MARK: - UITextFieldDelegate
 extension MorseCodeViewController: UITextFieldDelegate {
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        return presenter.validateInput(string: string)
+        return presenter.validateInput(string: string, currentText: textField.text as? NSString, range: range)
     }
 }
