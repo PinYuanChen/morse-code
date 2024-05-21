@@ -8,7 +8,7 @@
 import XCTest
 import MorseCode
 
-class CodableMorseRecordStore {
+class CodableMorseRecordStore: MorseRecordStore {
     
     private struct CodableMorseRecord: Codable {
         let id: UUID
@@ -27,7 +27,7 @@ class CodableMorseRecordStore {
         self.storeURL = storeURL
     }
     
-    func retrieve(completion: @escaping MorseRecordStore.RetrievalCompletion) {
+    func retrieve(completion: @escaping RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
             return completion(.success(.none))
         }
@@ -41,7 +41,7 @@ class CodableMorseRecordStore {
         }
     }
     
-    func insert(_ records: [LocalMorseRecord], completion: @escaping MorseRecordStore.InsertionCompletion) {
+    func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion) {
         do {
             let encoder = JSONEncoder()
             let codableRecords = records.map { CodableMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
@@ -54,7 +54,7 @@ class CodableMorseRecordStore {
         }
     }
     
-    func deleteCachedRecords(completion: @escaping MorseRecordStore.DeletionCompletion) {
+    func deleteCachedRecords(completion: @escaping DeletionCompletion) {
         guard FileManager.default.fileExists(atPath: storeURL.path) else {
             return completion(.success(()))
         }
