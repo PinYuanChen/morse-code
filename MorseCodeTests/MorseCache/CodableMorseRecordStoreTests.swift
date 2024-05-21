@@ -10,6 +10,17 @@ import MorseCode
 
 class CodableMorseRecordStore {
     
+    private struct CodableMorseRecord: Codable {
+        let id: UUID
+        let text: String
+        let morseCode: String
+        let flashSignals: [FlashType]
+        
+        var local: LocalMorseRecord {
+            .init(id: id, text: text, morseCode: morseCode, flashSignals: flashSignals)
+        }
+    }
+    
     private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("morseRecords.store")
     
     func retrieve(completion: @escaping MorseRecordStore.RetrievalCompletion) {
@@ -18,13 +29,13 @@ class CodableMorseRecordStore {
         }
         
         let decoder = JSONDecoder()
-        let records = try! decoder.decode([LocalMorseRecord].self, from: data)
-        completion(.success(records))
+        let records = try! decoder.decode([CodableMorseRecord].self, from: data)
+        completion(.success(records.map { LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }))
     }
     
     func insert(_ records: [LocalMorseRecord], completion: @escaping MorseRecordStore.InsertionCompletion) {
         let encoder = JSONEncoder()
-        let encoded = try! encoder.encode(records)
+        let encoded = try! encoder.encode(records.map { CodableMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) })
         try! encoded.write(to: storeURL)
         completion(.success(()))
     }
