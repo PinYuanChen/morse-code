@@ -22,9 +22,11 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     
     public weak var delegate: MorseCodePresenterDelegate?
     
-    public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype) {
+    public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
+                         localLoader: MorseRecordLoaderPrototype) {
         self.convertor = convertor
         self.flashManager = flashManager
+        self.localLoader = localLoader
         
         self.flashManager.didFinishPlaying = { [unowned self] in
             self.delegate?.updateFlashButton(imageName: FlashStatusType.stop.imageName)
@@ -50,4 +52,5 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     // MARK: Private properties
     private let convertor: MorseCodeConvertorPrototype
     private var flashManager: FlashManagerPrototype
+    private let localLoader: MorseRecordLoaderPrototype
 }
