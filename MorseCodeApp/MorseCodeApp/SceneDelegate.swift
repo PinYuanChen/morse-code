@@ -16,7 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let convertor = MorseCodeConvertor()
         let flashManager = FlashManager()
-        let morseCodeViewController = MorseCodeViewController(presenter: MorseCodePresenter(convertor: convertor, flashManager: flashManager))
+        
+        let morseCodeViewController = MorseCodeViewController(presenter: MorseCodePresenter(convertor: convertor, flashManager: flashManager, localLoader: localLoader))
         window.rootViewController = morseCodeViewController
         
         self.window = window
@@ -33,5 +34,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) { }
 
+    private var localLoader: LocalMorseRecordLoader {
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
+        let codableStore = CodableMorseRecordStore(storeURL: storeURL)
+        return .init(store: codableStore)
+    }
 }
 

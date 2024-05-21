@@ -8,12 +8,7 @@
 import Foundation
 import MorseCode
 
-public protocol MorseCodePresenterDelegate: AnyObject {
-    func displayMorseCode(code: String)
-    func updateFlashButton(imageName: String)
-}
-
-public class MorseCodePresenter {
+public class MorseCodePresenter: MorseCodePresenterPrototype {
     
     static let title = NSLocalizedString("MORSE_FLASH_TITLE", comment: "Main page title")
     
@@ -23,23 +18,19 @@ public class MorseCodePresenter {
     
     static let morseCodePlaceholder = NSLocalizedString("MORSE_CODE_OUTPUT", comment: "morse code textfield")
     
+    public static let maxInputLength = 30
+    
     public weak var delegate: MorseCodePresenterDelegate?
     
-    public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype) {
+    public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
+                         localLoader: MorseRecordLoaderPrototype) {
         self.convertor = convertor
         self.flashManager = flashManager
+        self.localLoader = localLoader
         
         self.flashManager.didFinishPlaying = { [unowned self] in
             self.delegate?.updateFlashButton(imageName: FlashStatusType.stop.imageName)
         }
-    }
-    
-    public func validateInput(string: String) -> Bool {
-        let regex = "[A-Za-z0-9 .,?!-/@()]*"
-        
-        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
-        
-        return predicate.evaluate(with: string)
     }
     
     public func convertToMorseCode(text: String) {
@@ -61,4 +52,5 @@ public class MorseCodePresenter {
     // MARK: Private properties
     private let convertor: MorseCodeConvertorPrototype
     private var flashManager: FlashManagerPrototype
+    private let localLoader: MorseRecordLoaderPrototype
 }

@@ -28,7 +28,7 @@ public final class LocalMorseRecordLoader: MorseRecordLoaderPrototype {
     
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] loadResult in
-            guard let self = self else { return }
+            guard self != nil else { return }
             
             switch loadResult {
             case .success(let records):
@@ -51,12 +51,12 @@ public final class LocalMorseRecordLoader: MorseRecordLoaderPrototype {
 
 private extension Array where Element == MorseRecord {
     func toLocal() -> [LocalMorseRecord] {
-        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode) }
     }
 }
 
 private extension Array where Element == LocalMorseRecord {
     func toModels() -> [MorseRecord] {
-        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode) }
     }
 }

@@ -26,7 +26,7 @@ public enum FlashStatusType {
     }
 }
 
-public enum FlashType: String, Codable {
+public enum FlashType: String {
     case dah = "-"
     case di = "."
     case pause = " "

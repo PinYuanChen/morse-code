@@ -13,53 +13,61 @@ import MorseCodeApp
 public final class MorseCodePresenterTests: XCTestCase {
     
     func test_init_doesNotConvert() {
-        let (_, convertor) = makeSUT()
+        let sut = makeSUT()
         
-        XCTAssertEqual(convertor.convertCallCount, 0)
+        XCTAssertEqual(sut.convertCallCount, 0)
     }
     
-    func test_ValidateInput() {
-        let (sut, _) = makeSUT()
+    func test_validateInputCharacters() {
+        let sut = makeSUT()
         
         let validCharacter = "z"
-        XCTAssertTrue(sut.validateInput(string: validCharacter))
+        XCTAssertTrue(sut.validateInput(string: validCharacter, currentText: nil, range: .init()))
         
         let validNumber = "0"
-        XCTAssertTrue(sut.validateInput(string: validNumber))
+        XCTAssertTrue(sut.validateInput(string: validNumber, currentText: nil, range: .init()))
         
         let validSign = "@"
-        XCTAssertTrue(sut.validateInput(string: validSign))
+        XCTAssertTrue(sut.validateInput(string: validSign, currentText: nil, range: .init()))
         
         let invalidEmoji = "😎"
-        XCTAssertFalse(sut.validateInput(string: invalidEmoji))
+        XCTAssertFalse(sut.validateInput(string: invalidEmoji, currentText: nil, range: .init()))
+    }
+    
+    func test_validateInputLength() {
+        let sut = makeSUT()
+        let maxLength = MorseCodePresenter.maxInputLength
+        let currentText = String(repeating: "z", count: maxLength) as NSString
+        
+        XCTAssertFalse(sut.validateInput(string: "z", currentText: currentText, range: .init(location: maxLength, length: 0)))
     }
     
     func test_convertInputTextToMorseCode() {
-        let (sut, convertor) = makeSUT()
+        let sut = makeSUT()
         
         sut.convertToMorseCode(text: "test1")
-        XCTAssertEqual(convertor.convertCallCount, 1)
+        XCTAssertEqual(sut.convertCallCount, 1)
         sut.convertToMorseCode(text: "test2")
-        XCTAssertEqual(convertor.convertCallCount, 2)
+        XCTAssertEqual(sut.convertCallCount, 2)
     }
     
     func test_convertFunction_OverrideFormerInput() {
-        let (sut, convertor) = makeSUT()
+        let sut = makeSUT()
         
         let firstInput = "First input"
         sut.convertToMorseCode(text: firstInput)
-        XCTAssertEqual(convertor.morseCodeString, firstInput)
+        XCTAssertEqual(sut.morseCodeString, firstInput)
         
         let secondInput = "Second input"
         sut.convertToMorseCode(text: secondInput)
-        XCTAssertEqual(convertor.morseCodeString, secondInput)
+        XCTAssertEqual(sut.morseCodeString, secondInput)
     }
     
     func test_convertMorseCodeToFlashSignals() {
-        let (sut, convertor) = makeSUT()
+        let sut = makeSUT()
         
         sut.playOrPauseFlashSignals(text: "hello")
-        XCTAssertEqual(convertor.convertFlashCount, 1)
+        XCTAssertEqual(sut.convertFlashCount, 1)
     }
     
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
@@ -70,11 +78,9 @@ public final class MorseCodePresenterTests: XCTestCase {
     }
 
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenter, convertor: ConvertorSpy) {
-        let convertor = ConvertorSpy()
-        let sut = MorseCodePresenter(convertor: convertor, flashManager: FlashManager())
-        trackForMemoryLeaks(convertor, file: file, line: line)
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> MorseCodePresenterSpy {
+        let sut = MorseCodePresenterSpy()
         trackForMemoryLeaks(sut, file: file, line: line)
-        return (sut, convertor)
+        return sut
     }
 }
