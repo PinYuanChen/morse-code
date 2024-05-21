@@ -7,10 +7,7 @@
 
 import Foundation
 
-public final class LocalMorseRecordLoader {
-    
-    public typealias SaveResult = Result<Void, Error>
-    public typealias LoadResult = Result<[LocalMorseRecord]?, Error>
+public final class LocalMorseRecordLoader: MorseRecordLoaderPrototype {
     
     public init(store: MorseRecordStore) {
         self.store = store
@@ -30,7 +27,16 @@ public final class LocalMorseRecordLoader {
     }
     
     public func load(completion: @escaping (LoadResult) -> Void) {
-        store.retrieve(completion: completion)
+        store.retrieve { [weak self] loadResult in
+            guard let self = self else { return }
+            
+            switch loadResult {
+            case .success(let records):
+                completion(.success(records?.toModels()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
     
     private func cache(_ records: [MorseRecord], with completion: @escaping (SaveResult) -> Void) {
@@ -45,6 +51,12 @@ public final class LocalMorseRecordLoader {
 
 private extension Array where Element == MorseRecord {
     func toLocal() -> [LocalMorseRecord] {
+        return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+    }
+}
+
+private extension Array where Element == LocalMorseRecord {
+    func toModels() -> [MorseRecord] {
         return map { .init(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
     }
 }

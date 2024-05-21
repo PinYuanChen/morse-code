@@ -127,9 +127,9 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
     func test_load_deliversRecordsOnNonEmptyCache() {
         let (sut, store) = makeSUT()
         
-        let records = uniqueRecords().localRecords
+        let (records, localRecords) = uniqueRecords()
         expect(sut, toCompleteLoadingWith: .success(records), when: {
-            store.completeRetrieval(with: records)
+            store.completeRetrieval(with: localRecords)
         })
     }
     
@@ -209,22 +209,5 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         
         action()
         wait(for: [exp], timeout: 1.0)
-    }
-    
-    private func uniqueRecords() -> (records: [MorseRecord], localRecords: [LocalMorseRecord]) {
-        let records = [uniqueRecord(), uniqueRecord()]
-        let localRecords = records.map {
-            LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals)
-        }
-        
-        return (records, localRecords)
-    }
-    
-    private func uniqueRecord() -> MorseRecord {
-        return .init(id: UUID(), text: "any", morseCode: "any", flashSignals: [])
-    }
-    
-    private func anyNSError() -> NSError {
-        return NSError(domain: "any error", code: 0)
     }
 }
