@@ -16,6 +16,7 @@
 		9B32A54F2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */; };
 		9B32A5502BF5A64300E8CCD4 /* MorseCodeViewController_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54D2BF5A64300E8CCD4 /* MorseCodeViewController_light.png */; };
 		9B32A5512BF5A64300E8CCD4 /* MorseCodeViewController_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54E2BF5A64300E8CCD4 /* MorseCodeViewController_dark.png */; };
+		9BB03D532BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB03D522BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
 		CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */; };
@@ -69,6 +70,7 @@
 		9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_extraExtraExtraLarge.png; sourceTree = "<group>"; };
 		9B32A54D2BF5A64300E8CCD4 /* MorseCodeViewController_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_light.png; sourceTree = "<group>"; };
 		9B32A54E2BF5A64300E8CCD4 /* MorseCodeViewController_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_dark.png; sourceTree = "<group>"; };
+		9BB03D522BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterPrototype.swift; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				9B10B18F2BF48E9600DD0233 /* MorseCodePresenter.swift */,
+				9BB03D522BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */,
+				9BB03D532BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift in Sources */,
 				CD00A99A2B3A7BC30042E9F6 /* UIColor+Ext.swift in Sources */,
 				CD4ED4F12B3C04E800197428 /* CustomButton.swift in Sources */,
 				CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */,
