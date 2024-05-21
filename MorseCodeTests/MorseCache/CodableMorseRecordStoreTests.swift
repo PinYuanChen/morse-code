@@ -103,6 +103,19 @@ class CodableMorseRecordStoreTests: XCTestCase {
         expect(sut, toRetrieveTwice: .failure(anyNSError()))
     }
     
+    func test_insert_overridesPreviouslyInsertedCacheValues() {
+        let sut = makeSUT()
+        
+        let firstInsertionError = insert(uniqueRecords().localRecords, to: sut)
+        XCTAssertNil(firstInsertionError, "Expected to insert cache successfully")
+        
+        let latestRecords = uniqueRecords().localRecords
+        let latestInsertionError = insert(latestRecords, to: sut)
+        
+        XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
+        expect(sut, toRetrieve: .success(latestRecords))
+    }
+    
     // MARK: - Helpers
     private func makeSUT(storeURL: URL? = nil, file: StaticString = #file, line: UInt = #line) -> CodableMorseRecordStore {
         let sut = CodableMorseRecordStore(storeURL: storeURL ?? testSpecificStoreURL())
@@ -110,15 +123,19 @@ class CodableMorseRecordStoreTests: XCTestCase {
         return sut
     }
     
-    private func insert(_ records: [LocalMorseRecord], to sut: CodableMorseRecordStore) {
+    @discardableResult
+    private func insert(_ records: [LocalMorseRecord], to sut: CodableMorseRecordStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
+        
+        var insertionError: Error?
         sut.insert(records) { insertionResult in
             if case let .failure(error) = insertionResult {
-                XCTFail("Unexpected failure with insertion error \(error)")
+                insertionError = error
             }
             exp.fulfill()
         }
         wait(for: [exp], timeout: 1.0)
+        return insertionError
     }
     
     private func expect(_ sut: CodableMorseRecordStore, toRetrieveTwice expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
