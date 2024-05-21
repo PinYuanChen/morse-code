@@ -20,7 +20,7 @@ public class CodableMorseRecordStore: MorseRecordStore {
         }
     }
     
-    private let queue = DispatchQueue(label: "\(CodableMorseRecordStore.self)Queue", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "\(CodableMorseRecordStore.self)Queue", qos: .userInitiated, attributes: .concurrent)
     private let storeURL: URL
     
     public init(storeURL: URL) {
@@ -46,7 +46,7 @@ public class CodableMorseRecordStore: MorseRecordStore {
     
     public func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion) {
         let storeURL = self.storeURL
-        queue.async {
+        queue.async(flags: .barrier) {
             do {
                 let encoder = JSONEncoder()
                 let codableRecords = records.map { CodableMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
@@ -62,7 +62,7 @@ public class CodableMorseRecordStore: MorseRecordStore {
     
     public func deleteCachedRecords(completion: @escaping DeletionCompletion) {
         let storeURL = self.storeURL
-        queue.async {
+        queue.async(flags: .barrier) {
             guard FileManager.default.fileExists(atPath: storeURL.path) else {
                 return completion(.success(()))
             }
