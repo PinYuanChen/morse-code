@@ -211,19 +211,6 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
-    private func uniqueRecords() -> (records: [MorseRecord], localRecords: [LocalMorseRecord]) {
-        let records = [uniqueRecord(), uniqueRecord()]
-        let localRecords = records.map {
-            LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals)
-        }
-        
-        return (records, localRecords)
-    }
-    
-    private func uniqueRecord() -> MorseRecord {
-        return .init(id: UUID(), text: "any", morseCode: "any", flashSignals: [])
-    }
-    
     private func anyNSError() -> NSError {
         return NSError(domain: "any error", code: 0)
     }

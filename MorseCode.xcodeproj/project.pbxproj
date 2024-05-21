@@ -17,6 +17,7 @@
 		9BB03D452BFB4124006C00B7 /* MorseRecordStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB03D442BFB4124006C00B7 /* MorseRecordStoreSpy.swift */; };
 		9BB03D472BFB7C0E006C00B7 /* CodableMorseRecordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB03D462BFB7C0E006C00B7 /* CodableMorseRecordStoreTests.swift */; };
 		9BB03D4B2BFB8057006C00B7 /* MorseRecordLoaderPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB03D4A2BFB8057006C00B7 /* MorseRecordLoaderPrototype.swift */; };
+		9BB03D4D2BFC697B006C00B7 /* MorseCacheTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB03D4C2BFC697B006C00B7 /* MorseCacheTestHelpers.swift */; };
 		9BB5FFDF2B34E382000B7C30 /* MorseCodeConvertorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFDE2B34E382000B7C30 /* MorseCodeConvertorTests.swift */; };
 		9BB5FFE42B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */; };
 		9BB5FFE92B34EB15000B7C30 /* MorseCodeDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */; };
@@ -51,6 +52,7 @@
 		9BB03D442BFB4124006C00B7 /* MorseRecordStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseRecordStoreSpy.swift; sourceTree = "<group>"; };
 		9BB03D462BFB7C0E006C00B7 /* CodableMorseRecordStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableMorseRecordStoreTests.swift; sourceTree = "<group>"; };
 		9BB03D4A2BFB8057006C00B7 /* MorseRecordLoaderPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseRecordLoaderPrototype.swift; sourceTree = "<group>"; };
+		9BB03D4C2BFC697B006C00B7 /* MorseCacheTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCacheTestHelpers.swift; sourceTree = "<group>"; };
 		9BB5FFDE2B34E382000B7C30 /* MorseCodeConvertorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeConvertorTests.swift; sourceTree = "<group>"; };
 		9BB5FFE32B34E455000B7C30 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		9BB5FFE82B34EB15000B7C30 /* MorseCodeDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeDict.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				9BB03D442BFB4124006C00B7 /* MorseRecordStoreSpy.swift */,
+				9BB03D4C2BFC697B006C00B7 /* MorseCacheTestHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				9BB03D472BFB7C0E006C00B7 /* CodableMorseRecordStoreTests.swift in Sources */,
 				CD24FC432B3C1A34005F6959 /* FlashManagerTests.swift in Sources */,
 				9B32A5582BF6135000E8CCD4 /* LocalMorseRecordLoaderTests.swift in Sources */,
+				9BB03D4D2BFC697B006C00B7 /* MorseCacheTestHelpers.swift in Sources */,
 				CDD90F7E2B3D487D00A89614 /* MockTimerScheduler.swift in Sources */,
 				9BB5FFDF2B34E382000B7C30 /* MorseCodeConvertorTests.swift in Sources */,
 				9BB03D452BFB4124006C00B7 /* MorseRecordStoreSpy.swift in Sources */,
