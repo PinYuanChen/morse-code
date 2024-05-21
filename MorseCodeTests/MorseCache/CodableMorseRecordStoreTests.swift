@@ -55,7 +55,16 @@ class CodableMorseRecordStore {
     }
     
     func deleteCachedRecords(completion: @escaping MorseRecordStore.DeletionCompletion) {
-        completion(.success(()))
+        guard FileManager.default.fileExists(atPath: storeURL.path) else {
+            return completion(.success(()))
+        }
+        
+        do {
+            try FileManager.default.removeItem(at: storeURL)
+            completion(.success(()))
+        } catch {
+            completion(.failure(error))
+        }
     }
 }
 
@@ -139,6 +148,23 @@ class CodableMorseRecordStoreTests: XCTestCase {
     
     func test_delete_hasNoSideEffectsOnEmptyCache() {
         let sut = makeSUT()
+        let exp = expectation(description: "Wait for cache deletion")
+        
+        sut.deleteCachedRecords { deletionResult in
+            if case let Result.failure(error) = deletionResult {
+                XCTFail("Unexpected failure with deletion error \(error)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+        
+        expect(sut, toRetrieve: .success(.none))
+    }
+    
+    func test_delete_emptiesPreviouslyInsertedCache() {
+        let sut = makeSUT()
+        insert(uniqueRecords().localRecords, to: sut)
+        
         let exp = expectation(description: "Wait for cache deletion")
         
         sut.deleteCachedRecords { deletionResult in
