@@ -21,7 +21,11 @@ class CodableMorseRecordStore {
         }
     }
     
-    private let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("morseRecords.store")
+    private let storeURL: URL
+    
+    init(storeURL: URL) {
+        self.storeURL = storeURL
+    }
     
     func retrieve(completion: @escaping MorseRecordStore.RetrievalCompletion) {
         guard let data = try? Data(contentsOf: storeURL) else {
@@ -120,7 +124,8 @@ class CodableMorseRecordStoreTests: XCTestCase {
     
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableMorseRecordStore {
-        let sut = CodableMorseRecordStore()
+        let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("morseRecords.store")
+        let sut = CodableMorseRecordStore(storeURL: storeURL)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
