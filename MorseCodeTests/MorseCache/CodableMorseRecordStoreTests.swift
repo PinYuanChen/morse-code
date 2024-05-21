@@ -80,6 +80,22 @@ class CodableMorseRecordStoreTests: XCTestCase {
         expect(sut, toRetrieve: .success(localRecords))
     }
     
+    func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
+        let sut = makeSUT()
+        let (_, localRecords) = uniqueRecords()
+        
+        let exp = expectation(description: "Wait for cache insertion")
+        sut.insert(localRecords) { insertionResult in
+            if case let .failure(error) = insertionResult {
+                XCTFail("Unexpected failure with insertion error \(error)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+        
+        expect(sut, toRetrieveTwice: .success(localRecords))
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableMorseRecordStore {
         let sut = CodableMorseRecordStore(storeURL: testSpecificStoreURL())
