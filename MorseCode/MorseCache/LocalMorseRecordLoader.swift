@@ -28,7 +28,7 @@ public final class LocalMorseRecordLoader: MorseRecordLoaderPrototype {
     
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] loadResult in
-            guard let self = self else { return }
+            guard self != nil else { return }
             
             switch loadResult {
             case .success(let records):
