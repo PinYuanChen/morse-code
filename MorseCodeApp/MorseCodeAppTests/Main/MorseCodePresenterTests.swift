@@ -18,7 +18,7 @@ public final class MorseCodePresenterTests: XCTestCase {
         XCTAssertEqual(convertor.convertCallCount, 0)
     }
     
-    func test_ValidateInputCharacter() {
+    func test_validateInputCharacters() {
         let (sut, _) = makeSUT()
         
         let validCharacter = "z"
@@ -34,7 +34,7 @@ public final class MorseCodePresenterTests: XCTestCase {
         XCTAssertFalse(sut.validateInput(string: invalidEmoji, currentText: nil, range: .init()))
     }
     
-    func test_ValidateInputLength() {
+    func test_validateInputLength() {
         let (sut, _) = makeSUT()
         let maxLength = MorseCodePresenter.maxInputLength
         let currentText = String(repeating: "z", count: maxLength) as NSString
