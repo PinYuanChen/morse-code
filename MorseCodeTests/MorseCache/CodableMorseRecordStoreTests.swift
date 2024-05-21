@@ -115,13 +115,13 @@ class CodableMorseRecordStoreTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    private func makeSUT(storeURL: URL? = nil, file: StaticString = #file, line: UInt = #line) -> CodableMorseRecordStore {
+    private func makeSUT(storeURL: URL? = nil, file: StaticString = #file, line: UInt = #line) -> MorseRecordStore {
         let sut = CodableMorseRecordStore(storeURL: storeURL ?? testSpecificStoreURL())
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
     
-    private func deleteCache(from sut: CodableMorseRecordStore) -> Error? {
+    private func deleteCache(from sut: MorseRecordStore) -> Error? {
         let exp = expectation(description: "Wait for cache deletion")
         var deletionError: Error?
         sut.deleteCachedRecords { deletionResult in
@@ -135,7 +135,7 @@ class CodableMorseRecordStoreTests: XCTestCase {
     }
     
     @discardableResult
-    private func insert(_ records: [LocalMorseRecord], to sut: CodableMorseRecordStore) -> Error? {
+    private func insert(_ records: [LocalMorseRecord], to sut: MorseRecordStore) -> Error? {
         let exp = expectation(description: "Wait for cache insertion")
         
         var insertionError: Error?
@@ -149,12 +149,12 @@ class CodableMorseRecordStoreTests: XCTestCase {
         return insertionError
     }
     
-    private func expect(_ sut: CodableMorseRecordStore, toRetrieveTwice expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ sut: MorseRecordStore, toRetrieveTwice expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
     
-    private func expect(_ sut: CodableMorseRecordStore, toRetrieve expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ sut: MorseRecordStore, toRetrieve expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for cache retrieval")
         
         sut.retrieve { retrievedResult in
