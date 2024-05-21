@@ -42,10 +42,16 @@ class CodableMorseRecordStore {
     }
     
     func insert(_ records: [LocalMorseRecord], completion: @escaping MorseRecordStore.InsertionCompletion) {
-        let encoder = JSONEncoder()
-        let encoded = try! encoder.encode(records.map { CodableMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) })
-        try! encoded.write(to: storeURL)
-        completion(.success(()))
+        do {
+            let encoder = JSONEncoder()
+            let codableRecords = records.map { CodableMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }
+            
+            let encoded = try encoder.encode(codableRecords)
+            try encoded.write(to: storeURL)
+            completion(.success(()))
+        } catch {
+            completion(.failure(error))
+        }
     }
 }
 
@@ -114,6 +120,17 @@ class CodableMorseRecordStoreTests: XCTestCase {
         
         XCTAssertNil(latestInsertionError, "Expected to override cache successfully")
         expect(sut, toRetrieve: .success(latestRecords))
+    }
+    
+    func test_insert_deliversErrorOnInsertionError() {
+        let invalidStoreURL = URL(string: "invalid://store-url")!
+        let sut = makeSUT(storeURL: invalidStoreURL)
+        let (_, localRecords) = uniqueRecords()
+        
+        let insertionError = insert(localRecords, to: sut)
+        
+        XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
+        expect(sut, toRetrieve: .success(.none))
     }
     
     // MARK: - Helpers
