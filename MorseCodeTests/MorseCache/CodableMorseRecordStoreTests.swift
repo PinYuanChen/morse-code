@@ -57,20 +57,7 @@ class CodableMorseRecordStoreTests: XCTestCase {
     
     func test_retrieve_deliversEmptyOnEmptyCache() {
         let sut = makeSUT()
-        let exp = expectation(description: "Wait for cache retrieval")
-        
-        sut.retrieve { result in
-            switch result {
-            case .success:
-                break
-            default:
-                XCTFail("Expected empty result, got \(result) instead")
-            }
-            
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
+        expect(sut, toRetrieve: .success(.none))
     }
     
     func test_retrieve_hasNoSideEffectsOnEmptyCache() {
@@ -100,24 +87,13 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let exp = expectation(description: "Wait for cache retrieval")
         
         sut.insert(localRecords) { insertionResult in
-            sut.retrieve { retrieveResult in
-                if case let .failure(error) = insertionResult {
-                    XCTFail("Unexpected failure with insertion error \(error)")
-                }
-                
-                switch retrieveResult {
-                case let .success(retrievedRecords):
-                    XCTAssertEqual(retrievedRecords, localRecords)
-                    
-                default:
-                    XCTFail("Expected found result with records\(localRecords), got \(retrieveResult) instead")
-                }
-                
-                exp.fulfill()
+            if case let .failure(error) = insertionResult {
+                XCTFail("Unexpected failure with insertion error \(error)")
             }
+            exp.fulfill()
         }
-        
         wait(for: [exp], timeout: 1.0)
+        expect(sut, toRetrieve: .success(localRecords))
     }
     
     // MARK: - Helpers
@@ -125,6 +101,27 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let sut = CodableMorseRecordStore(storeURL: testSpecificStoreURL())
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+    
+    private func expect(_ sut: CodableMorseRecordStore, toRetrieve expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
+        let exp = expectation(description: "Wait for cache retrieval")
+        
+        sut.retrieve { retrievedResult in
+            switch (expectedResult, retrievedResult) {
+            case (.failure(_), .failure(_)):
+                break
+                
+            case let (.success(expected), .success(retrieved)):
+                XCTAssertEqual(retrieved, expected, file: file, line: line)
+                
+            default:
+                XCTFail("Expected to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
+            }
+            
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
     }
     
     private func setupEmptyStoreState() {
