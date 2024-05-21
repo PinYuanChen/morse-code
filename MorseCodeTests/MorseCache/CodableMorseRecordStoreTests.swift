@@ -32,9 +32,13 @@ class CodableMorseRecordStore {
             return completion(.success(.none))
         }
         
-        let decoder = JSONDecoder()
-        let records = try! decoder.decode([CodableMorseRecord].self, from: data)
-        completion(.success(records.map { LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }))
+        do {
+            let decoder = JSONDecoder()
+            let records = try decoder.decode([CodableMorseRecord].self, from: data)
+            completion(.success(records.map { LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode, flashSignals: $0.flashSignals) }))
+        } catch {
+            completion(.failure(error))
+        }
     }
     
     func insert(_ records: [LocalMorseRecord], completion: @escaping MorseRecordStore.InsertionCompletion) {
@@ -80,6 +84,14 @@ class CodableMorseRecordStoreTests: XCTestCase {
         insert(localRecords, to: sut)
         expect(sut, toRetrieveTwice: .success(localRecords))
     }
+    
+    func test_retrieve_deliversFailureOnRetrievalError() {
+            let sut = makeSUT()
+            
+            try! "invalid data".write(to: testSpecificStoreURL(), atomically: false, encoding: .utf8)
+            
+            expect(sut, toRetrieve: .failure(anyNSError()))
+        }
     
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> CodableMorseRecordStore {

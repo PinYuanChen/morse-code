@@ -20,3 +20,8 @@ func uniqueRecords() -> (records: [MorseRecord], localRecords: [LocalMorseRecord
 func uniqueRecord() -> MorseRecord {
     return .init(id: UUID(), text: "any", morseCode: "any", flashSignals: [])
 }
+
+
+func anyNSError() -> NSError {
+    return NSError(domain: "any error", code: 0)
+}
