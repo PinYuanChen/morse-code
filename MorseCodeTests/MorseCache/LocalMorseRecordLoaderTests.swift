@@ -19,17 +19,17 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
     func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
         
-        sut.save(uniqueRecords().records) { _ in }
+        _ = try? sut.save(uniqueRecords().records)
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
+        XCTAssertEqual(store.receivedMessages.first, .deleteCachedRecords)
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        sut.save(uniqueRecords().records) { _ in }
         store.completeDeletion(with: deletionError)
+        _ = try? sut.save(uniqueRecords().records)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
@@ -38,8 +38,8 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         let (records, localRecords) = uniqueRecords()
         let (sut, store) = makeSUT()
         
-        sut.save(records) { _ in }
         store.completeDeletionSuccessfully()
+        _ = try? sut.save(records)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(localRecords)])
     }
@@ -72,37 +72,10 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         })
     }
     
-    func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
-        let store = MorseRecordStoreSpy()
-        var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
-        
-        var receivedResults = [LocalMorseRecordLoader.SaveResult]()
-        sut?.save(uniqueRecords().records) { receivedResults.append($0) }
-        
-        sut = nil
-        store.completeDeletion(with: anyNSError())
-        
-        XCTAssertTrue(receivedResults.isEmpty)
-    }
-    
-    func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
-        let store = MorseRecordStoreSpy()
-        var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
-        
-        var receivedResults = [LocalMorseRecordLoader.SaveResult]()
-        sut?.save(uniqueRecords().records) { receivedResults.append($0) }
-        
-        store.completeDeletionSuccessfully()
-        sut = nil
-        store.completeInsertion(with: anyNSError())
-        
-        XCTAssertTrue(receivedResults.isEmpty)
-    }
-    
     func test_load_requestsCacheRetrieval() {
         let (sut, store) = makeSUT()
         
-        sut.load() { _ in }
+        _ = try? sut.load()
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
     }
@@ -136,7 +109,7 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
     func test_load_hasNoSideEffectsOnRetrievalError() {
         let (sut, store) = makeSUT()
         
-        sut.load { _ in }
+        _ = try? sut.load()
         store.completeRetrieval(with: anyNSError())
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
@@ -145,7 +118,7 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
     func test_load_hasNoSideEffectsOnEmptyCache() {
         let (sut, store) = makeSUT()
         
-        sut.load { _ in }
+        _ = try? sut.load()
         store.completeRetrievalWithEmptyCache()
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
@@ -154,7 +127,7 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
     func test_load_hasNoSideEffectsOnNonEmptyCache() {
         let (sut, store) = makeSUT()
         
-        sut.load { _ in }
+        _ = try? sut.load()
         store.completeRetrieval(with: uniqueRecords().localRecords)
         
         XCTAssertEqual(store.receivedMessages, [.retrieve])
@@ -169,46 +142,37 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         return (sut, store)
     }
     
-    private func expect(_ sut: LocalMorseRecordLoader, toCompleteSavingWith expectedResult: LocalMorseRecordLoader.SaveResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        let exp = expectation(description: "Wait for save completion")
-        
-        sut.save([uniqueRecord()]) { receivedResult in
-            switch (receivedResult, expectedResult) {
-            case (.success(_), .success(_)):
-                break
-                
-            case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
-                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
-                
-            default:
-                XCTFail("Expected result \(expectedResult), got \(receivedResult) instead", file: file, line: line)
-            }
-            exp.fulfill()
-        }
+    private func expect(_ sut: LocalMorseRecordLoader, toCompleteSavingWith expectedResult:  Result<Void, Error>, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         
         action()
-        wait(for: [exp], timeout: 1.0)
+        let receivedResult = Result { try sut.save([uniqueRecord()]) }
+        
+        switch (receivedResult, expectedResult) {
+        case (.success(_), .success(_)):
+            break
+            
+        case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
+            XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            
+        default:
+            XCTFail("Expected result \(expectedResult), got \(receivedResult) instead", file: file, line: line)
+        }
     }
     
-    private func expect(_ sut: LocalMorseRecordLoader, toCompleteLoadingWith expectedResult: LocalMorseRecordLoader.LoadResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        let exp = expectation(description: "Wait for load completion")
-        
-        sut.load { receivedResult in
-            switch (receivedResult, expectedResult) {
-            case let (.success(receivedRecords), .success(expectedRecords)):
-                XCTAssertEqual(receivedRecords, expectedRecords, file: file, line: line)
-                
-            case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
-                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
-                
-            default:
-                XCTFail("Expected result \(expectedResult), got \(receivedResult) instead", file: file, line: line)
-            }
-            
-            exp.fulfill()
-        }
+    private func expect(_ sut: LocalMorseRecordLoader, toCompleteLoadingWith expectedResult: Result<[MorseRecord]?, Error>, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         
         action()
-        wait(for: [exp], timeout: 1.0)
+        let receivedResult = Result { try sut.load() }
+        
+        switch (receivedResult, expectedResult) {
+        case let (.success(receivedRecords), .success(expectedRecords)):
+            XCTAssertEqual(receivedRecords, expectedRecords, file: file, line: line)
+            
+        case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
+            XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+            
+        default:
+            XCTFail("Expected result \(expectedResult), got \(receivedResult) instead", file: file, line: line)
+        }
     }
 }

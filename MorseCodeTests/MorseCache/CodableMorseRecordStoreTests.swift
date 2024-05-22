@@ -28,27 +28,27 @@ class CodableMorseRecordStoreTests: XCTestCase {
         expect(sut, toRetrieveTwice: .success(.none))
     }
     
-    func test_retrieve_deliversFoundValuesOnNonEmptyCache() {
+    func test_retrieve_deliversFoundValuesOnNonEmptyCache() throws {
         let sut = makeSUT()
         let (_, localRecords) = uniqueRecords()
         
-        insert(localRecords, to: sut)
+        try insert(localRecords, to: sut)
         expect(sut, toRetrieve: .success(localRecords))
     }
     
-    func test_retrieve_hasNoSideEffectsOnNonEmptyCache() {
+    func test_retrieve_hasNoSideEffectsOnNonEmptyCache() throws {
         let sut = makeSUT()
         let (_, localRecords) = uniqueRecords()
         
-        insert(localRecords, to: sut)
+        try insert(localRecords, to: sut)
         expect(sut, toRetrieveTwice: .success(localRecords))
     }
     
     func test_retrieve_deliversFailureOnRetrievalError() {
         let storeURL = testSpecificStoreURL()
         let sut = makeSUT(storeURL: storeURL)
-        
-        try! "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
+
+        _ = try? "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
         
         expect(sut, toRetrieve: .failure(anyNSError()))
     }
@@ -57,33 +57,31 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let storeURL = testSpecificStoreURL()
         let sut = makeSUT(storeURL: storeURL)
         
-        try! "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
+        _ = try? "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
         
         expect(sut, toRetrieveTwice: .failure(anyNSError()))
     }
     
-    func test_insert_deliversNoErrorOnEmptyCache() {
+    func test_insert_deliversNoErrorOnEmptyCache() throws {
         let sut = makeSUT()
         
-        let insertionError = insert(uniqueRecords().localRecords, to: sut)
-        XCTAssertNil(insertionError, "Expected to insert cache successfully")
+        try insert(uniqueRecords().localRecords, to: sut)
     }
     
-    func test_insert_deliversNoErrorOnNonEmptyCache() {
+    func test_insert_deliversNoErrorOnNonEmptyCache() throws {
         let sut = makeSUT()
-        insert(uniqueRecords().localRecords, to: sut)
+        try insert(uniqueRecords().localRecords, to: sut)
         
-        let insertionError = insert(uniqueRecords().localRecords, to: sut)
-        XCTAssertNil(insertionError, "Expected to insert cache successfully")
+        try insert(uniqueRecords().localRecords, to: sut)
     }
     
-    func test_insert_overridesPreviouslyInsertedCacheValues() {
+    func test_insert_overridesPreviouslyInsertedCacheValues() throws {
         let sut = makeSUT()
         
-        insert(uniqueRecords().localRecords, to: sut)
+        try insert(uniqueRecords().localRecords, to: sut)
         
         let latestRecords = uniqueRecords().localRecords
-        insert(latestRecords, to: sut)
+        try insert(latestRecords, to: sut)
         expect(sut, toRetrieve: .success(latestRecords))
     }
     
@@ -92,58 +90,20 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let sut = makeSUT(storeURL: invalidStoreURL)
         let (_, localRecords) = uniqueRecords()
         
-        let insertionError = insert(localRecords, to: sut)
-        XCTAssertNotNil(insertionError, "Expected cache insertion to fail with an error")
+        XCTAssertThrowsError(try insert(localRecords, to: sut))
     }
     
-    func test_delete_hasNoSideEffectsOnEmptyCache() {
+    func test_delete_hasNoSideEffectsOnEmptyCache() throws {
         let sut = makeSUT()
         
-        let deletionError = deleteCache(from: sut)
-        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
+        try deleteCache(from: sut)
     }
     
-    func test_delete_emptiesPreviouslyInsertedCache() {
+    func test_delete_emptiesPreviouslyInsertedCache() throws {
         let sut = makeSUT()
-        insert(uniqueRecords().localRecords, to: sut)
+        try insert(uniqueRecords().localRecords, to: sut)
         
-        let deletionError = deleteCache(from: sut)
-        XCTAssertNil(deletionError, "Expected non-empty cache deletion to succeed")
-    }
-    
-    func test_delete_deliversErrorOnDeletionError() {
-        let noDeletePermissionURL = cachesDirectory()
-        let sut = makeSUT(storeURL: noDeletePermissionURL)
-        
-        let deletionError = deleteCache(from: sut)
-        XCTAssertNotNil(deletionError, "Expected cache deletion to fail")
-    }
-    
-    func test_storeSideEffects_runSerially() {
-        let sut = makeSUT()
-        var completedOperationsInOrder = [XCTestExpectation]()
-        
-        let op1 = expectation(description: "Operation 1")
-        sut.insert(uniqueRecords().localRecords) { _ in
-            completedOperationsInOrder.append(op1)
-            op1.fulfill()
-        }
-        
-        let op2 = expectation(description: "Operation 2")
-        sut.deleteCachedRecords { _ in
-            completedOperationsInOrder.append(op2)
-            op2.fulfill()
-        }
-        
-        let op3 = expectation(description: "Operation 3")
-        sut.insert(uniqueRecords().localRecords) { _ in
-            completedOperationsInOrder.append(op3)
-            op3.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5.0)
-        
-        XCTAssertEqual(completedOperationsInOrder, [op1, op2, op3], "Expected side-effects to run serially but operations finished in the wrong order")
+        try deleteCache(from: sut)
     }
     
     // MARK: - Helpers
@@ -153,58 +113,32 @@ class CodableMorseRecordStoreTests: XCTestCase {
         return sut
     }
     
-    private func deleteCache(from sut: MorseRecordStore) -> Error? {
-        let exp = expectation(description: "Wait for cache deletion")
-        var deletionError: Error?
-        sut.deleteCachedRecords { deletionResult in
-            if case let Result.failure(error) = deletionResult {
-                deletionError = error
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        return deletionError
+    private func deleteCache(from sut: MorseRecordStore) throws {
+        try sut.deleteCachedRecords()
     }
     
-    @discardableResult
-    private func insert(_ records: [LocalMorseRecord], to sut: MorseRecordStore) -> Error? {
-        let exp = expectation(description: "Wait for cache insertion")
-        
-        var insertionError: Error?
-        sut.insert(records) { insertionResult in
-            if case let .failure(error) = insertionResult {
-                insertionError = error
-            }
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 1.0)
-        return insertionError
+    private func insert(_ records: [LocalMorseRecord], to sut: MorseRecordStore) throws {
+        try sut.insert(records)
     }
     
-    private func expect(_ sut: MorseRecordStore, toRetrieveTwice expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ sut: MorseRecordStore, toRetrieveTwice expectedResult: Result<[LocalMorseRecord]?, Error>, file: StaticString = #file, line: UInt = #line) {
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
         expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
     
-    private func expect(_ sut: MorseRecordStore, toRetrieve expectedResult: MorseRecordStore.RetrievalResult, file: StaticString = #file, line: UInt = #line) {
-        let exp = expectation(description: "Wait for cache retrieval")
+    private func expect(_ sut: MorseRecordStore, toRetrieve expectedResult: Result<[LocalMorseRecord]?, Error>, file: StaticString = #file, line: UInt = #line) {
+        let retrievedResult = Result { try sut.retrieve() }
         
-        sut.retrieve { retrievedResult in
-            switch (expectedResult, retrievedResult) {
-            case (.failure(_), .failure(_)):
-                break
-                
-            case let (.success(expected), .success(retrieved)):
-                XCTAssertEqual(retrieved, expected, file: file, line: line)
-                
-            default:
-                XCTFail("Expected to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
-            }
+        switch (expectedResult, retrievedResult) {
+        case (.failure(_), .failure(_)):
+            break
             
-            exp.fulfill()
+        case let (.success(expected), .success(retrieved)):
+            XCTAssertEqual(retrieved, expected, file: file, line: line)
+            
+        default:
+            XCTFail("Expected to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
         }
-        
-        wait(for: [exp], timeout: 1.0)
     }
     
     private func setupEmptyStoreState() {

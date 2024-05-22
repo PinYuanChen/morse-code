@@ -17,50 +17,50 @@ class MorseRecordStoreSpy: MorseRecordStore {
     }
     
     private(set) var receivedMessages = [ReceivedMessage]()
-    private var deletionCompletions = [DeletionCompletion]()
-    private var insertionCompletions = [InsertionCompletion]()
-    private var retrievalCompletions = [RetrievalCompletion]()
+    private var deletionResult: Result<Void, Error>?
+    private var insertionResult: Result<Void, Error>?
+    private var retrievalResult: Result<[LocalMorseRecord]?, Error>?
     
-    func deleteCachedRecords(completion: @escaping DeletionCompletion) {
-        deletionCompletions.append(completion)
+    func deleteCachedRecords() throws {
         receivedMessages.append(.deleteCachedRecords)
+        try deletionResult?.get()
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
-        deletionCompletions[index](.failure(error))
+        deletionResult = .failure(error)
     }
     
     func completeDeletionSuccessfully(at index: Int = 0) {
-        deletionCompletions[index](.success(()))
+        deletionResult = .success(())
     }
     
-    func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion) {
-        insertionCompletions.append(completion)
+    func insert(_ records: [LocalMorseRecord]) throws {
         receivedMessages.append(.insert(records))
+        try insertionResult?.get()
     }
     
     func completeInsertion(with error: Error, at index: Int = 0) {
-        insertionCompletions[index](.failure(error))
+        insertionResult = .failure(error)
     }
     
     func completeInsertionSuccessfully(at index: Int = 0) {
-        insertionCompletions[index](.success(()))
+        insertionResult = .success(())
     }
     
-    func retrieve(completion: @escaping RetrievalCompletion) {
-        retrievalCompletions.append(completion)
+    func retrieve() throws -> [LocalMorseRecord]? {
         receivedMessages.append(.retrieve)
+        return try retrievalResult?.get()
     }
     
     func completeRetrieval(with error: Error, at index: Int = 0) {
-        retrievalCompletions[index](.failure(error))
+        retrievalResult = .failure(error)
     }
     
     func completeRetrievalWithEmptyCache(at index: Int = 0) {
-        retrievalCompletions[index](.success(.none))
+        retrievalResult = .success(.none)
     }
     
     func completeRetrieval(with records: [LocalMorseRecord], at index: Int = 0) {
-        retrievalCompletions[index](.success(records))
+        retrievalResult = .success(records)
     }
 }
