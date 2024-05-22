@@ -13,7 +13,7 @@ public final class MorseCodeViewController: UIViewController {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         
-        presenter.delegate = self
+        self.presenter.delegate = self
     }
     
     @available(*, unavailable)
@@ -27,7 +27,7 @@ public final class MorseCodeViewController: UIViewController {
     }
     
     // MARK: Private properties
-    private var presenter: MorseCodePresenter
+    private var presenter: MorseCodePresenterPrototype
     private let convertButton = CustomButton()
     private let flashButton = CustomButton()
     private let titleLabel = UILabel()
