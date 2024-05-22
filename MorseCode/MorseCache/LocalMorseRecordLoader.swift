@@ -13,31 +13,26 @@ public final class LocalMorseRecordLoader: MorseRecordLoaderPrototype {
         self.store = store
     }
     
-    public func save(_ records: [MorseRecord], completion: @escaping (SaveResult) -> Void) {
+    public func save(_ records: [MorseRecord]) throws {
         do {
             try store.deleteCachedRecords()
-            cache(records, with: completion)
+            try cache(records)
         } catch {
-            completion(.failure(error))
+            throw error
         }
     }
     
-    public func load(completion: @escaping (LoadResult) -> Void) {
+    public func load() throws -> [MorseRecord]? {
         do {
             let records = try store.retrieve()
-            completion(.success(records?.toModels()))
+            return records?.toModels()
         } catch {
-            completion(.failure(error))
+            throw error
         }
     }
     
-    private func cache(_ records: [MorseRecord], with completion: @escaping (SaveResult) -> Void) {
-        do {
-            try store.insert(records.toLocal())
-            completion(.success(()))
-        } catch {
-            completion(.failure(error))
-        }
+    private func cache(_ records: [MorseRecord]) throws {
+        return try store.insert(records.toLocal())
     }
     
     private let store: MorseRecordStore
