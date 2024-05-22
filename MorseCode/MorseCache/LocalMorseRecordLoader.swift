@@ -14,35 +14,29 @@ public final class LocalMorseRecordLoader: MorseRecordLoaderPrototype {
     }
     
     public func save(_ records: [MorseRecord], completion: @escaping (SaveResult) -> Void) {
-        store.deleteCachedRecords { [weak self] deletionResult in
-            guard let self = self else { return }
-            
-            switch deletionResult {
-            case .success:
-                self.cache(records, with: completion)
-            case .failure(let error):
-                completion(.failure(error))
-            }
+        do {
+            try store.deleteCachedRecords()
+            cache(records, with: completion)
+        } catch {
+            completion(.failure(error))
         }
     }
     
     public func load(completion: @escaping (LoadResult) -> Void) {
-        store.retrieve { [weak self] loadResult in
-            guard self != nil else { return }
-            
-            switch loadResult {
-            case .success(let records):
-                completion(.success(records?.toModels()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+        do {
+            let records = try store.retrieve()
+            completion(.success(records?.toModels()))
+        } catch {
+            completion(.failure(error))
         }
     }
     
     private func cache(_ records: [MorseRecord], with completion: @escaping (SaveResult) -> Void) {
-        store.insert(records.toLocal()) { [weak self] insertionResult in
-            guard self != nil else { return }
-            completion(insertionResult)
+        do {
+            try store.insert(records.toLocal())
+            completion(.success(()))
+        } catch {
+            completion(.failure(error))
         }
     }
     

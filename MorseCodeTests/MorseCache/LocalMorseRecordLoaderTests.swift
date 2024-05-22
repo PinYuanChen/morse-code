@@ -21,15 +21,15 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         
         sut.save(uniqueRecords().records) { _ in }
         
-        XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
+        XCTAssertEqual(store.receivedMessages.first, .deleteCachedRecords)
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        sut.save(uniqueRecords().records) { _ in }
         store.completeDeletion(with: deletionError)
+        sut.save(uniqueRecords().records) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
@@ -38,8 +38,8 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
         let (records, localRecords) = uniqueRecords()
         let (sut, store) = makeSUT()
         
-        sut.save(records) { _ in }
         store.completeDeletionSuccessfully()
+        sut.save(records) { _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(localRecords)])
     }
@@ -70,33 +70,6 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
             store.completeDeletionSuccessfully()
             store.completeInsertionSuccessfully()
         })
-    }
-    
-    func test_save_doesNotDeliverDeletionErrorAfterSUTInstanceHasBeenDeallocated() {
-        let store = MorseRecordStoreSpy()
-        var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
-        
-        var receivedResults = [LocalMorseRecordLoader.SaveResult]()
-        sut?.save(uniqueRecords().records) { receivedResults.append($0) }
-        
-        sut = nil
-        store.completeDeletion(with: anyNSError())
-        
-        XCTAssertTrue(receivedResults.isEmpty)
-    }
-    
-    func test_save_doesNotDeliverInsertionErrorAfterSUTInstanceHasBeenDeallocated() {
-        let store = MorseRecordStoreSpy()
-        var sut: LocalMorseRecordLoader? = LocalMorseRecordLoader(store: store)
-        
-        var receivedResults = [LocalMorseRecordLoader.SaveResult]()
-        sut?.save(uniqueRecords().records) { receivedResults.append($0) }
-        
-        store.completeDeletionSuccessfully()
-        sut = nil
-        store.completeInsertion(with: anyNSError())
-        
-        XCTAssertTrue(receivedResults.isEmpty)
     }
     
     func test_load_requestsCacheRetrieval() {
@@ -171,6 +144,7 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
     
     private func expect(_ sut: LocalMorseRecordLoader, toCompleteSavingWith expectedResult: LocalMorseRecordLoader.SaveResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for save completion")
+        action()
         
         sut.save([uniqueRecord()]) { receivedResult in
             switch (receivedResult, expectedResult) {
@@ -186,12 +160,12 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
             exp.fulfill()
         }
         
-        action()
         wait(for: [exp], timeout: 1.0)
     }
     
     private func expect(_ sut: LocalMorseRecordLoader, toCompleteLoadingWith expectedResult: LocalMorseRecordLoader.LoadResult, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for load completion")
+        action()
         
         sut.load { receivedResult in
             switch (receivedResult, expectedResult) {
@@ -208,7 +182,6 @@ final class LocalMorseRecordLoaderTests: XCTestCase {
             exp.fulfill()
         }
         
-        action()
         wait(for: [exp], timeout: 1.0)
     }
 }
