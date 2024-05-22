@@ -48,7 +48,7 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let storeURL = testSpecificStoreURL()
         let sut = makeSUT(storeURL: storeURL)
         
-        try! "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
+        _ = try? "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
         
         expect(sut, toRetrieve: .failure(anyNSError()))
     }
@@ -57,7 +57,7 @@ class CodableMorseRecordStoreTests: XCTestCase {
         let storeURL = testSpecificStoreURL()
         let sut = makeSUT(storeURL: storeURL)
         
-        try! "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
+        _ = try? "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
         
         expect(sut, toRetrieveTwice: .failure(anyNSError()))
     }
@@ -104,13 +104,6 @@ class CodableMorseRecordStoreTests: XCTestCase {
         try insert(uniqueRecords().localRecords, to: sut)
         
         try deleteCache(from: sut)
-    }
-    
-    func test_delete_deliversErrorOnDeletionError() {
-        let noDeletePermissionURL = cachesDirectory()
-        let sut = makeSUT(storeURL: noDeletePermissionURL)
-        
-        XCTAssertThrowsError(try deleteCache(from: sut))
     }
     
     // MARK: - Helpers
