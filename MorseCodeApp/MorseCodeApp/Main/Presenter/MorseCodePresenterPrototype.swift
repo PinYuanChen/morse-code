@@ -13,6 +13,7 @@ public protocol MorseCodePresenterDelegate: AnyObject {
 }
 
 public protocol MorseCodePresenterPrototype {
+    var delegate: MorseCodePresenterDelegate? { get set }
     func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool
     func convertToMorseCode(text: String)
     func playOrPauseFlashSignals(text: String)
