@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol MorseRecordStore {
-    func deleteCachedRecords() throws
-    func insert(_ records: [LocalMorseRecord]) throws
-    func retrieve() throws -> [LocalMorseRecord]?
+    func deleteCachedRecords() async throws
+    func insert(_ records: [LocalMorseRecord]) async throws
+    func retrieve() async throws -> [LocalMorseRecord]?
 }

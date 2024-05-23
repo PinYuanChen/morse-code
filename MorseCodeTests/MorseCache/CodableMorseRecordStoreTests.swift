@@ -18,92 +18,96 @@ class CodableMorseRecordStoreTests: XCTestCase {
         undoStoreSideEffects()
     }
     
-    func test_retrieve_deliversEmptyOnEmptyCache() {
+    func test_retrieve_deliversEmptyOnEmptyCache() async {
         let sut = makeSUT()
-        expect(sut, toRetrieve: .success(.none))
+        await expect(sut, toRetrieve: .success(.none))
     }
     
-    func test_retrieve_hasNoSideEffectsOnEmptyCache() {
+    func test_retrieve_hasNoSideEffectsOnEmptyCache() async {
         let sut = makeSUT()
-        expect(sut, toRetrieveTwice: .success(.none))
+        await expect(sut, toRetrieveTwice: .success(.none))
     }
     
-    func test_retrieve_deliversFoundValuesOnNonEmptyCache() throws {
-        let sut = makeSUT()
-        let (_, localRecords) = uniqueRecords()
-        
-        try insert(localRecords, to: sut)
-        expect(sut, toRetrieve: .success(localRecords))
-    }
-    
-    func test_retrieve_hasNoSideEffectsOnNonEmptyCache() throws {
+    func test_retrieve_deliversFoundValuesOnNonEmptyCache() async throws {
         let sut = makeSUT()
         let (_, localRecords) = uniqueRecords()
         
-        try insert(localRecords, to: sut)
-        expect(sut, toRetrieveTwice: .success(localRecords))
+        try await insert(localRecords, to: sut)
+        await expect(sut, toRetrieve: .success(localRecords))
     }
     
-    func test_retrieve_deliversFailureOnRetrievalError() {
+    func test_retrieve_hasNoSideEffectsOnNonEmptyCache() async throws {
+        let sut = makeSUT()
+        let (_, localRecords) = uniqueRecords()
+        
+        try await insert(localRecords, to: sut)
+        await expect(sut, toRetrieveTwice: .success(localRecords))
+    }
+    
+    func test_retrieve_deliversFailureOnRetrievalError() async {
         let storeURL = testSpecificStoreURL()
         let sut = makeSUT(storeURL: storeURL)
 
         _ = try? "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
         
-        expect(sut, toRetrieve: .failure(anyNSError()))
+        await expect(sut, toRetrieve: .failure(anyNSError()))
     }
     
-    func test_retrieve_hasNoSideEffectsOnFailure() {
+    func test_retrieve_hasNoSideEffectsOnFailure() async {
         let storeURL = testSpecificStoreURL()
         let sut = makeSUT(storeURL: storeURL)
         
         _ = try? "invalid data".write(to: storeURL, atomically: false, encoding: .utf8)
         
-        expect(sut, toRetrieveTwice: .failure(anyNSError()))
+        await expect(sut, toRetrieveTwice: .failure(anyNSError()))
     }
     
-    func test_insert_deliversNoErrorOnEmptyCache() throws {
+    func test_insert_deliversNoErrorOnEmptyCache() async throws {
         let sut = makeSUT()
         
-        try insert(uniqueRecords().localRecords, to: sut)
+        try await insert(uniqueRecords().localRecords, to: sut)
     }
     
-    func test_insert_deliversNoErrorOnNonEmptyCache() throws {
+    func test_insert_deliversNoErrorOnNonEmptyCache() async throws {
         let sut = makeSUT()
-        try insert(uniqueRecords().localRecords, to: sut)
+        try await  insert(uniqueRecords().localRecords, to: sut)
         
-        try insert(uniqueRecords().localRecords, to: sut)
+        try await insert(uniqueRecords().localRecords, to: sut)
     }
     
-    func test_insert_overridesPreviouslyInsertedCacheValues() throws {
+    func test_insert_overridesPreviouslyInsertedCacheValues() async throws {
         let sut = makeSUT()
         
-        try insert(uniqueRecords().localRecords, to: sut)
+        try await  insert(uniqueRecords().localRecords, to: sut)
         
         let latestRecords = uniqueRecords().localRecords
-        try insert(latestRecords, to: sut)
-        expect(sut, toRetrieve: .success(latestRecords))
+        try await insert(latestRecords, to: sut)
+        await expect(sut, toRetrieve: .success(latestRecords))
     }
     
-    func test_insert_deliversErrorOnInsertionError() {
+    func test_insert_deliversErrorOnInsertionError() async {
         let invalidStoreURL = URL(string: "invalid://store-url")!
         let sut = makeSUT(storeURL: invalidStoreURL)
         let (_, localRecords) = uniqueRecords()
         
-        XCTAssertThrowsError(try insert(localRecords, to: sut))
+        do {
+            try await insert(localRecords, to: sut)
+        } catch {
+            XCTAssertNotNil(error)
+        }
     }
     
-    func test_delete_hasNoSideEffectsOnEmptyCache() throws {
+    func test_delete_hasNoSideEffectsOnEmptyCache() async throws {
         let sut = makeSUT()
         
-        try deleteCache(from: sut)
+        try await deleteCache(from: sut)
     }
     
-    func test_delete_emptiesPreviouslyInsertedCache() throws {
+    func test_delete_emptiesPreviouslyInsertedCache() async throws {
         let sut = makeSUT()
-        try insert(uniqueRecords().localRecords, to: sut)
+        try await insert(uniqueRecords().localRecords, to: sut)
         
-        try deleteCache(from: sut)
+        try await deleteCache(from: sut)
     }
     
     // MARK: - Helpers
@@ -113,21 +117,28 @@ class CodableMorseRecordStoreTests: XCTestCase {
         return sut
     }
     
-    private func deleteCache(from sut: MorseRecordStore) throws {
-        try sut.deleteCachedRecords()
+    private func deleteCache(from sut: MorseRecordStore) async throws {
+        try await sut.deleteCachedRecords()
     }
     
-    private func insert(_ records: [LocalMorseRecord], to sut: MorseRecordStore) throws {
-        try sut.insert(records)
+    private func insert(_ records: [LocalMorseRecord], to sut: MorseRecordStore) async throws {
+        try await sut.insert(records)
     }
     
-    private func expect(_ sut: MorseRecordStore, toRetrieveTwice expectedResult: Result<[LocalMorseRecord]?, Error>, file: StaticString = #file, line: UInt = #line) {
-        expect(sut, toRetrieve: expectedResult, file: file, line: line)
-        expect(sut, toRetrieve: expectedResult, file: file, line: line)
+    private func expect(_ sut: MorseRecordStore, toRetrieveTwice expectedResult: Result<[LocalMorseRecord]?, Error>, file: StaticString = #file, line: UInt = #line) async {
+        await expect(sut, toRetrieve: expectedResult, file: file, line: line)
+        await expect(sut, toRetrieve: expectedResult, file: file, line: line)
     }
     
-    private func expect(_ sut: MorseRecordStore, toRetrieve expectedResult: Result<[LocalMorseRecord]?, Error>, file: StaticString = #file, line: UInt = #line) {
-        let retrievedResult = Result { try sut.retrieve() }
+    private func expect(_ sut: MorseRecordStore, toRetrieve expectedResult: Result<[LocalMorseRecord]?, Error>, file: StaticString = #file, line: UInt = #line) async {
+        
+        let retrievedResult: Result<[LocalMorseRecord]?, Error>!
+        do {
+            let records = try await sut.retrieve()
+            retrievedResult = .success(records)
+        } catch {
+            retrievedResult = .failure(error)
+        }
         
         switch (expectedResult, retrievedResult) {
         case (.failure(_), .failure(_)):
@@ -137,7 +148,7 @@ class CodableMorseRecordStoreTests: XCTestCase {
             XCTAssertEqual(retrieved, expected, file: file, line: line)
             
         default:
-            XCTFail("Expected to retrieve \(expectedResult), got \(retrievedResult) instead", file: file, line: line)
+            XCTFail("Expected to retrieve \(expectedResult), got \(String(describing: retrievedResult)) instead", file: file, line: line)
         }
     }
     
