@@ -6,7 +6,7 @@ import MorseCode
 import MorseCodeApp
 
 final class MorseCodePresenterSpy: MorseCodePresenterPrototype {
-    
+    var delegate: MorseCodeApp.MorseCodePresenterDelegate?
     public var convertCallCount = 0
     public var convertFlashCount = 0
     public var morseCodeString = ""
