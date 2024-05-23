@@ -14,11 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let convertor = MorseCodeConvertor()
-        let flashManager = FlashManager()
+        let mainTabBarController = MainTabBarController(viewControllers: [makeMorseCodeViewController(), makeRecordsViewController()])
         
-        let morseCodeViewController = MorseCodeViewController(presenter: MorseCodePresenter(convertor: convertor, flashManager: flashManager, localLoader: localLoader))
-        window.rootViewController = morseCodeViewController
+        window.rootViewController = mainTabBarController
         
         self.window = window
         window.makeKeyAndVisible()
@@ -33,11 +31,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) { }
 
     func sceneDidEnterBackground(_ scene: UIScene) { }
+    
+    // MARK: - Main
+    private func makeMorseCodeViewController() -> MorseCodeViewController {
+        let convertor = MorseCodeConvertor()
+        let flashManager = FlashManager()
+        
+        let morseCodeViewController = MorseCodeViewController(presenter: MorseCodePresenter(convertor: convertor, flashManager: flashManager, localLoader: localLoader))
+        morseCodeViewController.tabBarItem = MainTabBarItem(.main)
+        return morseCodeViewController
+    }
 
     private var localLoader: LocalMorseRecordLoader {
         let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
         let codableStore = CodableMorseRecordStore(storeURL: storeURL)
         return .init(store: codableStore)
+    }
+    
+    // MARK: - Records
+    private func makeRecordsViewController() -> RecordsViewController {
+        let recordsViewController = RecordsViewController()
+        recordsViewController.tabBarItem = MainTabBarItem(.records)
+        return recordsViewController
     }
 }
 
