@@ -92,6 +92,7 @@ class CodableMorseRecordStoreTests: XCTestCase {
         
         do {
             try await insert(localRecords, to: sut)
+            XCTFail("Expected insertion error error")
         } catch {
             XCTAssertNotNil(error)
         }
