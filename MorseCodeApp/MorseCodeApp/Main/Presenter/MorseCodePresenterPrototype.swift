@@ -20,7 +20,7 @@ public protocol MorseCodePresenterPrototype {
 }
 
 extension MorseCodePresenterPrototype {
-    public func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool {
+    public func validateInput(string: String, currentText: NSString? = nil, range: NSRange = .init()) -> Bool {
         let regex = "[A-Za-z0-9 .,?!-/@()]*"
         
         let predicate = NSPredicate(format:"SELF MATCHES %@", regex)

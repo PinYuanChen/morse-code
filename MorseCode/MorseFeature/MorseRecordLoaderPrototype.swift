@@ -8,6 +8,6 @@
 import Foundation
 
 public protocol MorseRecordLoaderPrototype {
-    func save(_ records: [MorseRecord]) throws
-    func load() throws -> [MorseRecord]?
+    func save(_ records: [MorseRecord]) async throws
+    func load() async throws -> [MorseRecord]?
 }
