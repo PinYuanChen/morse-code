@@ -28,7 +28,14 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     public func convertToMorseCode(text: String) {
         let result =  convertor.convertToMorseCode(input: text)
         delegate?.displayMorseCode(code: result)
-        saveToLocalStore(text: text, morseCode: result)
+        
+        Task.init {
+            do {
+                try await saveToLocalStore(text: text, morseCode: result)
+            } catch {
+                print(error)
+            }
+        }
     }
     
     public func playOrPauseFlashSignals(text: String) {
@@ -42,19 +49,12 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         delegate?.updateFlashButton(imageName: flashManager.currentStatus.imageName)
     }
     
-    private func saveToLocalStore(text: String, morseCode: String) {
+    private func saveToLocalStore(text: String, morseCode: String) async throws {
         let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
         
-        localLoader.load { [weak self] result in
-            switch result {
-            case let .success(records):
-                var records = records ?? []
-                records.append(newRecord)
-                self?.localLoader.save(records, completion: { _ in })
-            default:
-                break
-            }
-        }
+        var records = try await localLoader.load() ?? []
+        records.append(newRecord)
+        try await localLoader.save(records)
     }
     
     // MARK: Private properties

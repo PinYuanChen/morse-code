@@ -13,26 +13,26 @@ public final class LocalMorseRecordLoader: MorseRecordLoaderPrototype {
         self.store = store
     }
     
-    public func save(_ records: [MorseRecord]) throws {
+    public func save(_ records: [MorseRecord]) async throws {
         do {
-            try store.deleteCachedRecords()
-            try cache(records)
+            try await store.deleteCachedRecords()
+            try await cache(records)
         } catch {
             throw error
         }
     }
     
-    public func load() throws -> [MorseRecord]? {
+    public func load() async throws -> [MorseRecord]? {
         do {
-            let records = try store.retrieve()
+            let records = try await store.retrieve()
             return records?.toModels()
         } catch {
             throw error
         }
     }
     
-    private func cache(_ records: [MorseRecord]) throws {
-        return try store.insert(records.toLocal())
+    private func cache(_ records: [MorseRecord]) async throws {
+        return try await store.insert(records.toLocal())
     }
     
     private let store: MorseRecordStore
