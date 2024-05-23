@@ -22,16 +22,16 @@ public final class MorseCodePresenterTests: XCTestCase {
         let sut = makeSUT()
         
         let validCharacter = "z"
-        XCTAssertTrue(sut.validateInput(string: validCharacter, currentText: nil, range: .init()))
+        XCTAssertTrue(sut.validateInput(string: validCharacter))
         
         let validNumber = "0"
-        XCTAssertTrue(sut.validateInput(string: validNumber, currentText: nil, range: .init()))
+        XCTAssertTrue(sut.validateInput(string: validNumber))
         
         let validSign = "@"
-        XCTAssertTrue(sut.validateInput(string: validSign, currentText: nil, range: .init()))
+        XCTAssertTrue(sut.validateInput(string: validSign))
         
         let invalidEmoji = "😎"
-        XCTAssertFalse(sut.validateInput(string: invalidEmoji, currentText: nil, range: .init()))
+        XCTAssertFalse(sut.validateInput(string: invalidEmoji))
     }
     
     func test_validateInputLength() {
