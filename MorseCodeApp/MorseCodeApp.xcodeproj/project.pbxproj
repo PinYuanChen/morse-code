@@ -16,6 +16,9 @@
 		9B32A54F2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */; };
 		9B32A5502BF5A64300E8CCD4 /* MorseCodeViewController_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54D2BF5A64300E8CCD4 /* MorseCodeViewController_light.png */; };
 		9B32A5512BF5A64300E8CCD4 /* MorseCodeViewController_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54E2BF5A64300E8CCD4 /* MorseCodeViewController_dark.png */; };
+		9B3E83D72BFF437400A17D12 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E83D62BFF437400A17D12 /* RecordsViewController.swift */; };
+		9B3E83DA2BFF44B200A17D12 /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E83D92BFF44B200A17D12 /* TabBarItemType.swift */; };
+		9B3E83DE2BFF481900A17D12 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E83DD2BFF481900A17D12 /* MainTabBarController.swift */; };
 		9BB03D532BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB03D522BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
@@ -70,6 +73,9 @@
 		9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_extraExtraExtraLarge.png; sourceTree = "<group>"; };
 		9B32A54D2BF5A64300E8CCD4 /* MorseCodeViewController_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_light.png; sourceTree = "<group>"; };
 		9B32A54E2BF5A64300E8CCD4 /* MorseCodeViewController_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_dark.png; sourceTree = "<group>"; };
+		9B3E83D62BFF437400A17D12 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
+		9B3E83D92BFF44B200A17D12 /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
+		9B3E83DD2BFF481900A17D12 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		9BB03D522BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterPrototype.swift; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -154,6 +160,47 @@
 			path = snapshots;
 			sourceTree = "<group>";
 		};
+		9B3E83D22BFF431F00A17D12 /* Records */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E83D52BFF434800A17D12 /* Presenter */,
+				9B3E83D42BFF433C00A17D12 /* Views */,
+				9B3E83D32BFF433300A17D12 /* ViewControllers */,
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
+		9B3E83D32BFF433300A17D12 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E83D62BFF437400A17D12 /* RecordsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9B3E83D42BFF433C00A17D12 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9B3E83D52BFF434800A17D12 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		9B3E83D82BFF446600A17D12 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				9B3E83D92BFF44B200A17D12 /* TabBarItemType.swift */,
+				9B3E83DD2BFF481900A17D12 /* MainTabBarController.swift */,
+			);
+			path = MainTabBar;
+			sourceTree = "<group>";
+		};
 		CD00A9892B3A74D40042E9F6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,7 +264,9 @@
 			children = (
 				CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */,
 				CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */,
+				9B3E83D82BFF446600A17D12 /* MainTabBar */,
 				9B10B18C2BF48E2900DD0233 /* Main */,
+				9B3E83D22BFF431F00A17D12 /* Records */,
 				CD00A9982B3A7B950042E9F6 /* Extensions */,
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
 				9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */,
@@ -364,9 +413,12 @@
 			files = (
 				CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */,
 				9BB03D532BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift in Sources */,
+				9B3E83DE2BFF481900A17D12 /* MainTabBarController.swift in Sources */,
+				9B3E83D72BFF437400A17D12 /* RecordsViewController.swift in Sources */,
 				CD00A99A2B3A7BC30042E9F6 /* UIColor+Ext.swift in Sources */,
 				CD4ED4F12B3C04E800197428 /* CustomButton.swift in Sources */,
 				CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */,
+				9B3E83DA2BFF44B200A17D12 /* TabBarItemType.swift in Sources */,
 				CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */,
 				CD4ED4ED2B3C00E600197428 /* CustomTextField.swift in Sources */,
 				9B10B1902BF48E9600DD0233 /* MorseCodePresenter.swift in Sources */,
