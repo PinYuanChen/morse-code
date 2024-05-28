@@ -33,17 +33,6 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         delegate?.displayMorseCode(code: result)
     }
     
-    public func playOrPauseFlashSignals(text: String) {
-        if flashManager.currentStatus == .stop {
-            let signals = convertor.convertToMorseFlashSignals(input: text)
-            flashManager.startPlaySignals(signals: signals)
-        } else {
-            flashManager.stopPlayingSignals()
-        }
-
-        delegate?.updateFlashButton(imageName: flashManager.currentStatus.imageName)
-    }
-    
     public func saveToLocalStore(text: String, morseCode: String) async throws {
         let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
         
@@ -51,7 +40,6 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         records.append(newRecord)
         try await localLoader.save(records)
     }
-    
 }
 
 // MARK: - Localization

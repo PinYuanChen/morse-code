@@ -38,4 +38,15 @@ extension MorseCodePresenterPrototype {
         let length = newString?.count ?? 0
         return length <= MorseCodePresenter.maxInputLength
     }
+    
+    public func playOrPauseFlashSignals(text: String) {
+        if flashManager.currentStatus == .stop {
+            let signals = convertor.convertToMorseFlashSignals(input: text)
+            flashManager.startPlaySignals(signals: signals)
+        } else {
+            flashManager.stopPlayingSignals()
+        }
+
+        delegate?.updateFlashButton(imageName: flashManager.currentStatus.imageName)
+    }
 }

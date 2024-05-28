@@ -36,8 +36,4 @@ final class MorseCodePresenterSpy: MorseCodePresenterPrototype {
             throw error
         }
     }
-    
-    func playOrPauseFlashSignals(text: String) {
-        
-    }
 }
