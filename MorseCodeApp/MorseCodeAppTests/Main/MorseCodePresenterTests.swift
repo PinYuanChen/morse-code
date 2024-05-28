@@ -85,5 +85,4 @@ public final class MorseCodePresenterTests: XCTestCase {
     
     private let sosMorseCodeString = "... --- ... "
     private let a123MorseCodeString = ".- .---- ..--- ...-- "
-    private let helloWorldMorseCodeString = ".... . .-.. .-.. ---    .-- --- .-. .-.. -.. -.-.-- "
 }
