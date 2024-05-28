@@ -7,21 +7,26 @@ import MorseCodeApp
 
 class LoaderSpy: MorseRecordLoaderPrototype {
     
-    var loadCount = 0
-    var saveCount = 0
+    enum ReceivedMessage {
+        case load
+        case save
+        case delete
+    }
+    
+    var receivedMessages = [ReceivedMessage]()
     
     func save(_ records: [MorseRecord]) async throws {
-        saveCount += 1
+        receivedMessages.append(.save)
     }
     
     func load() async throws -> [MorseRecord]? {
-        loadCount += 1
+        receivedMessages.append(.load)
         return []
     }
 }
 
 final class MorseCodePresenterSpy: MorseCodePresenterPrototype {
-    
+
     let convertor: MorseCodeConvertorPrototype
     let flashManager: FlashManagerPrototype
     let localLoader: MorseRecordLoaderPrototype
@@ -41,6 +46,15 @@ final class MorseCodePresenterSpy: MorseCodePresenterPrototype {
     
     func convertToMorseCode(text: String) {
         morseCodeString = convertor.convertToMorseCode(input: text)
+    }
+    
+    func saveToLocalStore(text: String, morseCode: String) async throws {
+        do {
+            let _ = try await localLoader.load()
+            try await localLoader.save([])
+        } catch {
+            throw error
+        }
     }
     
     func playOrPauseFlashSignals(text: String) {

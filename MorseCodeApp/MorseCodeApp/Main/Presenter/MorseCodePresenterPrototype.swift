@@ -20,6 +20,7 @@ public protocol MorseCodePresenterPrototype {
     var localLoader: MorseRecordLoaderPrototype { get }
     func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool
     func convertToMorseCode(text: String)
+    func saveToLocalStore(text: String, morseCode: String) async throws
     func playOrPauseFlashSignals(text: String)
 }
 

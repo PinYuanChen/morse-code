@@ -31,14 +31,6 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     public func convertToMorseCode(text: String) {
         let result =  convertor.convertToMorseCode(input: text)
         delegate?.displayMorseCode(code: result)
-        
-        Task.init {
-            do {
-                try await saveToLocalStore(text: text, morseCode: result)
-            } catch {
-                print(error)
-            }
-        }
     }
     
     public func playOrPauseFlashSignals(text: String) {
@@ -52,7 +44,7 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         delegate?.updateFlashButton(imageName: flashManager.currentStatus.imageName)
     }
     
-    private func saveToLocalStore(text: String, morseCode: String) async throws {
+    public func saveToLocalStore(text: String, morseCode: String) async throws {
         let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
         
         var records = try await localLoader.load() ?? []

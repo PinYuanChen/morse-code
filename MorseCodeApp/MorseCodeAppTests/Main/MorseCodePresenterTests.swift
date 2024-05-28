@@ -55,12 +55,12 @@ public final class MorseCodePresenterTests: XCTestCase {
         XCTAssertEqual(sut.morseCodeString, a123MorseCodeString)
     }
     
-//    func test_convertMorseCodeToFlashSignals() {
-//        let sut = makeSUT()
-//        
-//        sut.playOrPauseFlashSignals(text: "hello")
-//        XCTAssertEqual(sut.convertFlashCount, 1)
-//    }
+    func test_saveMorseCode() async throws {
+        let (sut, loader) = makeSUT()
+        
+        try await sut.saveToLocalStore(text: "SOS", morseCode: sosMorseCodeString)
+        XCTAssertEqual(loader.receivedMessages, [.load, .save])
+    }
     
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
         let table = "Localizable"

@@ -43,6 +43,15 @@ extension MorseCodeViewController: MorseCodePresenterDelegate {
     public func displayMorseCode(code: String) {
         morseTextField.text = code
         flashButton.isEnabled = true
+        
+        guard let inputText = inputTextField.text else {
+            return
+        }
+        
+        Task.init {
+            try? await
+            presenter.saveToLocalStore(text: inputText, morseCode: code)
+        }
     }
     
     public func updateFlashButton(imageName: String) {
