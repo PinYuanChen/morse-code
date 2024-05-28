@@ -29,15 +29,17 @@ class MorseRecordCell: UITableViewCell {
 // MARK: - Setup UI
 private extension MorseRecordCell {
     func setupUI() {
+        contentView.backgroundColor = .clear
+        backgroundColor = .clear
         setupTitleLabel()
         setupMorseLabel()
-        setupFlashButton()
         setupDeleteButton()
+        setupFlashButton()
     }
     
     func setupTitleLabel() {
         titleLabel.textColor = .white
-        
+        titleLabel.text = "Title"
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(10)
@@ -47,26 +49,12 @@ private extension MorseRecordCell {
     
     func setupMorseLabel() {
         morseLabel.textColor = .txt5BC5A5
-        
+        morseLabel.text = "Morse Code"
         contentView.addSubview(morseLabel)
         morseLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(10)
             $0.leading.width.equalTo(titleLabel)
             $0.bottom.equalToSuperview().offset(-10)
-        }
-    }
-    
-    func setupFlashButton() {
-        flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
-        flashButton.tintColor = .white
-        flashButton.layer.cornerRadius = 20
-        flashButton.layer.masksToBounds = true
-        
-        contentView.addSubview(flashButton)
-        flashButton.snp.makeConstraints {
-            $0.size.equalTo(40)
-            $0.leading.equalTo(titleLabel.snp.trailing)
-            $0.centerY.equalToSuperview()
         }
     }
     
@@ -78,8 +66,22 @@ private extension MorseRecordCell {
         
         contentView.addSubview(deleteButton)
         deleteButton.snp.makeConstraints {
-            $0.leading.equalTo(flashButton.snp.trailing).offset(10)
-            $0.size.centerY.equalTo(flashButton)
+            $0.size.equalTo(40)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.centerY.equalToSuperview()
+        }
+    }
+    
+    func setupFlashButton() {
+        flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
+        flashButton.tintColor = .white
+        flashButton.layer.cornerRadius = 20
+        flashButton.layer.masksToBounds = true
+        
+        contentView.addSubview(flashButton)
+        flashButton.snp.makeConstraints {
+            $0.size.centerY.equalTo(deleteButton)
+            $0.trailing.equalTo(deleteButton.snp.leading).offset(-10)
         }
     }
 }
