@@ -169,7 +169,7 @@ private extension MorseCodeViewController {
     
     func setupFlashButton() {
         flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
-        flashButton.tintColor = .white
+        flashButton.tintColor = .white.withAlphaComponent(0.6)
         flashButton.layer.cornerRadius = 20
         flashButton.layer.masksToBounds = true
         flashButton.isEnabled = false
