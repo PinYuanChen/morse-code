@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MorseCode
 
 public protocol MorseCodePresenterDelegate: AnyObject {
     func displayMorseCode(code: String)
@@ -14,8 +15,12 @@ public protocol MorseCodePresenterDelegate: AnyObject {
 
 public protocol MorseCodePresenterPrototype {
     var delegate: MorseCodePresenterDelegate? { get set }
+    var convertor: MorseCodeConvertorPrototype { get }
+    var flashManager: FlashManagerPrototype { get }
+    var localLoader: MorseRecordLoaderPrototype { get }
     func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool
     func convertToMorseCode(text: String)
+    func saveToLocalStore(text: String, morseCode: String) async throws
     func playOrPauseFlashSignals(text: String)
 }
 
@@ -32,5 +37,24 @@ extension MorseCodePresenterPrototype {
         let newString = currentText?.replacingCharacters(in: range, with: string)
         let length = newString?.count ?? 0
         return length <= MorseCodePresenter.maxInputLength
+    }
+    
+    public func saveToLocalStore(text: String, morseCode: String) async throws {
+        let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
+        
+        var records = try await localLoader.load() ?? []
+        records.append(newRecord)
+        try await localLoader.save(records)
+    }
+    
+    public func playOrPauseFlashSignals(text: String) {
+        if flashManager.currentStatus == .stop {
+            let signals = convertor.convertToMorseFlashSignals(input: text)
+            flashManager.startPlaySignals(signals: signals)
+        } else {
+            flashManager.stopPlayingSignals()
+        }
+
+        delegate?.updateFlashButton(imageName: flashManager.currentStatus.imageName)
     }
 }

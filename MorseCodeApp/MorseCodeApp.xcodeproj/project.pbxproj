@@ -19,6 +19,7 @@
 		9B3E83D72BFF437400A17D12 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E83D62BFF437400A17D12 /* RecordsViewController.swift */; };
 		9B3E83DA2BFF44B200A17D12 /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E83D92BFF44B200A17D12 /* TabBarItemType.swift */; };
 		9B3E83DE2BFF481900A17D12 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3E83DD2BFF481900A17D12 /* MainTabBarController.swift */; };
+		9B9123C62C05AF5800F8D031 /* LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9123C52C05AF5800F8D031 /* LoaderSpy.swift */; };
 		9BB03D532BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB03D522BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
@@ -76,6 +77,7 @@
 		9B3E83D62BFF437400A17D12 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		9B3E83D92BFF44B200A17D12 /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
 		9B3E83DD2BFF481900A17D12 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		9B9123C52C05AF5800F8D031 /* LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderSpy.swift; sourceTree = "<group>"; };
 		9BB03D522BFCA8D3006C00B7 /* MorseCodePresenterPrototype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterPrototype.swift; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				CD00A9902B3A75600042E9F6 /* XCTestCase+LeakTracking.swift */,
 				CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */,
 				CD4ED4EE2B3C014900197428 /* MorseCodePresenterSpy.swift */,
+				9B9123C52C05AF5800F8D031 /* LoaderSpy.swift */,
 				9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */,
 				9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */,
 				9B32A5432BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift */,
@@ -436,6 +439,7 @@
 				9B32A5442BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift in Sources */,
 				CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */,
 				CD00A9912B3A75600042E9F6 /* XCTestCase+LeakTracking.swift in Sources */,
+				9B9123C62C05AF5800F8D031 /* LoaderSpy.swift in Sources */,
 				9B32A5422BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift in Sources */,
 				CD00A98F2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift in Sources */,
 			);

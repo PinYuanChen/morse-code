@@ -13,6 +13,9 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     public static let maxInputLength = 30
     
     public weak var delegate: MorseCodePresenterDelegate?
+    public let convertor: MorseCodeConvertorPrototype
+    public var flashManager: FlashManagerPrototype
+    public let localLoader: MorseRecordLoaderPrototype
     
     public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
                          localLoader: MorseRecordLoaderPrototype) {
@@ -28,39 +31,7 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     public func convertToMorseCode(text: String) {
         let result =  convertor.convertToMorseCode(input: text)
         delegate?.displayMorseCode(code: result)
-        
-        Task.init {
-            do {
-                try await saveToLocalStore(text: text, morseCode: result)
-            } catch {
-                print(error)
-            }
-        }
     }
-    
-    public func playOrPauseFlashSignals(text: String) {
-        if flashManager.currentStatus == .stop {
-            let signals = convertor.convertToMorseFlashSignals(input: text)
-            flashManager.startPlaySignals(signals: signals)
-        } else {
-            flashManager.stopPlayingSignals()
-        }
-
-        delegate?.updateFlashButton(imageName: flashManager.currentStatus.imageName)
-    }
-    
-    private func saveToLocalStore(text: String, morseCode: String) async throws {
-        let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
-        
-        var records = try await localLoader.load() ?? []
-        records.append(newRecord)
-        try await localLoader.save(records)
-    }
-    
-    // MARK: Private properties
-    private let convertor: MorseCodeConvertorPrototype
-    private var flashManager: FlashManagerPrototype
-    private let localLoader: MorseRecordLoaderPrototype
 }
 
 // MARK: - Localization

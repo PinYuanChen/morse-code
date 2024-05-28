@@ -13,14 +13,13 @@ public protocol FlashManagerPrototype {
 
 public enum FlashStatusType {
     case playing
-    case pause
     case stop
     
     public var imageName: String {
         switch self {
         case .playing:
             return "flashlight.slash.circle.fill"
-        default:
+        case .stop:
             return "flashlight.on.circle.fill"
         }
     }

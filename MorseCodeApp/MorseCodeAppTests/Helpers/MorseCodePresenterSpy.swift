@@ -6,17 +6,25 @@ import MorseCode
 import MorseCodeApp
 
 final class MorseCodePresenterSpy: MorseCodePresenterPrototype {
-    var delegate: MorseCodeApp.MorseCodePresenterDelegate?
-    public var convertCallCount = 0
-    public var convertFlashCount = 0
-    public var morseCodeString = ""
+
+    let convertor: MorseCodeConvertorPrototype
+    let flashManager: FlashManagerPrototype
+    let localLoader: MorseRecordLoaderPrototype
+    var delegate: MorseCodePresenterDelegate?
     
-    func convertToMorseCode(text: String) {
-        convertCallCount += 1
-        morseCodeString = text
+    var morseCodeString = ""
+    
+    init(convertor: MorseCodeConvertorPrototype,
+         flashManager: FlashManagerPrototype,
+         localLoader: MorseRecordLoaderPrototype,
+         delegate: MorseCodePresenterDelegate? = nil) {
+        self.convertor = convertor
+        self.flashManager = flashManager
+        self.localLoader = localLoader
+        self.delegate = delegate
     }
     
-    func playOrPauseFlashSignals(text: String) {
-        convertFlashCount += 1
+    func convertToMorseCode(text: String) {
+        morseCodeString = convertor.convertToMorseCode(input: text)
     }
 }
