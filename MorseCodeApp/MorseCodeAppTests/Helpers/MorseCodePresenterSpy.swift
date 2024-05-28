@@ -5,26 +5,6 @@
 import MorseCode
 import MorseCodeApp
 
-class LoaderSpy: MorseRecordLoaderPrototype {
-    
-    enum ReceivedMessage {
-        case load
-        case save
-        case delete
-    }
-    
-    var receivedMessages = [ReceivedMessage]()
-    
-    func save(_ records: [MorseRecord]) async throws {
-        receivedMessages.append(.save)
-    }
-    
-    func load() async throws -> [MorseRecord]? {
-        receivedMessages.append(.load)
-        return []
-    }
-}
-
 final class MorseCodePresenterSpy: MorseCodePresenterPrototype {
 
     let convertor: MorseCodeConvertorPrototype
