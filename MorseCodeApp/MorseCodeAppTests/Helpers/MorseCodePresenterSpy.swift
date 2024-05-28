@@ -5,18 +5,45 @@
 import MorseCode
 import MorseCodeApp
 
+class LoaderSpy: MorseRecordLoaderPrototype {
+    
+    var loadCount = 0
+    var saveCount = 0
+    
+    func save(_ records: [MorseRecord]) async throws {
+        saveCount += 1
+    }
+    
+    func load() async throws -> [MorseRecord]? {
+        loadCount += 1
+        return []
+    }
+}
+
 final class MorseCodePresenterSpy: MorseCodePresenterPrototype {
-    var delegate: MorseCodeApp.MorseCodePresenterDelegate?
-    public var convertCallCount = 0
-    public var convertFlashCount = 0
-    public var morseCodeString = ""
+    
+    let convertor: MorseCodeConvertorPrototype
+    let flashManager: FlashManagerPrototype
+    let localLoader: MorseRecordLoaderPrototype
+    var delegate: MorseCodePresenterDelegate?
+    
+    var morseCodeString = ""
+    
+    init(convertor: MorseCodeConvertorPrototype,
+         flashManager: FlashManagerPrototype,
+         localLoader: MorseRecordLoaderPrototype,
+         delegate: MorseCodePresenterDelegate? = nil) {
+        self.convertor = convertor
+        self.flashManager = flashManager
+        self.localLoader = localLoader
+        self.delegate = delegate
+    }
     
     func convertToMorseCode(text: String) {
-        convertCallCount += 1
-        morseCodeString = text
+        morseCodeString = convertor.convertToMorseCode(input: text)
     }
     
     func playOrPauseFlashSignals(text: String) {
-        convertFlashCount += 1
+        
     }
 }

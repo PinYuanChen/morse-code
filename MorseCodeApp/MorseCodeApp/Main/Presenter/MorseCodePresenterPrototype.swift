@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MorseCode
 
 public protocol MorseCodePresenterDelegate: AnyObject {
     func displayMorseCode(code: String)
@@ -14,6 +15,9 @@ public protocol MorseCodePresenterDelegate: AnyObject {
 
 public protocol MorseCodePresenterPrototype {
     var delegate: MorseCodePresenterDelegate? { get set }
+    var convertor: MorseCodeConvertorPrototype { get }
+    var flashManager: FlashManagerPrototype { get }
+    var localLoader: MorseRecordLoaderPrototype { get }
     func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool
     func convertToMorseCode(text: String)
     func playOrPauseFlashSignals(text: String)

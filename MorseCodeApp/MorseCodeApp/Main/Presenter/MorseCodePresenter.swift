@@ -13,6 +13,9 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     public static let maxInputLength = 30
     
     public weak var delegate: MorseCodePresenterDelegate?
+    public let convertor: MorseCodeConvertorPrototype
+    public var flashManager: FlashManagerPrototype
+    public let localLoader: MorseRecordLoaderPrototype
     
     public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
                          localLoader: MorseRecordLoaderPrototype) {
@@ -57,10 +60,6 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         try await localLoader.save(records)
     }
     
-    // MARK: Private properties
-    private let convertor: MorseCodeConvertorPrototype
-    private var flashManager: FlashManagerPrototype
-    private let localLoader: MorseRecordLoaderPrototype
 }
 
 // MARK: - Localization
