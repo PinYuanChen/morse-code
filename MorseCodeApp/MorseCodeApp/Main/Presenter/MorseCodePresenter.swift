@@ -32,14 +32,6 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         let result =  convertor.convertToMorseCode(input: text)
         delegate?.displayMorseCode(code: result)
     }
-    
-    public func saveToLocalStore(text: String, morseCode: String) async throws {
-        let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
-        
-        var records = try await localLoader.load() ?? []
-        records.append(newRecord)
-        try await localLoader.save(records)
-    }
 }
 
 // MARK: - Localization

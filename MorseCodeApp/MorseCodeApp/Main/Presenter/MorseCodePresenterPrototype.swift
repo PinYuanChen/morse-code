@@ -39,6 +39,14 @@ extension MorseCodePresenterPrototype {
         return length <= MorseCodePresenter.maxInputLength
     }
     
+    public func saveToLocalStore(text: String, morseCode: String) async throws {
+        let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
+        
+        var records = try await localLoader.load() ?? []
+        records.append(newRecord)
+        try await localLoader.save(records)
+    }
+    
     public func playOrPauseFlashSignals(text: String) {
         if flashManager.currentStatus == .stop {
             let signals = convertor.convertToMorseFlashSignals(input: text)

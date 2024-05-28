@@ -27,13 +27,4 @@ final class MorseCodePresenterSpy: MorseCodePresenterPrototype {
     func convertToMorseCode(text: String) {
         morseCodeString = convertor.convertToMorseCode(input: text)
     }
-    
-    func saveToLocalStore(text: String, morseCode: String) async throws {
-        do {
-            let _ = try await localLoader.load()
-            try await localLoader.save([])
-        } catch {
-            throw error
-        }
-    }
 }
