@@ -18,7 +18,7 @@ final class MorseCodeViewControllerTests: XCTestCase {
     
     // MARK: - Helpers
     private func makeSUT() -> MorseCodeViewController {
-        let viewController = MorseCodeViewController(presenter: MorseCodePresenterSpy(convertor: MorseCodeConvertor(), flashManager: FlashManager(), localLoader: LoaderSpy()))
+        let viewController = MorseUIComposer.composeMorseCode(with: LoaderSpy())
         return viewController
     }
 }

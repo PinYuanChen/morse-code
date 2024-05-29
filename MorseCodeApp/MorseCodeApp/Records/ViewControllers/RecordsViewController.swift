@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-class RecordsViewController: UIViewController {
+public class RecordsViewController: UIViewController {
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
@@ -37,11 +37,11 @@ private extension RecordsViewController {
 }
 
 extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         10
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = MorseRecordCell.use(table: tableView, for: indexPath)
         return cell
     }
