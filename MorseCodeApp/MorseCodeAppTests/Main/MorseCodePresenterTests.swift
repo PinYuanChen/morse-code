@@ -12,6 +12,12 @@ import MorseCodeApp
 
 public final class MorseCodePresenterTests: XCTestCase {
     
+    func test_initDoesNotLoadData() {
+        let (_, loader) = makeSUT()
+        
+        XCTAssertEqual(loader.receivedMessages, [])
+    }
+    
     func test_validateInputCharacters() {
         let (sut, _) = makeSUT()
         
