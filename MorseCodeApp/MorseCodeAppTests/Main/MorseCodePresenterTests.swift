@@ -12,6 +12,12 @@ import MorseCodeApp
 
 public final class MorseCodePresenterTests: XCTestCase {
     
+    func test_initDoesNotLoadData() {
+        let (_, loader) = makeSUT()
+        
+        XCTAssertEqual(loader.receivedMessages, [])
+    }
+    
     func test_validateInputCharacters() {
         let (sut, _) = makeSUT()
         
@@ -40,19 +46,8 @@ public final class MorseCodePresenterTests: XCTestCase {
         let (sut, _) = makeSUT()
         
         let inputText = "SOS"
-        sut.convertToMorseCode(text: inputText)
-        XCTAssertEqual(sut.morseCodeString, sosMorseCodeString)
-    }
-    
-    func test_convertFunction_OverrideFormerInput() {
-        let (sut, _) = makeSUT()
-        
-        let firstInput = "SOS"
-        sut.convertToMorseCode(text: firstInput)
-        
-        let secondInput = "a123"
-        sut.convertToMorseCode(text: secondInput)
-        XCTAssertEqual(sut.morseCodeString, a123MorseCodeString)
+        let output = sut.convertToMorseCode(text: inputText)
+        XCTAssertEqual(output, sosMorseCodeString)
     }
     
     func test_saveMorseCode() async throws {
@@ -68,15 +63,13 @@ public final class MorseCodePresenterTests: XCTestCase {
         
         assertLocalizedKeyAndValuesExist(in: bundle, table)
     }
-
+    
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenterSpy, loader: LoaderSpy) {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenter, loader: LoaderSpy) {
         
-        let convertor = MorseCodeConvertor()
-        let flashManager = FlashManager()
         let loaderSpy = LoaderSpy()
         
-        let sut = MorseCodePresenterSpy(convertor: convertor, flashManager: flashManager, localLoader: loaderSpy)
+        let sut = MorseCodePresenter(flashManager: FlashManager(), localLoader: loaderSpy)
         
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(loaderSpy, file: file, line: line)
@@ -84,5 +77,4 @@ public final class MorseCodePresenterTests: XCTestCase {
     }
     
     private let sosMorseCodeString = "... --- ... "
-    private let a123MorseCodeString = ".- .---- ..--- ...-- "
 }

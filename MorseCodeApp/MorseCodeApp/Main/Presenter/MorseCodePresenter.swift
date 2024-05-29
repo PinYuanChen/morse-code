@@ -8,18 +8,20 @@
 import Foundation
 import MorseCode
 
-public class MorseCodePresenter: MorseCodePresenterPrototype {
+public protocol MorseCodePresenterDelegate: AnyObject {
+    func updateFlashButton(imageName: String)
+}
+
+public class MorseCodePresenter: MorseCodeConvertorPrototype {
     
     public static let maxInputLength = 30
     
     public weak var delegate: MorseCodePresenterDelegate?
-    public let convertor: MorseCodeConvertorPrototype
     public var flashManager: FlashManagerPrototype
     public let localLoader: MorseRecordLoaderPrototype
     
-    public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
+    public required init(flashManager: FlashManagerPrototype,
                          localLoader: MorseRecordLoaderPrototype) {
-        self.convertor = convertor
         self.flashManager = flashManager
         self.localLoader = localLoader
         
@@ -28,9 +30,41 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         }
     }
     
-    public func convertToMorseCode(text: String) {
-        let result =  convertor.convertToMorseCode(input: text)
-        delegate?.displayMorseCode(code: result)
+    public func convertToMorseCode(text: String) -> String {
+        return convertToMorseCode(input: text)
+    }
+    
+    public func validateInput(string: String, currentText: NSString? = nil, range: NSRange = .init()) -> Bool {
+        let regex = "[A-Za-z0-9 .,?!-/@()]*"
+        
+        let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
+        
+        guard predicate.evaluate(with: string) else {
+            return false
+        }
+        
+        let newString = currentText?.replacingCharacters(in: range, with: string)
+        let length = newString?.count ?? 0
+        return length <= MorseCodePresenter.maxInputLength
+    }
+    
+    public func saveToLocalStore(text: String, morseCode: String) async throws {
+        let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
+        
+        var records = try await localLoader.load() ?? []
+        records.append(newRecord)
+        try await localLoader.save(records)
+    }
+    
+    public func playOrPauseFlashSignals(text: String) {
+        if flashManager.currentStatus == .stop {
+            let signals = convertToMorseFlashSignals(input: text)
+            flashManager.startPlaySignals(signals: signals)
+        } else {
+            flashManager.stopPlayingSignals()
+        }
+
+        delegate?.updateFlashButton(imageName: flashManager.currentStatus.imageName)
     }
 }
 

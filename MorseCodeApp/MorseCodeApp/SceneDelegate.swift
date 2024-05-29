@@ -13,8 +13,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
+        let morseCodeViewController = MorseUIComposer.composeMorseCode(with: localLoader)
+        let recordsViewController = MorseUIComposer.composeRecords()
         
-        let mainTabBarController = MainTabBarController(viewControllers: [makeMorseCodeViewController(), makeRecordsViewController()])
+        let mainTabBarController = MainTabBarController(viewControllers: [morseCodeViewController, recordsViewController])
         
         window.rootViewController = mainTabBarController
         
@@ -32,27 +34,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func sceneDidEnterBackground(_ scene: UIScene) { }
     
-    // MARK: - Main
-    private func makeMorseCodeViewController() -> MorseCodeViewController {
-        let convertor = MorseCodeConvertor()
-        let flashManager = FlashManager()
-        
-        let morseCodeViewController = MorseCodeViewController(presenter: MorseCodePresenter(convertor: convertor, flashManager: flashManager, localLoader: localLoader))
-        morseCodeViewController.tabBarItem = MainTabBarItem(.main)
-        return morseCodeViewController
-    }
-
     private var localLoader: LocalMorseRecordLoader {
         let storeURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
         let codableStore = CodableMorseRecordStore(storeURL: storeURL)
         return .init(store: codableStore)
-    }
-    
-    // MARK: - Records
-    private func makeRecordsViewController() -> RecordsViewController {
-        let recordsViewController = RecordsViewController()
-        recordsViewController.tabBarItem = MainTabBarItem(.records)
-        return recordsViewController
     }
 }
 
