@@ -9,7 +9,6 @@ import Foundation
 import MorseCode
 
 public protocol MorseCodePresenterDelegate: AnyObject {
-    func displayMorseCode(code: String)
     func updateFlashButton(imageName: String)
 }
 
@@ -31,9 +30,8 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         }
     }
     
-    public func convertToMorseCode(text: String) {
-        let result = convertToMorseCode(input: text)
-        delegate?.displayMorseCode(code: result)
+    public func convertToMorseCode(text: String) -> String {
+        return convertToMorseCode(input: text)
     }
     
     public func validateInput(string: String, currentText: NSString? = nil, range: NSRange = .init()) -> Bool {

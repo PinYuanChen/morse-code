@@ -40,20 +40,6 @@ public final class MorseCodeViewController: UIViewController {
 
 // MARK: - Presenter Delegate
 extension MorseCodeViewController: MorseCodePresenterDelegate {
-    public func displayMorseCode(code: String) {
-        morseTextField.text = code
-        flashButton.isEnabled = true
-        
-        guard let inputText = inputTextField.text else {
-            return
-        }
-        
-        Task.init {
-            try? await
-            presenter.saveToLocalStore(text: inputText, morseCode: code)
-        }
-    }
-    
     public func updateFlashButton(imageName: String) {
         flashButton.setBackgroundImage(.init(systemName: imageName), for: .normal)
     }
@@ -192,7 +178,8 @@ private extension MorseCodeViewController {
     
     @objc func didTappedConvertButton(_ sender: UIButton) {
         generator.impactOccurred()
-        presenter.convertToMorseCode(text: inputTextField.text ?? "")
+        let result = presenter.convertToMorseCode(text: inputTextField.text ?? "")
+        displayMorseCode(code: result)
     }
     
     @objc func didTappedFlashButton(_ sender: UIButton) {
@@ -208,6 +195,20 @@ private extension MorseCodeViewController {
     @objc func textFieldDidChange(_ textField: UITextField) {
         convertButton.isEnabled = textField.hasText
         generator.impactOccurred()
+    }
+    
+    func displayMorseCode(code: String) {
+        morseTextField.text = code
+        flashButton.isEnabled = true
+        
+        guard let inputText = inputTextField.text else {
+            return
+        }
+        
+        Task.init {
+            try? await
+            presenter.saveToLocalStore(text: inputText, morseCode: code)
+        }
     }
 }
 

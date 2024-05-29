@@ -31,7 +31,6 @@
 		CD00A9972B3A79080042E9F6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CD00A9962B3A79080042E9F6 /* SnapKit */; };
 		CD00A99A2B3A7BC30042E9F6 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9992B3A7BC30042E9F6 /* UIColor+Ext.swift */; };
 		CD4ED4ED2B3C00E600197428 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED4EC2B3C00E600197428 /* CustomTextField.swift */; };
-		CD4ED4EF2B3C014900197428 /* MorseCodePresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED4EE2B3C014900197428 /* MorseCodePresenterSpy.swift */; };
 		CD4ED4F12B3C04E800197428 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4ED4F02B3C04E800197428 /* CustomButton.swift */; };
 		CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */; };
 		CDD10AC02B397F3C008ED95F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */; };
@@ -90,7 +89,6 @@
 		CD00A9902B3A75600042E9F6 /* XCTestCase+LeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+LeakTracking.swift"; sourceTree = "<group>"; };
 		CD00A9992B3A7BC30042E9F6 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		CD4ED4EC2B3C00E600197428 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
-		CD4ED4EE2B3C014900197428 /* MorseCodePresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterSpy.swift; sourceTree = "<group>"; };
 		CD4ED4F02B3C04E800197428 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		CDD10ABA2B397F3C008ED95F /* MorseCodeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MorseCodeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 				CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */,
 				CD00A9902B3A75600042E9F6 /* XCTestCase+LeakTracking.swift */,
 				CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */,
-				CD4ED4EE2B3C014900197428 /* MorseCodePresenterSpy.swift */,
 				9B9123C52C05AF5800F8D031 /* LoaderSpy.swift */,
 				9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */,
 				9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */,
@@ -443,7 +440,6 @@
 				9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */,
 				CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */,
 				9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */,
-				CD4ED4EF2B3C014900197428 /* MorseCodePresenterSpy.swift in Sources */,
 				9B32A5442BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift in Sources */,
 				CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */,
 				CD00A9912B3A75600042E9F6 /* XCTestCase+LeakTracking.swift in Sources */,
