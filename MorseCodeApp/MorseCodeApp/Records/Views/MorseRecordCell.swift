@@ -38,7 +38,7 @@ private extension MorseRecordCell {
     }
     
     func setupTitleLabel() {
-        titleLabel.textColor = .white
+        titleLabel.textColor = .white.withAlphaComponent(0.7)
         titleLabel.text = "Title"
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
@@ -60,7 +60,7 @@ private extension MorseRecordCell {
     
     func setupDeleteButton() {
         deleteButton.setBackgroundImage(.init(systemName: "trash.circle.fill"), for: .normal)
-        deleteButton.tintColor = .white
+        deleteButton.tintColor = .white.withAlphaComponent(0.6)
         deleteButton.layer.cornerRadius = 20
         deleteButton.layer.masksToBounds = true
         
@@ -74,7 +74,7 @@ private extension MorseRecordCell {
     
     func setupFlashButton() {
         flashButton.setBackgroundImage(.init(systemName: "flashlight.on.circle.fill"), for: .normal)
-        flashButton.tintColor = .white
+        flashButton.tintColor = .white.withAlphaComponent(0.6)
         flashButton.layer.cornerRadius = 20
         flashButton.layer.masksToBounds = true
         
