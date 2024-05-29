@@ -9,7 +9,7 @@ import MorseCode
 public final class MorseCodeViewController: UIViewController {
     
     // MARK: Life cycle
-    public required init(presenter: MorseCodePresenterPrototype) {
+    public required init(presenter: MorseCodePresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         
@@ -27,7 +27,7 @@ public final class MorseCodeViewController: UIViewController {
     }
     
     // MARK: Private properties
-    private var presenter: MorseCodePresenterPrototype
+    private var presenter: MorseCodePresenter
     private let convertButton = CustomButton()
     private let flashButton = CustomButton()
     private let titleLabel = UILabel()

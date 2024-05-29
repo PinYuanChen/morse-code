@@ -34,10 +34,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // MARK: - Main
     private func makeMorseCodeViewController() -> MorseCodeViewController {
-        let convertor = MorseCodeConvertor()
         let flashManager = FlashManager()
+        let presenter = MorseCodePresenter(flashManager: flashManager, localLoader: localLoader)
         
-        let morseCodeViewController = MorseCodeViewController(presenter: MorseCodePresenter(convertor: convertor, flashManager: flashManager, localLoader: localLoader))
+        let morseCodeViewController = MorseCodeViewController(presenter: presenter)
+        
         morseCodeViewController.tabBarItem = MainTabBarItem(.main)
         return morseCodeViewController
     }
