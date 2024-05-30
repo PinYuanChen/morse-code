@@ -9,6 +9,7 @@ import Foundation
 import MorseCode
 
 public protocol MorseCodePresenterDelegate: AnyObject {
+    func showError(title: String, message: String)
     func updateFlashButton(imageName: String)
 }
 
@@ -48,15 +49,19 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         return length <= MorseCodePresenter.maxInputLength
     }
     
-    public func saveToLocalStore(text: String, morseCode: String) async throws {
-        let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
-        
+    public func saveToLocalStore(newRecord: MorseRecord) async throws {
         var records = try await localLoader.load() ?? []
         records.append(newRecord)
         try await localLoader.save(records)
     }
     
-    public func playOrPauseFlashSignals(text: String) {
+    public func playOrPauseFlashSignals(text: String, enableTorch: (() -> Bool) = FlashManager.enableTorch) {
+        
+        guard enableTorch() == true else {
+            delegate?.showError(title: MorseCodePresenter.torchAlertTitle, message: MorseCodePresenter.torchAlertMessage)
+            return
+        }
+        
         if flashManager.currentStatus == .stop {
             let signals = convertToMorseFlashSignals(input: text)
             flashManager.startPlaySignals(signals: signals)
@@ -77,4 +82,10 @@ extension MorseCodePresenter {
     static let inputTextPlaceholder = NSLocalizedString("INPUT_PLACEHOLDER", comment: "user input textfield")
     
     static let morseCodePlaceholder = NSLocalizedString("MORSE_CODE_OUTPUT", comment: "morse code textfield")
+    
+    static let torchAlertTitle = NSLocalizedString("TORCH_ALERT_TITLE", comment: "torch is not open")
+    
+    static let torchAlertMessage = NSLocalizedString("TORCH_ALERT_MESSAGE", comment: "torch is not open")
+    
+    static let alertConfirmTitle = NSLocalizedString("CONFIRM", comment: "confirm button title")
 }

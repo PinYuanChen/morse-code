@@ -15,6 +15,14 @@ public class FlashManager: FlashManagerPrototype {
         self.timerScheduler = timerScheduler
     }
     
+    public static func enableTorch() -> Bool {
+        guard let device = AVCaptureDevice.default(for: .video),
+              device.hasTorch else {
+            return false
+        }
+        return true
+    }
+    
     public func startPlaySignals(signals: [FlashType]) {
         guard !signals.isEmpty else { return }
         
@@ -44,6 +52,7 @@ public class FlashManager: FlashManagerPrototype {
 
 // MARK: - Private functions
 private extension FlashManager {
+    
     func scheduleTimer() {
         guard index < signals.count else {
             stopPlayingSignals()
@@ -65,7 +74,6 @@ private extension FlashManager {
     func toggleTorch(on: Bool) {
         guard let device = AVCaptureDevice.default(for: .video),
               device.hasTorch else {
-            print("Torch isn't available")
             return
         }
         

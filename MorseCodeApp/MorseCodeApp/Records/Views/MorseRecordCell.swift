@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import MorseCode
 
 class MorseRecordCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -18,6 +19,22 @@ class MorseRecordCell: UITableViewCell {
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(_ record: MorseRecord) {
+        titleLabel.text = record.text
+        morseLabel.text = record.morseCode
+    }
+    
+    func updateButtons(isPlaying: Bool, isPlayingIndex: Bool) {
+        if isPlayingIndex {
+            flashButton.setBackgroundImage(.init(systemName: FlashStatusType.playing.imageName), for: .normal)
+            deleteButton.isEnabled = false
+        } else {
+            flashButton.setBackgroundImage(.init(systemName: FlashStatusType.stop.imageName), for: .normal)
+            flashButton.isEnabled = !isPlaying
+            deleteButton.isEnabled = !isPlaying
+        }
     }
     
     private let titleLabel = UILabel()
