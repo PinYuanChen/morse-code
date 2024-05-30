@@ -32,7 +32,16 @@ final class RecordsPresenterTests: XCTestCase {
         XCTAssertEqual(loader.receivedMessages, [.load, .save(records: [])])
     }
     
-    func test_playFlashSignals_onCorrectIndex() async throws {
+    func test_doesNotPlaySignals_onInvalidDevice() async throws {
+        let (sut, loader) = makeSUT()
+        loader.completeLoadingWith([anyRecord()])
+        try await sut.loadRecords()
+        
+        sut.playOrPauseFlash(at: 0, enableTorch: { false })
+        XCTAssertNil(sut.currentPlayingIndex)
+    }
+    
+    func test_playAndPauseFlashSignals_onCorrectIndex() async throws {
         let (sut, loader) = makeSUT()
         loader.completeLoadingWith([anyRecord()])
         try await sut.loadRecords()
