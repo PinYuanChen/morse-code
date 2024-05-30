@@ -23,6 +23,7 @@
 		9B9123C82C05B33000F8D031 /* MorseRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9123C72C05B33000F8D031 /* MorseRecordCell.swift */; };
 		9B9123CA2C05B7D000F8D031 /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9123C92C05B7D000F8D031 /* UITableView+Ext.swift */; };
 		9B9123CF2C07253200F8D031 /* MorseUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9123CE2C07253200F8D031 /* MorseUIComposer.swift */; };
+		9B9123D22C08412900F8D031 /* RecordsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9123D12C08412900F8D031 /* RecordsPresenterTests.swift */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
 		CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */; };
@@ -82,6 +83,7 @@
 		9B9123C72C05B33000F8D031 /* MorseRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseRecordCell.swift; sourceTree = "<group>"; };
 		9B9123C92C05B7D000F8D031 /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		9B9123CE2C07253200F8D031 /* MorseUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseUIComposer.swift; sourceTree = "<group>"; };
+		9B9123D12C08412900F8D031 /* RecordsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsPresenterTests.swift; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		9B9123D02C07311300F8D031 /* Records */ = {
 			isa = PBXGroup;
 			children = (
+				9B9123D12C08412900F8D031 /* RecordsPresenterTests.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				9B9123C62C05AF5800F8D031 /* LoaderSpy.swift in Sources */,
 				9B32A5422BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift in Sources */,
 				CD00A98F2B3A74F60042E9F6 /* MorseCodeViewControllerTests.swift in Sources */,
+				9B9123D22C08412900F8D031 /* RecordsPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
