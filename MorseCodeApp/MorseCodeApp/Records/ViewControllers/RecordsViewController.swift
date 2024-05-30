@@ -77,6 +77,16 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         let isPlaying = presenter.currentPlayingIndex != nil
         cell.updateButtons(isPlaying: isPlaying, isPlayingIndex: indexPath.row == presenter.currentPlayingIndex)
         
+        cell.playAction = { [unowned self] in
+            self.presenter.playOrPauseFlash(at: indexPath.row)
+        }
+        
+        cell.deleteAction = { [weak self] in
+            Task.init {
+                try await self?.presenter.deleteRecord(at: indexPath.row)
+            }
+        }
+        
         return cell
     }
 }
