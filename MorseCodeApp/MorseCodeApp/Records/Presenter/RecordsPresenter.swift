@@ -30,10 +30,24 @@ public class RecordsPresenter {
             delegate?.showError(title: RecordsPresenter.loadErrorTitle, message: RecordsPresenter.loadErrorMessage)
         }
     }
+    
+    public func deleteRecord(at index: Int) async throws {
+        records.remove(at: index)
+        do {
+            try await loader.save(records)
+            delegate?.reloadData()
+        } catch {
+            delegate?.showError(title: RecordsPresenter.deleteErrorTitle, message: RecordsPresenter.deleteErrorMessage)
+        }
+    }
 }
 
 extension RecordsPresenter {
-    static let loadErrorTitle = NSLocalizedString("LOAD_ERROR_TITLE", comment: "fail to load data")
+    static let loadErrorTitle = NSLocalizedString("LOAD_ERROR_TITLE", comment: "fail to load records")
     
-    static let loadErrorMessage = NSLocalizedString("LOAD_ERROR_MESSAGE", comment: "fail to load data")
+    static let loadErrorMessage = NSLocalizedString("LOAD_ERROR_MESSAGE", comment: "fail to load records")
+    
+    static let deleteErrorTitle = NSLocalizedString("DELETE_ERROR_TITLE", comment: "fail to delete records")
+    
+    static let deleteErrorMessage = NSLocalizedString("DELETE_ERROR_MESSAGE", comment: "fail to delete records")
 }

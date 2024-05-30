@@ -21,6 +21,17 @@ final class RecordsPresenterTests: XCTestCase {
         XCTAssertEqual(loader.receivedMessages, [.load])
     }
     
+    func test_deleteRecords() async throws {
+        let (sut, loader) = makeSUT()
+        loader.completeLoadingWith([anyRecord()])
+        
+        try await sut.loadRecords()
+        try await sut.deleteRecord(at: 0)
+        
+        XCTAssertEqual(sut.records, [])
+        XCTAssertEqual(loader.receivedMessages, [.load, .save(records: [])])
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: RecordsPresenter, loader: LoaderSpy) {
         
@@ -30,5 +41,9 @@ final class RecordsPresenterTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(loaderSpy, file: file, line: line)
         return (sut, loaderSpy)
+    }
+    
+    private func anyRecord() -> MorseRecord {
+        .init(id: UUID(), text: "any", morseCode: "any")
     }
 }

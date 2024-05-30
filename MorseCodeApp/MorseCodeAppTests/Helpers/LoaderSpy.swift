@@ -10,19 +10,24 @@ import MorseCodeApp
 
 final class LoaderSpy: MorseRecordLoaderPrototype {
     
-    enum ReceivedMessage {
+    enum ReceivedMessage: Equatable {
         case load
-        case save
+        case save(records: [MorseRecord])
     }
     
     var receivedMessages = [ReceivedMessage]()
+    var records = [MorseRecord]()
     
     func save(_ records: [MorseRecord]) async throws {
-        receivedMessages.append(.save)
+        receivedMessages.append(.save(records: records))
     }
     
     func load() async throws -> [MorseRecord]? {
         receivedMessages.append(.load)
-        return []
+        return records
+    }
+    
+    func completeLoadingWith(_ records: [MorseRecord]) {
+        self.records = records
     }
 }

@@ -215,7 +215,7 @@ private extension MorseCodeViewController {
         
         Task.init {
             try? await
-            presenter.saveToLocalStore(text: inputText, morseCode: code)
+            presenter.saveToLocalStore(newRecord: .init(id: UUID(), text: inputText, morseCode: code))
         }
     }
 }

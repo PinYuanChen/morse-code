@@ -52,9 +52,10 @@ public final class MorseCodePresenterTests: XCTestCase {
     
     func test_saveMorseCode() async throws {
         let (sut, loader) = makeSUT()
+        let record = MorseRecord(id: UUID(), text: "SOS", morseCode: sosMorseCodeString)
         
-        try await sut.saveToLocalStore(text: "SOS", morseCode: sosMorseCodeString)
-        XCTAssertEqual(loader.receivedMessages, [.load, .save])
+        try await sut.saveToLocalStore(newRecord: record)
+        XCTAssertEqual(loader.receivedMessages, [.load, .save(records: [record])])
     }
     
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {

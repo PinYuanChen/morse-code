@@ -49,9 +49,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         return length <= MorseCodePresenter.maxInputLength
     }
     
-    public func saveToLocalStore(text: String, morseCode: String) async throws {
-        let newRecord = MorseRecord(id: UUID(), text: text, morseCode: morseCode)
-        
+    public func saveToLocalStore(newRecord: MorseRecord) async throws {
         var records = try await localLoader.load() ?? []
         records.append(newRecord)
         try await localLoader.save(records)
