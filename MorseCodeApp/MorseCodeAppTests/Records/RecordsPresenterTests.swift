@@ -9,37 +9,6 @@ import XCTest
 import MorseCode
 import MorseCodeApp
 
-protocol RecordsPresenterDelegate: AnyObject {
-    func reloadData()
-    func showError(title: String, message: String)
-}
-
-class RecordsPresenter {
-    
-    weak var delegate: RecordsPresenterDelegate?
-    private(set) var records = [MorseRecord]()
-    let loader: MorseRecordLoaderPrototype
-    
-    init(loader: MorseRecordLoaderPrototype) {
-        self.loader = loader
-    }
-    
-    func loadRecords() async throws {
-        do {
-            records = try await loader.load() ?? []
-            delegate?.reloadData()
-        } catch {
-            delegate?.showError(title: RecordsPresenter.loadErrorTitle, message: RecordsPresenter.loadErrorMessage)
-        }
-    }
-}
-
-extension RecordsPresenter {
-    static let loadErrorTitle = NSLocalizedString("LOAD_ERROR_TITLE", comment: "fail to load data")
-    
-    static let loadErrorMessage = NSLocalizedString("LOAD_ERROR_MESSAGE", comment: "fail to load data")
-}
-
 final class RecordsPresenterTests: XCTestCase {
     func test_initDoesNotLoadRecords() {
         let (sut, _) = makeSUT()
