@@ -70,7 +70,10 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let record = presenter.records[indexPath.row]
         let cell = MorseRecordCell.use(table: tableView, for: indexPath)
+        cell.configure(record)
+        
         return cell
     }
 }
