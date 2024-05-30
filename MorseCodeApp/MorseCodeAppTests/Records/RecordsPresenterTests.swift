@@ -48,6 +48,8 @@ final class RecordsPresenterTests: XCTestCase {
         
         sut.playOrPauseFlash(at: 0, enableTorch: { true })
         XCTAssertEqual(sut.currentPlayingIndex, 0)
+        sut.playOrPauseFlash(at: 0, enableTorch: { true })
+        XCTAssertNil(sut.currentPlayingIndex)
     }
     
     // MARK: - Helpers
