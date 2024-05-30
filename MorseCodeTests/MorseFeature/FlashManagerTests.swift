@@ -12,26 +12,32 @@ final class FlashManagerTests: XCTestCase {
         XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
     }
     
-    func test_startPlayingEmptySignals_didNotPlay() {
+    func test_doesNotPlay_onInvalidDevice() {
         let sut = makeSUT()
-        sut.startPlaySignals(signals: [])
+        playSignals(sut, signals: [.di], enableTorch: false)
         XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
     }
     
-    func test_startPlayingNonEmptySignals_didPlay() {
+    func test_validDevice_startPlayingEmptySignals_didNotPlay() {
         let sut = makeSUT()
-        sut.startPlaySignals(signals: [.di])
+        playSignals(sut, signals: [])
+        XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
+    }
+    
+    func test_validDevice_startPlayingNonEmptySignals_didPlay() {
+        let sut = makeSUT()
+        playSignals(sut, signals: [.di])
         XCTAssertEqual(sut.currentStatus, FlashStatusType.playing)
     }
     
-    func test_stopPlayingSignals_didStop() {
+    func test_validDevice_stopPlayingSignals_didStop() {
         let sut = makeSUT()
         sut.didFinishPlaying = { [weak sut] in
             guard let sut = sut else { return }
             XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
         }
         
-        sut.startPlaySignals(signals: [.di])
+        playSignals(sut, signals: [.dah])
         sut.stopPlayingSignals()
     }
     
@@ -58,7 +64,7 @@ final class FlashManagerTests: XCTestCase {
             exp.fulfill()
         }
         
-        sut.startPlaySignals(signals: [.di])
+        playSignals(sut, signals: [.di])
         wait(for: [exp], timeout: 1)
     }
     
@@ -67,6 +73,10 @@ final class FlashManagerTests: XCTestCase {
         let sut = FlashManager(timerScheduler: timerScheduler)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
+    }
+    
+    private func playSignals(_ sut: FlashManager, signals: [FlashType], enableTorch: Bool = true) {
+        sut.startPlaySignals(signals: signals, torchEnable: { return enableTorch })
     }
     
     private func checkDuration(type: FlashType, duration: Double) {
@@ -79,7 +89,7 @@ final class FlashManagerTests: XCTestCase {
         }
         
         let sut = makeSUT(timerScheduler: timerScheduler)
-        sut.startPlaySignals(signals: [type])
+        playSignals(sut, signals: [type])
         XCTAssertEqual(timerDelay, duration, accuracy: 1)
     }
 }

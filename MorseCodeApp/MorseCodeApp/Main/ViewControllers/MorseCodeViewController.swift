@@ -40,6 +40,14 @@ public final class MorseCodeViewController: UIViewController {
 
 // MARK: - Presenter Delegate
 extension MorseCodeViewController: MorseCodePresenterDelegate {
+    public func showError(title: String, message: String) {
+        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: MorseCodePresenter.alertConfirmTitle, style: .cancel)
+        alertViewController.addAction(cancelAction)
+        
+        self.present(alertViewController, animated: false)
+    }
+    
     public func updateFlashButton(imageName: String) {
         flashButton.setBackgroundImage(.init(systemName: imageName), for: .normal)
     }

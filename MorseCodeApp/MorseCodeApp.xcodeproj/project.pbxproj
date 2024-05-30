@@ -205,6 +205,13 @@
 			path = MainTabBar;
 			sourceTree = "<group>";
 		};
+		9B9123D02C07311300F8D031 /* Records */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Records;
+			sourceTree = "<group>";
+		};
 		CD00A9892B3A74D40042E9F6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +303,7 @@
 			children = (
 				CD00A9892B3A74D40042E9F6 /* Helpers */,
 				9B10B18D2BF48E5200DD0233 /* Main */,
+				9B9123D02C07311300F8D031 /* Records */,
 			);
 			path = MorseCodeAppTests;
 			sourceTree = "<group>";

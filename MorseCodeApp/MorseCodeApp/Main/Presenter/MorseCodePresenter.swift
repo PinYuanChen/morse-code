@@ -9,6 +9,7 @@ import Foundation
 import MorseCode
 
 public protocol MorseCodePresenterDelegate: AnyObject {
+    func showError(title: String, message: String)
     func updateFlashButton(imageName: String)
 }
 
@@ -57,9 +58,16 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
     }
     
     public func playOrPauseFlashSignals(text: String) {
+        
         if flashManager.currentStatus == .stop {
             let signals = convertToMorseFlashSignals(input: text)
-            flashManager.startPlaySignals(signals: signals)
+            flashManager.startPlaySignals(signals: signals, torchEnable: {
+                let enable = FlashManager.enableTorch()
+                if !enable {
+                    delegate?.showError(title: MorseCodePresenter.torchAlertTitle, message: MorseCodePresenter.torchAlertMessage)
+                }
+                return enable
+            })
         } else {
             flashManager.stopPlayingSignals()
         }
@@ -77,4 +85,10 @@ extension MorseCodePresenter {
     static let inputTextPlaceholder = NSLocalizedString("INPUT_PLACEHOLDER", comment: "user input textfield")
     
     static let morseCodePlaceholder = NSLocalizedString("MORSE_CODE_OUTPUT", comment: "morse code textfield")
+    
+    static let torchAlertTitle = NSLocalizedString("TORCH_ALERT_TITLE", comment: "torch is not open")
+    
+    static let torchAlertMessage = NSLocalizedString("TORCH_ALERT_MESSAGE", comment: "torch is not open")
+    
+    static let alertConfirmTitle = NSLocalizedString("CONFIRM", comment: "confirm button title")
 }
