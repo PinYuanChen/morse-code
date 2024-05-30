@@ -26,6 +26,10 @@ public class RecordsViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         Task.init {
             try await presenter.loadRecords()
         }
