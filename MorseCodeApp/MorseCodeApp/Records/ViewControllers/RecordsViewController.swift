@@ -74,6 +74,9 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = MorseRecordCell.use(table: tableView, for: indexPath)
         cell.configure(record)
         
+        let isPlaying = presenter.currentPlayingIndex != nil
+        cell.updateButtons(isPlaying: isPlaying, isPlayingIndex: indexPath.row == presenter.currentPlayingIndex)
+        
         return cell
     }
 }

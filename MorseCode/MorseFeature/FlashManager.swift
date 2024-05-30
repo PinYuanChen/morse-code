@@ -23,9 +23,8 @@ public class FlashManager: FlashManagerPrototype {
         return true
     }
     
-    public func startPlaySignals(signals: [FlashType], torchEnable: (() -> Bool)) {
-        guard !signals.isEmpty,
-        torchEnable() else { return }
+    public func startPlaySignals(signals: [FlashType]) {
+        guard !signals.isEmpty else { return }
         
         self.signals = signals
         currentStatus = .playing

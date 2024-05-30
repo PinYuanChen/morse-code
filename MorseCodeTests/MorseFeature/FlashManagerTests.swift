@@ -12,21 +12,15 @@ final class FlashManagerTests: XCTestCase {
         XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
     }
     
-    func test_doesNotPlay_onInvalidDevice() {
-        let sut = makeSUT()
-        playSignals(sut, signals: [.di], enableTorch: false)
-        XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
-    }
-    
     func test_validDevice_startPlayingEmptySignals_didNotPlay() {
         let sut = makeSUT()
-        playSignals(sut, signals: [])
+        sut.startPlaySignals(signals: [])
         XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
     }
     
     func test_validDevice_startPlayingNonEmptySignals_didPlay() {
         let sut = makeSUT()
-        playSignals(sut, signals: [.di])
+        sut.startPlaySignals(signals: [.di])
         XCTAssertEqual(sut.currentStatus, FlashStatusType.playing)
     }
     
@@ -36,8 +30,7 @@ final class FlashManagerTests: XCTestCase {
             guard let sut = sut else { return }
             XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
         }
-        
-        playSignals(sut, signals: [.dah])
+        sut.startPlaySignals(signals: [.dah])
         sut.stopPlayingSignals()
     }
     
@@ -64,7 +57,7 @@ final class FlashManagerTests: XCTestCase {
             exp.fulfill()
         }
         
-        playSignals(sut, signals: [.di])
+        sut.startPlaySignals(signals: [.di])
         wait(for: [exp], timeout: 1)
     }
     
@@ -73,10 +66,6 @@ final class FlashManagerTests: XCTestCase {
         let sut = FlashManager(timerScheduler: timerScheduler)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
-    }
-    
-    private func playSignals(_ sut: FlashManager, signals: [FlashType], enableTorch: Bool = true) {
-        sut.startPlaySignals(signals: signals, torchEnable: { return enableTorch })
     }
     
     private func checkDuration(type: FlashType, duration: Double) {
@@ -89,7 +78,7 @@ final class FlashManagerTests: XCTestCase {
         }
         
         let sut = makeSUT(timerScheduler: timerScheduler)
-        playSignals(sut, signals: [type])
+        sut.startPlaySignals(signals: [type])
         XCTAssertEqual(timerDelay, duration, accuracy: 1)
     }
 }

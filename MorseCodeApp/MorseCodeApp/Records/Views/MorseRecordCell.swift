@@ -26,6 +26,17 @@ class MorseRecordCell: UITableViewCell {
         morseLabel.text = record.morseCode
     }
     
+    func updateButtons(isPlaying: Bool, isPlayingIndex: Bool) {
+        if isPlayingIndex {
+            flashButton.setBackgroundImage(.init(systemName: FlashStatusType.playing.imageName), for: .normal)
+            deleteButton.isEnabled = false
+        } else {
+            flashButton.setBackgroundImage(.init(systemName: FlashStatusType.stop.imageName), for: .normal)
+            flashButton.isEnabled = !isPlaying
+            deleteButton.isEnabled = !isPlaying
+        }
+    }
+    
     private let titleLabel = UILabel()
     private let morseLabel = UILabel()
     private let flashButton = CustomButton()

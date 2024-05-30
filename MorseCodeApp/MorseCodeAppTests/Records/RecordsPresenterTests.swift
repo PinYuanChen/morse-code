@@ -32,6 +32,15 @@ final class RecordsPresenterTests: XCTestCase {
         XCTAssertEqual(loader.receivedMessages, [.load, .save(records: [])])
     }
     
+    func test_playFlashSignals_onCorrectIndex() async throws {
+        let (sut, loader) = makeSUT()
+        loader.completeLoadingWith([anyRecord()])
+        try await sut.loadRecords()
+        
+        sut.playOrPauseFlash(at: 0, enableTorch: { true })
+        XCTAssertEqual(sut.currentPlayingIndex, 0)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: RecordsPresenter, loader: LoaderSpy) {
         
@@ -44,6 +53,6 @@ final class RecordsPresenterTests: XCTestCase {
     }
     
     private func anyRecord() -> MorseRecord {
-        .init(id: UUID(), text: "any", morseCode: "any")
+        .init(id: UUID(), text: "any", morseCode: "... ---")
     }
 }

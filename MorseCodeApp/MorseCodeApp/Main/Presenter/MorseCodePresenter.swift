@@ -55,17 +55,16 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         try await localLoader.save(records)
     }
     
-    public func playOrPauseFlashSignals(text: String) {
+    public func playOrPauseFlashSignals(text: String, enableTorch: (() -> Bool) = FlashManager.enableTorch) {
+        
+        guard enableTorch() == true else {
+            delegate?.showError(title: MorseCodePresenter.torchAlertTitle, message: MorseCodePresenter.torchAlertMessage)
+            return
+        }
         
         if flashManager.currentStatus == .stop {
             let signals = convertToMorseFlashSignals(input: text)
-            flashManager.startPlaySignals(signals: signals, torchEnable: {
-                let enable = FlashManager.enableTorch()
-                if !enable {
-                    delegate?.showError(title: MorseCodePresenter.torchAlertTitle, message: MorseCodePresenter.torchAlertMessage)
-                }
-                return enable
-            })
+            flashManager.startPlaySignals(signals: signals)
         } else {
             flashManager.stopPlayingSignals()
         }
