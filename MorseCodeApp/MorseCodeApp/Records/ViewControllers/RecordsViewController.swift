@@ -60,7 +60,11 @@ extension RecordsViewController: RecordsPresenterDelegate {
     }
     
     public func showError(title: String, message: String) {
-        // TODO
+        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: MorseCodePresenter.alertConfirmTitle, style: .cancel)
+        alertViewController.addAction(cancelAction)
+        
+        self.present(alertViewController, animated: false)
     }
 }
 
