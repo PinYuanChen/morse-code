@@ -16,10 +16,17 @@ public class RecordsPresenter {
     
     public weak var delegate: RecordsPresenterDelegate?
     public private(set) var records = [MorseRecord]()
+    public var flashManager: FlashManagerPrototype
     public let loader: MorseRecordLoaderPrototype
     
-    public init(loader: MorseRecordLoaderPrototype) {
+    public init(flashManager: FlashManagerPrototype,
+                loader: MorseRecordLoaderPrototype) {
+        self.flashManager = flashManager
         self.loader = loader
+        
+        self.flashManager.didFinishPlaying = { [unowned self] in
+            self.delegate?.reloadData()
+        }
     }
     
     public func loadRecords() async throws {

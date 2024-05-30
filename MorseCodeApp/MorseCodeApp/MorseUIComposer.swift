@@ -22,7 +22,8 @@ final public class MorseUIComposer {
     }
     
     public static func composeRecords(loader: MorseRecordLoaderPrototype) -> RecordsViewController {
-        let presenter = RecordsPresenter(loader: loader)
+        let flashManager = FlashManager()
+        let presenter = RecordsPresenter(flashManager: flashManager,loader: loader)
         
         let recordsViewController = RecordsViewController(presenter: presenter)
         recordsViewController.tabBarItem = MainTabBarItem(.records)

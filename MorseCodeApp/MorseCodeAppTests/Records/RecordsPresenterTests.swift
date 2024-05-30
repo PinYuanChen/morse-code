@@ -36,7 +36,7 @@ final class RecordsPresenterTests: XCTestCase {
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: RecordsPresenter, loader: LoaderSpy) {
         
         let loaderSpy = LoaderSpy()
-        let sut = RecordsPresenter(loader: loaderSpy)
+        let sut = RecordsPresenter(flashManager: FlashManager(), loader: loaderSpy)
         
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(loaderSpy, file: file, line: line)
