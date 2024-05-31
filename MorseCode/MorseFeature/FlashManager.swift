@@ -23,11 +23,11 @@ public class FlashManager: FlashManagerPrototype {
         return true
     }
     
-    public func startPlaySignals(signals: [FlashType]) {
+    public func startPlaySignals(signals: [FlashType], uuid: UUID = .init()) {
         guard !signals.isEmpty else { return }
         
         self.signals = signals
-        currentStatus = .playing
+        currentStatus = .playing(id: uuid)
         scheduleTimer()
     }
     

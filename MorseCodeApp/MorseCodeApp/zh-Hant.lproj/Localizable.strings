@@ -6,9 +6,16 @@
   
 */
 
+"MAIN" = "主頁";
+"RECORDS" = "紀錄";
 "MORSE_FLASH_TITLE" = "摩斯手電筒";
 "PLAY" = "播放";
 "STOP" = "停止";
 "INPUT_PLACEHOLDER" = "輸入訊息";
 "MORSE_CODE_OUTPUT" = "摩斯密碼";
 "CONVERT" = "轉譯";
+"TORCH_ALERT_MESSAGE" = "手電筒無法使用";
+"CONFIRM" = "確認";
+"ALERT_TITLE" = "警告";
+"LOAD_ERROR_MESSAGE" = "載入失敗";
+"DELETE_ERROR_MESSAGE" = "刪除失敗";

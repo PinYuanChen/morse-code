@@ -20,8 +20,9 @@ final class FlashManagerTests: XCTestCase {
     
     func test_validDevice_startPlayingNonEmptySignals_didPlay() {
         let sut = makeSUT()
-        sut.startPlaySignals(signals: [.di])
-        XCTAssertEqual(sut.currentStatus, FlashStatusType.playing)
+        let id = UUID()
+        sut.startPlaySignals(signals: [.di], uuid: id)
+        XCTAssertEqual(sut.currentStatus, FlashStatusType.playing(id: id))
     }
     
     func test_validDevice_stopPlayingSignals_didStop() {

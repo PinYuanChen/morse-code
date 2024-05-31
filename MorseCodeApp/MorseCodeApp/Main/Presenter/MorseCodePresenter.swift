@@ -9,8 +9,8 @@ import Foundation
 import MorseCode
 
 public protocol MorseCodePresenterDelegate: AnyObject {
-    func showError(title: String, message: String)
-    func updateFlashButton(imageName: String)
+    func showError(title: String?, message: String)
+    func updateFlashButton(imageName: String, enable: Bool)
 }
 
 public class MorseCodePresenter: MorseCodeConvertorPrototype {
@@ -20,6 +20,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
     public weak var delegate: MorseCodePresenterDelegate?
     public var flashManager: FlashManagerPrototype
     public let localLoader: MorseRecordLoaderPrototype
+    public var presentedUUID: UUID?
     
     public required init(flashManager: FlashManagerPrototype,
                          localLoader: MorseRecordLoaderPrototype) {
@@ -27,7 +28,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         self.localLoader = localLoader
         
         self.flashManager.didFinishPlaying = { [unowned self] in
-            self.delegate?.updateFlashButton(imageName: FlashStatusType.stop.imageName)
+            self.delegate?.updateFlashButton(imageName: FlashStatusType.stop.imageName, enable: self.presentedUUID != nil)
         }
     }
     
@@ -50,26 +51,64 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
     }
     
     public func saveToLocalStore(newRecord: MorseRecord) async throws {
+        presentedUUID = newRecord.id
+        
         var records = try await localLoader.load() ?? []
         records.append(newRecord)
         try await localLoader.save(records)
     }
     
+    public func getFlashButtonStatus() {
+        let (status, enable) = getFlashButtonStatus()
+        delegate?.updateFlashButton(imageName: status.imageName, enable: enable)
+    }
+    
+    private func getFlashButtonStatus() -> (status: FlashStatusType, enable: Bool) {
+        guard let presentedUUID = presentedUUID else {
+            return (status: .stop, enable: false)
+        }
+        
+        if case let .playing(id: uuid) = flashManager.currentStatus {
+            if uuid == presentedUUID {
+                return (status: .playing(id: uuid), enable: true)
+            } else {
+                return (status: .stop, enable: false)
+            }
+        } else {
+            return (status: .stop, enable: true)
+        }
+    }
+    
     public func playOrPauseFlashSignals(text: String, enableTorch: (() -> Bool) = FlashManager.enableTorch) {
         
         guard enableTorch() == true else {
-            delegate?.showError(title: MorseCodePresenter.torchAlertTitle, message: MorseCodePresenter.torchAlertMessage)
+            delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
             return
         }
         
-        if flashManager.currentStatus == .stop {
+        guard let presentedUUID = presentedUUID else {
+            delegate?.updateFlashButton(imageName: FlashStatusType.stop.imageName, enable: false)
+            return
+        }
+        
+        let flashStatus: FlashStatusType
+        var enable = true
+        
+        switch flashManager.currentStatus {
+        case .stop:
             let signals = convertToMorseFlashSignals(input: text)
-            flashManager.startPlaySignals(signals: signals)
-        } else {
-            flashManager.stopPlayingSignals()
+            flashManager.startPlaySignals(signals: signals, uuid: presentedUUID)
+            flashStatus = .playing(id: presentedUUID)
+        case let .playing(id: uuid):
+            flashStatus = .stop
+            if uuid == presentedUUID {
+                flashManager.stopPlayingSignals()
+            } else {
+                enable = false
+            }
         }
 
-        delegate?.updateFlashButton(imageName: flashManager.currentStatus.imageName)
+        delegate?.updateFlashButton(imageName: flashStatus.imageName, enable: enable)
     }
 }
 
@@ -82,8 +121,6 @@ extension MorseCodePresenter {
     static let inputTextPlaceholder = NSLocalizedString("INPUT_PLACEHOLDER", comment: "user input textfield")
     
     static let morseCodePlaceholder = NSLocalizedString("MORSE_CODE_OUTPUT", comment: "morse code textfield")
-    
-    static let torchAlertTitle = NSLocalizedString("TORCH_ALERT_TITLE", comment: "torch is not open")
     
     static let torchAlertMessage = NSLocalizedString("TORCH_ALERT_MESSAGE", comment: "torch is not open")
     

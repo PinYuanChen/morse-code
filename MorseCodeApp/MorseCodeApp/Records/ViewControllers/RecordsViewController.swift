@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import MorseCode
 
 public class RecordsViewController: UIViewController {
     
@@ -26,6 +27,10 @@ public class RecordsViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         Task.init {
             try await presenter.loadRecords()
         }
@@ -59,8 +64,12 @@ extension RecordsViewController: RecordsPresenterDelegate {
         }
     }
     
-    public func showError(title: String, message: String) {
-        // TODO
+    public func showError(title: String?, message: String) {
+        let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: MorseCodePresenter.alertConfirmTitle, style: .cancel)
+        alertViewController.addAction(cancelAction)
+        
+        self.present(alertViewController, animated: false)
     }
 }
 
@@ -74,8 +83,17 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = MorseRecordCell.use(table: tableView, for: indexPath)
         cell.configure(record)
         
-        let isPlaying = presenter.currentPlayingIndex != nil
-        cell.updateButtons(isPlaying: isPlaying, isPlayingIndex: indexPath.row == presenter.currentPlayingIndex)
+        cell.updateButtons(status: presenter.currentFlashStatus, recordId: record.id)
+        
+        cell.playAction = { [unowned self] in
+            self.presenter.playOrPauseFlash(at: indexPath.row)
+        }
+        
+        cell.deleteAction = { [weak self] in
+            Task.init {
+                try await self?.presenter.deleteRecord(at: indexPath.row)
+            }
+        }
         
         return cell
     }

@@ -13,8 +13,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let morseCodeViewController = MorseUIComposer.composeMorseCode(with: localLoader)
-        let recordsViewController = MorseUIComposer.composeRecords(loader: localLoader)
+        
+        let flashManager = FlashManager()
+        
+        let morseCodeViewController = MorseUIComposer.composeMorseCode(with: localLoader, flashManager: flashManager)
+        
+        let recordsViewController = MorseUIComposer.composeRecords(with: localLoader, flashManager: flashManager)
         
         let mainTabBarController = MainTabBarController(viewControllers: [morseCodeViewController, recordsViewController])
         

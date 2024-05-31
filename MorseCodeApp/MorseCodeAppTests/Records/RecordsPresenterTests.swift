@@ -38,18 +38,19 @@ final class RecordsPresenterTests: XCTestCase {
         try await sut.loadRecords()
         
         sut.playOrPauseFlash(at: 0, enableTorch: { false })
-        XCTAssertNil(sut.currentPlayingIndex)
+        XCTAssertEqual(sut.currentFlashStatus, .stop)
     }
     
     func test_playAndPauseFlashSignals_onCorrectIndex() async throws {
         let (sut, loader) = makeSUT()
-        loader.completeLoadingWith([anyRecord()])
+        let record = anyRecord()
+        loader.completeLoadingWith([record])
         try await sut.loadRecords()
         
         sut.playOrPauseFlash(at: 0, enableTorch: { true })
-        XCTAssertEqual(sut.currentPlayingIndex, 0)
+        XCTAssertEqual(sut.currentFlashStatus, .playing(id: record.id))
         sut.playOrPauseFlash(at: 0, enableTorch: { true })
-        XCTAssertNil(sut.currentPlayingIndex)
+        XCTAssertEqual(sut.currentFlashStatus, .stop)
     }
     
     // MARK: - Helpers

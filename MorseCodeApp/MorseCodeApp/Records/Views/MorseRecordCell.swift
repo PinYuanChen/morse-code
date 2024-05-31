@@ -10,10 +10,20 @@ import SnapKit
 import MorseCode
 
 class MorseRecordCell: UITableViewCell {
+    
+    var playAction: (() -> Void)?
+    var deleteAction: (() -> Void)?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         setupUI()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        playAction = nil
+        deleteAction = nil
     }
     
     @available(*, unavailable)
@@ -26,14 +36,22 @@ class MorseRecordCell: UITableViewCell {
         morseLabel.text = record.morseCode
     }
     
-    func updateButtons(isPlaying: Bool, isPlayingIndex: Bool) {
-        if isPlayingIndex {
-            flashButton.setBackgroundImage(.init(systemName: FlashStatusType.playing.imageName), for: .normal)
-            deleteButton.isEnabled = false
+    func updateButtons(status: FlashStatusType, recordId: UUID) {
+        
+        if case .playing(let id) = status {
+            if id == recordId {
+                flashButton.setBackgroundImage(.init(systemName: status.imageName), for: .normal)
+                flashButton.isEnabled = true
+                deleteButton.isEnabled = false
+            } else {
+                flashButton.setBackgroundImage(.init(systemName: FlashStatusType.stop.imageName), for: .normal)
+                flashButton.isEnabled = false
+                deleteButton.isEnabled = false
+            }
         } else {
-            flashButton.setBackgroundImage(.init(systemName: FlashStatusType.stop.imageName), for: .normal)
-            flashButton.isEnabled = !isPlaying
-            deleteButton.isEnabled = !isPlaying
+            flashButton.setBackgroundImage(.init(systemName: status.imageName), for: .normal)
+            flashButton.isEnabled = true
+            deleteButton.isEnabled = true
         }
     }
     
@@ -80,6 +98,7 @@ private extension MorseRecordCell {
         deleteButton.tintColor = .white.withAlphaComponent(0.6)
         deleteButton.layer.cornerRadius = 20
         deleteButton.layer.masksToBounds = true
+        deleteButton.addTarget(self, action: #selector(didTappedDeleteButton), for: .touchUpInside)
         
         contentView.addSubview(deleteButton)
         deleteButton.snp.makeConstraints {
@@ -94,6 +113,7 @@ private extension MorseRecordCell {
         flashButton.tintColor = .white.withAlphaComponent(0.6)
         flashButton.layer.cornerRadius = 20
         flashButton.layer.masksToBounds = true
+        flashButton.addTarget(self, action: #selector(didTappedFlashButton), for: .touchUpInside)
         
         contentView.addSubview(flashButton)
         flashButton.snp.makeConstraints {
@@ -103,3 +123,12 @@ private extension MorseRecordCell {
     }
 }
 
+private extension MorseRecordCell {
+    @objc func didTappedFlashButton() {
+        playAction?()
+    }
+    
+    @objc func didTappedDeleteButton() {
+        deleteAction?()
+    }
+}

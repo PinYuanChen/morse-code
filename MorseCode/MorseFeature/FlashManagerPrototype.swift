@@ -6,18 +6,18 @@ import Foundation
 
 public protocol FlashManagerPrototype {
     var currentStatus: FlashStatusType { get }
-    func startPlaySignals(signals: [FlashType])
+    func startPlaySignals(signals: [FlashType], uuid: UUID)
     func stopPlayingSignals()
     var didFinishPlaying: (() -> Void)? { get set }
 }
 
-public enum FlashStatusType {
-    case playing
+public enum FlashStatusType: Equatable {
+    case playing(id: UUID)
     case stop
     
     public var imageName: String {
         switch self {
-        case .playing:
+        case .playing(_):
             return "flashlight.slash.circle.fill"
         case .stop:
             return "flashlight.on.circle.fill"

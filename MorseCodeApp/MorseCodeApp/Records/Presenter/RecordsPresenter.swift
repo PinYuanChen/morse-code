@@ -9,14 +9,18 @@ import MorseCode
 
 public protocol RecordsPresenterDelegate: AnyObject {
     func reloadData()
-    func showError(title: String, message: String)
+    func showError(title: String?, message: String)
 }
 
 public class RecordsPresenter: MorseCodeConvertorPrototype {
     
     public weak var delegate: RecordsPresenterDelegate?
     public private(set) var records = [MorseRecord]()
-    public private(set) var currentPlayingIndex: Int?
+    public var currentFlashStatus: FlashStatusType {
+        get {
+            flashManager.currentStatus
+        }
+    }
     public var flashManager: FlashManagerPrototype
     public let loader: MorseRecordLoaderPrototype
     
@@ -26,7 +30,6 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
         self.loader = loader
         
         self.flashManager.didFinishPlaying = { [unowned self] in
-            self.currentPlayingIndex = nil
             self.delegate?.reloadData()
         }
     }
@@ -36,7 +39,7 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
             records = try await loader.load() ?? []
             delegate?.reloadData()
         } catch {
-            delegate?.showError(title: RecordsPresenter.loadErrorTitle, message: RecordsPresenter.loadErrorMessage)
+            delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.loadErrorMessage)
         }
     }
     
@@ -46,25 +49,25 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
             try await loader.save(records)
             delegate?.reloadData()
         } catch {
-            delegate?.showError(title: RecordsPresenter.deleteErrorTitle, message: RecordsPresenter.deleteErrorMessage)
+            delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.deleteErrorMessage)
         }
     }
     
     public func playOrPauseFlash(at index: Int, enableTorch: (() -> Bool) = FlashManager.enableTorch) {
         
         guard enableTorch() == true else {
-            delegate?.showError(title: MorseCodePresenter.torchAlertTitle, message: MorseCodePresenter.torchAlertMessage)
+            delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
             return
         }
         
-        if currentPlayingIndex == index {
-            flashManager.stopPlayingSignals()
-            currentPlayingIndex = nil
+        let record = records[index]
+        if case .playing(id: let uuid) = flashManager.currentStatus {
+            if uuid == record.id {
+                flashManager.stopPlayingSignals()
+            }
         } else {
-            let morseCode = records[index].morseCode
-            let signals = convertToMorseFlashSignals(input: morseCode)
-            flashManager.startPlaySignals(signals: signals)
-            currentPlayingIndex = index
+            let signals = convertToMorseFlashSignals(input: record.morseCode)
+            flashManager.startPlaySignals(signals: signals, uuid: record.id)
         }
         
         delegate?.reloadData()
@@ -72,11 +75,9 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
 }
 
 extension RecordsPresenter {
-    static let loadErrorTitle = NSLocalizedString("LOAD_ERROR_TITLE", comment: "fail to load records")
+    static let alertTitle = NSLocalizedString("ALERT_TITLE", comment: "alert title")
     
     static let loadErrorMessage = NSLocalizedString("LOAD_ERROR_MESSAGE", comment: "fail to load records")
-    
-    static let deleteErrorTitle = NSLocalizedString("DELETE_ERROR_TITLE", comment: "fail to delete records")
     
     static let deleteErrorMessage = NSLocalizedString("DELETE_ERROR_MESSAGE", comment: "fail to delete records")
 }
