@@ -36,14 +36,22 @@ class MorseRecordCell: UITableViewCell {
         morseLabel.text = record.morseCode
     }
     
-    func updateButtons(isPlaying: Bool, isPlayingIndex: Bool) {
-        if isPlayingIndex {
-            flashButton.setBackgroundImage(.init(systemName: FlashStatusType.playing.imageName), for: .normal)
-            deleteButton.isEnabled = false
+    func updateButtons(status: FlashStatusType, recordId: UUID) {
+        
+        if case .playing(let id) = status {
+            if id == recordId {
+                flashButton.setBackgroundImage(.init(systemName: status.imageName), for: .normal)
+                flashButton.isEnabled = true
+                deleteButton.isEnabled = false
+            } else {
+                flashButton.setBackgroundImage(.init(systemName: FlashStatusType.stop.imageName), for: .normal)
+                flashButton.isEnabled = false
+                deleteButton.isEnabled = false
+            }
         } else {
-            flashButton.setBackgroundImage(.init(systemName: FlashStatusType.stop.imageName), for: .normal)
-            flashButton.isEnabled = !isPlaying
-            deleteButton.isEnabled = !isPlaying
+            flashButton.setBackgroundImage(.init(systemName: status.imageName), for: .normal)
+            flashButton.isEnabled = true
+            deleteButton.isEnabled = true
         }
     }
     

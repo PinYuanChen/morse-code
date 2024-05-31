@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import MorseCode
 
 public class RecordsViewController: UIViewController {
     
@@ -63,7 +64,7 @@ extension RecordsViewController: RecordsPresenterDelegate {
         }
     }
     
-    public func showError(title: String, message: String) {
+    public func showError(title: String?, message: String) {
         let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: MorseCodePresenter.alertConfirmTitle, style: .cancel)
         alertViewController.addAction(cancelAction)
@@ -82,8 +83,7 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = MorseRecordCell.use(table: tableView, for: indexPath)
         cell.configure(record)
         
-        let isPlaying = presenter.currentPlayingIndex != nil
-        cell.updateButtons(isPlaying: isPlaying, isPlayingIndex: indexPath.row == presenter.currentPlayingIndex)
+        cell.updateButtons(status: presenter.currentFlashStatus, recordId: record.id)
         
         cell.playAction = { [unowned self] in
             self.presenter.playOrPauseFlash(at: indexPath.row)

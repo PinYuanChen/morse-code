@@ -26,6 +26,11 @@ public final class MorseCodeViewController: UIViewController {
         setupUI()
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.getFlashButtonStatus()
+    }
+    
     // MARK: Private properties
     private var presenter: MorseCodePresenter
     private let convertButton = CustomButton()
@@ -40,7 +45,7 @@ public final class MorseCodeViewController: UIViewController {
 
 // MARK: - Presenter Delegate
 extension MorseCodeViewController: MorseCodePresenterDelegate {
-    public func showError(title: String, message: String) {
+    public func showError(title: String?, message: String) {
         let alertViewController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: MorseCodePresenter.alertConfirmTitle, style: .cancel)
         alertViewController.addAction(cancelAction)
@@ -48,8 +53,9 @@ extension MorseCodeViewController: MorseCodePresenterDelegate {
         self.present(alertViewController, animated: false)
     }
     
-    public func updateFlashButton(imageName: String) {
+    public func updateFlashButton(imageName: String, enable: Bool) {
         flashButton.setBackgroundImage(.init(systemName: imageName), for: .normal)
+        flashButton.isEnabled = enable
     }
 }
 
@@ -207,7 +213,6 @@ private extension MorseCodeViewController {
     
     func displayMorseCode(code: String) {
         morseTextField.text = code
-        flashButton.isEnabled = true
         
         guard let inputText = inputTextField.text else {
             return
@@ -216,6 +221,7 @@ private extension MorseCodeViewController {
         Task.init {
             try? await
             presenter.saveToLocalStore(newRecord: .init(id: UUID(), text: inputText, morseCode: code))
+            presenter.getFlashButtonStatus()
         }
     }
 }
