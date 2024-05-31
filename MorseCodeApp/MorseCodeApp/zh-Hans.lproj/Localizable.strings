@@ -6,9 +6,16 @@
   
 */
 
+"MAIN" = "主页";
+"RECORDS" = "纪录";
 "MORSE_FLASH_TITLE" = "摩尔斯手电筒";
 "PLAY" = "播放";
 "STOP" = "停止";
 "INPUT_PLACEHOLDER" = "输入信息";
 "MORSE_CODE_OUTPUT" = "摩尔斯电码";
 "CONVERT" = "转译";
+"TORCH_ALERT_MESSAGE" = "手电筒无法使用";
+"CONFIRM" = "确认";
+"ALERT_TITLE" = "警告";
+"LOAD_ERROR_MESSAGE" = "载入失败";
+"DELETE_ERROR_MESSAGE" = "删除失败";
