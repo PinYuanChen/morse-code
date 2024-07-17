@@ -14,7 +14,7 @@
 "INPUT_PLACEHOLDER" = "输入信息";
 "MORSE_CODE_OUTPUT" = "摩尔斯电码";
 "CONVERT" = "转译";
-"TORCH_ALERT_MESSAGE" = "手电筒无法使用";
+"TORCH_ALERT_MESSAGE" = "您的装置无手电筒功能，无法使用手电筒讯号。";
 "CONFIRM" = "确认";
 "ALERT_TITLE" = "警告";
 "LOAD_ERROR_MESSAGE" = "载入失败";

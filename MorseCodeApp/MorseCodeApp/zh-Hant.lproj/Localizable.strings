@@ -14,7 +14,7 @@
 "INPUT_PLACEHOLDER" = "輸入訊息";
 "MORSE_CODE_OUTPUT" = "摩斯密碼";
 "CONVERT" = "轉譯";
-"TORCH_ALERT_MESSAGE" = "手電筒無法使用";
+"TORCH_ALERT_MESSAGE" = "您的裝置無手電筒功能，無法使用手電筒訊號。";
 "CONFIRM" = "確認";
 "ALERT_TITLE" = "警告";
 "LOAD_ERROR_MESSAGE" = "載入失敗";

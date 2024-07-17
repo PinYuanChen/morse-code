@@ -14,7 +14,7 @@
 "INPUT_PLACEHOLDER" = "Input your message here.";
 "MORSE_CODE_OUTPUT" = "Morse code output";
 "CONVERT" = "Convert";
-"TORCH_ALERT_MESSAGE" = "Torch is not available.";
+"TORCH_ALERT_MESSAGE" = "Your device does not have a flashlight function so you cannot use flashlight signals feature.";
 "CONFIRM" = "Confirm";
 "ALERT_TITLE" = "Warning";
 "LOAD_ERROR_MESSAGE" = "Fail to load records.";
