@@ -31,6 +31,11 @@ public final class MorseCodeViewController: UIViewController {
         presenter.getFlashButtonStatus()
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        presenter.checkFirstTime()
+    }
+    
     // MARK: Private properties
     private var presenter: MorseCodePresenter
     private let convertButton = CustomButton()

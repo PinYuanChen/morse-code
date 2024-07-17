@@ -32,6 +32,16 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         }
     }
     
+    public func checkFirstTime() {
+        guard let _ = UserDefaults.standard.value(forKey: "HaveCheckedFirstTime") else {
+            if !FlashManager.enableTorch() {
+                delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
+            }
+            UserDefaults.standard.setValue(true, forKey: "HaveCheckedFirstTime")
+            return
+        }
+    }
+    
     public func convertToMorseCode(text: String) -> String {
         return convertToMorseCode(input: text)
     }
