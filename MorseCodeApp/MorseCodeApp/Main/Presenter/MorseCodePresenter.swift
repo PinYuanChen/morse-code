@@ -64,7 +64,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         presentedUUID = newRecord.id
         
         var records = try await localLoader.load() ?? []
-        records.append(newRecord)
+        records.insert(newRecord, at: 0)
         try await localLoader.save(records)
     }
     
