@@ -36,6 +36,7 @@ public class RecordsViewController: UIViewController {
         }
     }
 
+    private let emptyLabel = UILabel()
     private let tableView = UITableView()
 }
 
@@ -43,6 +44,7 @@ private extension RecordsViewController {
     func setupUI() {
         view.backgroundColor = .bg04121F
         setupTableView()
+        setupEmptyLabel()
     }
     
     func setupTableView() {
@@ -55,11 +57,25 @@ private extension RecordsViewController {
             $0.edges.equalToSuperview()
         }
     }
+    
+    func setupEmptyLabel() {
+        emptyLabel.text = NSLocalizedString("EMPTY_RECORD_MESSAGE", comment: "Records view controller")
+        emptyLabel.numberOfLines = 0
+        emptyLabel.textAlignment = .center
+        emptyLabel.textColor = .bg275452
+        view.addSubview(emptyLabel)
+        emptyLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(100)
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview().offset(-50)
+        }
+    }
 }
 
 extension RecordsViewController: RecordsPresenterDelegate {
     public func reloadData() {
         DispatchQueue.main.async { [unowned self] in
+            self.emptyLabel.isHidden = !self.presenter.records.isEmpty
             self.tableView.reloadData()
         }
     }

@@ -32,6 +32,16 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         }
     }
     
+    public func checkFirstTime() {
+        guard let _ = UserDefaults.standard.value(forKey: "HaveCheckedFirstTime") else {
+            if !FlashManager.enableTorch() {
+                delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
+            }
+            UserDefaults.standard.setValue(true, forKey: "HaveCheckedFirstTime")
+            return
+        }
+    }
+    
     public func convertToMorseCode(text: String) -> String {
         return convertToMorseCode(input: text)
     }
@@ -54,7 +64,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         presentedUUID = newRecord.id
         
         var records = try await localLoader.load() ?? []
-        records.append(newRecord)
+        records.insert(newRecord, at: 0)
         try await localLoader.save(records)
     }
     

@@ -14,8 +14,9 @@
 "INPUT_PLACEHOLDER" = "输入信息";
 "MORSE_CODE_OUTPUT" = "摩尔斯电码";
 "CONVERT" = "转译";
-"TORCH_ALERT_MESSAGE" = "手电筒无法使用";
+"TORCH_ALERT_MESSAGE" = "您的装置无手电筒功能，无法使用手电筒讯号。";
 "CONFIRM" = "确认";
 "ALERT_TITLE" = "警告";
 "LOAD_ERROR_MESSAGE" = "载入失败";
 "DELETE_ERROR_MESSAGE" = "删除失败";
+"EMPTY_RECORD_MESSAGE" = "尚未有任何纪录。\n您在主页将文字转换为摩斯电码后，系统会自动将您的纪录储存并显示在此页。";
