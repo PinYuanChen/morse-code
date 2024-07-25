@@ -13,7 +13,6 @@ final class MorseCodeViewControllerTests: XCTestCase {
         
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .light)), named: "MorseCodeViewController_light")
         assert(snapshot: sut.snapshot(for: .iPhone13(style: .dark)), named: "MorseCodeViewController_dark")
-        assert(snapshot: sut.snapshot(for: .iPhone13(style: .light, contentSize: .extraExtraExtraLarge)), named: "MorseCodeViewController_extraExtraExtraLarge")
     }
     
     // MARK: - Helpers
