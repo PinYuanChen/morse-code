@@ -11,7 +11,7 @@ import MorseCode
 
 public class RecordsViewController: UIViewController {
     
-    let presenter: RecordsPresenter
+    public let presenter: RecordsPresenter
     
     public required init(presenter: RecordsPresenter) {
         self.presenter = presenter
