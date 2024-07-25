@@ -34,6 +34,10 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
         }
     }
     
+    public func setRecords(_ records: [MorseRecord]) {
+        self.records = records
+    }
+    
     public func loadRecords() async throws {
         do {
             records = try await loader.load() ?? []
