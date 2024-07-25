@@ -40,18 +40,12 @@ class MorseRecordCell: UITableViewCell {
         
         if case .playing(let id) = status {
             if id == recordId {
-                flashButton.setBackgroundImage(.init(systemName: status.imageName), for: .normal)
-                flashButton.isEnabled = true
-                deleteButton.isEnabled = false
+                setFlashAndDeleteButton(status: status, flashEnable: true, deleteEnable: false)
             } else {
-                flashButton.setBackgroundImage(.init(systemName: FlashStatusType.stop.imageName), for: .normal)
-                flashButton.isEnabled = false
-                deleteButton.isEnabled = false
+                setFlashAndDeleteButton(status: .stop, flashEnable: false, deleteEnable: false)
             }
         } else {
-            flashButton.setBackgroundImage(.init(systemName: status.imageName), for: .normal)
-            flashButton.isEnabled = true
-            deleteButton.isEnabled = true
+            setFlashAndDeleteButton(status: status, flashEnable: true, deleteEnable: true)
         }
     }
     
@@ -130,5 +124,18 @@ private extension MorseRecordCell {
     
     @objc func didTappedDeleteButton() {
         deleteAction?()
+    }
+    
+    func setFlashAndDeleteButton(status: FlashStatusType, flashEnable: Bool, deleteEnable: Bool) {
+        
+        let imageName = switch status {
+        case .playing(_): "flashlight.slash.circle.fill"
+        case .stop:
+            "flashlight.on.circle.fill"
+        }
+        
+        flashButton.setBackgroundImage(.init(systemName: imageName), for: .normal)
+        flashButton.isEnabled = flashEnable
+        deleteButton.isEnabled = deleteEnable
     }
 }

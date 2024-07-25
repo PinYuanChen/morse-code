@@ -14,15 +14,6 @@ public protocol FlashManagerPrototype {
 public enum FlashStatusType: Equatable {
     case playing(id: UUID)
     case stop
-    
-    public var imageName: String {
-        switch self {
-        case .playing(_):
-            return "flashlight.slash.circle.fill"
-        case .stop:
-            return "flashlight.on.circle.fill"
-        }
-    }
 }
 
 public enum FlashType: String {
