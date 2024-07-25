@@ -63,8 +63,4 @@ final class RecordsPresenterTests: XCTestCase {
         trackForMemoryLeaks(loaderSpy, file: file, line: line)
         return (sut, loaderSpy)
     }
-    
-    private func anyRecord() -> MorseRecord {
-        .init(id: UUID(), text: "any", morseCode: "... ---")
-    }
 }
