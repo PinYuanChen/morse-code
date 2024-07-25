@@ -6,7 +6,7 @@ import XCTest
 import MorseCode
 import MorseCodeApp
 
-final class MorseCodeViewControllerTests: XCTestCase { 
+final class MorseCodeViewControllerSnapshotTests: XCTestCase { 
     
     func test_morseCodeUI() {
         let sut = makeSUT()
