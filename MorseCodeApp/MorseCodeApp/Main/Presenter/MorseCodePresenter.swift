@@ -10,7 +10,7 @@ import MorseCode
 
 public protocol MorseCodePresenterDelegate: AnyObject {
     func showError(title: String?, message: String)
-    func updateFlashButton(imageName: String, enable: Bool)
+    func updateFlashButton(status: FlashStatusType, enable: Bool)
 }
 
 public class MorseCodePresenter: MorseCodeConvertorPrototype {
@@ -28,7 +28,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         self.localLoader = localLoader
         
         self.flashManager.didFinishPlaying = { [unowned self] in
-            self.delegate?.updateFlashButton(imageName: FlashStatusType.stop.imageName, enable: self.presentedUUID != nil)
+            self.delegate?.updateFlashButton(status: .stop, enable: self.presentedUUID != nil)
         }
     }
     
@@ -70,7 +70,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
     
     public func getFlashButtonStatus() {
         let (status, enable) = getFlashButtonStatus()
-        delegate?.updateFlashButton(imageName: status.imageName, enable: enable)
+        delegate?.updateFlashButton(status: status, enable: enable)
     }
     
     private func getFlashButtonStatus() -> (status: FlashStatusType, enable: Bool) {
@@ -97,7 +97,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         }
         
         guard let presentedUUID = presentedUUID else {
-            delegate?.updateFlashButton(imageName: FlashStatusType.stop.imageName, enable: false)
+            delegate?.updateFlashButton(status: FlashStatusType.stop, enable: false)
             return
         }
         
@@ -118,7 +118,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
             }
         }
 
-        delegate?.updateFlashButton(imageName: flashStatus.imageName, enable: enable)
+        delegate?.updateFlashButton(status: flashStatus, enable: enable)
     }
 }
 

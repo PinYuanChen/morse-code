@@ -58,7 +58,13 @@ extension MorseCodeViewController: MorseCodePresenterDelegate {
         self.present(alertViewController, animated: false)
     }
     
-    public func updateFlashButton(imageName: String, enable: Bool) {
+    public func updateFlashButton(status: FlashStatusType, enable: Bool) {
+        let imageName = switch status {
+        case .playing(_): "flashlight.slash.circle.fill"
+        case .stop:
+            "flashlight.on.circle.fill"
+        }
+        
         flashButton.setBackgroundImage(.init(systemName: imageName), for: .normal)
         flashButton.isEnabled = enable
     }
