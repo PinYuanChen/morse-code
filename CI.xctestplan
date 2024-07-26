@@ -1,0 +1,39 @@
+{
+  "configurations" : [
+    {
+      "id" : "FEB19EDC-D6AF-4E01-9C1A-420D2220C41B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MorseCodeApp.xcodeproj",
+      "identifier" : "CDD10AB92B397F3C008ED95F",
+      "name" : "MorseCodeApp"
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:..\/MorseCode.xcodeproj",
+        "identifier" : "9B4C4F5C2B34DE21005C48D5",
+        "name" : "MorseCodeTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MorseCodeApp.xcodeproj",
+        "identifier" : "CDD10AEB2B3A716E008ED95F",
+        "name" : "MorseCodeAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}
