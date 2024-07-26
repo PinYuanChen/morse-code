@@ -5,12 +5,6 @@
 import UIKit
 
 extension UIColor {
-    private static func color(lightMode: UIColor, darkMode: UIColor) -> UIColor {
-        guard #available(iOS 13.0, *) else { return lightMode }
-        return UIColor { (traitCollection) -> UIColor in
-            return traitCollection.userInterfaceStyle == .light ? lightMode : darkMode
-        }
-    }
     
     /// vc background
     static let bg04121F: UIColor = #colorLiteral(red: 0.01568627451, green: 0.07058823529, blue: 0.1215686275, alpha: 1)

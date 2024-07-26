@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "BABF637C-B401-46FD-A10B-80023891C5D2",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MorseCode.xcodeproj",
+        "identifier" : "9B4C4F5C2B34DE21005C48D5",
+        "name" : "MorseCodeTests"
+      }
+    }
+  ],
+  "version" : 1
+}
