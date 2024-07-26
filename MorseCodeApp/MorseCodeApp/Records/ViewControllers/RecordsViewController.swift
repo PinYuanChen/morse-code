@@ -31,7 +31,7 @@ public class RecordsViewController: UIViewController {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Task.init {
+        Task {
             try await presenter.loadRecords()
         }
     }
