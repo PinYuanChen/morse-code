@@ -9,7 +9,16 @@
     }
   ],
   "defaultOptions" : {
-
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:MorseCodeApp.xcodeproj",
+          "identifier" : "CDD10AB92B397F3C008ED95F",
+          "name" : "MorseCodeApp"
+        }
+      ]
+    },
+    "testExecutionOrdering" : "random"
   },
   "testTargets" : [
     {
