@@ -10,4 +10,10 @@
    <FileRef
       location = "group:CI.xctestplan">
    </FileRef>
+   <FileRef
+      location = "group:MorseCode.xctestplan">
+   </FileRef>
+   <FileRef
+      location = "group:MorseCodeAppTests.xctestplan">
+   </FileRef>
 </Workspace>
