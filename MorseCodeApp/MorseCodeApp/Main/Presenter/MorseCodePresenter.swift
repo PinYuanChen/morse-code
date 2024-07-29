@@ -16,6 +16,7 @@ public protocol MorseCodePresenterDelegate: AnyObject {
 public protocol MorseCodePresenterPrototype {
     /// Should weakify delegate
     var delegate: MorseCodePresenterDelegate? { get set }
+    var presentedUUID: UUID? { get }
     func checkFirstTime()
     func convertToMorseCode(text: String) -> String
     func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool

@@ -53,6 +53,14 @@ public final class MorseCodePresenterTests: XCTestCase {
         assertLocalizedKeyAndValuesExist(in: bundle, table)
     }
     
+    func test_presentedUUID_isSetAfterSaveToLocalStore() async {
+        let sut = makeSUT()
+        XCTAssertNil(sut.presentedUUID)
+        let newRecord = anyRecord()
+        try? await sut.saveToLocalStore(newRecord: newRecord)
+        XCTAssertEqual(newRecord.id, sut.presentedUUID)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) ->  MorseCodePresenter {
         
