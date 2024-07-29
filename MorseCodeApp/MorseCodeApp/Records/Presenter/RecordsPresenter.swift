@@ -12,7 +12,7 @@ public protocol RecordsPresenterDelegate: AnyObject {
     func showError(title: String?, message: String)
 }
 
-public class RecordsPresenter: MorseCodeConvertorPrototype {
+public class RecordsPresenter {
     
     public weak var delegate: RecordsPresenterDelegate?
     public private(set) var records = [MorseRecord]()
@@ -21,11 +21,13 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
             flashManager.currentStatus
         }
     }
+    public let convertor: MorseCodeConvertorPrototype
     public var flashManager: FlashManagerPrototype
     public let loader: MorseRecordLoaderPrototype
     
-    public init(flashManager: FlashManagerPrototype,
+    public init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
                 loader: MorseRecordLoaderPrototype) {
+        self.convertor = convertor
         self.flashManager = flashManager
         self.loader = loader
         
@@ -66,7 +68,7 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
                 flashManager.stopPlayingSignals()
             }
         } else {
-            let signals = convertToMorseFlashSignals(input: record.morseCode)
+            let signals = convertor.convertToMorseFlashSignals(input: record.morseCode)
             flashManager.startPlaySignals(signals: signals, uuid: record.id)
         }
         

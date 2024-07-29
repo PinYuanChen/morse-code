@@ -41,13 +41,11 @@ final class MorseCodeConvertorTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> ConvertorStub {
-        let sut = ConvertorStub()
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> MorseConvertor {
+        let sut = MorseConvertor()
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
-    
-    private class ConvertorStub: MorseCodeConvertorPrototype { }
     
     private let sosMorseCodeString = "... --- ... "
     private let a123MorseCodeString = ".- .---- ..--- ...-- "

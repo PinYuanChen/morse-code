@@ -19,7 +19,7 @@ final class RecordsViewControllerSnapshotTests: XCTestCase {
     
     // MARK: - Helpers
     private func makeSUT() -> RecordsViewController {
-        let viewController = MorseUIComposer.composeRecords(with: LoaderSpy(), flashManager: FlashManager())
+        let viewController = MorseUIComposer.composeRecords(convertor: MorseConvertor(), loader: LoaderSpy(), flashManager: FlashManager())
         return viewController
     }
 }

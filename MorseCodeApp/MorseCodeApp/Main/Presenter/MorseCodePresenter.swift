@@ -23,17 +23,19 @@ public protocol MorseCodePresenterPrototype {
     func playOrPauseFlashSignals(text: String, enableTorch: (() -> Bool))
 }
 
-public class MorseCodePresenter: MorseCodePresenterPrototype, MorseCodeConvertorPrototype {
+public class MorseCodePresenter: MorseCodePresenterPrototype {
     
     public static let maxInputLength = 30
     
     public weak var delegate: MorseCodePresenterDelegate?
+    public let convertor: MorseCodeConvertorPrototype
     public var flashManager: FlashManagerPrototype
     public let localLoader: MorseRecordLoaderPrototype
     public var presentedUUID: UUID?
     
-    public required init(flashManager: FlashManagerPrototype,
+    public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
                          localLoader: MorseRecordLoaderPrototype) {
+        self.convertor = convertor
         self.flashManager = flashManager
         self.localLoader = localLoader
         
@@ -53,7 +55,7 @@ public class MorseCodePresenter: MorseCodePresenterPrototype, MorseCodeConvertor
     }
     
     public func convertToMorseCode(text: String) -> String {
-        return convertToMorseCode(input: text)
+        return convertor.convertToMorseCode(input: text)
     }
     
     public func validateInput(string: String, currentText: NSString? = nil, range: NSRange = .init()) -> Bool {
@@ -116,7 +118,7 @@ public class MorseCodePresenter: MorseCodePresenterPrototype, MorseCodeConvertor
         
         switch flashManager.currentStatus {
         case .stop:
-            let signals = convertToMorseFlashSignals(input: text)
+            let signals = convertor.convertToMorseFlashSignals(input: text)
             flashManager.startPlaySignals(signals: signals, uuid: presentedUUID)
             flashStatus = .playing(id: presentedUUID)
         case let .playing(id: uuid):

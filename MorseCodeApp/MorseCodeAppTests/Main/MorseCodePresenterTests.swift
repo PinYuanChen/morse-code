@@ -49,7 +49,7 @@ public final class MorseCodePresenterTests: XCTestCase {
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) ->  MorseCodePresenter {
         
-        let sut = MorseCodePresenter(flashManager: FlashManager(), localLoader: LoaderSpy())
+        let sut = MorseCodePresenter(convertor: MorseConvertor(), flashManager: FlashManager(), localLoader: LoaderSpy())
         
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
