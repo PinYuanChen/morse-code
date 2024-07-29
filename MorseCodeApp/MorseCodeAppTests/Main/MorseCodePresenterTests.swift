@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import XCTest
 import MorseCode
 import MorseCodeApp
 

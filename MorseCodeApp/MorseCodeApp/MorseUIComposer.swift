@@ -15,6 +15,7 @@ final public class MorseUIComposer {
         let presenter = MorseCodePresenter(flashManager: flashManager, localLoader: loader)
         
         let morseCodeViewController = MorseCodeViewController(presenter: presenter)
+        presenter.delegate = morseCodeViewController
         
         morseCodeViewController.tabBarItem = MainTabBarItem(.main)
         return morseCodeViewController

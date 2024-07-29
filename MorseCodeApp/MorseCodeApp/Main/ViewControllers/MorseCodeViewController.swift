@@ -12,8 +12,6 @@ public final class MorseCodeViewController: UIViewController {
     public required init(presenter: MorseCodePresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        
-        self.presenter.delegate = self
     }
     
     @available(*, unavailable)

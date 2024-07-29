@@ -13,7 +13,17 @@ public protocol MorseCodePresenterDelegate: AnyObject {
     func updateFlashButton(status: FlashStatusType, enable: Bool)
 }
 
-public class MorseCodePresenter: MorseCodeConvertorPrototype {
+public protocol MorseCodePresenterPrototype {
+    /// Should weakify delegate
+    var delegate: MorseCodePresenterDelegate? { get set }
+    func checkFirstTime()
+    func convertToMorseCode(text: String) -> String
+    func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool
+    func getFlashButtonStatus()
+    func playOrPauseFlashSignals(text: String, enableTorch: (() -> Bool))
+}
+
+public class MorseCodePresenter: MorseCodePresenterPrototype, MorseCodeConvertorPrototype {
     
     public static let maxInputLength = 30
     
