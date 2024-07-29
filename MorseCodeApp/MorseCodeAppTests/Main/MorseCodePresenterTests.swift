@@ -39,6 +39,13 @@ public final class MorseCodePresenterTests: XCTestCase {
         XCTAssertFalse(sut.validateInput(string: "z", currentText: currentText, range: .init(location: maxLength, length: 0)))
     }
     
+    func test_convertValidInputIntoMorseCode() {
+        let sut = makeSUT()
+        XCTAssertEqual(sut.convertToMorseCode(text: "sos"), sosMorseCodeString)
+        XCTAssertEqual(sut.convertToMorseCode(text: "a123"), a123MorseCodeString)
+        XCTAssertEqual(sut.convertToMorseCode(text: "Hello world!"), helloWorldMorseCodeString)
+    }
+    
     func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
         let table = "Localizable"
         let bundle = Bundle(for: MorseCodePresenter.self)
@@ -54,4 +61,8 @@ public final class MorseCodePresenterTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
+    
+    private let sosMorseCodeString = "... --- ... "
+    private let a123MorseCodeString = ".- .---- ..--- ...-- "
+    private let helloWorldMorseCodeString = ".... . .-.. .-.. ---    .-- --- .-. .-.. -.. -.-.-- "
 }
