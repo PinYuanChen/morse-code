@@ -10,8 +10,6 @@ import Foundation
 public protocol MorseRecordLoaderPrototype {
     typealias SaveResult = Result<Void, Error>
     typealias SaveCompletion = (SaveResult) -> Void
-    
-    
     typealias LoadResult = Result<[MorseRecord]?, Error>
     typealias LoadCompletion = (LoadResult) -> Void
     

@@ -29,6 +29,8 @@
 		9BC0A8D62C5254B400A5CC8A /* RecordsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC0A8D52C5254B400A5CC8A /* RecordsViewControllerSnapshotTests.swift */; };
 		9BE8C3332C52C2DB00D0CF1F /* RecordsViewController_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE8C3312C52C2DA00D0CF1F /* RecordsViewController_dark.png */; };
 		9BE8C3342C52C2DB00D0CF1F /* RecordsViewController_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE8C3322C52C2DB00D0CF1F /* RecordsViewController_light.png */; };
+		9BFED5982C593B5700B6E203 /* RecordsViewController_empty_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFED5972C593B5700B6E203 /* RecordsViewController_empty_light.png */; };
+		9BFED59A2C593B5E00B6E203 /* RecordsViewController_empty_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFED5992C593B5E00B6E203 /* RecordsViewController_empty_dark.png */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
 		CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */; };
@@ -94,6 +96,8 @@
 		9BC0A8D52C5254B400A5CC8A /* RecordsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		9BE8C3312C52C2DA00D0CF1F /* RecordsViewController_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_dark.png; sourceTree = "<group>"; };
 		9BE8C3322C52C2DB00D0CF1F /* RecordsViewController_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_light.png; sourceTree = "<group>"; };
+		9BFED5972C593B5700B6E203 /* RecordsViewController_empty_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_empty_light.png; sourceTree = "<group>"; };
+		9BFED5992C593B5E00B6E203 /* RecordsViewController_empty_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_empty_dark.png; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -231,6 +235,8 @@
 		9BC0A8D22C52522700A5CC8A /* snapshots */ = {
 			isa = PBXGroup;
 			children = (
+				9BFED5972C593B5700B6E203 /* RecordsViewController_empty_light.png */,
+				9BFED5992C593B5E00B6E203 /* RecordsViewController_empty_dark.png */,
 				9BE8C3312C52C2DA00D0CF1F /* RecordsViewController_dark.png */,
 				9BE8C3322C52C2DB00D0CF1F /* RecordsViewController_light.png */,
 			);
@@ -438,8 +444,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BFED59A2C593B5E00B6E203 /* RecordsViewController_empty_dark.png in Resources */,
 				9B32A5512BF5A64300E8CCD4 /* MorseCodeViewController_dark.png in Resources */,
 				9BE8C3342C52C2DB00D0CF1F /* RecordsViewController_light.png in Resources */,
+				9BFED5982C593B5700B6E203 /* RecordsViewController_empty_light.png in Resources */,
 				9B32A54F2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png in Resources */,
 				9B32A5502BF5A64300E8CCD4 /* MorseCodeViewController_light.png in Resources */,
 				9BE8C3332C52C2DB00D0CF1F /* RecordsViewController_dark.png in Resources */,
