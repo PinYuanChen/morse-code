@@ -36,22 +36,31 @@ public class RecordsPresenter {
         }
     }
     
-    public func loadRecords() async throws {
-        do {
-            records = try await loader.load() ?? []
-            delegate?.reloadData()
-        } catch {
-            delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.loadErrorMessage)
+    public func loadRecords() {
+        
+        loader.load { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case let .success(records):
+                self.records = records ?? []
+                self.delegate?.reloadData()
+            case .failure(_):
+                self.delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.loadErrorMessage)
+            }
         }
     }
     
-    public func deleteRecord(at index: Int) async throws {
+    public func deleteRecord(at index: Int) {
         records.remove(at: index)
-        do {
-            try await loader.save(records)
-            delegate?.reloadData()
-        } catch {
-            delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.deleteErrorMessage)
+        
+        loader.save(records) { [weak self] result in
+            switch result {
+            case .success:
+                self?.delegate?.reloadData()
+            case .failure(_):
+                self?.delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.deleteErrorMessage)
+            }
         }
     }
     

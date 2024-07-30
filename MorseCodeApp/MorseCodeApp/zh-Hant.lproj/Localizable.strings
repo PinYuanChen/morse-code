@@ -20,3 +20,4 @@
 "LOAD_ERROR_MESSAGE" = "載入失敗";
 "DELETE_ERROR_MESSAGE" = "刪除失敗";
 "EMPTY_RECORD_MESSAGE" = "尚未有任何紀錄。\n您在主頁將文字轉換為摩斯密碼後，系統會自動將您的紀錄儲存並顯示在此頁。";
+"SAVE_ERROR_MESSAGE" = "儲存失敗";

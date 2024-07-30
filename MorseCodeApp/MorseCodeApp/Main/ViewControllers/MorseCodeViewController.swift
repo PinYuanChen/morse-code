@@ -227,11 +227,9 @@ private extension MorseCodeViewController {
             return
         }
         
-        Task.init {
-            try? await
-            presenter.saveToLocalStore(newRecord: .init(id: UUID(), text: inputText, morseCode: code))
-            presenter.getFlashButtonStatus()
-        }
+        presenter.saveToLocalStore(newRecord: .init(id: UUID(), text: inputText, morseCode: code))
+        presenter.getFlashButtonStatus()
+        
     }
 }
 

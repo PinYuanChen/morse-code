@@ -31,9 +31,7 @@ public class RecordsViewController: UIViewController {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Task {
-            try await presenter.loadRecords()
-        }
+        presenter.loadRecords()
     }
 
     private let emptyLabel = UILabel()

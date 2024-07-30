@@ -73,12 +73,25 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         return length <= MorseCodePresenter.maxInputLength
     }
     
-    public func saveToLocalStore(newRecord: MorseRecord) async throws {
+    public func saveToLocalStore(newRecord: MorseRecord) {
         presentedUUID = newRecord.id
         
-        var records = try await localLoader.load() ?? []
-        records.insert(newRecord, at: 0)
-        try await localLoader.save(records)
+        localLoader.load { [weak self] loadResult in
+            guard let self = self else { return }
+            
+            switch loadResult {
+            case .success(let records):
+                var newRecords = records ?? []
+                newRecords.insert(newRecord, at: 0)
+                self.localLoader.save(newRecords) { [weak self] saveResult in
+                    if case .failure(_) = saveResult {
+                        self?.delegate?.showError(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.saveErrorMessage)
+                    }
+                }
+            case .failure(_):
+                self.delegate?.showError(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.saveErrorMessage)
+            }
+        }
     }
     
     public func getFlashButtonStatus() {
@@ -148,4 +161,8 @@ extension MorseCodePresenter {
     static let torchAlertMessage = NSLocalizedString("TORCH_ALERT_MESSAGE", comment: "torch is not open")
     
     static let alertConfirmTitle = NSLocalizedString("CONFIRM", comment: "confirm button title")
+    
+    static let alertTitle = NSLocalizedString("ALERT_TITLE", comment: "alert title in main page")
+    
+    static let saveErrorMessage = NSLocalizedString("SAVE_ERROR_MESSAGE", comment: "fail to save records")
 }
