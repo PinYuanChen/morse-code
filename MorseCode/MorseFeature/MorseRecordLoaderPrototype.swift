@@ -9,8 +9,12 @@ import Foundation
 
 public protocol MorseRecordLoaderPrototype {
     typealias SaveResult = Result<Void, Error>
-    typealias LoadResult = Result<[MorseRecord]?, Error>
+    typealias SaveCompletion = (SaveResult) -> Void
     
-    func save(_ records: [MorseRecord], completion: @escaping (SaveResult) -> Void)
-    func load(completion: @escaping (LoadResult) -> Void)
+    
+    typealias LoadResult = Result<[MorseRecord]?, Error>
+    typealias LoadCompletion = (LoadResult) -> Void
+    
+    func save(_ records: [MorseRecord], completion: @escaping SaveCompletion)
+    func load(completion: @escaping LoadCompletion)
 }
