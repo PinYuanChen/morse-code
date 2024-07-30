@@ -26,57 +26,56 @@ public class CodableMorseRecordStore: MorseRecordStore {
         self.storeURL = storeURL
     }
     
-    public func retrieve() async throws -> [LocalMorseRecord]? {
-        let storeURL = self.storeURL
+    public func retrieve(completion: @escaping RetrievalCompletion)  {
         guard let data = try? Data(contentsOf: storeURL) else {
-            return nil
+            return  completion(.success(.none))
         }
         
-        return try await withCheckedThrowingContinuation { continuation in
-            queue.async() {
-                do {
-                    let decoder = JSONDecoder()
-                    let records = try decoder.decode([CodableMorseRecord].self, from: data)
-                    let localRecords = records.map { LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode) }
-                    continuation.resume(returning: localRecords)
-                } catch {
-                    continuation.resume(throwing: error)
-                }
+        let storeURL = self.storeURL
+        queue.async {
+            guard let data = try? Data(contentsOf: storeURL) else {
+                return completion(.success(.none))
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let records = try decoder.decode([CodableMorseRecord].self, from: data)
+                completion(.success(records.map { LocalMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode) }))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
     
-    public func insert(_ records: [LocalMorseRecord]) async throws {
+    public func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion) {
         let storeURL = self.storeURL
-        
-        try await withCheckedThrowingContinuation { continuation in
-            queue.async(flags: .barrier) {
+        queue.async(flags: .barrier) {
+            do {
                 let encoder = JSONEncoder()
                 let codableRecords = records.map { CodableMorseRecord(id: $0.id, text: $0.text, morseCode: $0.morseCode) }
-                do {
-                    let encoded = try encoder.encode(codableRecords)
-                    try encoded.write(to: storeURL)
-                    continuation.resume()
-                } catch {
-                    continuation.resume(throwing: error)
-                }
+                
+                let encoded = try encoder.encode(codableRecords)
+                try encoded.write(to: storeURL)
+                completion(.success(()))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
     
-    public func deleteCachedRecords() async throws {
+    public func deleteCachedRecords(completion: @escaping DeletionCompletion) {
         let storeURL = self.storeURL
         
-        try await withCheckedThrowingContinuation { continuation in
-            queue.async(flags: .barrier) {
-                do {
-                    if FileManager.default.fileExists(atPath: storeURL.path) {
-                        try FileManager.default.removeItem(at: storeURL)
-                    }
-                    continuation.resume()
-                } catch {
-                    continuation.resume(throwing: error)
-                }
+        queue.async(flags: .barrier) {
+            guard FileManager.default.fileExists(atPath: storeURL.path) else {
+                return completion(.success(()))
+            }
+            
+            do {
+                try FileManager.default.removeItem(at: storeURL)
+                completion(.success(()))
+            } catch {
+                completion(.failure(error))
             }
         }
     }
