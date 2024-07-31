@@ -9,7 +9,7 @@ import XCTest
 import MorseCode
 import MorseCodeApp
 
-final class MorseUIIntegrationTests: XCTestCase {
+final class MorseCodeViewControllerTests: XCTestCase {
     
     func test_showPlaceholders_whenTextFieldsAreEmpty() {
         let sut = makeSUT()
@@ -19,7 +19,7 @@ final class MorseUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.morseTextField.placeholder, MorseCodePresenter.morseCodePlaceholder)
     }
     
-    func test_convertButtonStatus() {
+    func test_convertButtonIsEnable() {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
         
@@ -42,7 +42,7 @@ final class MorseUIIntegrationTests: XCTestCase {
         XCTAssertEqual(sut.morseTextField.text, anyMorse)
     }
     
-    func test_flashButtonStatus() {
+    func test_flashButtonIsEnable() {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
         
