@@ -24,7 +24,7 @@ extension MorseCodeViewController {
         convertButton.sendActions(for: .touchUpInside)
     }
     
-    func simulateFlashButton(status: FlashStatusType, enable: Bool) {
-        updateFlashButton(status: status, enable: enable)
+    func simulateFlashButton(enable: Bool) {
+        updateFlashButton(status: .stop, enable: enable)
     }
 }

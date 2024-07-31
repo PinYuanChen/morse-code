@@ -48,8 +48,11 @@ final class MorseUIIntegrationTests: XCTestCase {
         
         XCTAssertFalse(sut.flashButton.isEnabled)
         
-        sut.simulateFlashButton(status: .stop, enable: true)
+        sut.simulateFlashButton(enable: true)
         XCTAssertTrue(sut.flashButton.isEnabled)
+        
+        sut.simulateFlashButton(enable: false)
+        XCTAssertFalse(sut.flashButton.isEnabled)
     }
 
     // MARK: - Helpers
