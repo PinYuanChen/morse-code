@@ -11,6 +11,14 @@ import MorseCodeApp
 
 final class MorseUIIntegrationTests: XCTestCase {
     
+    func test_showPlaceholders_whenTextFieldsAreEmpty() {
+        let sut = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(sut.inputTextField.placeholder, MorseCodePresenter.inputTextPlaceholder)
+        XCTAssertEqual(sut.morseTextField.placeholder, MorseCodePresenter.morseCodePlaceholder)
+    }
+    
     func test_convertButtonStatus() {
         let sut = makeSUT()
         sut.loadViewIfNeeded()

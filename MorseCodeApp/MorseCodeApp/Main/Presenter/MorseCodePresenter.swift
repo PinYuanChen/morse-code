@@ -150,7 +150,7 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
 }
 
 // MARK: - Localization
-extension MorseCodePresenter {
+public extension MorseCodePresenter {
     static let title = NSLocalizedString("MORSE_FLASH_TITLE", comment: "Main page title")
     
     static let convertButtonTitle = NSLocalizedString("CONVERT", comment: "convert button")
