@@ -5,6 +5,7 @@
 //  Created by Champion Chen on 2024/7/31.
 //
 
+import MorseCode
 import MorseCodeApp
 
 extension MorseCodeViewController {
@@ -16,5 +17,9 @@ extension MorseCodeViewController {
     func simulateDeleteAllText() {
         inputTextField.text = ""
         inputTextField.sendActions(for: .editingChanged)
+    }
+    
+    func simulateFlashButton(status: FlashStatusType, enable: Bool) {
+        updateFlashButton(status: status, enable: enable)
     }
 }

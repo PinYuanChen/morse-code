@@ -12,7 +12,7 @@ import MorseCodeApp
 final class MorseUIIntegrationTests: XCTestCase {
     
     func test_convertButtonStatus() {
-        let (sut, _) = makeSUT()
+        let sut = makeSUT()
         sut.loadViewIfNeeded()
         
         XCTAssertFalse(sut.convertButton.isEnabled)
@@ -23,14 +23,22 @@ final class MorseUIIntegrationTests: XCTestCase {
         sut.simulateDeleteAllText()
         XCTAssertFalse(sut.convertButton.isEnabled)
     }
+    
+    func test_flashButtonStatus() {
+        let sut = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        XCTAssertFalse(sut.flashButton.isEnabled)
+        
+        sut.simulateFlashButton(status: .stop, enable: true)
+        XCTAssertTrue(sut.flashButton.isEnabled)
+    }
 
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodeViewController, loader: LoaderSpy) {
-        let loaderSpy = LoaderSpy()
-        let sut = MorseUIComposer.composeMorseCode(convertor: MorseConvertor(), loader: loaderSpy, flashManager: FlashManager())
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> MorseCodeViewController {
+        let sut = MorseUIComposer.composeMorseCode(convertor: MorseConvertor(), loader: LoaderSpy(), flashManager: FlashManager())
         
         trackForMemoryLeaks(sut, file: file, line: line)
-        trackForMemoryLeaks(loaderSpy, file: file, line: line)
-        return (sut, loaderSpy)
+        return sut
     }
 }
