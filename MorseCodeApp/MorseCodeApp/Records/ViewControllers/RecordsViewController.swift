@@ -11,12 +11,11 @@ import MorseCode
 
 public class RecordsViewController: UIViewController {
     
-    public let presenter: RecordsPresenter
+    public let presenter: RecordsPresenterPrototype
     
-    public required init(presenter: RecordsPresenter) {
+    public required init(presenter: RecordsPresenterPrototype) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        self.presenter.delegate = self
     }
     
     @available(*, unavailable)

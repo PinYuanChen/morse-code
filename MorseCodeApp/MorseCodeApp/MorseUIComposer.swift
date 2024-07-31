@@ -25,6 +25,8 @@ final public class MorseUIComposer {
         let presenter = RecordsPresenter(convertor: convertor, flashManager: flashManager, loader: loader)
         
         let recordsViewController = RecordsViewController(presenter: presenter)
+        presenter.delegate = recordsViewController
+        
         recordsViewController.tabBarItem = MainTabBarItem(.records)
         return recordsViewController
     }

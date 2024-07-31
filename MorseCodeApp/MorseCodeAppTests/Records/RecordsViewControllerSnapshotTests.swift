@@ -19,7 +19,7 @@ final class RecordsViewControllerSnapshotTests: XCTestCase {
     
     func test_nonEmptyRecordsUI() {
         let (sut, loader) = makeSUT()
-        sut.presenter.loadRecords()
+        sut.loadRecords()
         loader.completeLoading(with: [anyRecord(), anyRecord()])
         sut.loadViewIfNeeded()
         
@@ -32,5 +32,11 @@ final class RecordsViewControllerSnapshotTests: XCTestCase {
         let loaderSpy = LoaderSpy()
         let viewController = MorseUIComposer.composeRecords(convertor: MorseConvertor(), loader: loaderSpy, flashManager: FlashManager())
         return (viewController, loaderSpy)
+    }
+}
+
+private extension RecordsViewController {
+    func loadRecords() {
+        presenter.loadRecords()
     }
 }

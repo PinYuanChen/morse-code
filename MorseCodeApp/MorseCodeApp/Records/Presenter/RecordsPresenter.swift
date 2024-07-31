@@ -12,14 +12,21 @@ public protocol RecordsPresenterDelegate: AnyObject {
     func showError(title: String?, message: String)
 }
 
-public class RecordsPresenter {
+public protocol RecordsPresenterPrototype {
+    var delegate: RecordsPresenterDelegate? { get set }
+    var records: [MorseRecord] { get }
+    var currentFlashStatus: FlashStatusType { get }
+    func loadRecords()
+    func deleteRecord(at index: Int)
+    func playOrPauseFlash(at index: Int)
+}
+
+public class RecordsPresenter: RecordsPresenterPrototype {
     
     public weak var delegate: RecordsPresenterDelegate?
     public private(set) var records = [MorseRecord]()
     public var currentFlashStatus: FlashStatusType {
-        get {
-            flashManager.currentStatus
-        }
+        flashManager.currentStatus
     }
     public let convertor: MorseCodeConvertorPrototype
     public var flashManager: FlashManagerPrototype

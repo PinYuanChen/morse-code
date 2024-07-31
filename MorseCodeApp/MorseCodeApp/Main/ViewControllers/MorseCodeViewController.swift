@@ -35,7 +35,7 @@ public final class MorseCodeViewController: UIViewController {
     }
     
     // MARK: Private properties
-    private var presenter: MorseCodePresenterPrototype
+    private let presenter: MorseCodePresenterPrototype
     private let convertButton = CustomButton()
     private let flashButton = CustomButton()
     private let titleLabel = UILabel()
