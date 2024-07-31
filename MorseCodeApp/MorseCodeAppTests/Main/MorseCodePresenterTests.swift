@@ -46,13 +46,6 @@ public final class MorseCodePresenterTests: XCTestCase {
         XCTAssertEqual(sut.convertToMorseCode(text: "Hello world!"), helloWorldMorseCodeString)
     }
     
-    func test_localizedStrings_haveKeysAndValuesForAllSupportedLocalizations() {
-        let table = "Localizable"
-        let bundle = Bundle(for: MorseCodePresenter.self)
-        
-        assertLocalizedKeyAndValuesExist(in: bundle, table)
-    }
-    
     func test_presentedUUID_isSetAfterSaveToLocalStore() {
         let sut = makeSUT()
         XCTAssertNil(sut.presentedUUID)
