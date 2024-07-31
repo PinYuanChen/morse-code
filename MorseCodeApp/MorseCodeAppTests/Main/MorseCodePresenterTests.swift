@@ -55,7 +55,7 @@ public final class MorseCodePresenterTests: XCTestCase {
     }
     
     // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) ->  MorseCodePresenter {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> MorseCodePresenter {
         
         let sut = MorseCodePresenter(convertor: MorseConvertor(), flashManager: FlashManager(), localLoader: LoaderSpy())
         
