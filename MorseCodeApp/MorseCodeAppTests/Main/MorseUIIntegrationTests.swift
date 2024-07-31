@@ -24,6 +24,16 @@ final class MorseUIIntegrationTests: XCTestCase {
         XCTAssertFalse(sut.convertButton.isEnabled)
     }
     
+    func test_convertMorseCode_didDisplayResult() {
+        let sut = makeSUT()
+        sut.loadViewIfNeeded()
+        
+        XCTAssertEqual(sut.morseTextField.text, "")
+        
+        sut.simulateConvertText(text: anyText)
+        XCTAssertEqual(sut.morseTextField.text, anyMorse)
+    }
+    
     func test_flashButtonStatus() {
         let sut = makeSUT()
         sut.loadViewIfNeeded()
@@ -41,4 +51,7 @@ final class MorseUIIntegrationTests: XCTestCase {
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
+    
+    private let anyText = "any"
+    private let anyMorse = ".- -. -.-- "
 }

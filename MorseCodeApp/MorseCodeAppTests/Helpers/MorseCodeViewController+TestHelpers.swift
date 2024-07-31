@@ -19,6 +19,11 @@ extension MorseCodeViewController {
         inputTextField.sendActions(for: .editingChanged)
     }
     
+    func simulateConvertText(text: String) {
+        simulateTypeText(text: text)
+        convertButton.sendActions(for: .touchUpInside)
+    }
+    
     func simulateFlashButton(status: FlashStatusType, enable: Bool) {
         updateFlashButton(status: status, enable: enable)
     }
