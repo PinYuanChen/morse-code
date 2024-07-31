@@ -15,7 +15,7 @@ public class FlashManager: FlashManagerPrototype {
         self.timerScheduler = timerScheduler
     }
     
-    public static func enableTorch() -> Bool {
+    public var enableTorch: Bool {
         guard let device = AVCaptureDevice.default(for: .video),
               device.hasTorch else {
             return false
@@ -45,7 +45,7 @@ public class FlashManager: FlashManagerPrototype {
         flashTimer?.invalidate()
         flashTimer = nil
     }
-
+    
     private var flashTimer: Timer?
     private var signals = [FlashType]()
 }

@@ -20,8 +20,9 @@ public protocol MorseCodePresenterPrototype {
     func checkFirstTime()
     func convertToMorseCode(text: String) -> String
     func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool
+    func saveToLocalStore(newRecord: MorseRecord)
     func getFlashButtonStatus()
-    func playOrPauseFlashSignals(text: String, enableTorch: (() -> Bool))
+    func playOrPauseFlashSignals(text: String)
 }
 
 public class MorseCodePresenter: MorseCodePresenterPrototype {
@@ -47,7 +48,7 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     
     public func checkFirstTime() {
         guard let _ = UserDefaults.standard.value(forKey: "HaveCheckedFirstTime") else {
-            if !FlashManager.enableTorch() {
+            if !flashManager.enableTorch {
                 delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
             }
             UserDefaults.standard.setValue(true, forKey: "HaveCheckedFirstTime")
@@ -115,9 +116,9 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         }
     }
     
-    public func playOrPauseFlashSignals(text: String, enableTorch: (() -> Bool) = FlashManager.enableTorch) {
+    public func playOrPauseFlashSignals(text: String) {
         
-        guard enableTorch() == true else {
+        guard flashManager.enableTorch else {
             delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
             return
         }

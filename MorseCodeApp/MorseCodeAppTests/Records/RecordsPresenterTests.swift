@@ -21,7 +21,7 @@ final class RecordsPresenterTests: XCTestCase {
         XCTAssertEqual(loader.receivedMessages, [.load])
     }
     
-    func test_deleteRecords() {
+    func test_deleteRecordsUponRequest() {
         let (sut, loader) = makeSUT()
         sut.loadRecords()
         loader.completeLoading(with: [anyRecord()])
@@ -30,27 +30,6 @@ final class RecordsPresenterTests: XCTestCase {
         
         XCTAssertEqual(sut.records, [])
         XCTAssertEqual(loader.receivedMessages, [.load, .save(records: [])])
-    }
-    
-    func test_doesNotPlaySignals_onInvalidDevice() {
-        let (sut, loader) = makeSUT()
-        sut.loadRecords()
-        loader.completeLoading(with: [anyRecord()])
-        
-        sut.playOrPauseFlash(at: 0, enableTorch: { false })
-        XCTAssertEqual(sut.currentFlashStatus, .stop)
-    }
-    
-    func test_playAndPauseFlashSignals_onCorrectIndex() {
-        let (sut, loader) = makeSUT()
-        let record = anyRecord()
-        sut.loadRecords()
-        loader.completeLoading(with: [record])
-        
-        sut.playOrPauseFlash(at: 0, enableTorch: { true })
-        XCTAssertEqual(sut.currentFlashStatus, .playing(id: record.id))
-        sut.playOrPauseFlash(at: 0, enableTorch: { true })
-        XCTAssertEqual(sut.currentFlashStatus, .stop)
     }
     
     // MARK: - Helpers

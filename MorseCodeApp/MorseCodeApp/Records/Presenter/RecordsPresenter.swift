@@ -63,9 +63,9 @@ public class RecordsPresenter {
         }
     }
     
-    public func playOrPauseFlash(at index: Int, enableTorch: (() -> Bool) = FlashManager.enableTorch) {
+    public func playOrPauseFlash(at index: Int) {
         
-        guard enableTorch() == true else {
+        guard flashManager.enableTorch else {
             delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
             return
         }

@@ -5,6 +5,7 @@
 import Foundation
 
 public protocol FlashManagerPrototype {
+    var enableTorch: Bool { get }
     var currentStatus: FlashStatusType { get }
     func startPlaySignals(signals: [FlashType], uuid: UUID)
     func stopPlayingSignals()
