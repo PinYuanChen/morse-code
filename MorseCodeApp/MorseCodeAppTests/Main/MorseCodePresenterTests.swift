@@ -60,12 +60,21 @@ public final class MorseCodePresenterTests: XCTestCase {
     func test_deliverError_onLoadingError() {
         let (sut, loader, delegate) = makeSUT()
         
-        
         sut.saveToLocalStore(newRecord: anyRecord())
         loader.completeLoading(with: anyNSError())
         
         XCTAssertEqual(delegate.receivedMessages, [.error(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.saveErrorMessage)])
-    }    
+    }
+    
+    func test_deliverError_onSavingError() {
+        let (sut, loader, delegate) = makeSUT()
+        
+        sut.saveToLocalStore(newRecord: anyRecord())
+        loader.completeLoading(with: [])
+        loader.completeSaving(with: anyNSError())
+        
+        XCTAssertEqual(delegate.receivedMessages, [.error(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.saveErrorMessage)])
+    }
     
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenter, loader: LoaderSpy, delegate: ViewSpy) {
