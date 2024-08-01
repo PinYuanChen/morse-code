@@ -68,7 +68,6 @@ private extension MorseRecordCell {
     
     func setupTitleLabel() {
         titleLabel.textColor = .white.withAlphaComponent(0.7)
-        titleLabel.text = "Title"
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(10)
@@ -78,7 +77,6 @@ private extension MorseRecordCell {
     
     func setupMorseLabel() {
         morseLabel.textColor = .txt5BC5A5
-        morseLabel.text = "Morse Code"
         contentView.addSubview(morseLabel)
         morseLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(10)
