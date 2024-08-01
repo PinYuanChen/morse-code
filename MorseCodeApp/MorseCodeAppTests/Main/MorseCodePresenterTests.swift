@@ -12,7 +12,7 @@ import MorseCodeApp
 public final class MorseCodePresenterTests: XCTestCase {
     
     func test_validateValidCharacters() {
-        let sut = makeSUT()
+        let (sut, _, _) = makeSUT()
         
         let valids = ["z", "0", "@"]
 
@@ -22,7 +22,7 @@ public final class MorseCodePresenterTests: XCTestCase {
     }
     
     func test_validateInvalidCharacters() {
-        let sut = makeSUT()
+        let (sut, _, _) = makeSUT()
         
         let invalids = ["😎", "🥩", "卍", "中"]
         invalids.forEach {
@@ -32,7 +32,7 @@ public final class MorseCodePresenterTests: XCTestCase {
     }
     
     func test_validateInputLength() {
-        let sut = makeSUT()
+        let (sut, _, _) = makeSUT()
         let maxLength = MorseCodePresenter.maxInputLength
         let currentText = String(repeating: "z", count: maxLength) as NSString
         
@@ -40,27 +40,46 @@ public final class MorseCodePresenterTests: XCTestCase {
     }
     
     func test_convertValidInputIntoMorseCode() {
-        let sut = makeSUT()
+        let (sut, _, _) = makeSUT()
         XCTAssertEqual(sut.convertToMorseCode(text: "sos"), sosMorseCodeString)
         XCTAssertEqual(sut.convertToMorseCode(text: "a123"), a123MorseCodeString)
         XCTAssertEqual(sut.convertToMorseCode(text: "Hello world!"), helloWorldMorseCodeString)
     }
     
     func test_presentedUUID_isSetAfterSaveToLocalStore() {
-        let sut = makeSUT()
+        let (sut, _, _) = makeSUT()
+        
         XCTAssertNil(sut.presentedUUID)
+        
         let newRecord = anyRecord()
         sut.saveToLocalStore(newRecord: newRecord)
+        
         XCTAssertEqual(newRecord.id, sut.presentedUUID)
     }
     
-    // MARK: - Helpers
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> MorseCodePresenter {
+    func test_deliverError_onLoadingError() {
+        let (sut, loader, delegate) = makeSUT()
         
-        let sut = MorseCodePresenter(convertor: MorseConvertor(), flashManager: FlashManager(), localLoader: LoaderSpy())
+        
+        sut.saveToLocalStore(newRecord: anyRecord())
+        loader.completeLoading(with: anyNSError())
+        
+        XCTAssertEqual(delegate.receivedMessages, [.error(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.saveErrorMessage)])
+    }    
+    
+    // MARK: - Helpers
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenter, loader: LoaderSpy, delegate: ViewSpy) {
+        
+        let viewSpy = ViewSpy()
+        let loaderSpy = LoaderSpy()
+        
+        let sut = MorseCodePresenter(convertor: MorseConvertor(), flashManager: FlashManager(), localLoader: loaderSpy)
+        sut.delegate = viewSpy
         
         trackForMemoryLeaks(sut, file: file, line: line)
-        return sut
+        trackForMemoryLeaks(loaderSpy, file: file, line: line)
+        trackForMemoryLeaks(viewSpy, file: file, line: line)
+        return (sut, loaderSpy, viewSpy)
     }
     
     private let sosMorseCodeString = "... --- ... "
