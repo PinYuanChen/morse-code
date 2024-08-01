@@ -12,20 +12,29 @@ public protocol RecordsPresenterDelegate: AnyObject {
     func showError(title: String?, message: String)
 }
 
-public class RecordsPresenter: MorseCodeConvertorPrototype {
+public protocol RecordsPresenterPrototype {
+    var delegate: RecordsPresenterDelegate? { get set }
+    var records: [MorseRecord] { get }
+    var currentFlashStatus: FlashStatusType { get }
+    func loadRecords()
+    func deleteRecord(at index: Int)
+    func playOrPauseFlash(at index: Int)
+}
+
+public class RecordsPresenter: RecordsPresenterPrototype {
     
     public weak var delegate: RecordsPresenterDelegate?
     public private(set) var records = [MorseRecord]()
     public var currentFlashStatus: FlashStatusType {
-        get {
-            flashManager.currentStatus
-        }
+        flashManager.currentStatus
     }
+    public let convertor: MorseCodeConvertorPrototype
     public var flashManager: FlashManagerPrototype
     public let loader: MorseRecordLoaderPrototype
     
-    public init(flashManager: FlashManagerPrototype,
+    public init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
                 loader: MorseRecordLoaderPrototype) {
+        self.convertor = convertor
         self.flashManager = flashManager
         self.loader = loader
         
@@ -34,28 +43,36 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
         }
     }
     
-    public func loadRecords() async throws {
-        do {
-            records = try await loader.load() ?? []
-            delegate?.reloadData()
-        } catch {
-            delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.loadErrorMessage)
+    public func loadRecords() {
+        loader.load { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case let .success(records):
+                self.records = records ?? []
+                self.delegate?.reloadData()
+            case .failure(_):
+                self.delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.loadErrorMessage)
+            }
         }
     }
     
-    public func deleteRecord(at index: Int) async throws {
+    public func deleteRecord(at index: Int) {
         records.remove(at: index)
-        do {
-            try await loader.save(records)
-            delegate?.reloadData()
-        } catch {
-            delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.deleteErrorMessage)
+        
+        loader.save(records) { [weak self] result in
+            switch result {
+            case .success:
+                self?.delegate?.reloadData()
+            case .failure(_):
+                self?.delegate?.showError(title: RecordsPresenter.alertTitle, message: RecordsPresenter.deleteErrorMessage)
+            }
         }
     }
     
-    public func playOrPauseFlash(at index: Int, enableTorch: (() -> Bool) = FlashManager.enableTorch) {
+    public func playOrPauseFlash(at index: Int) {
         
-        guard enableTorch() == true else {
+        guard flashManager.enableTorch else {
             delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
             return
         }
@@ -66,7 +83,7 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
                 flashManager.stopPlayingSignals()
             }
         } else {
-            let signals = convertToMorseFlashSignals(input: record.morseCode)
+            let signals = convertor.convertToMorseFlashSignals(input: record.morseCode)
             flashManager.startPlaySignals(signals: signals, uuid: record.id)
         }
         
@@ -74,7 +91,7 @@ public class RecordsPresenter: MorseCodeConvertorPrototype {
     }
 }
 
-extension RecordsPresenter {
+public extension RecordsPresenter {
     static let alertTitle = NSLocalizedString("ALERT_TITLE", comment: "alert title")
     
     static let loadErrorMessage = NSLocalizedString("LOAD_ERROR_MESSAGE", comment: "fail to load records")

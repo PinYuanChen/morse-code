@@ -11,3 +11,7 @@ import MorseCode
 func anyRecord() -> MorseRecord {
     .init(id: UUID(), text: "any", morseCode: "... ---")
 }
+
+func anyNSError() -> NSError {
+    return NSError(domain: "any error", code: 0)
+}

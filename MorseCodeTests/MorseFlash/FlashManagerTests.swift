@@ -21,7 +21,7 @@ final class FlashManagerTests: XCTestCase {
     func test_validDevice_startPlayingNonEmptySignals_didPlay() {
         let sut = makeSUT()
         let id = UUID()
-        sut.startPlaySignals(signals: [.di], uuid: id)
+        sut.startPlaySignals(signals: anySignals(), uuid: id)
         XCTAssertEqual(sut.currentStatus, FlashStatusType.playing(id: id))
     }
     
@@ -31,14 +31,12 @@ final class FlashManagerTests: XCTestCase {
             guard let sut = sut else { return }
             XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
         }
-        sut.startPlaySignals(signals: [.dah])
+        sut.startPlaySignals(signals: anySignals())
         sut.stopPlayingSignals()
     }
     
     func test_signalDurations() {
-        let signals: [FlashType] = [.di, .pause, .pause, .dah, .pause, .dah, .pause]
-        
-        signals.forEach {
+        anySignals().forEach {
             checkDuration(type: $0, duration: $0.duration)
         }
     }
@@ -81,5 +79,9 @@ final class FlashManagerTests: XCTestCase {
         let sut = makeSUT(timerScheduler: timerScheduler)
         sut.startPlaySignals(signals: [type])
         XCTAssertEqual(timerDelay, duration, accuracy: 1)
+    }
+    
+    private func anySignals() -> [FlashType] {
+        [.dah, .pause, .di, .di, .pause]
     }
 }

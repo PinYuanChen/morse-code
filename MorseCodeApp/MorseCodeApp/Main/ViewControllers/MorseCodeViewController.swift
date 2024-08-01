@@ -8,12 +8,17 @@ import MorseCode
 
 public final class MorseCodeViewController: UIViewController {
     
+    public let presenter: MorseCodePresenterPrototype
+    public let convertButton = CustomButton()
+    public let flashButton = CustomButton()
+    public let titleLabel = UILabel()
+    public let inputTextField = CustomTextField()
+    public let morseTextField = UITextField()
+    
     // MARK: Life cycle
-    public required init(presenter: MorseCodePresenter) {
+    public required init(presenter: MorseCodePresenterPrototype) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        
-        self.presenter.delegate = self
     }
     
     @available(*, unavailable)
@@ -37,14 +42,8 @@ public final class MorseCodeViewController: UIViewController {
     }
     
     // MARK: Private properties
-    private var presenter: MorseCodePresenter
-    private let convertButton = CustomButton()
-    private let flashButton = CustomButton()
-    private let titleLabel = UILabel()
     private let inputBaseView = UIView()
-    private let inputTextField = CustomTextField()
     private let morseBaseView = UIView()
-    private let morseTextField = UITextField()
     private let generator = UIImpactFeedbackGenerator(style: .heavy)
 }
 
@@ -229,11 +228,9 @@ private extension MorseCodeViewController {
             return
         }
         
-        Task.init {
-            try? await
-            presenter.saveToLocalStore(newRecord: .init(id: UUID(), text: inputText, morseCode: code))
-            presenter.getFlashButtonStatus()
-        }
+        presenter.saveToLocalStore(newRecord: .init(id: UUID(), text: inputText, morseCode: code))
+        presenter.getFlashButtonStatus()
+        
     }
 }
 

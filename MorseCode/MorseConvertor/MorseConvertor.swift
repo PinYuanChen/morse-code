@@ -7,8 +7,11 @@
 
 import Foundation
 
-public extension MorseCodeConvertorPrototype {
-    func convertToMorseCode(input: String) -> String {
+public class MorseConvertor:  MorseCodeConvertorPrototype {
+    
+    public init() { }
+    
+    public func convertToMorseCode(input: String) -> String {
         
         var output = ""
         let shortPauseSpace = " "
@@ -31,7 +34,7 @@ public extension MorseCodeConvertorPrototype {
         return output
     }
     
-    func convertToMorseFlashSignals(input: String) -> [FlashType] {
+    public func convertToMorseFlashSignals(input: String) -> [FlashType] {
         
         var signals = [FlashType]()
         for char in input {

@@ -15,19 +15,34 @@ final class LoaderSpy: MorseRecordLoaderPrototype {
         case save(records: [MorseRecord])
     }
     
-    var receivedMessages = [ReceivedMessage]()
+    private(set) var receivedMessages = [ReceivedMessage]()
+    private var saveCompletions = [SaveCompletion]()
+    private var loadCompletions = [LoadCompletion]()
     var records = [MorseRecord]()
     
-    func save(_ records: [MorseRecord]) async throws {
+    func save(_ records: [MorseRecord], completion: @escaping SaveCompletion) {
+        saveCompletions.append(completion)
         receivedMessages.append(.save(records: records))
     }
     
-    func load() async throws -> [MorseRecord]? {
-        receivedMessages.append(.load)
-        return records
+    func completeSaving(with error: Error, at index: Int = 0) {
+        saveCompletions[index](.failure(error))
     }
     
-    func completeLoadingWith(_ records: [MorseRecord]) {
-        self.records = records
+    func completeSavingSuccessfully(at index: Int = 0) {
+        saveCompletions[index](.success(()))
+    }
+    
+    func load(completion: @escaping LoadCompletion) {
+        loadCompletions.append(completion)
+        receivedMessages.append(.load)
+    }
+    
+    func completeLoading(with error: Error, at index: Int = 0) {
+        loadCompletions[index](.failure(error))
+    }
+    
+    func completeLoading(with records: [MorseRecord], at index: Int = 0) {
+        loadCompletions[index](.success(records))
     }
 }

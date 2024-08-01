@@ -11,19 +11,18 @@ import MorseCode
 
 public class RecordsViewController: UIViewController {
     
-    public let presenter: RecordsPresenter
+    public let presenter: RecordsPresenterPrototype
     
-    public required init(presenter: RecordsPresenter) {
+    public required init(presenter: RecordsPresenterPrototype) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-        self.presenter.delegate = self
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -31,11 +30,9 @@ public class RecordsViewController: UIViewController {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Task {
-            try await presenter.loadRecords()
-        }
+        presenter.loadRecords()
     }
-
+    
     private let emptyLabel = UILabel()
     private let tableView = UITableView()
 }
@@ -74,10 +71,8 @@ private extension RecordsViewController {
 
 extension RecordsViewController: RecordsPresenterDelegate {
     public func reloadData() {
-        DispatchQueue.main.async { [unowned self] in
-            self.emptyLabel.isHidden = !self.presenter.records.isEmpty
-            self.tableView.reloadData()
-        }
+        self.emptyLabel.isHidden = !self.presenter.records.isEmpty
+        self.tableView.reloadData()
     }
     
     public func showError(title: String?, message: String) {
@@ -105,10 +100,7 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
             self.presenter.playOrPauseFlash(at: indexPath.row)
         }
         
-        cell.deleteAction = { [weak self] in
-            Task.init {
-                try await self?.presenter.deleteRecord(at: indexPath.row)
-            }
+        cell.deleteAction = { [weak self] in self?.presenter.deleteRecord(at: indexPath.row)
         }
         
         return cell

@@ -29,6 +29,13 @@
 		9BC0A8D62C5254B400A5CC8A /* RecordsViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC0A8D52C5254B400A5CC8A /* RecordsViewControllerSnapshotTests.swift */; };
 		9BE8C3332C52C2DB00D0CF1F /* RecordsViewController_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE8C3312C52C2DA00D0CF1F /* RecordsViewController_dark.png */; };
 		9BE8C3342C52C2DB00D0CF1F /* RecordsViewController_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BE8C3322C52C2DB00D0CF1F /* RecordsViewController_light.png */; };
+		9BFED5982C593B5700B6E203 /* RecordsViewController_empty_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFED5972C593B5700B6E203 /* RecordsViewController_empty_light.png */; };
+		9BFED59A2C593B5E00B6E203 /* RecordsViewController_empty_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFED5992C593B5E00B6E203 /* RecordsViewController_empty_dark.png */; };
+		9BFED59C2C593D4200B6E203 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED59B2C593D4200B6E203 /* MainQueueDispatchDecorator.swift */; };
+		9BFED59E2C59ECC300B6E203 /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED59D2C59ECC300B6E203 /* LocalizationTests.swift */; };
+		9BFED5A82C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED5A72C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift */; };
+		9BFED5AA2C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED5A92C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift */; };
+		9BFED5AC2C5B1F3F00B6E203 /* ViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED5AB2C5B1F3F00B6E203 /* ViewSpy.swift */; };
 		CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */; };
 		CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */; };
 		CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */; };
@@ -94,6 +101,13 @@
 		9BC0A8D52C5254B400A5CC8A /* RecordsViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		9BE8C3312C52C2DA00D0CF1F /* RecordsViewController_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_dark.png; sourceTree = "<group>"; };
 		9BE8C3322C52C2DB00D0CF1F /* RecordsViewController_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_light.png; sourceTree = "<group>"; };
+		9BFED5972C593B5700B6E203 /* RecordsViewController_empty_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_empty_light.png; sourceTree = "<group>"; };
+		9BFED5992C593B5E00B6E203 /* RecordsViewController_empty_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_empty_dark.png; sourceTree = "<group>"; };
+		9BFED59B2C593D4200B6E203 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
+		9BFED59D2C59ECC300B6E203 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
+		9BFED5A72C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeViewControllerTests.swift; sourceTree = "<group>"; };
+		9BFED5A92C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorseCodeViewController+TestHelpers.swift"; sourceTree = "<group>"; };
+		9BFED5AB2C5B1F3F00B6E203 /* ViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSpy.swift; sourceTree = "<group>"; };
 		CD00A9872B3A74B90042E9F6 /* MorseCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MorseCodeViewController.swift; sourceTree = "<group>"; };
 		CD00A98A2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+TestHelpers.swift"; sourceTree = "<group>"; };
 		CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+TestHelpers.swift"; sourceTree = "<group>"; };
@@ -153,6 +167,7 @@
 				9B32A54B2BF5A62200E8CCD4 /* snapshots */,
 				CD00A98E2B3A74F60042E9F6 /* MorseCodeViewControllerSnapshotTests.swift */,
 				9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */,
+				9BFED5A72C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -231,6 +246,8 @@
 		9BC0A8D22C52522700A5CC8A /* snapshots */ = {
 			isa = PBXGroup;
 			children = (
+				9BFED5972C593B5700B6E203 /* RecordsViewController_empty_light.png */,
+				9BFED5992C593B5E00B6E203 /* RecordsViewController_empty_dark.png */,
 				9BE8C3312C52C2DA00D0CF1F /* RecordsViewController_dark.png */,
 				9BE8C3322C52C2DB00D0CF1F /* RecordsViewController_light.png */,
 			);
@@ -248,6 +265,8 @@
 				9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */,
 				9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */,
 				9B32A5432BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift */,
+				9BFED5A92C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift */,
+				9BFED5AB2C5B1F3F00B6E203 /* ViewSpy.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -303,6 +322,7 @@
 				CDD10ABD2B397F3C008ED95F /* AppDelegate.swift */,
 				CDD10ABF2B397F3C008ED95F /* SceneDelegate.swift */,
 				9B9123CE2C07253200F8D031 /* MorseUIComposer.swift */,
+				9BFED59B2C593D4200B6E203 /* MainQueueDispatchDecorator.swift */,
 				9B3E83D82BFF446600A17D12 /* MainTabBar */,
 				9B10B18C2BF48E2900DD0233 /* Main */,
 				9B3E83D22BFF431F00A17D12 /* Records */,
@@ -330,6 +350,7 @@
 				CD00A9892B3A74D40042E9F6 /* Helpers */,
 				9B10B18D2BF48E5200DD0233 /* Main */,
 				9B9123D02C07311300F8D031 /* Records */,
+				9BFED59D2C59ECC300B6E203 /* LocalizationTests.swift */,
 			);
 			path = MorseCodeAppTests;
 			sourceTree = "<group>";
@@ -438,8 +459,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BFED59A2C593B5E00B6E203 /* RecordsViewController_empty_dark.png in Resources */,
 				9B32A5512BF5A64300E8CCD4 /* MorseCodeViewController_dark.png in Resources */,
 				9BE8C3342C52C2DB00D0CF1F /* RecordsViewController_light.png in Resources */,
+				9BFED5982C593B5700B6E203 /* RecordsViewController_empty_light.png in Resources */,
 				9B32A54F2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png in Resources */,
 				9B32A5502BF5A64300E8CCD4 /* MorseCodeViewController_light.png in Resources */,
 				9BE8C3332C52C2DB00D0CF1F /* RecordsViewController_dark.png in Resources */,
@@ -454,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */,
+				9BFED59C2C593D4200B6E203 /* MainQueueDispatchDecorator.swift in Sources */,
 				9B9123C82C05B33000F8D031 /* MorseRecordCell.swift in Sources */,
 				9B3E83DE2BFF481900A17D12 /* MainTabBarController.swift in Sources */,
 				9B3E83D72BFF437400A17D12 /* RecordsViewController.swift in Sources */,
@@ -474,8 +498,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BFED5AC2C5B1F3F00B6E203 /* ViewSpy.swift in Sources */,
 				9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */,
+				9BFED59E2C59ECC300B6E203 /* LocalizationTests.swift in Sources */,
 				CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */,
+				9BFED5AA2C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift in Sources */,
 				9BC0A8D42C52541900A5CC8A /* SharedTestHelpers.swift in Sources */,
 				9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */,
 				9B32A5442BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift in Sources */,
@@ -484,6 +511,7 @@
 				9BC0A8D62C5254B400A5CC8A /* RecordsViewControllerSnapshotTests.swift in Sources */,
 				9B9123C62C05AF5800F8D031 /* LoaderSpy.swift in Sources */,
 				9B32A5422BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift in Sources */,
+				9BFED5A82C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift in Sources */,
 				CD00A98F2B3A74F60042E9F6 /* MorseCodeViewControllerSnapshotTests.swift in Sources */,
 				9B9123D22C08412900F8D031 /* RecordsPresenterTests.swift in Sources */,
 			);

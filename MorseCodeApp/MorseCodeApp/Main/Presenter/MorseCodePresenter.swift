@@ -13,17 +13,31 @@ public protocol MorseCodePresenterDelegate: AnyObject {
     func updateFlashButton(status: FlashStatusType, enable: Bool)
 }
 
-public class MorseCodePresenter: MorseCodeConvertorPrototype {
+public protocol MorseCodePresenterPrototype {
+    /// Should weakify delegate
+    var delegate: MorseCodePresenterDelegate? { get set }
+    var presentedUUID: UUID? { get }
+    func checkFirstTime()
+    func convertToMorseCode(text: String) -> String
+    func validateInput(string: String, currentText: NSString?, range: NSRange) -> Bool
+    func saveToLocalStore(newRecord: MorseRecord)
+    func getFlashButtonStatus()
+    func playOrPauseFlashSignals(text: String)
+}
+
+public class MorseCodePresenter: MorseCodePresenterPrototype {
     
     public static let maxInputLength = 30
     
     public weak var delegate: MorseCodePresenterDelegate?
+    public let convertor: MorseCodeConvertorPrototype
     public var flashManager: FlashManagerPrototype
     public let localLoader: MorseRecordLoaderPrototype
     public var presentedUUID: UUID?
     
-    public required init(flashManager: FlashManagerPrototype,
+    public required init(convertor: MorseCodeConvertorPrototype, flashManager: FlashManagerPrototype,
                          localLoader: MorseRecordLoaderPrototype) {
+        self.convertor = convertor
         self.flashManager = flashManager
         self.localLoader = localLoader
         
@@ -34,7 +48,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
     
     public func checkFirstTime() {
         guard let _ = UserDefaults.standard.value(forKey: "HaveCheckedFirstTime") else {
-            if !FlashManager.enableTorch() {
+            if !flashManager.enableTorch {
                 delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
             }
             UserDefaults.standard.setValue(true, forKey: "HaveCheckedFirstTime")
@@ -43,7 +57,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
     }
     
     public func convertToMorseCode(text: String) -> String {
-        return convertToMorseCode(input: text)
+        return convertor.convertToMorseCode(input: text)
     }
     
     public func validateInput(string: String, currentText: NSString? = nil, range: NSRange = .init()) -> Bool {
@@ -60,12 +74,25 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         return length <= MorseCodePresenter.maxInputLength
     }
     
-    public func saveToLocalStore(newRecord: MorseRecord) async throws {
+    public func saveToLocalStore(newRecord: MorseRecord) {
         presentedUUID = newRecord.id
         
-        var records = try await localLoader.load() ?? []
-        records.insert(newRecord, at: 0)
-        try await localLoader.save(records)
+        localLoader.load { [weak self] loadResult in
+            guard let self = self else { return }
+            
+            switch loadResult {
+            case .success(let records):
+                var newRecords = records ?? []
+                newRecords.insert(newRecord, at: 0)
+                self.localLoader.save(newRecords) { [weak self] saveResult in
+                    if case .failure(_) = saveResult {
+                        self?.delegate?.showError(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.saveErrorMessage)
+                    }
+                }
+            case .failure(_):
+                self.delegate?.showError(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.saveErrorMessage)
+            }
+        }
     }
     
     public func getFlashButtonStatus() {
@@ -89,9 +116,9 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         }
     }
     
-    public func playOrPauseFlashSignals(text: String, enableTorch: (() -> Bool) = FlashManager.enableTorch) {
+    public func playOrPauseFlashSignals(text: String) {
         
-        guard enableTorch() == true else {
+        guard flashManager.enableTorch else {
             delegate?.showError(title: nil, message: MorseCodePresenter.torchAlertMessage)
             return
         }
@@ -106,7 +133,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
         
         switch flashManager.currentStatus {
         case .stop:
-            let signals = convertToMorseFlashSignals(input: text)
+            let signals = convertor.convertToMorseFlashSignals(input: text)
             flashManager.startPlaySignals(signals: signals, uuid: presentedUUID)
             flashStatus = .playing(id: presentedUUID)
         case let .playing(id: uuid):
@@ -123,7 +150,7 @@ public class MorseCodePresenter: MorseCodeConvertorPrototype {
 }
 
 // MARK: - Localization
-extension MorseCodePresenter {
+public extension MorseCodePresenter {
     static let title = NSLocalizedString("MORSE_FLASH_TITLE", comment: "Main page title")
     
     static let convertButtonTitle = NSLocalizedString("CONVERT", comment: "convert button")
@@ -135,4 +162,8 @@ extension MorseCodePresenter {
     static let torchAlertMessage = NSLocalizedString("TORCH_ALERT_MESSAGE", comment: "torch is not open")
     
     static let alertConfirmTitle = NSLocalizedString("CONFIRM", comment: "confirm button title")
+    
+    static let alertTitle = NSLocalizedString("ALERT_TITLE", comment: "alert title in main page")
+    
+    static let saveErrorMessage = NSLocalizedString("SAVE_ERROR_MESSAGE", comment: "fail to save records")
 }

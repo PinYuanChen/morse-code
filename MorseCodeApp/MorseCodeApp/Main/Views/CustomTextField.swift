@@ -4,9 +4,9 @@
 
 import UIKit
 
-class CustomTextField: UITextField {
+public class CustomTextField: UITextField {
 
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
 
         for view in subviews {

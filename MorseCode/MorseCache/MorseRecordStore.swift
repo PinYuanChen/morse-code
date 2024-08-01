@@ -8,7 +8,16 @@
 import Foundation
 
 public protocol MorseRecordStore {
-    func deleteCachedRecords() async throws
-    func insert(_ records: [LocalMorseRecord]) async throws
-    func retrieve() async throws -> [LocalMorseRecord]?
+    typealias DeletionResult = Result<Void, Error>
+        typealias DeletionCompletion = (DeletionResult) -> Void
+        
+        typealias InsertionResult = Result<Void, Error>
+        typealias InsertionCompletion = (InsertionResult) -> Void
+        
+        typealias RetrievalResult = Result<[LocalMorseRecord]?, Error>
+        typealias RetrievalCompletion = (RetrievalResult) -> Void
+
+    func deleteCachedRecords(completion: @escaping DeletionCompletion)
+    func insert(_ records: [LocalMorseRecord], completion: @escaping InsertionCompletion)
+    func retrieve(completion: @escaping RetrievalCompletion)
 }

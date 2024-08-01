@@ -16,4 +16,7 @@
    <FileRef
       location = "group:MorseCodeAppTests.xctestplan">
    </FileRef>
+   <FileRef
+      location = "group:../MorseCodeApp.xctestplan">
+   </FileRef>
 </Workspace>

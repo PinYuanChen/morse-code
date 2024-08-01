@@ -9,69 +9,68 @@ import XCTest
 import MorseCode
 
 final class CacheMorseRecordUseCaseTests: XCTestCase {
-
+    
     func test_init_doesNotMessageStoreUponCreation() {
         let (_, store) = makeSUT()
         
         XCTAssertEqual(store.receivedMessages, [])
     }
     
-    func test_save_requestsCacheDeletion() async {
+    func test_save_requestsCacheDeletion() {
         let (sut, store) = makeSUT()
         
-        _ = try? await sut.save(uniqueRecords().records)
-        
+        sut.save(uniqueRecords().records) { _ in }
         XCTAssertEqual(store.receivedMessages.first, .deleteCachedRecords)
     }
     
-    func test_save_doesNotRequestCacheInsertionOnDeletionError() async {
+    func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
+        sut.save(uniqueRecords().records) { _ in }
         store.completeDeletion(with: deletionError)
-        _ = try? await sut.save(uniqueRecords().records)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords])
     }
     
-    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() async throws {
+    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
         let (records, localRecords) = uniqueRecords()
         let (sut, store) = makeSUT()
         
+        sut.save(records) { _ in }
         store.completeDeletionSuccessfully()
-        _ = try? await sut.save(records)
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedRecords, .insert(localRecords)])
     }
     
-    func test_save_failsOnDeletionError() async {
+    func test_save_failsOnDeletionError() {
         let (sut, store) = makeSUT()
         let deletionError = anyNSError()
         
-        await expect(sut, toCompleteSavingWith: .failure(deletionError), when: {
+        expect(sut, toCompleteSavingWith: .failure(deletionError), when: {
             store.completeDeletion(with: deletionError)
         })
     }
     
-    func test_save_failsOnInsertionError() async {
+    func test_save_failsOnInsertionError() {
         let (sut, store) = makeSUT()
         let insertionError = anyNSError()
         
-        await expect(sut, toCompleteSavingWith: .failure(insertionError), when: {
+        expect(sut, toCompleteSavingWith: .failure(insertionError), when: {
             store.completeDeletionSuccessfully()
             store.completeInsertion(with: insertionError)
         })
     }
     
-    func test_save_succeedsOnSuccessfulCacheInsertion() async {
+    func test_save_succeedsOnSuccessfulCacheInsertion() {
         let (sut, store) = makeSUT()
         
-        await expect(sut, toCompleteSavingWith: .success(()), when: {
+        expect(sut, toCompleteSavingWith: .success(()), when: {
             store.completeDeletionSuccessfully()
             store.completeInsertionSuccessfully()
         })
-    }
-
+    }    
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: LocalMorseRecordLoader, store: MorseRecordStoreSpy) {
         let store = MorseRecordStoreSpy()
@@ -81,28 +80,24 @@ final class CacheMorseRecordUseCaseTests: XCTestCase {
         return (sut, store)
     }
     
-    private func expect(_ sut: LocalMorseRecordLoader, toCompleteSavingWith expectedResult:  Result<Void, Error>, when action: () -> Void, file: StaticString = #file, line: UInt = #line) async {
+    private func expect(_ sut: LocalMorseRecordLoader, toCompleteSavingWith expectedResult:  Result<Void, Error>, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        
+        let exp = expectation(description: "Wait for save completion")
+        sut.save([uniqueRecord()]) { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case (.success(_), .success(_)):
+                break
+                
+            case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+                
+            default:
+                XCTFail("Expected result \(expectedResult), got \(String(describing: receivedResult)) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
         
         action()
-        
-        let receivedResult: Result<Void, Error>!
-        
-        do {
-            try await sut.save([uniqueRecord()])
-            receivedResult = .success(())
-        } catch {
-            receivedResult = .failure(error)
-        }
-        
-        switch (receivedResult, expectedResult) {
-        case (.success(_), .success(_)):
-            break
-            
-        case let (.failure(receivedError as NSError), .failure(expectedError as NSError)):
-            XCTAssertEqual(receivedError, expectedError, file: file, line: line)
-            
-        default:
-            XCTFail("Expected result \(expectedResult), got \(String(describing: receivedResult)) instead", file: file, line: line)
-        }
+        wait(for: [exp], timeout: 1.0)
     }
 }
