@@ -15,7 +15,7 @@ final public class MorseUIComposer {
         let presenter = MorseCodePresenter(convertor: convertor, flashManager: flashManager, localLoader: loader)
         
         let morseCodeViewController = MorseCodeViewController(presenter: presenter)
-        presenter.delegate = morseCodeViewController
+        presenter.delegate = WeakRefVirtualProxy(morseCodeViewController)
         
         morseCodeViewController.tabBarItem = MainTabBarItem(.main)
         return morseCodeViewController
@@ -25,7 +25,7 @@ final public class MorseUIComposer {
         let presenter = RecordsPresenter(convertor: convertor, flashManager: flashManager, loader: loader)
         
         let recordsViewController = RecordsViewController(presenter: presenter)
-        presenter.delegate = recordsViewController
+        presenter.delegate = WeakRefVirtualProxy(recordsViewController)
         
         recordsViewController.tabBarItem = MainTabBarItem(.records)
         return recordsViewController
