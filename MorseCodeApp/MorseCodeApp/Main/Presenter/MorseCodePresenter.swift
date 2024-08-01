@@ -29,7 +29,7 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     
     public static let maxInputLength = 30
     
-    public weak var delegate: MorseCodePresenterDelegate?
+    public var delegate: MorseCodePresenterDelegate?
     public let convertor: MorseCodeConvertorPrototype
     public var flashManager: FlashManagerPrototype
     public let localLoader: MorseRecordLoaderPrototype

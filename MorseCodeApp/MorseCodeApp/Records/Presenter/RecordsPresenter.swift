@@ -23,7 +23,7 @@ public protocol RecordsPresenterPrototype {
 
 public class RecordsPresenter: RecordsPresenterPrototype {
     
-    public weak var delegate: RecordsPresenterDelegate?
+    public var delegate: RecordsPresenterDelegate?
     public private(set) var records = [MorseRecord]()
     public var currentFlashStatus: FlashStatusType {
         flashManager.currentStatus
