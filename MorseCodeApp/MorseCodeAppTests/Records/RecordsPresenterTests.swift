@@ -40,6 +40,36 @@ final class RecordsPresenterTests: XCTestCase {
         XCTAssertEqual(delegate.receivedMessages, [.error(title: RecordsPresenter.alertTitle, message: RecordsPresenter.loadErrorMessage)])
     }
     
+    func test_reloadData_onLoadingSuccess() {
+        let (sut, loader, delegate) = makeSUT()
+        sut.loadRecords()
+        loader.completeLoading(with: [])
+        
+        XCTAssertEqual(delegate.receivedMessages, [.reloadData])
+    }
+    
+    func test_deliverError_onDeletionFailure() {
+        let (sut, loader, delegate) = makeSUT()
+        sut.loadRecords()
+        loader.completeLoading(with: [anyRecord()])
+        
+        sut.deleteRecord(at: 0)
+        loader.completeSaving(with: anyNSError())
+        
+        XCTAssertEqual(delegate.receivedMessages.last, .error(title: RecordsPresenter.alertTitle, message: RecordsPresenter.deleteErrorMessage))
+    }
+    
+    func test_reloadData_onDeletionSuccess() {
+        let (sut, loader, delegate) = makeSUT()
+        sut.loadRecords()
+        loader.completeLoading(with: [anyRecord()])
+        
+        sut.deleteRecord(at: 0)
+        loader.completeSavingSuccessfully()
+        
+        XCTAssertEqual(delegate.receivedMessages.last, .reloadData)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: RecordsPresenter, loader: LoaderSpy, delegate: ViewSpy) {
         
