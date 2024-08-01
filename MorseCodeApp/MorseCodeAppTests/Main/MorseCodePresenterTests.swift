@@ -76,6 +76,16 @@ public final class MorseCodePresenterTests: XCTestCase {
         XCTAssertEqual(delegate.receivedMessages, [.error(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.saveErrorMessage)])
     }
     
+    func test_updateFlashStatus() {
+        let (sut, _, delegate) = makeSUT()
+        sut.getFlashButtonStatus()
+        XCTAssertEqual(delegate.receivedMessages[0], .updateButton(status: .stop, enable: false))
+        
+        sut.saveToLocalStore(newRecord: anyRecord())
+        sut.getFlashButtonStatus()
+        XCTAssertEqual(delegate.receivedMessages[1], .updateButton(status: .stop, enable: true))
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: MorseCodePresenter, loader: LoaderSpy, delegate: ViewSpy) {
         
