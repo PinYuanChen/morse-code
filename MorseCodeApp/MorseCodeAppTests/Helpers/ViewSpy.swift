@@ -8,11 +8,12 @@
 import MorseCode
 import MorseCodeApp
 
-class ViewSpy: MorseCodePresenterDelegate {
+class ViewSpy: MorseCodePresenterDelegate, RecordsPresenterDelegate {
     
     enum ReceivedMessage: Equatable {
         case error(title: String?, message: String)
         case updateButton(status: MorseCode.FlashStatusType, enable: Bool)
+        case reloadData
     }
     
     var receivedMessages = [ReceivedMessage]()
@@ -23,5 +24,9 @@ class ViewSpy: MorseCodePresenterDelegate {
     
     func updateFlashButton(status: MorseCode.FlashStatusType, enable: Bool) {
         receivedMessages.append(.updateButton(status: status, enable: enable))
+    }
+    
+    func reloadData() {
+        receivedMessages.append(.reloadData)
     }
 }

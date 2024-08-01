@@ -91,7 +91,7 @@ public class RecordsPresenter: RecordsPresenterPrototype {
     }
 }
 
-extension RecordsPresenter {
+public extension RecordsPresenter {
     static let alertTitle = NSLocalizedString("ALERT_TITLE", comment: "alert title")
     
     static let loadErrorMessage = NSLocalizedString("LOAD_ERROR_MESSAGE", comment: "fail to load records")
