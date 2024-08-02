@@ -9,10 +9,10 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.pinyuanchen.MorseCodeApp</key>
-		<string>Morse Flash Signal</string>
+		<string>MorseCodeFlash_AppStore_Distribution</string>
 	</dict>
 	<key>signingCertificate</key>
-	<string>iPhone Distribution</string>
+	<string>Apple Distribution</string>
 	<key>signingStyle</key>
 	<string>manual</string>
 	<key>stripSwiftSymbols</key>
