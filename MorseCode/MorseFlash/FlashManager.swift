@@ -8,7 +8,7 @@ public class FlashManager: FlashManagerPrototype {
     
     public private(set) var currentStatus: FlashStatusType = .stop
     public let timerScheduler: TimerSchedulerPrototype
-    public var didFinishPlaying: (() -> Void)?
+    public var completePlayingHandlers: [(() -> Void)?] = []
     public private(set) var index = 0
     
     public init(timerScheduler: TimerSchedulerPrototype = RunLoop.current) {
@@ -37,7 +37,7 @@ public class FlashManager: FlashManagerPrototype {
         flashTimer?.invalidate()
         flashTimer = nil
         index = 0
-        didFinishPlaying?()
+        completePlayingHandlers.compactMap { $0 }.forEach { $0() }
     }
     
     deinit {

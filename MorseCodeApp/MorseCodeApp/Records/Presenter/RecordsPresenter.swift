@@ -38,9 +38,9 @@ public class RecordsPresenter: RecordsPresenterPrototype {
         self.flashManager = flashManager
         self.loader = loader
         
-        self.flashManager.didFinishPlaying = { [unowned self] in
+        self.flashManager.completePlayingHandlers.append ({ [unowned self] in
             self.delegate?.reloadData()
-        }
+        })
     }
     
     public func loadRecords() {
