@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let morseCodeViewController = MorseUIComposer.composeMorseCode(convertor: convertor, loader: MainQueueDispatchDecorator(decoratee: localLoader), flashManager: flashManager)
         
-        let tableViewController = MorseUIComposer.composeMorseTable()
+        let tableViewController = MorseUIComposer.composeMorseTable(dataSource: validCharacters + validNumbers + validSigns)
         
         let recordsViewController = MorseUIComposer.composeRecords(convertor: convertor, loader: MainQueueDispatchDecorator(decoratee: localLoader), flashManager: flashManager)
         

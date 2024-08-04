@@ -21,8 +21,7 @@ final public class MorseUIComposer {
         return morseCodeViewController
     }
     
-    public static func composeMorseTable() -> MorseTableViewController {
-        let dataSource = validCharacters + validNumbers + validSigns
+    public static func composeMorseTable(dataSource: [String]) -> MorseTableViewController {
         let morseTableViewController = MorseTableViewController(dataSource: dataSource)
         morseTableViewController.tabBarItem = MainTabBarItem(.table)
         return morseTableViewController
