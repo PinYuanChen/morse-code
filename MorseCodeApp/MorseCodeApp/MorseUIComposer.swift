@@ -17,7 +17,7 @@ final public class MorseUIComposer {
         let morseCodeViewController = MorseCodeViewController(presenter: presenter)
         presenter.delegate = WeakRefVirtualProxy(morseCodeViewController)
         
-        morseCodeViewController.tabBarItem = MainTabBarItem(.main)
+        morseCodeViewController.tabBarItem = MainTabBarItem(.convert)
         return morseCodeViewController
     }
     
