@@ -27,10 +27,10 @@ final class FlashManagerTests: XCTestCase {
     
     func test_validDevice_stopPlayingSignals_didStop() {
         let sut = makeSUT()
-        sut.didFinishPlaying = { [weak sut] in
+        sut.completePlayingHandlers.append({ [weak sut] in
             guard let sut = sut else { return }
             XCTAssertEqual(sut.currentStatus, FlashStatusType.stop)
-        }
+        })
         sut.startPlaySignals(signals: anySignals())
         sut.stopPlayingSignals()
     }
@@ -50,11 +50,11 @@ final class FlashManagerTests: XCTestCase {
         let sut = makeSUT(timerScheduler: timerScheduler)
         
         let exp = expectation(description: "Wait for stop")
-        sut.didFinishPlaying = { [weak sut] in
+        sut.completePlayingHandlers.append({ [weak sut] in
             guard let sut = sut else { return }
             XCTAssertEqual(sut.index, 0)
             exp.fulfill()
-        }
+        })
         
         sut.startPlaySignals(signals: [.di])
         wait(for: [exp], timeout: 1)

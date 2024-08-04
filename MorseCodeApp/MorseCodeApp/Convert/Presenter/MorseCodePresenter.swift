@@ -41,9 +41,9 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
         self.flashManager = flashManager
         self.localLoader = localLoader
         
-        self.flashManager.didFinishPlaying = { [unowned self] in
+        self.flashManager.completePlayingHandlers.append({ [unowned self] in
             self.delegate?.updateFlashButton(status: .stop, enable: self.presentedUUID != nil)
-        }
+        })
     }
     
     public func checkFirstTime() {
