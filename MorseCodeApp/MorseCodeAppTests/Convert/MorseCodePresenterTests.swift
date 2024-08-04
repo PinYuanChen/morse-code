@@ -13,10 +13,9 @@ public final class MorseCodePresenterTests: XCTestCase {
     
     func test_validateValidCharacters() {
         let (sut, _, _) = makeSUT()
-        
-        let valids = ["z", "0", "@"]
 
-        valids.forEach {
+        let validInput = validCharacters + validNumbers + validSigns
+        validInput.forEach {
             XCTAssertTrue(sut.validateInput(string: $0))
         }
     }

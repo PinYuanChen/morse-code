@@ -9,8 +9,12 @@ import UIKit
 import MorseCode
 
 public class MorseTableViewController: UIViewController {
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    
+    public let titleLabel = UILabel()
+    
+    public required init(dataSource: [String]) {
+        self.dataSource = dataSource
+        super.init(nibName: nil, bundle: nil)
     }
     
     @available(*, unavailable)
@@ -23,25 +27,45 @@ public class MorseTableViewController: UIViewController {
         setupUI()
     }
     
-    private let alphabets = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map { String($0 )}
-    private let numbers = Array(0...9).map { String($0 )}
-    private let signs = [".", ",", "?", "!", "-", "/", "@", "(", ")"]
-    private lazy var dataSource = alphabets + numbers + signs
+    private let dataSource: [String]
     private let tableView = UITableView()
+    private lazy var tabBarHeight = self.tabBarController?.tabBar.frame.size.height ?? 60
 }
 
 private extension MorseTableViewController {
     func setupUI() {
         view.backgroundColor = .bg04121F
+        setupTitleLabel()
         setupTableView()
     }
     
+    func setupTitleLabel() {
+        titleLabel.text = NSLocalizedString("MORSE_LOOKUP_TABLE", comment: "")
+        titleLabel.textColor = .txt5BC5A5
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textAlignment = .center
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(60)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
     func setupTableView() {
+        tableView.register(MorseTableViewCell.self)
         tableView.dataSource = self
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .bg25333F
+        tableView.separatorStyle = .none
+        tableView.sectionHeaderTopPadding = .zero
+        tableView.layer.cornerRadius = 10
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-(tabBarHeight+10))
         }
     }
 }
@@ -52,6 +76,11 @@ extension MorseTableViewController: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        .init()
+        let cell = MorseTableViewCell.use(table: tableView, for: indexPath)
+        let title = dataSource[indexPath.row]
+        let morseCode = morseCodeDict[title] ?? ""
+        
+        cell.configure(title: title, morse: morseCode)
+        return cell
     }
 }

@@ -1,11 +1,17 @@
 //
-//  MorseCodeDict.swift
+//  Constants.swift
 //  MorseCode
 //
-//  Created by Champion Chen on 2023/12/22.
+//  Created by Champion Chen on 2024/8/4.
 //
 
 import Foundation
+
+public let validCharacters = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ").map { String($0) }
+
+public let validNumbers = Array(0...9).map { String($0) }
+
+public let validSigns = [".", ",", "?", "!", "-", "/", "@", "(", ")"]
 
 public let morseCodeDict = [
     "0": "-----",
