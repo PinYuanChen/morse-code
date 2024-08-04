@@ -25,9 +25,16 @@ class MainTabBarController: UITabBarController {
     required init(viewControllers: [UIViewController]) {
         super.init(nibName: nil, bundle: nil)
         setViewControllers(viewControllers, animated: false)
-        tabBar.backgroundColor = .bg1B262F
-        tabBar.tintColor = .txt5BC5A5
-        tabBar.unselectedItemTintColor = .white.withAlphaComponent(0.6)
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .bg1B262F
+        appearance.stackedLayoutAppearance.selected.iconColor = .txt5BC5A5
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.txt5BC5A5]
+        appearance.stackedLayoutAppearance.normal.iconColor = UIColor.white.withAlphaComponent(0.6)
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white.withAlphaComponent(0.6)]
+        
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
     }
     
     @available(*, unavailable)

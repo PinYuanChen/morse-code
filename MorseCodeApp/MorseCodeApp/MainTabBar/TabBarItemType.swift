@@ -8,13 +8,16 @@
 import Foundation
 
 enum TabBarItemType: CaseIterable {
-    case main
+    case convert
+    case table
     case records
     
     var title: String {
         switch self {
-        case .main:
-            return NSLocalizedString("MAIN", comment: "")
+        case .convert:
+            return NSLocalizedString("CONVERT", comment: "")
+        case .table:
+            return NSLocalizedString("TABLE", comment: "")
         case .records:
             return NSLocalizedString("RECORDS", comment: "")
         }
@@ -22,7 +25,9 @@ enum TabBarItemType: CaseIterable {
     
     var image: String {
         switch self {
-        case .main:
+        case .convert:
+            return "chevron.right.square"
+        case .table:
             return "list.bullet.rectangle.portrait"
         case .records:
             return "clock"
@@ -31,7 +36,9 @@ enum TabBarItemType: CaseIterable {
     
     var selectedImage: String {
         switch self {
-        case .main:
+        case .convert:
+            return "chevron.right.square.fill"
+        case .table:
             return "list.bullet.rectangle.portrait.fill"
         case .records:
             return "clock.fill"

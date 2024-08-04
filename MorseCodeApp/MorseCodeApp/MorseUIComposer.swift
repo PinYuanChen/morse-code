@@ -17,8 +17,14 @@ final public class MorseUIComposer {
         let morseCodeViewController = MorseCodeViewController(presenter: presenter)
         presenter.delegate = WeakRefVirtualProxy(morseCodeViewController)
         
-        morseCodeViewController.tabBarItem = MainTabBarItem(.main)
+        morseCodeViewController.tabBarItem = MainTabBarItem(.convert)
         return morseCodeViewController
+    }
+    
+    public static func composeMorseTable(dataSource: [String]) -> MorseTableViewController {
+        let morseTableViewController = MorseTableViewController(dataSource: dataSource)
+        morseTableViewController.tabBarItem = MainTabBarItem(.table)
+        return morseTableViewController
     }
     
     public static func composeRecords(convertor: MorseCodeConvertorPrototype, loader: MorseRecordLoaderPrototype, flashManager: FlashManagerPrototype) -> RecordsViewController {

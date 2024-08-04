@@ -11,6 +11,11 @@
 		9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */; };
 		9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */; };
 		9B10B1992BF4B59300DD0233 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */; };
+		9B30F6442C5F31A100E70CCB /* MorseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B30F6432C5F31A100E70CCB /* MorseTableViewController.swift */; };
+		9B30F6462C5F3AB400E70CCB /* MorseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B30F6452C5F3AB400E70CCB /* MorseTableViewCell.swift */; };
+		9B30F64D2C5F60D800E70CCB /* MorseTableViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B30F64C2C5F60D800E70CCB /* MorseTableViewControllerSnapshotTests.swift */; };
+		9B30F6502C5F625B00E70CCB /* MorseTableViewController_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B30F64E2C5F625B00E70CCB /* MorseTableViewController_dark.png */; };
+		9B30F6512C5F625B00E70CCB /* MorseTableViewController_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B30F64F2C5F625B00E70CCB /* MorseTableViewController_light.png */; };
 		9B32A5422BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */; };
 		9B32A5442BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B32A5432BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift */; };
 		9B32A54F2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */; };
@@ -84,6 +89,11 @@
 		9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterTests.swift; sourceTree = "<group>"; };
 		9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationHelper.swift; sourceTree = "<group>"; };
 		9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9B30F6432C5F31A100E70CCB /* MorseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTableViewController.swift; sourceTree = "<group>"; };
+		9B30F6452C5F3AB400E70CCB /* MorseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTableViewCell.swift; sourceTree = "<group>"; };
+		9B30F64C2C5F60D800E70CCB /* MorseTableViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTableViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
+		9B30F64E2C5F625B00E70CCB /* MorseTableViewController_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseTableViewController_dark.png; sourceTree = "<group>"; };
+		9B30F64F2C5F625B00E70CCB /* MorseTableViewController_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseTableViewController_light.png; sourceTree = "<group>"; };
 		9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Snapshot.swift"; sourceTree = "<group>"; };
 		9B32A5432BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Snapshot.swift"; sourceTree = "<group>"; };
 		9B32A54C2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MorseCodeViewController_extraExtraExtraLarge.png; sourceTree = "<group>"; };
@@ -153,17 +163,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9B10B18C2BF48E2900DD0233 /* Main */ = {
+		9B10B18C2BF48E2900DD0233 /* Convert */ = {
 			isa = PBXGroup;
 			children = (
 				9B10B18E2BF48E6C00DD0233 /* Presenter */,
 				CD4ED4EB2B3C00D600197428 /* Views */,
 				CD4ED4EA2B3C00C500197428 /* ViewControllers */,
 			);
-			path = Main;
+			path = Convert;
 			sourceTree = "<group>";
 		};
-		9B10B18D2BF48E5200DD0233 /* Main */ = {
+		9B10B18D2BF48E5200DD0233 /* Convert */ = {
 			isa = PBXGroup;
 			children = (
 				9B32A54B2BF5A62200E8CCD4 /* snapshots */,
@@ -171,7 +181,7 @@
 				9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */,
 				9BFED5A72C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift */,
 			);
-			path = Main;
+			path = Convert;
 			sourceTree = "<group>";
 		};
 		9B10B18E2BF48E6C00DD0233 /* Presenter */ = {
@@ -180,6 +190,33 @@
 				9B10B18F2BF48E9600DD0233 /* MorseCodePresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		9B30F6422C5F317D00E70CCB /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				9B30F6432C5F31A100E70CCB /* MorseTableViewController.swift */,
+				9B30F6452C5F3AB400E70CCB /* MorseTableViewCell.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		9B30F64A2C5F606400E70CCB /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				9B30F64B2C5F607600E70CCB /* snapshots */,
+				9B30F64C2C5F60D800E70CCB /* MorseTableViewControllerSnapshotTests.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		9B30F64B2C5F607600E70CCB /* snapshots */ = {
+			isa = PBXGroup;
+			children = (
+				9B30F64E2C5F625B00E70CCB /* MorseTableViewController_dark.png */,
+				9B30F64F2C5F625B00E70CCB /* MorseTableViewController_light.png */,
+			);
+			path = snapshots;
 			sourceTree = "<group>";
 		};
 		9B32A54B2BF5A62200E8CCD4 /* snapshots */ = {
@@ -327,7 +364,8 @@
 				9BFED59B2C593D4200B6E203 /* MainQueueDispatchDecorator.swift */,
 				9BFED5AD2C5B403800B6E203 /* WeakRefVirtualProxy.swift */,
 				9B3E83D82BFF446600A17D12 /* MainTabBar */,
-				9B10B18C2BF48E2900DD0233 /* Main */,
+				9B30F6422C5F317D00E70CCB /* Table */,
+				9B10B18C2BF48E2900DD0233 /* Convert */,
 				9B3E83D22BFF431F00A17D12 /* Records */,
 				CD00A9982B3A7B950042E9F6 /* Extensions */,
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
@@ -351,7 +389,8 @@
 			isa = PBXGroup;
 			children = (
 				CD00A9892B3A74D40042E9F6 /* Helpers */,
-				9B10B18D2BF48E5200DD0233 /* Main */,
+				9B10B18D2BF48E5200DD0233 /* Convert */,
+				9B30F64A2C5F606400E70CCB /* Table */,
 				9B9123D02C07311300F8D031 /* Records */,
 				9BFED59D2C59ECC300B6E203 /* LocalizationTests.swift */,
 			);
@@ -464,10 +503,12 @@
 			files = (
 				9BFED59A2C593B5E00B6E203 /* RecordsViewController_empty_dark.png in Resources */,
 				9B32A5512BF5A64300E8CCD4 /* MorseCodeViewController_dark.png in Resources */,
+				9B30F6512C5F625B00E70CCB /* MorseTableViewController_light.png in Resources */,
 				9BE8C3342C52C2DB00D0CF1F /* RecordsViewController_light.png in Resources */,
 				9BFED5982C593B5700B6E203 /* RecordsViewController_empty_light.png in Resources */,
 				9B32A54F2BF5A64300E8CCD4 /* MorseCodeViewController_extraExtraExtraLarge.png in Resources */,
 				9B32A5502BF5A64300E8CCD4 /* MorseCodeViewController_light.png in Resources */,
+				9B30F6502C5F625B00E70CCB /* MorseTableViewController_dark.png in Resources */,
 				9BE8C3332C52C2DB00D0CF1F /* RecordsViewController_dark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +522,7 @@
 			files = (
 				CDD10ABE2B397F3C008ED95F /* AppDelegate.swift in Sources */,
 				9BFED59C2C593D4200B6E203 /* MainQueueDispatchDecorator.swift in Sources */,
+				9B30F6462C5F3AB400E70CCB /* MorseTableViewCell.swift in Sources */,
 				9BFED5AE2C5B403800B6E203 /* WeakRefVirtualProxy.swift in Sources */,
 				9B9123C82C05B33000F8D031 /* MorseRecordCell.swift in Sources */,
 				9B3E83DE2BFF481900A17D12 /* MainTabBarController.swift in Sources */,
@@ -488,6 +530,7 @@
 				9B9123CA2C05B7D000F8D031 /* UITableView+Ext.swift in Sources */,
 				CD00A99A2B3A7BC30042E9F6 /* UIColor+Ext.swift in Sources */,
 				CD4ED4F12B3C04E800197428 /* CustomButton.swift in Sources */,
+				9B30F6442C5F31A100E70CCB /* MorseTableViewController.swift in Sources */,
 				CD00A9882B3A74B90042E9F6 /* MorseCodeViewController.swift in Sources */,
 				9B3E83DA2BFF44B200A17D12 /* TabBarItemType.swift in Sources */,
 				9B9123D42C084D6100F8D031 /* RecordsPresenter.swift in Sources */,
@@ -517,6 +560,7 @@
 				9B32A5422BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift in Sources */,
 				9BFED5A82C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift in Sources */,
 				CD00A98F2B3A74F60042E9F6 /* MorseCodeViewControllerSnapshotTests.swift in Sources */,
+				9B30F64D2C5F60D800E70CCB /* MorseTableViewControllerSnapshotTests.swift in Sources */,
 				9B9123D22C08412900F8D031 /* RecordsPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

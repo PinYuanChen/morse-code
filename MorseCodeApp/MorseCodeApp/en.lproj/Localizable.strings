@@ -21,3 +21,5 @@
 "DELETE_ERROR_MESSAGE" = "Fail to delete records.";
 "EMPTY_RECORD_MESSAGE" = "No records yet.\nOnce you convert text to Morse code on the Main tab, the system will automatically save and display your records here.";
 "SAVE_ERROR_MESSAGE" = "Fail to save record";
+"TABLE" = "Table";
+"MORSE_LOOKUP_TABLE" = "Lookup Table";
