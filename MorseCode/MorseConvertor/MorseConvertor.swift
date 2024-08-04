@@ -17,7 +17,7 @@ public class MorseConvertor:  MorseCodeConvertorPrototype {
         let shortPauseSpace = " "
         let longPauseSpace = "   "
         
-        for char in input.lowercased() {
+        for char in input.uppercased() {
             guard let mCode = morseCodeDict["\(char)"] else {
                 continue
             }
