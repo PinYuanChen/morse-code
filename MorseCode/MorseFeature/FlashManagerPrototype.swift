@@ -9,7 +9,7 @@ public protocol FlashManagerPrototype {
     var currentStatus: FlashStatusType { get }
     func startPlaySignals(signals: [FlashType], uuid: UUID)
     func stopPlayingSignals()
-    var didFinishPlaying: (() -> Void)? { get set }
+    var completePlayingHandlers: [(() -> Void)?] { get set }
 }
 
 public enum FlashStatusType: Equatable {

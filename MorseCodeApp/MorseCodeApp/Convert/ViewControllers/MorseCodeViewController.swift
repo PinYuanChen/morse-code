@@ -59,7 +59,8 @@ extension MorseCodeViewController: MorseCodePresenterDelegate {
     
     public func updateFlashButton(status: FlashStatusType, enable: Bool) {
         let imageName = switch status {
-        case .playing(_): "flashlight.slash.circle.fill"
+        case .playing(_): 
+            "flashlight.slash.circle.fill"
         case .stop:
             "flashlight.on.circle.fill"
         }
