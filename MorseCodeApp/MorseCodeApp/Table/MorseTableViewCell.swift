@@ -44,6 +44,7 @@ private extension MorseTableViewCell {
         
         titleLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(17)
+            $0.bottom.equalToSuperview().offset(-17)
         }
     }
     
