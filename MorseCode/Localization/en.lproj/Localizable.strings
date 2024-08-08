@@ -1,8 +1,8 @@
 /* 
   Localizable.strings
-  MorseCodeApp
+  MorseCode
 
-  Created by patrick on 2024/1/11.
+  Created by Champion Chen on 2024/8/8.
   
 */
 
@@ -16,6 +16,7 @@
 "CONVERT" = "Convert";
 "TORCH_ALERT_MESSAGE" = "Your device does not have a flashlight function so you cannot use flashlight signals feature.";
 "CONFIRM" = "Confirm";
+"CANCEL" = "Cancel";
 "ALERT_TITLE" = "Warning";
 "LOAD_ERROR_MESSAGE" = "Fail to load records.";
 "DELETE_ERROR_MESSAGE" = "Fail to delete records.";
@@ -23,3 +24,4 @@
 "SAVE_ERROR_MESSAGE" = "Fail to save record";
 "TABLE" = "Table";
 "MORSE_LOOKUP_TABLE" = "Lookup Table";
+"CONFIRM_DELETION_MESSAGE" = "Are you sure you want to delete this record?";

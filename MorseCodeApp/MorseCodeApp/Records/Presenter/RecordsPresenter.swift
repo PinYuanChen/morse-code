@@ -92,9 +92,9 @@ public class RecordsPresenter: RecordsPresenterPrototype {
 }
 
 public extension RecordsPresenter {
-    static let alertTitle = NSLocalizedString("ALERT_TITLE", comment: "alert title")
+    static let alertTitle = Localization.string("ALERT_TITLE", comment: "alert title")
     
-    static let loadErrorMessage = NSLocalizedString("LOAD_ERROR_MESSAGE", comment: "fail to load records")
+    static let loadErrorMessage = Localization.string("LOAD_ERROR_MESSAGE", comment: "fail to load records")
     
-    static let deleteErrorMessage = NSLocalizedString("DELETE_ERROR_MESSAGE", comment: "fail to delete records")
+    static let deleteErrorMessage = Localization.string("DELETE_ERROR_MESSAGE", comment: "fail to delete records")
 }
