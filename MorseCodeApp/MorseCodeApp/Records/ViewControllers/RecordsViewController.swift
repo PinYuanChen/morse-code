@@ -56,7 +56,7 @@ private extension RecordsViewController {
     }
     
     func setupEmptyLabel() {
-        emptyLabel.text = NSLocalizedString("EMPTY_RECORD_MESSAGE", comment: "Records view controller")
+        emptyLabel.text = Localization.string("EMPTY_RECORD_MESSAGE", comment: "Records view controller")
         emptyLabel.numberOfLines = 0
         emptyLabel.textAlignment = .center
         emptyLabel.textColor = .bg275452

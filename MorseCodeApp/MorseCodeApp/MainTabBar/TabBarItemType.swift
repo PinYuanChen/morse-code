@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MorseCode
 
 enum TabBarItemType: CaseIterable {
     case convert
@@ -15,11 +16,11 @@ enum TabBarItemType: CaseIterable {
     var title: String {
         switch self {
         case .convert:
-            return NSLocalizedString("CONVERT", comment: "")
+            return Localization.string("CONVERT", comment: "")
         case .table:
-            return NSLocalizedString("TABLE", comment: "")
+            return Localization.string("TABLE", comment: "")
         case .records:
-            return NSLocalizedString("RECORDS", comment: "")
+            return Localization.string("RECORDS", comment: "")
         }
     }
     

@@ -13,7 +13,7 @@ public class Localization {
         Bundle(for: Localization.self)
     }()
     
-    public static func string(forKey key: String, comment: String = "") -> String {
+    public static func string(_ key: String, comment: String = "") -> String {
         return NSLocalizedString(key, bundle: bundle, comment: comment)
     }
     
