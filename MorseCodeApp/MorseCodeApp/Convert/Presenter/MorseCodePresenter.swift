@@ -163,7 +163,11 @@ public extension MorseCodePresenter {
     
     static let alertConfirmTitle = Localization.string("CONFIRM", comment: "confirm button title")
     
+    static let alertCancelTitle = Localization.string("CANCEL", comment: "cancel button title")
+    
     static let alertTitle = Localization.string("ALERT_TITLE", comment: "alert title in main page")
     
     static let saveErrorMessage = Localization.string("SAVE_ERROR_MESSAGE", comment: "fail to save records")
+    
+    static let deletionCheckMessage = Localization.string("CONFIRM_DELETION_MESSAGE", comment: "delete record check")
 }

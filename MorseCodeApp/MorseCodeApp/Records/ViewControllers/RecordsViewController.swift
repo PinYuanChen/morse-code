@@ -37,6 +37,7 @@ public class RecordsViewController: UIViewController {
     private let tableView = UITableView()
 }
 
+// MARK: - Setup UI
 private extension RecordsViewController {
     func setupUI() {
         view.backgroundColor = .bg04121F
@@ -66,6 +67,22 @@ private extension RecordsViewController {
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().offset(-50)
         }
+    }
+}
+
+private extension RecordsViewController {
+    func showDeleteAlert(at indexPath: IndexPath) {
+        let alertViewController = UIAlertController(title: MorseCodePresenter.alertTitle, message: MorseCodePresenter.deletionCheckMessage, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: MorseCodePresenter.alertCancelTitle, style: .cancel)
+        alertViewController.addAction(cancelAction)
+        
+        let confirmAction = UIAlertAction(title: MorseCodePresenter.alertConfirmTitle, style: .destructive) { [weak self] _ in
+            self?.presenter.deleteRecord(at: indexPath.row)
+        }
+        alertViewController.addAction(confirmAction)
+        
+        self.present(alertViewController, animated: true)
     }
 }
 
@@ -100,7 +117,9 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
             self.presenter.playOrPauseFlash(at: indexPath.row)
         }
         
-        cell.deleteAction = { [weak self] in self?.presenter.deleteRecord(at: indexPath.row)
+        cell.deleteAction = { [weak self] in 
+            guard let self = self else { return }
+            self.showDeleteAlert(at: indexPath)
         }
         
         return cell

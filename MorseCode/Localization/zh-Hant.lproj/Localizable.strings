@@ -16,6 +16,7 @@
 "CONVERT" = "轉譯";
 "TORCH_ALERT_MESSAGE" = "您的裝置無手電筒功能，無法使用手電筒訊號。";
 "CONFIRM" = "確認";
+"CANCEL" = "取消";
 "ALERT_TITLE" = "警告";
 "LOAD_ERROR_MESSAGE" = "載入失敗";
 "DELETE_ERROR_MESSAGE" = "刪除失敗";
@@ -23,3 +24,4 @@
 "SAVE_ERROR_MESSAGE" = "儲存失敗";
 "TABLE" = "查找表";
 "MORSE_LOOKUP_TABLE" = "查找表";
+"CONFIRM_DELETION_MESSAGE" = "您確定要刪除這筆資料嗎?";
