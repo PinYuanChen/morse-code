@@ -149,21 +149,25 @@ public class MorseCodePresenter: MorseCodePresenterPrototype {
     }
 }
 
-// MARK: - Localization
+// MARK: - Localization.string
 public extension MorseCodePresenter {
-    static let title = NSLocalizedString("MORSE_FLASH_TITLE", comment: "Main page title")
+    static let title = Localization.string("MORSE_FLASH_TITLE", comment: "Main page title")
     
-    static let convertButtonTitle = NSLocalizedString("CONVERT", comment: "convert button")
+    static let convertButtonTitle = Localization.string("CONVERT", comment: "convert button")
     
-    static let inputTextPlaceholder = NSLocalizedString("INPUT_PLACEHOLDER", comment: "user input textfield")
+    static let inputTextPlaceholder = Localization.string("INPUT_PLACEHOLDER", comment: "user input textfield")
     
-    static let morseCodePlaceholder = NSLocalizedString("MORSE_CODE_OUTPUT", comment: "morse code textfield")
+    static let morseCodePlaceholder = Localization.string("MORSE_CODE_OUTPUT", comment: "morse code textfield")
     
-    static let torchAlertMessage = NSLocalizedString("TORCH_ALERT_MESSAGE", comment: "torch is not open")
+    static let torchAlertMessage = Localization.string("TORCH_ALERT_MESSAGE", comment: "torch is not open")
     
-    static let alertConfirmTitle = NSLocalizedString("CONFIRM", comment: "confirm button title")
+    static let alertConfirmTitle = Localization.string("CONFIRM", comment: "confirm button title")
     
-    static let alertTitle = NSLocalizedString("ALERT_TITLE", comment: "alert title in main page")
+    static let alertCancelTitle = Localization.string("CANCEL", comment: "cancel button title")
     
-    static let saveErrorMessage = NSLocalizedString("SAVE_ERROR_MESSAGE", comment: "fail to save records")
+    static let alertTitle = Localization.string("ALERT_TITLE", comment: "alert title in main page")
+    
+    static let saveErrorMessage = Localization.string("SAVE_ERROR_MESSAGE", comment: "fail to save records")
+    
+    static let deletionCheckMessage = Localization.string("CONFIRM_DELETION_MESSAGE", comment: "delete record check")
 }

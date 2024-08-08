@@ -40,7 +40,7 @@ private extension MorseTableViewController {
     }
     
     func setupTitleLabel() {
-        titleLabel.text = NSLocalizedString("MORSE_LOOKUP_TABLE", comment: "")
+        titleLabel.text = Localization.string("MORSE_LOOKUP_TABLE", comment: "")
         titleLabel.textColor = .txt5BC5A5
         titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
         titleLabel.textAlignment = .center

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		9B10B1902BF48E9600DD0233 /* MorseCodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B18F2BF48E9600DD0233 /* MorseCodePresenter.swift */; };
 		9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */; };
-		9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */; };
 		9B10B1992BF4B59300DD0233 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */; };
 		9B30F6442C5F31A100E70CCB /* MorseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B30F6432C5F31A100E70CCB /* MorseTableViewController.swift */; };
 		9B30F6462C5F3AB400E70CCB /* MorseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B30F6452C5F3AB400E70CCB /* MorseTableViewCell.swift */; };
@@ -37,7 +36,6 @@
 		9BFED5982C593B5700B6E203 /* RecordsViewController_empty_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFED5972C593B5700B6E203 /* RecordsViewController_empty_light.png */; };
 		9BFED59A2C593B5E00B6E203 /* RecordsViewController_empty_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BFED5992C593B5E00B6E203 /* RecordsViewController_empty_dark.png */; };
 		9BFED59C2C593D4200B6E203 /* MainQueueDispatchDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED59B2C593D4200B6E203 /* MainQueueDispatchDecorator.swift */; };
-		9BFED59E2C59ECC300B6E203 /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED59D2C59ECC300B6E203 /* LocalizationTests.swift */; };
 		9BFED5A82C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED5A72C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift */; };
 		9BFED5AA2C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED5A92C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift */; };
 		9BFED5AC2C5B1F3F00B6E203 /* ViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFED5AB2C5B1F3F00B6E203 /* ViewSpy.swift */; };
@@ -56,7 +54,6 @@
 		CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDD10AC62B397F3D008ED95F /* Assets.xcassets */; };
 		CDD10AD42B3980A0008ED95F /* MorseCode.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; };
 		CDD10AD52B3980A0008ED95F /* MorseCode.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CDD10AD22B3980A0008ED95F /* MorseCode.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CDEB81CD2B4FE3010058190A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDEB81CF2B4FE3010058190A /* Localizable.strings */; };
 		CDEB81D92B4FE55D0058190A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDEB81DB2B4FE55D0058190A /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +84,6 @@
 /* Begin PBXFileReference section */
 		9B10B18F2BF48E9600DD0233 /* MorseCodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenter.swift; sourceTree = "<group>"; };
 		9B10B1932BF490EA00DD0233 /* MorseCodePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodePresenterTests.swift; sourceTree = "<group>"; };
-		9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationHelper.swift; sourceTree = "<group>"; };
 		9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B30F6432C5F31A100E70CCB /* MorseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTableViewController.swift; sourceTree = "<group>"; };
 		9B30F6452C5F3AB400E70CCB /* MorseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseTableViewCell.swift; sourceTree = "<group>"; };
@@ -115,7 +111,6 @@
 		9BFED5972C593B5700B6E203 /* RecordsViewController_empty_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_empty_light.png; sourceTree = "<group>"; };
 		9BFED5992C593B5E00B6E203 /* RecordsViewController_empty_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordsViewController_empty_dark.png; sourceTree = "<group>"; };
 		9BFED59B2C593D4200B6E203 /* MainQueueDispatchDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainQueueDispatchDecorator.swift; sourceTree = "<group>"; };
-		9BFED59D2C59ECC300B6E203 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 		9BFED5A72C5A2A4600B6E203 /* MorseCodeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCodeViewControllerTests.swift; sourceTree = "<group>"; };
 		9BFED5A92C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorseCodeViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		9BFED5AB2C5B1F3F00B6E203 /* ViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSpy.swift; sourceTree = "<group>"; };
@@ -135,9 +130,6 @@
 		CDD10ACB2B397F3D008ED95F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDD10AD22B3980A0008ED95F /* MorseCode.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MorseCode.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDD10AEC2B3A716E008ED95F /* MorseCodeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MorseCodeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDEB81CE2B4FE3010058190A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CDEB81D02B4FE3450058190A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		CDEB81D12B4FE3530058190A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		CDEB81DA2B4FE55D0058190A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CDEB81DC2B4FE55F0058190A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CDEB81DD2B4FE5600058190A /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -301,7 +293,6 @@
 				CD00A9902B3A75600042E9F6 /* XCTestCase+LeakTracking.swift */,
 				CD00A98B2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift */,
 				9B9123C52C05AF5800F8D031 /* LoaderSpy.swift */,
-				9B10B1972BF4B24000DD0233 /* LocalizationHelper.swift */,
 				9B32A5412BF5A23A00E8CCD4 /* XCTestCase+Snapshot.swift */,
 				9B32A5432BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift */,
 				9BFED5A92C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift */,
@@ -371,7 +362,6 @@
 				CDD10AC62B397F3D008ED95F /* Assets.xcassets */,
 				9B10B19A2BF4B59300DD0233 /* LaunchScreen.storyboard */,
 				CDD10ACB2B397F3D008ED95F /* Info.plist */,
-				CDEB81CF2B4FE3010058190A /* Localizable.strings */,
 				CDEB81DB2B4FE55D0058190A /* InfoPlist.strings */,
 			);
 			path = MorseCodeApp;
@@ -392,7 +382,6 @@
 				9B10B18D2BF48E5200DD0233 /* Convert */,
 				9B30F64A2C5F606400E70CCB /* Table */,
 				9B9123D02C07311300F8D031 /* Records */,
-				9BFED59D2C59ECC300B6E203 /* LocalizationTests.swift */,
 			);
 			path = MorseCodeAppTests;
 			sourceTree = "<group>";
@@ -492,7 +481,6 @@
 			files = (
 				9B10B1992BF4B59300DD0233 /* LaunchScreen.storyboard in Resources */,
 				CDEB81D92B4FE55D0058190A /* InfoPlist.strings in Resources */,
-				CDEB81CD2B4FE3010058190A /* Localizable.strings in Resources */,
 				CDD10AC72B397F3D008ED95F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,11 +535,9 @@
 			files = (
 				9BFED5AC2C5B1F3F00B6E203 /* ViewSpy.swift in Sources */,
 				9B10B1942BF490EA00DD0233 /* MorseCodePresenterTests.swift in Sources */,
-				9BFED59E2C59ECC300B6E203 /* LocalizationTests.swift in Sources */,
 				CD00A98C2B3A74EB0042E9F6 /* UIButton+TestHelpers.swift in Sources */,
 				9BFED5AA2C5A2A9000B6E203 /* MorseCodeViewController+TestHelpers.swift in Sources */,
 				9BC0A8D42C52541900A5CC8A /* SharedTestHelpers.swift in Sources */,
-				9B10B1982BF4B24000DD0233 /* LocalizationHelper.swift in Sources */,
 				9B32A5442BF5A26C00E8CCD4 /* UIViewController+Snapshot.swift in Sources */,
 				CD00A98D2B3A74EB0042E9F6 /* UIControl+TestHelpers.swift in Sources */,
 				CD00A9912B3A75600042E9F6 /* XCTestCase+LeakTracking.swift in Sources */,
@@ -576,16 +562,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CDEB81CF2B4FE3010058190A /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CDEB81CE2B4FE3010058190A /* en */,
-				CDEB81D02B4FE3450058190A /* zh-Hans */,
-				CDEB81D12B4FE3530058190A /* zh-Hant */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
 		CDEB81DB2B4FE55D0058190A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
