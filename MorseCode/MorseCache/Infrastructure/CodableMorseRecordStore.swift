@@ -27,10 +27,6 @@ public class CodableMorseRecordStore: MorseRecordStore {
     }
     
     public func retrieve(completion: @escaping RetrievalCompletion)  {
-        guard (try? Data(contentsOf: storeURL)) != nil else {
-            return  completion(.success(.none))
-        }
-        
         let storeURL = self.storeURL
         queue.async {
             guard let data = try? Data(contentsOf: storeURL) else {
